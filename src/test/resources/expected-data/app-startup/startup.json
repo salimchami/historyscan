@@ -6,15 +6,13 @@
       "title": "GET",
       "name": "startup"
     },
-    "codebase": {
-      "href": "http://localhost/codebase",
-      "method": "POST",
-      "name": "add-codebase"
+    "add-codebase": {
+      "href": "http://localhost/add",
+      "title": "POST"
     },
-    "codebases": {
-      "href": "http://localhost/codebase/list",
-      "method": "GET",
-      "name": "existing-codebases"
+    "list-codebases": {
+      "href": "http://localhost/list",
+      "title": "GET"
     }
   }
 }

@@ -2,6 +2,7 @@ package io.sch.historyscan.web;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
+import io.sch.historyscan.web.codebase.CodeBaseToAddDTO;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
 
@@ -18,9 +19,31 @@ public class StartupDTO extends RepresentationModel<StartupDTO> {
         this.message = "Application is up! Please use the links below to navigate to the API endpoints.";
         try {
             addSelfLink();
+            addCodebase();
+            currentCodebases();
         } catch (NoSuchMethodException e) {
             throw new HistoryScanTechnicalException("No method found in the controller", e);
         }
+
+    }
+
+    private void currentCodebases() throws NoSuchMethodException {
+        add(
+                linkTo(CodeBaseController.class,
+                        CodeBaseController.class.getMethod("currentCodeBases"))
+                        .withRel("list-codebases")
+                        .withTitle(HttpMethod.GET.name())
+        );
+
+    }
+
+    private void addCodebase() throws NoSuchMethodException {
+        add(
+                linkTo(CodeBaseController.class,
+                        CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
+                        .withRel("add-codebase")
+                        .withTitle(HttpMethod.POST.name())
+        );
 
     }
 
