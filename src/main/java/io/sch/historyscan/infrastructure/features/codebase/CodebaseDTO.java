@@ -1,4 +1,4 @@
-package io.sch.historyscan.web;
+package io.sch.historyscan.infrastructure.features.codebase;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.hateoas.RepresentationModel;

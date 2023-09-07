@@ -13,13 +13,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
@@ -66,8 +62,7 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
     public static class EndPoints {
         public static final String BASE_URL = "/";
-        public static final String CODEBASE = "/codebases";
-        public static final String CODEBASE_ADD = CODEBASE + "/add";
+        public static final String CODEBASES = "/codebases";
     }
 
     public static class TestsFolders {

@@ -1,4 +1,4 @@
-package io.sch.historyscan.web;
+package io.sch.historyscan.application;
 
 import io.sch.historyscan.common.HistoryscanIntegrationTests;
 import io.sch.historyscan.common.JsonReader;

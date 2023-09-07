@@ -7,11 +7,11 @@
       "name": "startup"
     },
     "add-codebase": {
-      "href": "http://localhost/add",
+      "href": "http://localhost/codebases",
       "title": "POST"
     },
     "list-codebases": {
-      "href": "http://localhost/list",
+      "href": "http://localhost/codebases",
       "title": "GET"
     }
   }

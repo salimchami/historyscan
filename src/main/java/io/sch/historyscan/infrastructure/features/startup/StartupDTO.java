@@ -1,8 +1,9 @@
-package io.sch.historyscan.web;
+package io.sch.historyscan.infrastructure.features.startup;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
-import io.sch.historyscan.web.codebase.CodeBaseToAddDTO;
+import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
+import io.sch.historyscan.infrastructure.features.codebase.CodeBaseToAddDTO;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
 
