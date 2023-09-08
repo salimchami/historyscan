@@ -2,12 +2,15 @@ package io.sch.historyscan.application;
 
 import io.sch.historyscan.common.HistoryscanIntegrationTests;
 import io.sch.historyscan.common.JsonReader;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import static io.sch.historyscan.common.HistoryscanIntegrationTests.EndPoints.CODEBASES;
 import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.CODEBASE_FOLDER;
@@ -20,20 +23,23 @@ class CodeBaseControllerTest extends HistoryscanIntegrationTests {
     @Value("${io.sch.historyscan.codebases.folder}")
     private String codebasesFolder;
 
-    @Test
-    void should_clone_the_codebase_over_http() throws Exception {
-        String expectedAddedCodebaseResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, "added-codebase");
-        final String codebaseToAdd = JsonReader.toRequestedJson(CODEBASE_FOLDER, "http-codebase");
+    public static Stream<Arguments> should_clone_the_codebase_params() {
+        return Stream.of(
+                Arguments.of("http-codebase", "http-added-codebase"),
+                Arguments.of("git-codebase", "git-added-codebase")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("should_clone_the_codebase_params")
+    void should_clone_the_codebase(String codeBaseToAddJson, String expectedAddedCodeBase) throws Exception {
+        String expectedAddedCodebaseResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, expectedAddedCodeBase);
+        final String codebaseToAdd = JsonReader.toRequestedJson(CODEBASE_FOLDER, codeBaseToAddJson);
         endPointCaller.perform(post(CODEBASES).content(codebaseToAdd)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(expectedAddedCodebaseResponse, true));
         codebaseExists(Paths.get(codebasesFolder, "public-articles").toString());
-    }
-
-    @Test
-    @Disabled
-    void currentCodeBases() {
     }
 }
