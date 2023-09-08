@@ -7,4 +7,6 @@ public interface Logger {
     void error(Exception ex);
 
     void error(String message);
+
+    void debug(String message);
 }

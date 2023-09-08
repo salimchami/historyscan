@@ -22,4 +22,9 @@ public class AppLogger implements Logger {
     public void error(String message) {
         logger.error(message);
     }
+
+    @Override
+    public void debug(String message) {
+        logger.debug(message);
+    }
 }
