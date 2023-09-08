@@ -17,4 +17,9 @@ public class AppLogger implements Logger {
     public void error(Exception ex) {
         logger.error(ex.getMessage(), ex);
     }
+
+    @Override
+    public void error(String message) {
+        logger.error(message);
+    }
 }

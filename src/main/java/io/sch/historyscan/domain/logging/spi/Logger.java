@@ -5,4 +5,6 @@ public interface Logger {
     void info(String message);
 
     void error(Exception ex);
+
+    void error(String message);
 }

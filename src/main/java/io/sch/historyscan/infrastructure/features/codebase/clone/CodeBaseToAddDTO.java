@@ -1,11 +1,12 @@
-package io.sch.historyscan.infrastructure.features.codebase;
+package io.sch.historyscan.infrastructure.features.codebase.clone;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
-public record CodeBaseToAddDTO(@JsonProperty("url") String url,
+public record CodeBaseToAddDTO(String url,
                                @JsonProperty("public-key") String publicKey,
-                               @JsonProperty("branch") String branch
+                               String name,
+                               String branch
 ) {
 }

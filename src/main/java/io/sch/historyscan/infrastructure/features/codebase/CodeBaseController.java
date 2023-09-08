@@ -1,5 +1,8 @@
 package io.sch.historyscan.infrastructure.features.codebase;
 
+import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
+import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
+import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebaseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +27,7 @@ public class CodeBaseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CodebaseDTO>> currentCodeBases() {
-        return ResponseEntity.ok(List.of(new CodebaseDTO("", "")));
+    public ResponseEntity<List<CurrentCodebaseDTO>> currentCodeBases() {
+        return ResponseEntity.ok(List.of(new CurrentCodebaseDTO("", "")));
     }
 }
