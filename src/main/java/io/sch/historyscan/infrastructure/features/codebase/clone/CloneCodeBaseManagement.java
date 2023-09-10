@@ -1,10 +1,10 @@
-package io.sch.historyscan.infrastructure.features.codebase;
+package io.sch.historyscan.infrastructure.features.codebase.clone;
 
-import io.sch.historyscan.domain.contexts.codebase.ClonedCodeBase;
-import io.sch.historyscan.domain.contexts.codebase.CodeBaseRepository;
-import io.sch.historyscan.domain.contexts.codebase.CodeBaseToClone;
-import io.sch.historyscan.infrastructure.features.codebase.errors.CloningCodeBaseException;
-import io.sch.historyscan.infrastructure.features.codebase.errors.PullingCodeBaseException;
+import io.sch.historyscan.domain.contexts.codebase.clone.ClonedCodeBase;
+import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseRepository;
+import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseToClone;
+import io.sch.historyscan.infrastructure.features.codebase.errors.CloneCodeBaseException;
+import io.sch.historyscan.infrastructure.features.codebase.errors.PullCodeBaseException;
 import io.sch.historyscan.infrastructure.features.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.logging.AppLogger;
 import org.eclipse.jgit.api.Git;
@@ -20,15 +20,14 @@ import java.nio.file.Paths;
 import static java.lang.String.format;
 
 @Component
-public final class CodeBaseManagementRepository implements CodeBaseRepository {
+public final class CloneCodeBaseManagement implements CodeBaseRepository {
     private final AppLogger logger;
-
     private final String codebasesFolder;
     private final FileSystemManager fileSystemManager;
 
-    public CodeBaseManagementRepository(AppLogger logger,
-                                        @Value("${io.sch.historyscan.codebases.folder}") String codebasesFolder,
-                                        FileSystemManager fileSystemManager) {
+    public CloneCodeBaseManagement(AppLogger logger,
+                                   @Value("${io.sch.historyscan.codebases.folder}") String codebasesFolder,
+                                   FileSystemManager fileSystemManager) {
         this.logger = logger;
         this.codebasesFolder = codebasesFolder;
         this.fileSystemManager = fileSystemManager;
@@ -50,10 +49,11 @@ public final class CodeBaseManagementRepository implements CodeBaseRepository {
                 .setDirectory(codebase)
                 .call()) {
             logger.debug("Cloned repository: " + git.getRepository().getDirectory());
-            return new ClonedCodeBase(git.remoteSetUrl().toString(), git.getRepository().getDirectory().toString(),
+            return new ClonedCodeBase(git.getRepository().getConfig().getString("remote", "origin", "url"),
+                    git.getRepository().getDirectory().toString(),
                     codeBaseToClone.branch());
         } catch (GitAPIException e) {
-            throw new CloningCodeBaseException(format("Error while cloning repository %s", codeBaseToClone.url()), e);
+            throw new CloneCodeBaseException(format("Error while cloning repository %s", codeBaseToClone.url()), e);
         }
     }
 
@@ -65,7 +65,7 @@ public final class CodeBaseManagementRepository implements CodeBaseRepository {
             git.close();
             return new ClonedCodeBase(codeBaseToClone.url(), codeBaseToClone.name(), codeBaseToClone.branch());
         } catch (IOException e) {
-            throw new PullingCodeBaseException(format("Error while cloning repository %s", codeBaseToClone.url()), e);
+            throw new PullCodeBaseException(format("Error while cloning repository %s", codeBaseToClone.url()), e);
         }
     }
 }

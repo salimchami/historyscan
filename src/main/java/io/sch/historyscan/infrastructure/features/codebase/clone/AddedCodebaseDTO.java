@@ -2,9 +2,15 @@ package io.sch.historyscan.infrastructure.features.codebase.clone;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
+import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.http.HttpMethod;
 
 import java.util.Objects;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
 
@@ -18,6 +24,36 @@ public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;
+        try {
+            addSelfLink();
+            codeBaseInfoLink();
+            codeBasesListLink();
+        } catch (NoSuchMethodException e) {
+            throw new HistoryScanTechnicalException("No method found in the controller", e);
+        }
+    }
+
+    private void codeBaseInfoLink() {
+        add(linkTo(methodOn(CodeBaseController.class, name).findCodeBase(name))
+                .withRel("codebase-info")
+                .withTitle(HttpMethod.GET.name()));
+    }
+
+    private void codeBasesListLink() throws NoSuchMethodException {
+        add(linkTo(CodeBaseController.class,
+                CodeBaseController.class.getMethod("currentCodeBases"))
+                .withRel("codebases-list")
+                .withTitle(HttpMethod.GET.name()));
+    }
+
+    private void addSelfLink() throws NoSuchMethodException {
+        add(
+                linkTo(CodeBaseController.class,
+                        CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
+                        .withSelfRel()
+                        .withTitle(HttpMethod.POST.name())
+        );
+
     }
 
     public String getName() {

@@ -1,5 +1,8 @@
-package io.sch.historyscan.domain.contexts.codebase;
+package io.sch.historyscan.domain.contexts.codebase.clone;
 
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDService;
+
+@DDDService
 public record CodeBaseCloner(CodeBaseRepository codeBaseRepository) implements Clone {
 
     @Override

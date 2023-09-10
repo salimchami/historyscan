@@ -25,7 +25,6 @@ public class StartupDTO extends RepresentationModel<StartupDTO> {
         } catch (NoSuchMethodException e) {
             throw new HistoryScanTechnicalException("No method found in the controller", e);
         }
-
     }
 
     private void currentCodebases() throws NoSuchMethodException {

@@ -3,12 +3,11 @@ package io.sch.historyscan.infrastructure.features.codebase;
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebaseDTO;
+import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/codebases")
@@ -26,8 +25,16 @@ public class CodeBaseController {
         return new ResponseEntity<>(addedCodeBase, HttpStatus.CREATED);
     }
 
+    @GetMapping(path = "/{codebaseName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CurrentCodebaseDTO> findCodeBase(@PathVariable("codebaseName") String codebaseName) {
+        throw new UnsupportedOperationException("Not implemented yet");
+//        return codebaseApplication.findCodeBase(codebaseName)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
-    public ResponseEntity<List<CurrentCodebaseDTO>> currentCodeBases() {
-        return ResponseEntity.ok(List.of(new CurrentCodebaseDTO("", "")));
+    public ResponseEntity<CurrentCodebasesDTO> currentCodeBases() {
+        return ResponseEntity.ok(codebaseApplication.currentCodeBases());
     }
 }

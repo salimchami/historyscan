@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.codebase;
+package io.sch.historyscan.infrastructure.features.codebase.clone;
 
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 

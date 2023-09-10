@@ -1,5 +1,8 @@
 package io.sch.historyscan.domain.logging.spi;
 
+import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureSPI;
+
+@HexagonalArchitectureSPI
 public interface Logger {
 
     void info(String message);
