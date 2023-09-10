@@ -1,0 +1,11 @@
+{
+  "name": "public-articles",
+  "url": "https://github.com/salimchami/public-articles.git",
+  "current-branch": "main",
+  "_links": {
+    "self": {
+      "href": "http://localhost/codebases/public-articles",
+      "title": "GET"
+    }
+  }
+}

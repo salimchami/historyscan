@@ -2,10 +2,10 @@ package io.sch.historyscan.domain.contexts.codebase.find;
 
 import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureAPI;
 
-import java.util.List;
+import java.util.Optional;
 
 @HexagonalArchitectureAPI
 @FunctionalInterface
-public interface CurrentCodeBases {
-    List<CurrentCodeBase> fromDisk();
+public interface FindCodeBase {
+    Optional<CurrentCodeBase> from(String name);
 }

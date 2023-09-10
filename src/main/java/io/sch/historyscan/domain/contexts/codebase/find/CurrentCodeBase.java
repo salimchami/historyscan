@@ -6,5 +6,5 @@ import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 public record CurrentCodeBase(String name,
                               String url,
                               String currentBranch,
-                              boolean error) {
+                              boolean gitError) {
 }

@@ -6,6 +6,7 @@ import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseToClone;
 import io.sch.historyscan.infrastructure.features.codebase.errors.CloneCodeBaseException;
 import io.sch.historyscan.infrastructure.features.codebase.errors.PullCodeBaseException;
 import io.sch.historyscan.infrastructure.features.filesystem.FileSystemManager;
+import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import io.sch.historyscan.infrastructure.logging.AppLogger;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -20,6 +21,7 @@ import java.nio.file.Paths;
 import static java.lang.String.format;
 
 @Component
+@HexagonalArchitectureAdapter
 public final class CloneCodeBaseManagement implements CodeBaseRepository {
     private final AppLogger logger;
     private final String codebasesFolder;

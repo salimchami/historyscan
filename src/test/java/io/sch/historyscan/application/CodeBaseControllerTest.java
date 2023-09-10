@@ -51,4 +51,12 @@ class CodeBaseControllerTest extends HistoryscanIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedCodesBasesResponse, true));
     }
+
+    @Test
+    void should_find_current_codebase() throws Exception {
+        var expectedCodesBasesResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, "codebase-public-articles");
+        endPointCaller.perform(get(CODEBASES + "/public-articles"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedCodesBasesResponse, true));
+    }
 }

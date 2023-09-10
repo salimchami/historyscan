@@ -27,10 +27,9 @@ public class CodeBaseController {
 
     @GetMapping(path = "/{codebaseName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CurrentCodebaseDTO> findCodeBase(@PathVariable("codebaseName") String codebaseName) {
-        throw new UnsupportedOperationException("Not implemented yet");
-//        return codebaseApplication.findCodeBase(codebaseName)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
+        return codebaseApplication.findCodeBase(codebaseName)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping

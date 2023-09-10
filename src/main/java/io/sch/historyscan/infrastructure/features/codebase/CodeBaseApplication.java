@@ -2,7 +2,8 @@ package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.domain.contexts.codebase.clone.Clone;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseToClone;
-import io.sch.historyscan.domain.contexts.codebase.find.CurrentCodeBases;
+import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBase;
+import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBases;
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebaseDTO;
@@ -17,14 +18,16 @@ import java.util.Optional;
 public class CodeBaseApplication {
 
     private final Clone clone;
-    private final CurrentCodeBases currentCodeBases;
+    private final FindCodeBases findCodeBases;
+    private final FindCodeBase findCodeBase;
     private final CodeBaseMapper codeBaseMapper;
 
     public CodeBaseApplication(Clone clone,
-                               CurrentCodeBases currentCodeBases,
-                               CodeBaseMapper codeBaseMapper) {
+                               FindCodeBases findCodeBases,
+                               FindCodeBase findCodeBase, CodeBaseMapper codeBaseMapper) {
         this.clone = clone;
-        this.currentCodeBases = currentCodeBases;
+        this.findCodeBases = findCodeBases;
+        this.findCodeBase = findCodeBase;
         this.codeBaseMapper = codeBaseMapper;
     }
 
@@ -37,11 +40,12 @@ public class CodeBaseApplication {
     }
 
     public Optional<CurrentCodebaseDTO> findCodeBase(String codebaseName) {
-        return Optional.empty();
+        return findCodeBase.from(codebaseName)
+                .map(codeBaseMapper::domainToWeb);
     }
 
     public CurrentCodebasesDTO currentCodeBases() {
-        var codebases = currentCodeBases.fromDisk();
+        var codebases = findCodeBases.fromDisk();
         return codeBaseMapper.domainToWeb(codebases);
     }
 }
