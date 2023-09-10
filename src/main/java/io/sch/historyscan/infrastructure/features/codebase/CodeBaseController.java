@@ -2,7 +2,7 @@ package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
-import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebaseDTO;
+import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +26,7 @@ public class CodeBaseController {
     }
 
     @GetMapping(path = "/{codebaseName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CurrentCodebaseDTO> findCodeBase(@PathVariable("codebaseName") String codebaseName) {
+    public ResponseEntity<CodebaseDTO> findCodeBase(@PathVariable("codebaseName") String codebaseName) {
         return codebaseApplication.findCodeBase(codebaseName)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

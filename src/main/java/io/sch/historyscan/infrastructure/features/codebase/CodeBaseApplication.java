@@ -6,7 +6,7 @@ import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBase;
 import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBases;
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
-import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebaseDTO;
+import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureApplication;
 import org.springframework.stereotype.Component;
@@ -39,9 +39,9 @@ public class CodeBaseApplication {
 
     }
 
-    public Optional<CurrentCodebaseDTO> findCodeBase(String codebaseName) {
+    public Optional<CodebaseDTO> findCodeBase(String codebaseName) {
         return findCodeBase.from(codebaseName)
-                .map(codeBaseMapper::domainToWeb);
+                .map(codeBaseMapper::codebaseDomainToWeb);
     }
 
     public CurrentCodebasesDTO currentCodeBases() {
