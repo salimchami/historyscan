@@ -40,7 +40,6 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
         add(linkTo(methodOn(CodeBaseController.class).findCodeBase(name))
                 .withSelfRel()
                 .withTitle(HttpMethod.GET.name()));
-
     }
 
     public String getCurrentBranch() {
