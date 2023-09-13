@@ -2,10 +2,13 @@ package io.sch.historyscan.infrastructure.features.codebase.info;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sch.historyscan.domain.contexts.analysis.EnumAnalysisType;
+import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -23,10 +26,18 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
         this.url = url;
         this.currentBranch = currentBranch;
         addSelfLink();
+        addAnalysisLink();
+    }
+
+    private void addAnalysisLink() {
+        Arrays.stream(EnumAnalysisType.values()).forEach(analysisType ->
+                add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
+                        .withRel("analyze-" + analysisType.getTitle())
+                        .withTitle(HttpMethod.POST.name())));
     }
 
     private void addSelfLink() {
-        add(linkTo(methodOn(CodeBaseController.class, name).findCodeBase(name))
+        add(linkTo(methodOn(CodeBaseController.class).findCodeBase(name))
                 .withSelfRel()
                 .withTitle(HttpMethod.GET.name()));
 

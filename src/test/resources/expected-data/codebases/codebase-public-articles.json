@@ -6,6 +6,10 @@
     "self": {
       "href": "http://localhost/codebases/public-articles",
       "title": "GET"
+    },
+    "analyze-history": {
+      "href": "http://localhost/analyse/analyse/public-articles/history",
+      "title": "POST"
     }
   }
 }
