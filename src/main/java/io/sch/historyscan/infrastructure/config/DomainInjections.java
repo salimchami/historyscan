@@ -1,5 +1,8 @@
 package io.sch.historyscan.infrastructure.config;
 
+import io.sch.historyscan.domain.contexts.analysis.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.CodeBaseAnalysis;
+import io.sch.historyscan.domain.contexts.analysis.HistoryAnalysis;
 import io.sch.historyscan.domain.contexts.codebase.clone.Clone;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseCloner;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseRepository;
@@ -23,5 +26,10 @@ public class DomainInjections {
     @Bean
     public FindCodeBase currentCodeBase(CodeBaseInfoInventory codeBaseInfoInventory) {
         return new CodeBaseSearch(codeBaseInfoInventory);
+    }
+
+    @Bean
+    public Analysis currentCodeBaseHistory(HistoryAnalysis historyAnalysis) {
+        return new CodeBaseAnalysis(historyAnalysis);
     }
 }

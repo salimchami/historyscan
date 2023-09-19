@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public record FileSystemManager() {
@@ -28,5 +29,12 @@ public record FileSystemManager() {
     public List<File> listFoldersFrom(String folder) {
         return Arrays.stream(Objects.requireNonNull(new File(folder).listFiles(File::isDirectory)))
                 .toList();
+    }
+
+    public Optional<File> findFolder(String baseFolder, String folderName) {
+        return listFoldersFrom(baseFolder)
+                .stream()
+                .filter(folder -> folder.getName().equals(folderName))
+                .findFirst();
     }
 }

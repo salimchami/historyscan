@@ -8,14 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/analyse")
+@RequestMapping
 public class AnalysisController {
+    private final AnalysisApplication analysisApplication;
 
-    @PostMapping(path = "/analyse/{name}/{analysisType}",
+    public AnalysisController(AnalysisApplication analysisApplication) {
+        this.analysisApplication = analysisApplication;
+    }
+
+    @PostMapping(path = "/analyze/{name}/{analysisType}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> analyse(@PathVariable("name") String name,
-                                     @PathVariable("analysisType") String analysisType) {
-        throw new UnsupportedOperationException("Not implemented yet");
+                                          @PathVariable("analysisType") String analysisType) {
+        analysisApplication.analyse(name, analysisType);
+        return ResponseEntity.created(null).build();
     }
 }

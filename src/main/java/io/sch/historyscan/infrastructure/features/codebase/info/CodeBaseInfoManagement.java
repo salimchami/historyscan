@@ -26,12 +26,10 @@ public class CodeBaseInfoManagement implements CodeBaseInfoInventory {
 
     @Override
     public Optional<CurrentCodeBase> findBy(String name) {
-        return this.fileSystemManager.listFoldersFrom(codebasesFolder)
-                .stream()
-                .filter(folder -> folder.getName().equals(name))
-                .findFirst()
+        return this.fileSystemManager.findFolder(codebasesFolder, name)
                 .map(this::codeBaseFromFolder);
     }
+
 
     public CurrentCodeBase codeBaseFromFolder(File folder) {
         try (var git = Git.open(folder)) {
