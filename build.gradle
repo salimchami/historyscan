@@ -1,3 +1,4 @@
+import org.gradle.internal.os.OperatingSystem
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.15'
@@ -13,7 +14,35 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo1.maven.org/maven2/' }
 }
+
+tasks.register('checkClocInPath') {
+    doLast {
+        if (OperatingSystem.current().isUnix()) {
+            // Pour Linux/Mac
+            def result = exec {
+                commandLine 'sh', '-c', 'command -v cloc'
+                ignoreExitValue true
+            }
+            if (result.exitValue != 0) {
+                throw new GradleException("CLOC n'est pas dans le PATH.")
+            }
+        } else if (OperatingSystem.current().isWindows()) {
+            // Pour Windows
+            def result = exec {
+                commandLine 'cmd', '/c', 'where cloc'
+                ignoreExitValue true
+            }
+            if (result.exitValue != 0) {
+                throw new GradleException("CLOC n'est pas dans le PATH.")
+            }
+        } else {
+            throw new GradleException("Système d'exploitation non pris en charge.")
+        }
+    }
+}
+build.dependsOn(checkClocInPath)
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
@@ -27,3 +56,4 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+

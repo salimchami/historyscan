@@ -7,5 +7,5 @@ import java.util.Optional;
 @HexagonalArchitectureSPI
 @FunctionalInterface
 public interface HistoryAnalysis {
-        Optional<CodeBaseHistory> of(CodeBaseToAnalyze codeBaseToAnalyze);
+        Optional<CodeBaseHistory> of(String codeBaseName);
 }

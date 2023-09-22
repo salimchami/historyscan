@@ -8,7 +8,7 @@
       "title": "GET"
     },
     "analyze-history": {
-      "href": "http://localhost/analyse/analyse/public-articles/history",
+      "href": "http://localhost/analyze/public-articles/history",
       "title": "POST"
     }
   }

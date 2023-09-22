@@ -4,6 +4,7 @@ public class CodeBaseToAnalyze {
     private final String name;
     private final String analysisType;
     private CodeBaseHistory analysis;
+    private HistoryAnalysis historyAnalysis;
 
     public CodeBaseToAnalyze(String name, String analysisType) {
         this.name = name;
@@ -11,8 +12,9 @@ public class CodeBaseToAnalyze {
     }
 
     public CodeBaseToAnalyze loadLogFrom(HistoryAnalysis historyAnalysis) {
-        analysis = historyAnalysis.of(this)
+        analysis = historyAnalysis.of(name)
                 .orElseThrow(() -> new CodeBaseHistoryNotFoundException("CodeBase history not found"));
+        this.historyAnalysis = historyAnalysis;
         return this;
     }
 
@@ -26,5 +28,8 @@ public class CodeBaseToAnalyze {
 
     public String getName() {
         return name;
+    }
+
+    public void cloc() {
     }
 }

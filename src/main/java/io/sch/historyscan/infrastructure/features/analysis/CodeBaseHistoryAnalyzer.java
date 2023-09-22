@@ -40,8 +40,8 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalysis {
     }
 
     @Override
-    public Optional<CodeBaseHistory> of(CodeBaseToAnalyze codeBaseToAnalyze) {
-        return this.fileSystemManager.findFolder(codebasesFolder, codeBaseToAnalyze.getName())
+    public Optional<CodeBaseHistory> of(String codeBaseName) {
+        return this.fileSystemManager.findFolder(codebasesFolder, codeBaseName)
                 .map(this::codeBaseHistory);
     }
 
