@@ -2,7 +2,7 @@ package io.sch.historyscan.infrastructure.features.codebase.info;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.sch.historyscan.domain.contexts.analysis.EnumAnalysisType;
+import io.sch.historyscan.domain.contexts.analysis.EnumAnalysis;
 import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
@@ -30,7 +30,7 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
     }
 
     private void addAnalysisLink() {
-        Arrays.stream(EnumAnalysisType.values()).forEach(analysisType ->
+        Arrays.stream(EnumAnalysis.values()).forEach(analysisType ->
                 add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
                         .withRel("analyze-" + analysisType.getTitle())
                         .withTitle(HttpMethod.POST.name())));

@@ -1,23 +1,24 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.Analysis;
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseToAnalyze;
-import org.springframework.http.ResponseEntity;
+import io.sch.historyscan.domain.contexts.analysis.CodeBase;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AnalysisApplication {
 
     private final Analysis analysis;
+    private final AnalysisMapper analysisMapper;
 
-    public AnalysisApplication(Analysis analysis) {
+    public AnalysisApplication(Analysis analysis, AnalysisMapper analysisMapper) {
         this.analysis = analysis;
+        this.analysisMapper = analysisMapper;
     }
 
-    public ResponseEntity<Object> analyse(String name,
+    public AnalyzedCodeBaseDTO analyse(String name,
                                           String analysisType) {
-        final CodeBaseToAnalyze codeBase = new CodeBaseToAnalyze(name, analysisType);
-        analysis.of(codeBase);
-       return null;
+        final CodeBase codeBase = CodeBase.of(name, analysisType);
+        var analyzedCodeBase = analysis.of(codeBase);
+        return analysisMapper.domainToWeb(analyzedCodeBase);
     }
 }

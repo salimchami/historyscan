@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping
 public class AnalysisController {
@@ -19,9 +21,10 @@ public class AnalysisController {
     @PostMapping(path = "/analyze/{name}/{analysisType}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> analyse(@PathVariable("name") String name,
-                                          @PathVariable("analysisType") String analysisType) {
-        analysisApplication.analyse(name, analysisType);
-        return ResponseEntity.created(null).build();
+    public ResponseEntity<AnalyzedCodeBaseDTO> analyse(@PathVariable("name") String name,
+                                                       @PathVariable("analysisType") String analysisType) {
+        var analysis = analysisApplication.analyse(name, analysisType);
+        URI uri = URI.create("/analyze/" + name + "/" + analysisType);
+        return ResponseEntity.created(uri).body(analysis);
     }
 }

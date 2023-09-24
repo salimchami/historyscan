@@ -1,11 +1,11 @@
 package io.sch.historyscan.domain.contexts.analysis;
 
-public record CodeBaseAnalysis(HistoryAnalysis historyAnalysis) implements Analysis {
+public record CodeBaseAnalysis(HistoryAnalyzer historyAnalyzer) implements Analysis {
 
-    public void of(CodeBaseToAnalyze codeBaseToAnalyze) {
-        codeBaseToAnalyze.loadLogFrom(historyAnalysis)
-                .and()
-                .cloc();
-        System.out.println(codeBaseToAnalyze.getAnalysis());
+    public CodeBaseHistory of(CodeBase codeBase) {
+        return historyAnalyzer.of(codeBase.getName())
+                .orElseThrow(() ->
+                        new CodeBaseHistoryNotFoundException(
+                                "CodeBase '%s' history not found".formatted(codeBase.getName())));
     }
 }

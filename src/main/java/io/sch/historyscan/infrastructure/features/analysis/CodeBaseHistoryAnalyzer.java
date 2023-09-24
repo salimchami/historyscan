@@ -26,7 +26,7 @@ import java.util.stream.StreamSupport;
 
 @Component
 @HexagonalArchitectureAdapter
-public class CodeBaseHistoryAnalyzer implements HistoryAnalysis {
+public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
 
     private final String codebasesFolder;
     private final FileSystemManager fileSystemManager;
@@ -63,8 +63,8 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalysis {
         }
     }
 
-    private CodeBaseHistoryCommit initCodeBaseHistoryCommit(RevCommit revCommit, Git codeBase) {
-        return new CodeBaseHistoryCommit(
+    private CodeBaseFile initCodeBaseHistoryCommit(RevCommit revCommit, Git codeBase) {
+        return new CodeBaseFile(
                 new CodeBaseHistoryCommitInfo(
                         revCommit.getId().getName(),
                         revCommit.getAuthorIdent().getName(),

@@ -26,7 +26,7 @@ tasks.register('checkClocInPath') {
                 ignoreExitValue true
             }
             if (result.exitValue != 0) {
-                throw new GradleException("CLOC n'est pas dans le PATH.")
+                throw new GradleException("CLOC not found in PATH.")
             }
         } else if (OperatingSystem.current().isWindows()) {
             // Pour Windows
@@ -35,10 +35,10 @@ tasks.register('checkClocInPath') {
                 ignoreExitValue true
             }
             if (result.exitValue != 0) {
-                throw new GradleException("CLOC n'est pas dans le PATH.")
+                throw new GradleException("CLOC not found in PATH.")
             }
         } else {
-            throw new GradleException("Système d'exploitation non pris en charge.")
+            throw new GradleException("Unsupported operating system.")
         }
     }
 }
