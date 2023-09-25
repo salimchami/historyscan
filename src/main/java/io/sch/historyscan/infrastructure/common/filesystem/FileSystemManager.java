@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.filesystem;
+package io.sch.historyscan.infrastructure.common.filesystem;
 
 import io.sch.historyscan.infrastructure.features.codebase.clone.CreatingCodeBaseFolderException;
 import org.springframework.stereotype.Component;

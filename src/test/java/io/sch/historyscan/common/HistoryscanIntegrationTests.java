@@ -60,8 +60,8 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
     }
 
     public static class EndPoints {
-        public static final String BASE_URL = "/";
-        public static final String CODEBASES = "/codebases";
+        public static final String BASE_URL = "/api/v1";
+        public static final String CODEBASES = BASE_URL + "/codebases";
     }
 
     public static class TestsFolders {

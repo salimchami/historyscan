@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum EnumAnalysis {
-    COMMITS_SCAN("history");
+    COMMITS_SCAN("history"), CLOC_REVISIONS("cloc-revisions");
     private final String title;
 
     EnumAnalysis(String title) {

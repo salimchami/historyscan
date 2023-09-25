@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static io.sch.historyscan.infrastructure.common.filesystem.WebConstants.ENDPOINT_ROOT;
+
 @RestController
-@RequestMapping
+@RequestMapping(path = ENDPOINT_ROOT)
 public class StartupController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StartupDTO> startup(){
+    public ResponseEntity<StartupDTO> startup() {
         return ResponseEntity.ok(new StartupDTO());
     }
 }

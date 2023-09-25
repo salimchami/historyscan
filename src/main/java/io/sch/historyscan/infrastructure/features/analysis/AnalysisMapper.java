@@ -10,14 +10,14 @@ import java.util.List;
 
 @Component
 public class AnalysisMapper {
-    public AnalyzedCodeBaseDTO domainToWeb(CodeBaseHistory analyzedCodeBase) {
-        return new AnalyzedCodeBaseDTO(
+    public CodeBaseHistoryDTO domainToWeb(CodeBaseHistory analyzedCodeBase) {
+        return new CodeBaseHistoryDTO(
                 analyzedCodeBase.files().stream().map(this::domainToWeb).toList()
         );
     }
 
-    public CodeBaseFileDTO domainToWeb(CodeBaseFile codeBaseFile) {
-        return new CodeBaseFileDTO(
+    public CodeBaseHistoryFileDTO domainToWeb(CodeBaseFile codeBaseFile) {
+        return new CodeBaseHistoryFileDTO(
                 this.domainToWeb(codeBaseFile.info()),
                 this.domainToWeb(codeBaseFile.files())
         );

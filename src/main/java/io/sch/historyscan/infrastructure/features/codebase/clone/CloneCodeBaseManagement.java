@@ -5,7 +5,7 @@ import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseRepository;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseToClone;
 import io.sch.historyscan.infrastructure.features.codebase.errors.CloneCodeBaseException;
 import io.sch.historyscan.infrastructure.features.codebase.errors.PullCodeBaseException;
-import io.sch.historyscan.infrastructure.features.filesystem.FileSystemManager;
+import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import io.sch.historyscan.infrastructure.logging.AppLogger;
 import org.eclipse.jgit.api.Git;

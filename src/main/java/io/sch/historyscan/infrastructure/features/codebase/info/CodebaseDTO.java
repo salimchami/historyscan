@@ -21,7 +21,7 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
 
     @JsonCreator
     public CodebaseDTO(String name, String url,
-                       @JsonProperty("current-branch") String currentBranch) {
+                       @JsonProperty("currentBranch") String currentBranch) {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;

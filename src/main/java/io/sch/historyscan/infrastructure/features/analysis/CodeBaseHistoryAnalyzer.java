@@ -2,7 +2,7 @@ package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.*;
 import io.sch.historyscan.domain.logging.spi.Logger;
-import io.sch.historyscan.infrastructure.features.filesystem.FileSystemManager;
+import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;

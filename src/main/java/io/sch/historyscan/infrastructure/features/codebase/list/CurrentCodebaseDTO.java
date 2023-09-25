@@ -2,6 +2,8 @@ package io.sch.historyscan.infrastructure.features.codebase.list;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sch.historyscan.domain.contexts.analysis.EnumAnalysis;
+import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
@@ -18,11 +20,25 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
 
     @JsonCreator
     public CurrentCodebaseDTO(String name, String url,
-                              @JsonProperty("current-branch") String currentBranch) {
+                              @JsonProperty("currentBranch") String currentBranch) {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;
         addSelfLink();
+        addHistoryAnalysisLink();
+        addClocAndRevisionsLink();
+    }
+
+    private void addClocAndRevisionsLink() {
+        add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.CLOC_REVISIONS.getTitle()))
+                .withRel("analyze-cloc-revisions")
+                .withTitle(HttpMethod.GET.name()));
+    }
+
+    private void addHistoryAnalysisLink() {
+        add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.COMMITS_SCAN.getTitle()))
+                .withRel("analyze-history")
+                .withTitle(HttpMethod.GET.name()));
     }
 
     private void addSelfLink() {

@@ -20,23 +20,16 @@ public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
 
     @JsonCreator
     public AddedCodebaseDTO(String name, String url,
-                            @JsonProperty("current-branch") String currentBranch) {
+                            @JsonProperty("currentBranch") String currentBranch) {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;
         try {
             addSelfLink();
-            codeBaseInfoLink();
             codeBasesListLink();
         } catch (NoSuchMethodException e) {
             throw new HistoryScanTechnicalException("No method found in the controller", e);
         }
-    }
-
-    private void codeBaseInfoLink() {
-        add(linkTo(methodOn(CodeBaseController.class, name).findCodeBase(name))
-                .withRel("codebase-info")
-                .withTitle(HttpMethod.GET.name()));
     }
 
     private void codeBasesListLink() throws NoSuchMethodException {

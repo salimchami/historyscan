@@ -6,15 +6,15 @@ import org.springframework.hateoas.RepresentationModel;
 import java.util.List;
 import java.util.Objects;
 
-public class AnalyzedCodeBaseDTO extends RepresentationModel<AnalyzedCodeBaseDTO> {
-    private final List<CodeBaseFileDTO> files;
+public class CodeBaseHistoryDTO extends RepresentationModel<CodeBaseHistoryDTO> {
+    private final List<CodeBaseHistoryFileDTO> files;
 
     @JsonCreator
-    public AnalyzedCodeBaseDTO(List<CodeBaseFileDTO> files) {
+    public CodeBaseHistoryDTO(List<CodeBaseHistoryFileDTO> files) {
         this.files = files;
     }
 
-    public List<CodeBaseFileDTO> getFiles() {
+    public List<CodeBaseHistoryFileDTO> getFiles() {
         return files;
     }
 
@@ -23,7 +23,7 @@ public class AnalyzedCodeBaseDTO extends RepresentationModel<AnalyzedCodeBaseDTO
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        AnalyzedCodeBaseDTO that = (AnalyzedCodeBaseDTO) o;
+        CodeBaseHistoryDTO that = (CodeBaseHistoryDTO) o;
         return Objects.equals(files, that.files);
     }
 

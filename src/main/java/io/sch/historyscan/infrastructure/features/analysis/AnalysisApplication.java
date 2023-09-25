@@ -15,8 +15,8 @@ public class AnalysisApplication {
         this.analysisMapper = analysisMapper;
     }
 
-    public AnalyzedCodeBaseDTO analyse(String name,
-                                          String analysisType) {
+    public CodeBaseHistoryDTO analyze(String name,
+                                      String analysisType) {
         final CodeBase codeBase = CodeBase.of(name, analysisType);
         var analyzedCodeBase = analysis.of(codeBase);
         return analysisMapper.domainToWeb(analyzedCodeBase);

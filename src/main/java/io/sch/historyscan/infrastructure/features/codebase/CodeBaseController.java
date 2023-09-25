@@ -9,8 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static io.sch.historyscan.infrastructure.common.filesystem.WebConstants.ENDPOINT_ROOT;
+
 @RestController
-@RequestMapping("/codebases")
+@RequestMapping(path = ENDPOINT_ROOT + "/codebases")
 public class CodeBaseController {
 
     private final CodeBaseApplication codebaseApplication;

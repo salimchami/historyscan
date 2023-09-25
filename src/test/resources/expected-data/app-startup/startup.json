@@ -2,16 +2,16 @@
   "message": "Application is up! Please use the links below to navigate to the API endpoints.",
   "_links": {
     "self": {
-      "href": "http://localhost",
+      "href": "http://localhost/api/v1",
       "title": "GET",
       "name": "startup"
     },
     "add-codebase": {
-      "href": "http://localhost/codebases",
+      "href": "http://localhost/api/v1/codebases",
       "title": "POST"
     },
     "list-codebases": {
-      "href": "http://localhost/codebases",
+      "href": "http://localhost/api/v1/codebases",
       "title": "GET"
     }
   }
