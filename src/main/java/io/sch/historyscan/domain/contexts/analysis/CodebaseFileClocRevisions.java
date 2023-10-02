@@ -7,6 +7,7 @@ public record CodebaseFileClocRevisions(String fileName, int numberOfModifs) imp
     public int compareTo(CodebaseFileClocRevisions o) {
         return comparing(CodebaseFileClocRevisions::numberOfModifs)
                 .thenComparing(CodebaseFileClocRevisions::fileName)
+                .reversed()
                 .compare(this, o);
     }
 }
