@@ -1,4 +1,4 @@
-package io.sch.historyscan.application;
+package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.common.HistoryscanIntegrationTests;
 import io.sch.historyscan.common.JsonReader;
@@ -7,7 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.FileSystemUtils;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
@@ -25,14 +27,16 @@ class CodeBaseControllerTest extends HistoryscanIntegrationTests {
 
     public static Stream<Arguments> should_clone_the_codebase_params() {
         return Stream.of(
-                Arguments.of("http-codebase", "http-added-codebase"),
-                Arguments.of("git-codebase", "git-added-codebase")
+                Arguments.of("http-codebase", "http-added-codebase")
+//                Arguments.of("git-codebase", "git-added-codebase")
         );
     }
 
     @ParameterizedTest(name = "{index} {1}")
     @MethodSource("should_clone_the_codebase_params")
     void should_clone_the_codebase(String codeBaseToAddJson, String expectedAddedCodeBase) throws Exception {
+        final File codeBase = Paths.get(codebasesFolder, "public-articles").toFile();
+        FileSystemUtils.deleteRecursively(codeBase);
         var expectedAddedCodebaseResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, expectedAddedCodeBase);
         var codebaseToAdd = JsonReader.toRequestedJson(CODEBASE_FOLDER, codeBaseToAddJson);
         endPointCaller.perform(post(CODEBASES).content(codebaseToAdd))

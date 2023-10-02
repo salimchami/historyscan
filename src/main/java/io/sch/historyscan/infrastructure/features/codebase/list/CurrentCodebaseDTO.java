@@ -3,6 +3,8 @@ package io.sch.historyscan.infrastructure.features.codebase.list;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sch.historyscan.domain.contexts.analysis.EnumAnalysis;
+import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
+import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
@@ -25,17 +27,21 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
         this.url = url;
         this.currentBranch = currentBranch;
         addSelfLink();
-        addHistoryAnalysisLink();
-        addClocAndRevisionsLink();
+        try {
+            addHistoryAnalysisLink();
+            addClocAndRevisionsLink();
+        } catch (HistoryScanFunctionalException e) {
+            throw new HistoryScanTechnicalException(e.getMessage());
+        }
     }
 
-    private void addClocAndRevisionsLink() {
+    private void addClocAndRevisionsLink() throws HistoryScanFunctionalException {
         add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.CLOC_REVISIONS.getTitle()))
                 .withRel("analyze-cloc-revisions")
                 .withTitle(HttpMethod.GET.name()));
     }
 
-    private void addHistoryAnalysisLink() {
+    private void addHistoryAnalysisLink() throws HistoryScanFunctionalException {
         add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.COMMITS_SCAN.getTitle()))
                 .withRel("analyze-history")
                 .withTitle(HttpMethod.GET.name()));

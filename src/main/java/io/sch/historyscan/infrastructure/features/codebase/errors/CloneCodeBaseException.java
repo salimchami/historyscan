@@ -6,4 +6,8 @@ public class CloneCodeBaseException extends HistoryScanTechnicalException {
     public CloneCodeBaseException(String message, Throwable e) {
         super(message, e);
     }
+
+    public CloneCodeBaseException(String message) {
+        super(message);
+    }
 }

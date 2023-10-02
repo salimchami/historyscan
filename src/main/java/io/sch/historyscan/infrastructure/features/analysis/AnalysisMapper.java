@@ -1,9 +1,6 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseFile;
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseHistory;
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseHistoryCommitFile;
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseHistoryCommitInfo;
+import io.sch.historyscan.domain.contexts.analysis.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,5 +34,15 @@ public class AnalysisMapper {
 
     private CodeBaseHistoryCommitInfoDTO domainToWeb(CodeBaseHistoryCommitInfo info) {
         return new CodeBaseHistoryCommitInfoDTO(info.hash(), info.author(), info.date(), info.shortMessage());
+    }
+
+    public CodeBaseClocRevisionsDTO domainToWeb(CodebaseClocRevisions analyzedCodeBaseClocRevisions) {
+        return new CodeBaseClocRevisionsDTO(
+                analyzedCodeBaseClocRevisions.revisions().stream().map(this::domainToWeb).toList()
+        );
+    }
+
+    private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
+        return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfModifs());
     }
 }

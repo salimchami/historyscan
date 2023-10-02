@@ -6,6 +6,7 @@ import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBase;
 import io.sch.historyscan.domain.contexts.codebase.find.FindCodeBases;
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
+import io.sch.historyscan.infrastructure.features.codebase.errors.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureApplication;
@@ -31,7 +32,7 @@ public class CodeBaseApplication {
         this.codeBaseMapper = codeBaseMapper;
     }
 
-    public AddedCodebaseDTO clone(CodeBaseToAddDTO codeBaseToAddDTO) {
+    public AddedCodebaseDTO clone(CodeBaseToAddDTO codeBaseToAddDTO) throws CodeBaseAlreadyExistsException {
         var codebase = clone.from(new CodeBaseToClone(
                 codeBaseToAddDTO.url(), codeBaseToAddDTO.publicKey(),
                 codeBaseToAddDTO.name(), codeBaseToAddDTO.branch()));

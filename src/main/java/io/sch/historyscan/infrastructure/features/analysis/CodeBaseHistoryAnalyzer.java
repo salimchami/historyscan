@@ -50,7 +50,6 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
             return new CodeBaseHistory(StreamSupport.stream(codeBase.log().all().call().spliterator(), false)
                     .map(revCommit -> initCodeBaseHistoryCommit(revCommit, codeBase))
                     .toList());
-
         } catch (IOException e) {
             logger.error("Unable to open codebase %s".formatted(file.getName()), e);
             throw new CodeBaseNotOpenedException("Unable to open codebase %s".formatted(file.getName()), e);

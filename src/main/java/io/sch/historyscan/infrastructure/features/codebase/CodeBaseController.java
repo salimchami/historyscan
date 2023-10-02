@@ -2,6 +2,7 @@ package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
+import io.sch.historyscan.infrastructure.features.codebase.errors.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class CodeBaseController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AddedCodebaseDTO> add(@RequestBody CodeBaseToAddDTO codeBaseToAddDTO) {
+    public ResponseEntity<AddedCodebaseDTO> add(@RequestBody CodeBaseToAddDTO codeBaseToAddDTO) throws CodeBaseAlreadyExistsException {
         var addedCodeBase = codebaseApplication.clone(codeBaseToAddDTO);
         return new ResponseEntity<>(addedCodeBase, HttpStatus.CREATED);
     }
