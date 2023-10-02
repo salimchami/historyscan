@@ -8,18 +8,26 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.diff.DiffFormatter;
+import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -39,30 +47,38 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         this.logger = logger;
     }
 
+    @CacheEvict(allEntries = true, cacheNames = {"codebaseHistory"})
+    @Scheduled(fixedDelay = 15000)
+    public void cacheEvict() {
+        // Cache TTL
+    }
+
     @Override
+    @Cacheable(value = "codebaseHistory", key = "#codeBaseName", condition = "#codeBaseName != null")
     public Optional<CodeBaseHistory> of(String codeBaseName) {
         return this.fileSystemManager.findFolder(codebasesFolder, codeBaseName)
                 .map(this::codeBaseHistory);
     }
 
-    private CodeBaseHistory codeBaseHistory(File file) {
-        try (var codeBase = Git.open(file)) {
-            return new CodeBaseHistory(StreamSupport.stream(codeBase.log().all().call().spliterator(), false)
-                    .map(revCommit -> initCodeBaseHistoryCommit(revCommit, codeBase))
+    private CodeBaseHistory codeBaseHistory(File codebase) {
+        try (var repository = new FileRepositoryBuilder().setGitDir(Paths.get(codebase.toString(), ".git").toFile()).build();
+             var git = new Git(repository)) {
+            return new CodeBaseHistory(StreamSupport.stream(git.log().all().call().spliterator(), false)
+                    .map(revCommit -> initCodeBaseHistoryCommit(revCommit, git, repository))
                     .toList());
         } catch (IOException e) {
-            logger.error("Unable to open codebase %s".formatted(file.getName()), e);
-            throw new CodeBaseNotOpenedException("Unable to open codebase %s".formatted(file.getName()), e);
+            logger.error("Unable to open codebase %s".formatted(codebase.getName()), e);
+            throw new CodeBaseNotOpenedException("Unable to open codebase %s".formatted(codebase.getName()), e);
         } catch (NoHeadException e) {
-            logger.error("Unable to find HEAD for codebase %s".formatted(file.getName()), e);
-            throw new CodeBaseHeadNotFoundException("Unable to find HEAD for codebase %s".formatted(file.getName()), e);
+            logger.error("Unable to find HEAD for codebase %s".formatted(codebase.getName()), e);
+            throw new CodeBaseHeadNotFoundException("Unable to find HEAD for codebase %s".formatted(codebase.getName()), e);
         } catch (GitAPIException e) {
-            logger.error("Unable to find log for codebase %s".formatted(file.getName()), e);
-            throw new CodeBaseLogNotFoundException("Unable to find log for codebase %s".formatted(file.getName()), e);
+            logger.error("Unable to find log for codebase %s".formatted(codebase.getName()), e);
+            throw new CodeBaseLogNotFoundException("Unable to find log for codebase %s".formatted(codebase.getName()), e);
         }
     }
 
-    private CodeBaseFile initCodeBaseHistoryCommit(RevCommit revCommit, Git codeBase) {
+    private CodeBaseFile initCodeBaseHistoryCommit(RevCommit revCommit, Git git, Repository repository) {
         return new CodeBaseFile(
                 new CodeBaseHistoryCommitInfo(
                         revCommit.getId().getName(),
@@ -70,74 +86,81 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
                         LocalDateTime.ofInstant(revCommit.getAuthorIdent().getWhenAsInstant(), ZoneId.systemDefault()),
                         revCommit.getShortMessage()
                 ),
-                commitFilesList(new GitCommit(revCommit), codeBase.getRepository(), codeBase)
+                commitFilesList(revCommit, git, repository).stream().filter(file -> file.cloc() > 0).toList()
         );
     }
 
-    private List<CodeBaseHistoryCommitFile> commitFilesList(GitCommit commit, Repository repository, Git git) {
-        try {
-            var diffEntries = git.diff()
-                    .setOldTree(prepareTreeParser(repository, commit.parentTree()))
-                    .setNewTree(prepareTreeParser(repository, commit.getTree()))
-                    .call();
-            return diffEntries.stream()
-                    .map(diffEntry -> initCodeBaseHistoryCommitFile(diffEntry, commit, repository))
-                    .toList();
-        } catch (GitAPIException e) {
-            throw new CommitDiffException("Unable to find diff for commit %s".formatted(commit.getName()), e);
-        }
-    }
-
-    private static CodeBaseHistoryCommitFile initCodeBaseHistoryCommitFile(DiffEntry diffEntry, GitCommit commit, Repository repository) {
-        int linesAdded = 0;
-        int linesDeleted = 0;
-
-        try (var reader = repository.newObjectReader()) {
-
-            CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
-            CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
-
-
-            ObjectId oldTree = repository.resolve(commit.getName() + "^{tree}");
-            ObjectId newTree = repository.resolve(commit.getName() + "^{tree}");
-
-            oldTreeIter.reset(reader, oldTree);
-            newTreeIter.reset(reader, newTree);
-
-
-            switch (diffEntry.getChangeType()) {
-                case ADD -> linesAdded += countLines(newTreeIter);
-                case DELETE -> linesDeleted += countLines(oldTreeIter);
-                case MODIFY -> {
-                    linesAdded += countLines(newTreeIter);
-                    linesDeleted += countLines(oldTreeIter);
+    private List<CodeBaseHistoryCommitFile> commitFilesList(RevCommit commit, Git git, Repository repository) {
+        var files = new ArrayList<CodeBaseHistoryCommitFile>();
+        var parentTree = parentTree(commit);
+        var commitTree = commit.getTree();
+        var diffs = commitDiffs(git, repository, parentTree, commitTree);
+        for (DiffEntry diff : diffs) {
+            int addedLines = 0;
+            int deletedLines = 0;
+            int modifiedLines = 0;
+            try (var out = new ByteArrayOutputStream()) {
+                try (DiffFormatter formatter = new DiffFormatter(out)) {
+                    formatter.setRepository(repository);
+                    formatter.format(diff);
                 }
-                default -> throw new CommitDiffException("Diff entry type not found %s".formatted(commit.getName()));
+                String diffText = out.toString();
+                String[] diffLines = diffText.split("\r\n|\r|\n");
+                for (String line : diffLines) {
+                    if (line.startsWith("+") && !line.startsWith("+++")) {
+                        addedLines++;
+
+                    } else if (line.startsWith("-") && !line.startsWith("---")) {
+                        deletedLines++;
+                    } else if(line.startsWith("+++") || line.startsWith("---")) {
+                        modifiedLines++;
+                    }
+                }
+            } catch (IOException e) {
+                throw new CommitDiffException("Unable to find diff for commit", e);
             }
-            return new CodeBaseHistoryCommitFile(diffEntry.getNewPath(), linesAdded, linesDeleted);
-        } catch (IOException e) {
-            throw new CommitDiffException("Unable to read tree commit %s".formatted(commit.getName()), e);
+            files.add(new CodeBaseHistoryCommitFile(diff.getNewPath(), addedLines, deletedLines, modifiedLines));
+        }
+        return files;
+    }
+
+    private List<DiffEntry> commitDiffs(Git git, Repository repository, RevTree parentTree, RevTree commitTree) {
+        try {
+            if (parentTree != null) {
+                return git.diff()
+                        .setOldTree(prepareTreeParser(repository, parentTree))
+                        .setNewTree(prepareTreeParser(repository, commitTree))
+                        .call();
+            } else {
+                return git.diff()
+                        .setOldTree(prepareTreeParser(repository, null))
+                        .setNewTree(prepareTreeParser(repository, commitTree))
+                        .call();
+            }
+        } catch (GitAPIException e) {
+            throw new CommitDiffException("Unable to find diff for commit", e);
         }
     }
 
-    private static CanonicalTreeParser prepareTreeParser(Repository repository, RevTree tree) {
-        try (var reader = repository.newObjectReader()) {
-            var treeParser = new CanonicalTreeParser();
+    private CanonicalTreeParser prepareTreeParser(Repository repository, RevTree tree) {
+        try (ObjectReader reader = repository.newObjectReader()) {
+            CanonicalTreeParser treeParser = new CanonicalTreeParser();
             if (tree != null) {
                 treeParser.reset(reader, tree.getId());
             }
             return treeParser;
         } catch (IOException e) {
-            throw new CommitDiffException("Unable to read tree %s".formatted(tree.getId()), e);
+            throw new CommitDiffException("Unable to find diff for commit", e);
         }
     }
 
-    private static int countLines(CanonicalTreeParser treeParser) {
-        int count = 0;
-        while (!treeParser.eof()) {
-            treeParser.next();
-            count++;
+    private static RevTree parentTree(RevCommit commit) {
+        RevTree parentTree;
+        if (commit.getParentCount() > 0) {
+            parentTree = commit.getParent(0).getTree();
+        } else {
+            parentTree = null; // No parent for the initial commit
         }
-        return count;
+        return parentTree;
     }
 }

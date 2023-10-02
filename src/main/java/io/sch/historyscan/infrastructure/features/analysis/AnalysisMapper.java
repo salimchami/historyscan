@@ -27,9 +27,9 @@ public class AnalysisMapper {
     private CodeBaseHistoryCommitFileDTO domainToWeb(CodeBaseHistoryCommitFile codeBaseHistoryCommitFile) {
         return new CodeBaseHistoryCommitFileDTO(
                 codeBaseHistoryCommitFile.fileName(),
-                codeBaseHistoryCommitFile.nbLinesAdded(),
-                codeBaseHistoryCommitFile.nbLinesDeleted()
-        );
+                codeBaseHistoryCommitFile.nbAddedLines(),
+                codeBaseHistoryCommitFile.nbDeletedLines(),
+                codeBaseHistoryCommitFile.nbModifiedLines());
     }
 
     private CodeBaseHistoryCommitInfoDTO domainToWeb(CodeBaseHistoryCommitInfo info) {

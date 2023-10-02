@@ -10,10 +10,12 @@ public record CodeBaseHistory(List<CodeBaseFile> files) {
                 .flatMap(codebaseFile -> codebaseFile.files().stream())
                 .collect(Collectors.groupingBy(
                         CodeBaseHistoryCommitFile::fileName,
-                        Collectors.counting()
+                        Collectors.summingInt(CodeBaseHistoryCommitFile::cloc)
                 ))
                 .entrySet().stream()
-                .map(entry -> new CodebaseFileClocRevisions(entry.getKey(), entry.getValue().intValue()))
+                .filter(entry -> entry.getValue() > 0)
+                .map(entry -> new CodebaseFileClocRevisions(entry.getKey(), entry.getValue()))
+                .sorted()
                 .toList();
         return new CodebaseClocRevisions(revisions);
     }

@@ -16,21 +16,21 @@ class CodeBaseHistoryTest {
         var date = LocalDateTime.now();
         var codeBaseHistory = new CodeBaseHistory(List.of(
                 new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 1, 2),
-                        new CodeBaseHistoryCommitFile(fileName2, 15, 30)
+                        new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
+                        new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
                 )),
                 new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-2", "author-1", date, "message 2"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 12, 0),
-                        new CodeBaseHistoryCommitFile(fileName2, 150, 100)
+                        new CodeBaseHistoryCommitFile(fileName1, 12, 0, 2),
+                        new CodeBaseHistoryCommitFile(fileName2, 150, 100, 45)
                 )),
                 new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-3", "author-1", date, "message 3"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 12, 0)
+                        new CodeBaseHistoryCommitFile(fileName1, 12, 0, 10)
                 ))
         ));
         var clocRevisions = codeBaseHistory.toClocRevisions();
         assertThat(clocRevisions).isEqualTo(new CodebaseClocRevisions(List.of(
-                new CodebaseFileClocRevisions(fileName1, 3),
-                new CodebaseFileClocRevisions(fileName2, 2)
+                new CodebaseFileClocRevisions(fileName1, 44),
+                new CodebaseFileClocRevisions(fileName2, 350)
         )));
     }
 }
