@@ -16,9 +16,6 @@ import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
@@ -47,14 +44,7 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         this.logger = logger;
     }
 
-    @CacheEvict(allEntries = true, cacheNames = {"codebaseHistory"})
-    @Scheduled(fixedDelay = 15000)
-    public void cacheEvict() {
-        // Cache TTL
-    }
-
     @Override
-    @Cacheable(value = "codebaseHistory", key = "#codeBaseName", condition = "#codeBaseName != null")
     public Optional<CodeBaseHistory> of(String codeBaseName) {
         return this.fileSystemManager.findFolder(codebasesFolder, codeBaseName)
                 .map(this::codeBaseHistory);

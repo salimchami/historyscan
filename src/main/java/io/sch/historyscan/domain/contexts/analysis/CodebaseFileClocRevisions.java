@@ -12,6 +12,6 @@ public record CodebaseFileClocRevisions(String fileName, int numberOfModifs) imp
     }
 
     public boolean ignored() {
-        return EnumIgnoredCodeBaseFiles.ignoredFiles().contains(fileName);
+        return EnumIgnoredCodeBaseFiles.ignoredFiles().stream().anyMatch(fileName::contains);
     }
 }

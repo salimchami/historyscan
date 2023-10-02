@@ -5,6 +5,9 @@ import io.sch.historyscan.domain.contexts.analysis.CodeBase;
 import io.sch.historyscan.domain.contexts.analysis.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.CodebaseClocRevisions;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,8 +25,14 @@ public class AnalysisApplication {
         this.codebaseClocRevisionsAnalysis = codebaseClocRevisionsAnalysis;
     }
 
-    public Object analyze(String name,
-                                      String analysisType) throws HistoryScanFunctionalException {
+    @CacheEvict(allEntries = true, cacheNames = {"codebaseAnalysis"})
+    @Scheduled(fixedDelay = 15000)
+    public void cacheEvict() {
+        // Cache TTL
+    }
+
+    @Cacheable(value = "codebaseAnalysis", key = "#name-#analysisType", condition = "#name != null && #analysisType != null")
+    public Object analyze(String name, String analysisType) throws HistoryScanFunctionalException {
         final CodeBase codeBase = CodeBase.of(name, analysisType);
         return switch (codeBase.getType()) {
             case COMMITS_SCAN -> historyAnalysis(codeBase);
