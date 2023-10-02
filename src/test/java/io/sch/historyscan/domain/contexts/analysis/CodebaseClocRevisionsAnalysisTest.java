@@ -44,7 +44,7 @@ class CodebaseClocRevisionsAnalysisTest {
         );
 
         var analysis = codebaseClocRevisionsAnalysis.analyze(codeBase);
-        assertThat(analysis).isEqualTo(new CodebaseClocRevisions(List.of(
+        assertThat(analysis).isEqualTo(CodebaseClocRevisions.of(List.of(
                 new CodebaseFileClocRevisions(fileName1, 44),
                 new CodebaseFileClocRevisions(fileName2, 350)
         )));

@@ -10,4 +10,8 @@ public record CodebaseFileClocRevisions(String fileName, int numberOfModifs) imp
                 .reversed()
                 .compare(this, o);
     }
+
+    public boolean ignored() {
+        return EnumIgnoredCodeBaseFiles.ignoredFiles().contains(fileName);
+    }
 }

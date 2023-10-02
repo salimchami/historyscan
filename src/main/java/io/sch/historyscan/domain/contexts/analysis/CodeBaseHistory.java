@@ -17,6 +17,6 @@ public record CodeBaseHistory(List<CodeBaseFile> files) {
                 .map(entry -> new CodebaseFileClocRevisions(entry.getKey(), entry.getValue()))
                 .sorted()
                 .toList();
-        return new CodebaseClocRevisions(revisions);
+        return CodebaseClocRevisions.of(revisions);
     }
 }

@@ -28,7 +28,7 @@ class CodeBaseHistoryTest {
                 ))
         ));
         var clocRevisions = codeBaseHistory.toClocRevisions();
-        assertThat(clocRevisions).isEqualTo(new CodebaseClocRevisions(List.of(
+        assertThat(clocRevisions).isEqualTo(CodebaseClocRevisions.of(List.of(
                 new CodebaseFileClocRevisions(fileName1, 44),
                 new CodebaseFileClocRevisions(fileName2, 350)
         )));
