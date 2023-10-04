@@ -1,5 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis;
 
+import static io.sch.historyscan.domain.contexts.analysis.EnumIgnoredCodeBaseFiles.ignoredFiles;
 import static java.util.Comparator.comparing;
 
 public record CodebaseFileClocRevisions(String fileName, int numberOfModifs) implements Comparable<CodebaseFileClocRevisions> {
@@ -12,6 +13,6 @@ public record CodebaseFileClocRevisions(String fileName, int numberOfModifs) imp
     }
 
     public boolean ignored() {
-        return EnumIgnoredCodeBaseFiles.ignoredFiles().stream().anyMatch(fileName::contains);
+        return ignoredFiles().stream().anyMatch(fileName::contains);
     }
 }

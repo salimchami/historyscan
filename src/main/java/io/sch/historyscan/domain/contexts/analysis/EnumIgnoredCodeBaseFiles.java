@@ -4,8 +4,43 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum EnumIgnoredCodeBaseFiles {
-    JS(List.of("/dev/null", "package-lock.json", "yarn.lock")),
-    JAVA(List.of());
+    JS(List.of("/dev/null",
+            "package-lock.json",
+            "yarn.lock",
+            "libs",
+            "lib",
+            ".js.map",
+            ".map",
+            "node_modules/",
+            "dist/",
+            "build/",
+            ".cache/",
+            ".temp/",
+            "coverage/",
+            "docs/",
+            "jpeg",
+            "jpg",
+            "png",
+            ".d.ts")),
+
+    JAVA(List.of(".class",
+            ".jar",
+            "bin/",
+            "target/",
+            "build/",
+            "out/",
+            "coverage/",
+            "docs/",
+            "lib/",
+            "libs/",
+            "generated/",
+            "jpeg",
+            "jpg",
+            "png",
+            "gradlew",
+            "gitattributes",
+            "documentation",
+            "package-info.java"));
 
     private final List<String> ignoredFiles;
 

@@ -10,12 +10,15 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
 
     private final List<CodeBaseClocRevisionsFileDTO> revisions;
     private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
+    private final List<String> extensions;
 
     @JsonCreator
     public CodeBaseClocRevisionsDTO(List<CodeBaseClocRevisionsFileDTO> revisions,
-                                    List<CodeBaseClocRevisionsFileDTO> ignoredRevisions) {
+                                    List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
+                                    List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
+        this.extensions = extensions;
     }
 
     public List<CodeBaseClocRevisionsFileDTO> getRevisions() {
@@ -26,17 +29,23 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
         return ignoredRevisions;
     }
 
+    public List<String> getExtensions() {
+        return extensions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CodeBaseClocRevisionsDTO that = (CodeBaseClocRevisionsDTO) o;
-        return Objects.equals(revisions, that.revisions) && Objects.equals(ignoredRevisions, that.ignoredRevisions);
+        return Objects.equals(revisions, that.revisions)
+                && Objects.equals(ignoredRevisions, that.ignoredRevisions)
+                && Objects.equals(extensions, that.extensions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), revisions, ignoredRevisions);
+        return Objects.hash(super.hashCode(), revisions, ignoredRevisions, extensions);
     }
 }

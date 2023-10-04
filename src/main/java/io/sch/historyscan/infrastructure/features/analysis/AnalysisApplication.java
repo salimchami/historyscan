@@ -10,6 +10,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class AnalysisApplication {
 
@@ -26,12 +28,12 @@ public class AnalysisApplication {
     }
 
     @CacheEvict(allEntries = true, cacheNames = {"codebaseAnalysis"})
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.HOURS)
     public void cacheEvict() {
         // Cache TTL
     }
 
-    @Cacheable(value = "codebaseAnalysis", key = "#name-#analysisType", condition = "#name != null && #analysisType != null")
+    @Cacheable(cacheNames = "codebaseAnalysis", key="#name + #analysisType", condition = "#name != null && #analysisType != null")
     public Object analyze(String name, String analysisType) throws HistoryScanFunctionalException {
         final CodeBase codeBase = CodeBase.of(name, analysisType);
         return switch (codeBase.getType()) {
