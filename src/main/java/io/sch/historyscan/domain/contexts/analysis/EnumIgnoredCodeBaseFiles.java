@@ -21,7 +21,9 @@ public enum EnumIgnoredCodeBaseFiles {
             "jpeg",
             "jpg",
             "png",
-            ".d.ts")),
+            ".d.ts",
+            "release/"
+    )),
 
     JAVA(List.of(".class",
             ".jar",
@@ -40,7 +42,9 @@ public enum EnumIgnoredCodeBaseFiles {
             "gradlew",
             "gitattributes",
             "documentation",
-            "package-info.java"));
+            "package-info.java",
+            "release/"
+    ));
 
     private final List<String> ignoredFiles;
 
