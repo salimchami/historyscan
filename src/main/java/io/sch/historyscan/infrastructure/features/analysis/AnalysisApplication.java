@@ -43,12 +43,12 @@ public class AnalysisApplication {
     }
 
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBase codeBase) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseClocRevisions = codebaseClocRevisionsAnalysis.analyze(codeBase);
+        var analyzedCodeBaseClocRevisions = codebaseClocRevisionsAnalysis.of(codeBase);
         return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
     }
 
     private CodeBaseHistoryDTO historyAnalysis(CodeBase codeBase) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseHistory = codebaseHistoryAnalysis.analyze(codeBase);
+        var analyzedCodeBaseHistory = codebaseHistoryAnalysis.of(codeBase);
         return analysisMapper.domainToWeb(analyzedCodeBaseHistory);
     }
 }

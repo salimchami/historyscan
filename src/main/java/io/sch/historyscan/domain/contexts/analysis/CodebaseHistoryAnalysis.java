@@ -11,7 +11,7 @@ public class CodebaseHistoryAnalysis implements Analysis<CodeBaseHistory> {
     }
 
     @Override
-    public CodeBaseHistory analyze(CodeBase codeBase) throws HistoryScanFunctionalException {
+    public CodeBaseHistory of(CodeBase codeBase) throws HistoryScanFunctionalException {
         return historyAnalyzer.of(codeBase.getName())
                 .orElseThrow(() ->
                         new CodeBaseHistoryNotFoundException(

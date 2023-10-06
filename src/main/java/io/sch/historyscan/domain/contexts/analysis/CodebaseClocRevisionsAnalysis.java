@@ -12,8 +12,8 @@ public class CodebaseClocRevisionsAnalysis implements Analysis<CodebaseClocRevis
     }
 
     @Override
-    public CodebaseClocRevisions analyze(CodeBase codeBase) throws HistoryScanFunctionalException {
-        var history = codebaseHistoryAnalysis.analyze(codeBase);
+    public CodebaseClocRevisions of(CodeBase codeBase) throws HistoryScanFunctionalException {
+        var history = codebaseHistoryAnalysis.of(codeBase);
         return history.toClocRevisions();
     }
 }

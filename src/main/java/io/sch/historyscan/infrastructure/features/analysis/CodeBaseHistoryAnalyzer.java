@@ -9,6 +9,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.diff.DiffFormatter;
+import org.eclipse.jgit.lib.FileMode;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -85,31 +86,33 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         var parentTree = parentTree(commit);
         var commitTree = commit.getTree();
         var diffs = commitDiffs(git, repository, parentTree, commitTree);
-        for (DiffEntry diff : diffs) {
-            int addedLines = 0;
-            int deletedLines = 0;
-            int modifiedLines = 0;
-            try (var out = new ByteArrayOutputStream()) {
-                try (DiffFormatter formatter = new DiffFormatter(out)) {
-                    formatter.setRepository(repository);
-                    formatter.format(diff);
-                }
-                String diffText = out.toString();
-                String[] diffLines = diffText.split("\r\n|\r|\n");
-                for (String line : diffLines) {
-                    if (line.startsWith("+") && !line.startsWith("+++")) {
-                        addedLines++;
-
-                    } else if (line.startsWith("-") && !line.startsWith("---")) {
-                        deletedLines++;
-                    } else if(line.startsWith("+++") || line.startsWith("---")) {
-                        modifiedLines++;
+        for (DiffEntry fileDiff : diffs) {
+            if (fileDiff.getNewMode() != FileMode.MISSING) {
+                int addedLines = 0;
+                int deletedLines = 0;
+                int modifiedLines = 0;
+                try (var out = new ByteArrayOutputStream()) {
+                    try (DiffFormatter formatter = new DiffFormatter(out)) {
+                        formatter.setRepository(repository);
+                        formatter.format(fileDiff);
                     }
+                    String diffText = out.toString();
+                    String[] diffLines = diffText.split("\r\n|\r|\n");
+                    for (String line : diffLines) {
+                        if (line.startsWith("+") && !line.startsWith("+++")) {
+                            addedLines++;
+
+                        } else if (line.startsWith("-") && !line.startsWith("---")) {
+                            deletedLines++;
+                        } else if (line.startsWith("+++") || line.startsWith("---")) {
+                            modifiedLines++;
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new CommitDiffException("Unable to find diff for commit", e);
                 }
-            } catch (IOException e) {
-                throw new CommitDiffException("Unable to find diff for commit", e);
+                files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), addedLines, deletedLines, modifiedLines));
             }
-            files.add(new CodeBaseHistoryCommitFile(diff.getNewPath(), addedLines, deletedLines, modifiedLines));
         }
         return files;
     }
