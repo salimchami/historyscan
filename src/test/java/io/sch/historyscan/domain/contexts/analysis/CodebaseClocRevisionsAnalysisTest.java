@@ -28,7 +28,7 @@ class CodebaseClocRevisionsAnalysisTest {
         CodeBase codeBase = new CodeBase("the-code-base", EnumAnalysis.CLOC_REVISIONS);
         final String fileName1 = "file-1.java";
         final String fileName2 = "file-2.java";
-        when(historyAnalysis.analyze(codeBase)).thenReturn(new CodeBaseHistory(List.of(
+        when(historyAnalysis.of(codeBase)).thenReturn(new CodeBaseHistory(List.of(
                         new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
                                 new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
                                 new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
@@ -43,7 +43,7 @@ class CodebaseClocRevisionsAnalysisTest {
                 ))
         );
 
-        var analysis = codebaseClocRevisionsAnalysis.analyze(codeBase);
+        var analysis = codebaseClocRevisionsAnalysis.of(codeBase);
         assertThat(analysis).isEqualTo(CodebaseClocRevisions.of(List.of(
                 new CodebaseFileClocRevisions(fileName1, 44),
                 new CodebaseFileClocRevisions(fileName2, 350)

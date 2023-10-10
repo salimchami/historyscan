@@ -10,8 +10,9 @@
       "files": [
         {
           "file-name": "audit-applicatif/application-audit.md",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 3
+          "nb-lines-added": 46,
+          "nb-lines-deleted": 26,
+          "nbModifiedLines": 2
         }
       ]
     },
@@ -25,28 +26,33 @@
       "files": [
         {
           "file-name": ".gitignore",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 0
+          "nb-lines-added": 1,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         },
         {
           "file-name": "README.md",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 3
+          "nb-lines-added": 7,
+          "nb-lines-deleted": 1,
+          "nbModifiedLines": 2
         },
         {
           "file-name": "audit-applicatif/bugs.png",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 0
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         },
         {
           "file-name": "audit-applicatif/modules-dependencies.png",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 0
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         },
         {
           "file-name": "audit-applicatif/owasp.png",
-          "nb-lines-added": 3,
-          "nb-lines-deleted": 0
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         }
       ]
     },
@@ -60,8 +66,9 @@
       "files": [
         {
           "file-name": "audit-applicatif/application-audit.md",
-          "nb-lines-added": 2,
-          "nb-lines-deleted": 0
+          "nb-lines-added": 1160,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         }
       ]
     },
@@ -76,7 +83,8 @@
         {
           "file-name": "README.md",
           "nb-lines-added": 1,
-          "nb-lines-deleted": 0
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
         }
       ]
     }

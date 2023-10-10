@@ -54,8 +54,13 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
     private CodeBaseHistory codeBaseHistory(File codebase) {
         try (var repository = new FileRepositoryBuilder().setGitDir(Paths.get(codebase.toString(), ".git").toFile()).build();
              var git = new Git(repository)) {
+            git.fetch().call();
+            git.pull().call();
+            var codebaseCurrentFiles = fileSystemManager.allFilesFrom(codebase, ".git");
             return new CodeBaseHistory(StreamSupport.stream(git.log().all().call().spliterator(), false)
-                    .map(revCommit -> initCodeBaseHistoryCommit(revCommit, git, repository))
+                    .map(revCommit -> initCodeBaseHistoryCommit(revCommit, git, repository, codebaseCurrentFiles))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
                     .toList());
         } catch (IOException e) {
             logger.error("Unable to open codebase %s".formatted(codebase.getName()), e);
@@ -69,52 +74,62 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         }
     }
 
-    private CodeBaseFile initCodeBaseHistoryCommit(RevCommit revCommit, Git git, Repository repository) {
-        return new CodeBaseFile(
+    private Optional<CodeBaseFile> initCodeBaseHistoryCommit(RevCommit revCommit, Git git, Repository repository, List<String> codebaseCurrentFiles) {
+        final List<CodeBaseHistoryCommitFile> codeBaseHistoryCommitFiles = commitFilesList(revCommit, git, repository, codebaseCurrentFiles);
+        if (codeBaseHistoryCommitFiles.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(new CodeBaseFile(
                 new CodeBaseHistoryCommitInfo(
                         revCommit.getId().getName(),
                         revCommit.getAuthorIdent().getName(),
                         LocalDateTime.ofInstant(revCommit.getAuthorIdent().getWhenAsInstant(), ZoneId.systemDefault()),
                         revCommit.getShortMessage()
                 ),
-                commitFilesList(revCommit, git, repository).stream().filter(file -> file.cloc() > 0).toList()
-        );
+                codeBaseHistoryCommitFiles.stream().filter(file -> file.cloc() > 0).toList()
+        ));
     }
 
-    private List<CodeBaseHistoryCommitFile> commitFilesList(RevCommit commit, Git git, Repository repository) {
+    private List<CodeBaseHistoryCommitFile> commitFilesList(RevCommit commit, Git git, Repository repository,
+                                                            List<String> codebaseCurrentFiles) {
         var files = new ArrayList<CodeBaseHistoryCommitFile>();
         var parentTree = parentTree(commit);
         var commitTree = commit.getTree();
         var diffs = commitDiffs(git, repository, parentTree, commitTree);
         for (DiffEntry fileDiff : diffs) {
-            if (fileDiff.getNewMode() != FileMode.MISSING) {
-                int addedLines = 0;
-                int deletedLines = 0;
-                int modifiedLines = 0;
-                try (var out = new ByteArrayOutputStream()) {
-                    try (DiffFormatter formatter = new DiffFormatter(out)) {
-                        formatter.setRepository(repository);
-                        formatter.format(fileDiff);
-                    }
-                    String diffText = out.toString();
-                    String[] diffLines = diffText.split("\r\n|\r|\n");
-                    for (String line : diffLines) {
-                        if (line.startsWith("+") && !line.startsWith("+++")) {
-                            addedLines++;
-
-                        } else if (line.startsWith("-") && !line.startsWith("---")) {
-                            deletedLines++;
-                        } else if (line.startsWith("+++") || line.startsWith("---")) {
-                            modifiedLines++;
-                        }
-                    }
-                } catch (IOException e) {
-                    throw new CommitDiffException("Unable to find diff for commit", e);
-                }
-                files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), addedLines, deletedLines, modifiedLines));
+            if (fileDiff.getNewMode().getObjectType() == FileMode.REGULAR_FILE.getObjectType()
+                    && codebaseCurrentFiles.stream().anyMatch(codebaseCurrentFile -> fileDiff.getNewPath().contains(codebaseCurrentFile))) {
+                cloc(repository, fileDiff, files);
             }
         }
         return files;
+    }
+
+    private static void cloc(Repository repository, DiffEntry fileDiff, ArrayList<CodeBaseHistoryCommitFile> files) {
+        int addedLines = 0;
+        int deletedLines = 0;
+        int modifiedLines = 0;
+        try (var out = new ByteArrayOutputStream()) {
+            try (DiffFormatter formatter = new DiffFormatter(out)) {
+                formatter.setRepository(repository);
+                formatter.format(fileDiff);
+            }
+            String diffText = out.toString();
+            String[] diffLines = diffText.split("\r\n|\r|\n");
+            for (String line : diffLines) {
+                if (line.startsWith("+") && !line.startsWith("+++")) {
+                    addedLines++;
+
+                } else if (line.startsWith("-") && !line.startsWith("---")) {
+                    deletedLines++;
+                } else if (line.startsWith("+++") || line.startsWith("---")) {
+                    modifiedLines++;
+                }
+            }
+        } catch (IOException e) {
+            throw new CommitDiffException("Unable to find diff for commit", e);
+        }
+        files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), addedLines, deletedLines, modifiedLines));
     }
 
     private List<DiffEntry> commitDiffs(Git git, Repository repository, RevTree parentTree, RevTree commitTree) {

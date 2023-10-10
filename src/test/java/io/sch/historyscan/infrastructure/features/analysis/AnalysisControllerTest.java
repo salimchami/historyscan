@@ -14,7 +14,7 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
     @Test
     void should_analyze_history_of_the_codebase() throws Exception {
         String expectedHistory = JsonReader.toExpectedJson(CODEBASE_FOLDER, "codebase-history");
-        endPointCaller.perform(get("/api/v1/analyze/public-articles/history"))
+        endPointCaller.perform(get("/api/v1/analyze/public-articles-2/history"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedHistory, true));
     }
