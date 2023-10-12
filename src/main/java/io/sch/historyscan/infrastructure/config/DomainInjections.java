@@ -35,4 +35,9 @@ public class DomainInjections {
     public Analysis<CodebaseClocRevisions> codebaseClocRevisionsStrategy(Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
         return new CodebaseClocRevisionsAnalysis(codebaseHistoryAnalysis);
     }
+
+    @Bean
+    public Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsStrategy(Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
+        return new CodebaseNetworkClocRevisionsAnalysis(codebaseHistoryAnalysis);
+    }
 }

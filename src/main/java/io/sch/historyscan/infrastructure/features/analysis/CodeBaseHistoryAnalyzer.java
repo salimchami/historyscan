@@ -74,12 +74,12 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         }
     }
 
-    private Optional<CodeBaseFile> initCodeBaseHistoryCommit(RevCommit revCommit, Git git, Repository repository, List<String> codebaseCurrentFiles) {
+    private Optional<CodeBaseCommit> initCodeBaseHistoryCommit(RevCommit revCommit, Git git, Repository repository, List<String> codebaseCurrentFiles) {
         final List<CodeBaseHistoryCommitFile> codeBaseHistoryCommitFiles = commitFilesList(revCommit, git, repository, codebaseCurrentFiles);
         if (codeBaseHistoryCommitFiles.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(new CodeBaseFile(
+        return Optional.of(new CodeBaseCommit(
                 new CodeBaseHistoryCommitInfo(
                         revCommit.getId().getName(),
                         revCommit.getAuthorIdent().getName(),

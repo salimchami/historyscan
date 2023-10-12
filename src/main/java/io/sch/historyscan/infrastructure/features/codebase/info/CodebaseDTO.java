@@ -37,7 +37,7 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
             try {
                 add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
                         .withRel("analyze-" + analysisType.getTitle())
-                        .withTitle(HttpMethod.POST.name()));
+                        .withTitle(HttpMethod.GET.name()));
             } catch (HistoryScanFunctionalException e) {
                 throw new HistoryScanTechnicalException("Error while adding analysis link", e);
             }

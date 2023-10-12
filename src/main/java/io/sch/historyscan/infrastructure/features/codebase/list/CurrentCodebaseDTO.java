@@ -10,6 +10,7 @@ import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -27,24 +28,20 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
         this.url = url;
         this.currentBranch = currentBranch;
         addSelfLink();
-        try {
-            addHistoryAnalysisLink();
-            addClocAndRevisionsLink();
-        } catch (HistoryScanFunctionalException e) {
-            throw new HistoryScanTechnicalException(e.getMessage());
-        }
+        addAnalysisLink();
     }
 
-    private void addClocAndRevisionsLink() throws HistoryScanFunctionalException {
-        add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.CLOC_REVISIONS.getTitle()))
-                .withRel("analyze-cloc-revisions")
-                .withTitle(HttpMethod.GET.name()));
-    }
-
-    private void addHistoryAnalysisLink() throws HistoryScanFunctionalException {
-        add(linkTo(methodOn(AnalysisController.class).analyse(name, EnumAnalysis.COMMITS_SCAN.getTitle()))
-                .withRel("analyze-history")
-                .withTitle(HttpMethod.GET.name()));
+    private void addAnalysisLink() {
+        Arrays.stream(EnumAnalysis.values()).forEach(analysisType ->
+        {
+            try {
+                add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
+                        .withRel("analyze-" + analysisType.getTitle())
+                        .withTitle(HttpMethod.GET.name()));
+            } catch (HistoryScanFunctionalException e) {
+                throw new HistoryScanTechnicalException("Error while adding analysis link", e);
+            }
+        });
     }
 
     private void addSelfLink() {

@@ -1,9 +1,6 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import io.sch.historyscan.domain.contexts.analysis.Analysis;
-import io.sch.historyscan.domain.contexts.analysis.CodeBase;
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseHistory;
-import io.sch.historyscan.domain.contexts.analysis.CodebaseClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.*;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,13 +15,16 @@ public class AnalysisApplication {
     private final AnalysisMapper analysisMapper;
     private final Analysis<CodeBaseHistory> codebaseHistoryAnalysis;
     private final Analysis<CodebaseClocRevisions> codebaseClocRevisionsAnalysis;
+    private final Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsAnalysis;
 
     public AnalysisApplication(AnalysisMapper analysisMapper,
                                Analysis<CodeBaseHistory> codebaseHistoryAnalysis,
-                               Analysis<CodebaseClocRevisions> codebaseClocRevisionsAnalysis) {
+                               Analysis<CodebaseClocRevisions> codebaseClocRevisionsAnalysis,
+                               Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsAnalysis) {
         this.analysisMapper = analysisMapper;
         this.codebaseHistoryAnalysis = codebaseHistoryAnalysis;
         this.codebaseClocRevisionsAnalysis = codebaseClocRevisionsAnalysis;
+        this.codebaseNetworkClocRevisionsAnalysis = codebaseNetworkClocRevisionsAnalysis;
     }
 
     @CacheEvict(allEntries = true, cacheNames = {"codebaseAnalysis"})
@@ -39,11 +39,17 @@ public class AnalysisApplication {
         return switch (codeBase.getType()) {
             case COMMITS_SCAN -> historyAnalysis(codeBase);
             case CLOC_REVISIONS -> clocRevisionsAnalysis(codeBase);
+            case NETWORK_CLOC_REVISIONS -> networkClocRevisionsAnalysis(codeBase);
         };
     }
 
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBase codeBase) throws HistoryScanFunctionalException {
         var analyzedCodeBaseClocRevisions = codebaseClocRevisionsAnalysis.of(codeBase);
+        return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
+    }
+
+    private CodeBaseNetworkClocRevisionsDTO networkClocRevisionsAnalysis(CodeBase codeBase) throws HistoryScanFunctionalException {
+        var analyzedCodeBaseClocRevisions = codebaseNetworkClocRevisionsAnalysis.of(codeBase);
         return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
     }
 

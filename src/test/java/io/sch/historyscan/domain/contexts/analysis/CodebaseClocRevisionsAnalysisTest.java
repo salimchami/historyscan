@@ -29,15 +29,15 @@ class CodebaseClocRevisionsAnalysisTest {
         final String fileName1 = "file-1.java";
         final String fileName2 = "file-2.java";
         when(historyAnalysis.of(codeBase)).thenReturn(new CodeBaseHistory(List.of(
-                        new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
+                        new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
                                 new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
                                 new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
                         )),
-                        new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-2", "author-1", date, "message 2"), List.of(
+                        new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-2", "author-1", date, "message 2"), List.of(
                                 new CodeBaseHistoryCommitFile(fileName1, 12, 0, 2),
                                 new CodeBaseHistoryCommitFile(fileName2, 150, 100, 45)
                         )),
-                        new CodeBaseFile(new CodeBaseHistoryCommitInfo("commit-3", "author-1", date, "message 3"), List.of(
+                        new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-3", "author-1", date, "message 3"), List.of(
                                 new CodeBaseHistoryCommitFile(fileName1, 12, 0, 10)
                         ))
                 ))
