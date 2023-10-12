@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.toMap;
-
 @Component
 public class AnalysisMapper {
     public CodeBaseHistoryDTO domainToWeb(CodeBaseHistory analyzedCodeBase) {
@@ -47,23 +45,24 @@ public class AnalysisMapper {
     }
 
     public CodeBaseNetworkClocRevisionsDTO domainToWeb(CodebaseNetworkClocRevisions revisions) {
-        return new CodeBaseNetworkClocRevisionsDTO(toRevisionsMap(revisions.revisions()),
+        return new CodeBaseNetworkClocRevisionsDTO(toRevisionList(revisions.revisions()),
                 revisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
                 revisions.extensions());
     }
 
-    private Map<CodeBaseClocRevisionsFileDTO, Map<FileNameDTO, WeightDTO>> toRevisionsMap(Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions) {
-        return revisions.entrySet().stream().collect(
-                toMap(
-                        e -> domainToWeb(e.getKey()),
-                        e -> e.getValue().entrySet().stream().collect(
-                                toMap(
-                                        e2 -> new FileNameDTO(e2.getKey().value()),
-                                        e2 -> new WeightDTO(e2.getValue().value())
-                                )
-                        )
-                )
-        );
+    private List<CodeBaseNetworkClocRevisionsFileDTO> toRevisionList(Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions) {
+        return revisions.entrySet().stream()
+                .map(entry -> new CodeBaseNetworkClocRevisionsFileDTO(
+                        entry.getKey().fileName(),
+                        entry.getKey().numberOfModifs(),
+                        entry.getValue().entrySet().stream()
+                                .map(e ->
+                                        new FileRevisionsLinkDTO(
+                                                e.getKey().value(),
+                                                e.getValue().value()))
+                                .toList()
+                ))
+                .toList();
     }
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {

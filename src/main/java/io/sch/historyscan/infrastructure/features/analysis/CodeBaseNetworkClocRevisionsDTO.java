@@ -4,23 +4,22 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class CodeBaseNetworkClocRevisionsDTO extends RepresentationModel<CodeBaseNetworkClocRevisionsDTO> {
 
-    private final Map<CodeBaseClocRevisionsFileDTO, Map<FileNameDTO, WeightDTO>> revisions;
+    private final List<CodeBaseNetworkClocRevisionsFileDTO> revisions;
     private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
-    public CodeBaseNetworkClocRevisionsDTO(Map<CodeBaseClocRevisionsFileDTO, Map<FileNameDTO, WeightDTO>> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions, List<String> extensions) {
+    public CodeBaseNetworkClocRevisionsDTO(List<CodeBaseNetworkClocRevisionsFileDTO> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions, List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;
     }
 
-    public Map<CodeBaseClocRevisionsFileDTO, Map<FileNameDTO, WeightDTO>> getRevisions() {
+    public List<CodeBaseNetworkClocRevisionsFileDTO> getRevisions() {
         return revisions;
     }
 
