@@ -8,18 +8,18 @@ import java.util.Objects;
 
 public class CodeBaseNetworkClocRevisionsDTO extends RepresentationModel<CodeBaseNetworkClocRevisionsDTO> {
 
-    private final List<CodeBaseNetworkClocRevisionsFileDTO> revisions;
+    private final List<FileRevisionsLinkDTO> revisions;
     private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
-    public CodeBaseNetworkClocRevisionsDTO(List<CodeBaseNetworkClocRevisionsFileDTO> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions, List<String> extensions) {
+    public CodeBaseNetworkClocRevisionsDTO(List<FileRevisionsLinkDTO> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions, List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;
     }
 
-    public List<CodeBaseNetworkClocRevisionsFileDTO> getRevisions() {
+    public List<FileRevisionsLinkDTO> getRevisions() {
         return revisions;
     }
 

@@ -1,25 +1,35 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Objects;
 
 public class FileRevisionsLinkDTO extends RepresentationModel<FileRevisionsLinkDTO> {
-    private final String name;
-    private final int weight;
+    private final String from;
+    private final Integer fromWeight;
+    private final String to;
+    private final Integer weight;
 
-    @JsonCreator
-    public FileRevisionsLinkDTO(String name, int weight) {
-        this.name = name;
+    public FileRevisionsLinkDTO(String from, int fromWeight, String to, Integer weight) {
+        this.from = from;
+        this.fromWeight = fromWeight;
+        this.to = to;
         this.weight = weight;
     }
 
-    public String getName() {
-        return name;
+    public String getFrom() {
+        return from;
     }
 
-    public int getWeight() {
+    public Integer getFromWeight() {
+        return fromWeight;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public Integer getWeight() {
         return weight;
     }
 
@@ -29,11 +39,11 @@ public class FileRevisionsLinkDTO extends RepresentationModel<FileRevisionsLinkD
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FileRevisionsLinkDTO that = (FileRevisionsLinkDTO) o;
-        return weight == that.weight && Objects.equals(name, that.name);
+        return fromWeight == that.fromWeight && weight == that.weight && Objects.equals(from, that.from) && Objects.equals(to, that.to);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, weight);
+        return Objects.hash(super.hashCode(), from, fromWeight, to, weight);
     }
 }

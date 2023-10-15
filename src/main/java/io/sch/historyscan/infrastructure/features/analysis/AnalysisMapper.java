@@ -3,8 +3,10 @@ package io.sch.historyscan.infrastructure.features.analysis;
 import io.sch.historyscan.domain.contexts.analysis.*;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Component
 public class AnalysisMapper {
@@ -50,19 +52,16 @@ public class AnalysisMapper {
                 revisions.extensions());
     }
 
-    private List<CodeBaseNetworkClocRevisionsFileDTO> toRevisionList(Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions) {
+    private List<FileRevisionsLinkDTO> toRevisionList(Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions) {
         return revisions.entrySet().stream()
-                .map(entry -> new CodeBaseNetworkClocRevisionsFileDTO(
-                        entry.getKey().fileName(),
-                        entry.getKey().numberOfModifs(),
-                        entry.getValue().entrySet().stream()
-                                .map(e ->
-                                        new FileRevisionsLinkDTO(
-                                                e.getKey().value(),
-                                                e.getValue().value()))
-                                .toList()
-                ))
-                .toList();
+                .flatMap(baseEntry -> {
+                    final String filename = Paths.get(baseEntry.getKey().fileName()).getFileName().toString();
+                    if (baseEntry.getValue().isEmpty()) {
+                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfModifs(), null, null));
+                    }
+                    return baseEntry.getValue().entrySet().stream()
+                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfModifs(), entry.getKey().value(), entry.getValue().value()));
+                }).toList();
     }
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
