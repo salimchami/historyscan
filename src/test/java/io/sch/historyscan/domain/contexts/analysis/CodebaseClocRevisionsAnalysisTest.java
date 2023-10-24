@@ -1,5 +1,12 @@
 package io.sch.historyscan.domain.contexts.analysis;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
+import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
+import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
+import io.sch.historyscan.domain.contexts.analysis.history.CodebaseHistoryAnalysis;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +25,7 @@ class CodebaseClocRevisionsAnalysisTest {
 
     @BeforeEach
     void setUp() {
-        historyAnalysis = (Analysis<CodeBaseHistory>) mock(Analysis.class);
+        historyAnalysis = mock(CodebaseHistoryAnalysis.class);
         codebaseClocRevisionsAnalysis = new CodebaseClocRevisionsAnalysis(historyAnalysis);
         date = LocalDateTime.now();
     }
@@ -43,8 +50,8 @@ class CodebaseClocRevisionsAnalysisTest {
                 ))
         );
 
-        var analysis = codebaseClocRevisionsAnalysis.of(codeBase);
-        assertThat(analysis).isEqualTo(CodebaseClocRevisions.of(List.of(
+        var revisions = codebaseClocRevisionsAnalysis.of(codeBase);
+        assertThat(revisions).isEqualTo(CodebaseClocRevisions.of(List.of(
                 new CodebaseFileClocRevisions(fileName1, 44),
                 new CodebaseFileClocRevisions(fileName2, 350)
         )));

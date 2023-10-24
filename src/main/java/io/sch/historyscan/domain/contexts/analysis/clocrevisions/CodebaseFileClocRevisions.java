@@ -1,4 +1,4 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
 import static io.sch.historyscan.domain.contexts.analysis.EnumIgnoredCodeBaseFiles.ignoredFiles;
 import static java.util.Comparator.comparing;

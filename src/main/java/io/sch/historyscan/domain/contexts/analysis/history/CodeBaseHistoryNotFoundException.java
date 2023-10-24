@@ -1,4 +1,4 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.history;
 
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 

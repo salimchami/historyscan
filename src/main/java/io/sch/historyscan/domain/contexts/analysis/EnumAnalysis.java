@@ -6,6 +6,7 @@ import java.util.Optional;
 public enum EnumAnalysis {
     COMMITS_SCAN("history"),
     CLOC_REVISIONS("cloc-revisions"),
+    CLUSTERED_CLOC_REVISIONS("clustered-cloc-revisions"),
     NETWORK_CLOC_REVISIONS("network-cloc-revisions");
     private final String title;
 

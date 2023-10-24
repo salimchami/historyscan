@@ -1,5 +1,7 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.history;
 
+import io.sch.historyscan.domain.contexts.analysis.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.CodeBase;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 
 public class CodebaseHistoryAnalysis implements Analysis<CodeBaseHistory> {

@@ -1,4 +1,9 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
+
+import io.sch.historyscan.domain.contexts.analysis.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.Weight;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
 
 import java.util.HashMap;
 import java.util.List;
