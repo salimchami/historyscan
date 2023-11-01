@@ -25,11 +25,11 @@ public record CodebaseNetworkClocRevisions(
             var fileMap = new HashMap<FileName, Weight>();
             for (CodeBaseCommit commit : commits) {
                 commit.files().stream()
-                        .filter(codeBaseHistoryCommitFile -> codeBaseHistoryCommitFile.fileName().equals(revision.fileName()))
+                        .filter(codeBaseHistoryCommitFile -> codeBaseHistoryCommitFile.name().equals(revision.fileName()))
                         .findFirst()
                         .ifPresent(revisionFileCommit -> commit.files().forEach(fileCommit -> {
-                            if (!fileCommit.fileName().equals(revision.fileName())) {
-                                var linkedFileName = new FileName(fileCommit.fileName());
+                            if (!fileCommit.name().equals(revision.fileName())) {
+                                var linkedFileName = new FileName(fileCommit.name());
                                 var weight = fileMap.getOrDefault(linkedFileName, Weight.ZERO);
                                 fileMap.put(linkedFileName, new Weight(weight.value() + 1));
                             }

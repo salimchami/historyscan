@@ -4,6 +4,7 @@ import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record CodebaseClusteredClocRevisions(
@@ -18,7 +19,14 @@ public record CodebaseClusteredClocRevisions(
     }
 
     private static List<List<CodebaseFileClocRevisions>> clusters(List<CodebaseFileClocRevisions> revisions, List<CodeBaseCommit> commits) {
-        // FIXME
+        List<List<CodebaseFileClocRevisions>> revisionMatrix = new ArrayList<>();
+        for (var revision : revisions) {
+            List<CodebaseFileClocRevisions> commitFilesRevisions = new ArrayList<>();
+            for (var commit : commits) {
+//                commitFilesRevisions.add();
+            }
+            revisionMatrix.add(commitFilesRevisions);
+        }
         return List.of();
     }
 }

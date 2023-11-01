@@ -9,15 +9,19 @@ import java.util.Objects;
 public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHistoryCommitFileDTO> {
 
     private final String fileName;
+    private final int nbActualLines;
     private final int nbAddedLines;
     private final int nbDeletedLines;
     private final int nbModifiedLines;
 
     @JsonCreator
     public CodeBaseHistoryCommitFileDTO(@JsonProperty("file-name") String fileName,
-                                        @JsonProperty("nb-lines-added") int nbAddedLines,
-                                        @JsonProperty("nb-lines-deleted") int nbDeletedLines, int nbModifiedLines) {
+                                        @JsonProperty("nb-actual-lines") int nbActualLines,
+                                        @JsonProperty("nb-added-lines") int nbAddedLines,
+                                        @JsonProperty("nb-deleted-lines") int nbDeletedLines,
+                                        @JsonProperty("nb-modified-lines") int nbModifiedLines) {
         this.fileName = fileName;
+        this.nbActualLines = nbActualLines;
         this.nbAddedLines = nbAddedLines;
         this.nbDeletedLines = nbDeletedLines;
         this.nbModifiedLines = nbModifiedLines;
@@ -39,17 +43,30 @@ public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHi
         return nbModifiedLines;
     }
 
+    public int getNbActualLines() {
+        return nbActualLines;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CodeBaseHistoryCommitFileDTO that = (CodeBaseHistoryCommitFileDTO) o;
-        return nbAddedLines == that.nbAddedLines && nbDeletedLines == that.nbDeletedLines && nbModifiedLines == that.nbModifiedLines && Objects.equals(fileName, that.fileName);
+        return nbActualLines == that.nbActualLines
+                && nbAddedLines == that.nbAddedLines
+                && nbDeletedLines == that.nbDeletedLines
+                && nbModifiedLines == that.nbModifiedLines
+                && Objects.equals(fileName, that.fileName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), fileName, nbAddedLines, nbDeletedLines, nbModifiedLines);
+        return Objects.hash(super.hashCode(),
+                nbActualLines,
+                fileName,
+                nbAddedLines,
+                nbDeletedLines,
+                nbModifiedLines);
     }
 }

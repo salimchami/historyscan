@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.history;
 
 public record CodeBaseHistoryCommitFile(
-        String fileName,
+        String name,
         int nbLines,
         int nbAddedLines,
         int nbDeletedLines,
