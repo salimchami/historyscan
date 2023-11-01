@@ -1,6 +1,6 @@
 package io.sch.historyscan.infrastructure.config;
 
-import io.sch.historyscan.domain.contexts.analysis.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;

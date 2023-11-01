@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.Analysis;
-import io.sch.historyscan.domain.contexts.analysis.CodeBase;
+import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
@@ -17,8 +17,8 @@ public class CodebaseClocRevisionsAnalysis implements Analysis<CodebaseClocRevis
     }
 
     @Override
-    public CodebaseClocRevisions of(CodeBase codeBase) throws HistoryScanFunctionalException {
-        var history = codebaseHistoryAnalysis.of(codeBase);
+    public CodebaseClocRevisions of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
+        var history = codebaseHistoryAnalysis.of(codeBaseToAnalyze);
         return clocRevisionsFrom(history);
     }
 

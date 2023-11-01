@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.Analysis;
-import io.sch.historyscan.domain.contexts.analysis.CodeBase;
+import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
@@ -19,8 +19,8 @@ public class CodebaseNetworkClocRevisionsAnalysis implements Analysis<CodebaseNe
     }
 
     @Override
-    public CodebaseNetworkClocRevisions of(CodeBase codeBase) throws HistoryScanFunctionalException {
-        var history = codebaseHistoryAnalysis.of(codeBase);
+    public CodebaseNetworkClocRevisions of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
+        var history = codebaseHistoryAnalysis.of(codeBaseToAnalyze);
         var clocRevisions = codebaseClocRevisionsAnalysis.clocRevisionsFrom(history);
         return CodebaseNetworkClocRevisions.of(history.commits(), clocRevisions);
     }

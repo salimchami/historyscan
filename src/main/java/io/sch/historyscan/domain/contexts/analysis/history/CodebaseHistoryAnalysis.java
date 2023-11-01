@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.history;
 
-import io.sch.historyscan.domain.contexts.analysis.Analysis;
-import io.sch.historyscan.domain.contexts.analysis.CodeBase;
+import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 
 public class CodebaseHistoryAnalysis implements Analysis<CodeBaseHistory> {
@@ -13,10 +13,10 @@ public class CodebaseHistoryAnalysis implements Analysis<CodeBaseHistory> {
     }
 
     @Override
-    public CodeBaseHistory of(CodeBase codeBase) throws HistoryScanFunctionalException {
-        return historyAnalyzer.of(codeBase.getName())
+    public CodeBaseHistory of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
+        return historyAnalyzer.of(codeBaseToAnalyze.getName())
                 .orElseThrow(() ->
                         new CodeBaseHistoryNotFoundException(
-                                "CodeBase '%s' history not found".formatted(codeBase.getName())));
+                                "CodeBase '%s' history not found".formatted(codeBaseToAnalyze.getName())));
     }
 }

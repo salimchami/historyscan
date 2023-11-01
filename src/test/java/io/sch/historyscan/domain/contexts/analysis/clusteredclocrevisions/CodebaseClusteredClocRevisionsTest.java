@@ -1,6 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CodebaseClusteredClocRevisionsTest {
 

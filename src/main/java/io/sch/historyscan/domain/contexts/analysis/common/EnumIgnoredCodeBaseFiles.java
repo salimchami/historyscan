@@ -1,4 +1,4 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.common;
 
 import java.util.Arrays;
 import java.util.List;

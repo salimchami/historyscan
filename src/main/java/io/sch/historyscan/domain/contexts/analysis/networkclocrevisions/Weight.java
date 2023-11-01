@@ -1,4 +1,4 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
 
 public record Weight(int value) {
 

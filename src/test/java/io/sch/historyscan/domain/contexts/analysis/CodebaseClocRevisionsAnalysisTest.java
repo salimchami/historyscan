@@ -3,6 +3,10 @@ package io.sch.historyscan.domain.contexts.analysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
+import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
@@ -32,10 +36,10 @@ class CodebaseClocRevisionsAnalysisTest {
 
     @Test
     void should_calculate_codebase_commits_files_number_of_revisions() throws HistoryScanFunctionalException {
-        CodeBase codeBase = new CodeBase("the-code-base", EnumAnalysis.CLOC_REVISIONS);
+        CodeBaseToAnalyze codeBaseToAnalyze = new CodeBaseToAnalyze("the-code-base", EnumAnalysisType.CLOC_REVISIONS);
         final String fileName1 = "file-1.java";
         final String fileName2 = "file-2.java";
-        when(historyAnalysis.of(codeBase)).thenReturn(new CodeBaseHistory(List.of(
+        when(historyAnalysis.of(codeBaseToAnalyze)).thenReturn(new CodeBaseHistory(List.of(
                         new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
                                 new CodeBaseHistoryCommitFile(fileName1, 20, 1, 2, 5),
                                 new CodeBaseHistoryCommitFile(fileName2, 1500, 15, 30, 10)
@@ -50,7 +54,7 @@ class CodebaseClocRevisionsAnalysisTest {
                 ))
         );
 
-        var revisions = sut.of(codeBase);
+        var revisions = sut.of(codeBaseToAnalyze);
         assertThat(revisions).isEqualTo(new CodebaseClocRevisions(List.of(
                 new CodebaseFileClocRevisions(fileName2, 350, 1500),
                 new CodebaseFileClocRevisions(fileName1, 44, 20)

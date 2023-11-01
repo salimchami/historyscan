@@ -1,6 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import static io.sch.historyscan.domain.contexts.analysis.EnumIgnoredCodeBaseFiles.ignoredFiles;
+import static io.sch.historyscan.domain.contexts.analysis.common.EnumIgnoredCodeBaseFiles.ignoredFiles;
 import static java.util.Comparator.comparing;
 
 public record CodebaseFileClocRevisions(String fileName, int numberOfRevisions, int nbLines) implements Comparable<CodebaseFileClocRevisions> {

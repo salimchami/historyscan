@@ -1,6 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
 

@@ -1,4 +1,4 @@
-package io.sch.historyscan.domain.contexts.analysis;
+package io.sch.historyscan.domain.contexts.analysis.common;
 
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureAPI;
@@ -7,5 +7,5 @@ import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureAPI;
 @FunctionalInterface
 public interface Analysis<T> {
 
-    T of(CodeBase codeBase) throws HistoryScanFunctionalException;
+    T of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException;
 }
