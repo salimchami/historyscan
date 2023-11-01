@@ -19,14 +19,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class CodebaseClocRevisionsAnalysisTest {
-    private CodebaseClocRevisionsAnalysis codebaseClocRevisionsAnalysis;
+    private CodebaseClocRevisionsAnalysis sut;
     private Analysis<CodeBaseHistory> historyAnalysis;
     private LocalDateTime date;
 
     @BeforeEach
     void setUp() {
         historyAnalysis = mock(CodebaseHistoryAnalysis.class);
-        codebaseClocRevisionsAnalysis = new CodebaseClocRevisionsAnalysis(historyAnalysis);
+        sut = new CodebaseClocRevisionsAnalysis(historyAnalysis);
         date = LocalDateTime.now();
     }
 
@@ -37,23 +37,23 @@ class CodebaseClocRevisionsAnalysisTest {
         final String fileName2 = "file-2.java";
         when(historyAnalysis.of(codeBase)).thenReturn(new CodeBaseHistory(List.of(
                         new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
-                                new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
-                                new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
+                                new CodeBaseHistoryCommitFile(fileName1, 20, 1, 2, 5),
+                                new CodeBaseHistoryCommitFile(fileName2, 1500, 15, 30, 10)
                         )),
                         new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-2", "author-1", date, "message 2"), List.of(
-                                new CodeBaseHistoryCommitFile(fileName1, 12, 0, 2),
-                                new CodeBaseHistoryCommitFile(fileName2, 150, 100, 45)
+                                new CodeBaseHistoryCommitFile(fileName1, 20, 12, 0, 2),
+                                new CodeBaseHistoryCommitFile(fileName2, 1500,150, 100, 45)
                         )),
                         new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-3", "author-1", date, "message 3"), List.of(
-                                new CodeBaseHistoryCommitFile(fileName1, 12, 0, 10)
+                                new CodeBaseHistoryCommitFile(fileName1, 20, 12, 0, 10)
                         ))
                 ))
         );
 
-        var revisions = codebaseClocRevisionsAnalysis.of(codeBase);
-        assertThat(revisions).isEqualTo(CodebaseClocRevisions.of(List.of(
-                new CodebaseFileClocRevisions(fileName1, 44),
-                new CodebaseFileClocRevisions(fileName2, 350)
-        )));
+        var revisions = sut.of(codeBase);
+        assertThat(revisions).isEqualTo(new CodebaseClocRevisions(List.of(
+                new CodebaseFileClocRevisions(fileName2, 350, 1500),
+                new CodebaseFileClocRevisions(fileName1, 44, 20)
+        ), List.of(), List.of("java")));
     }
 }

@@ -7,13 +7,14 @@ public record CodebaseClocRevisions(
         List<CodebaseFileClocRevisions> ignoredRevisions,
         List<String> extensions) {
     public static CodebaseClocRevisions of(List<CodebaseFileClocRevisions> revisions) {
-        final List<CodebaseFileClocRevisions> finalRevisions = revisions.stream()
-                .filter(file -> !file.ignored())
-                .toList();
         return new CodebaseClocRevisions(
-                finalRevisions,
+                revisions.stream()
+                        .filter(file -> !file.ignored())
+                        .toList(),
                 ignored(revisions),
-                extensions(finalRevisions));
+                extensions(revisions.stream()
+                        .filter(file1 -> !file1.ignored())
+                        .toList()));
     }
 
     private static List<String> extensions(List<CodebaseFileClocRevisions> revisions) {
@@ -21,10 +22,14 @@ public record CodebaseClocRevisions(
                 .map(CodebaseFileClocRevisions::fileName)
                 .map(fileName -> fileName.substring(fileName.lastIndexOf(".") + 1))
                 .distinct()
+                .sorted()
                 .toList();
     }
 
     private static List<CodebaseFileClocRevisions> ignored(List<CodebaseFileClocRevisions> revisions) {
-        return revisions.stream().filter(CodebaseFileClocRevisions::ignored).toList();
+        return revisions.stream()
+                .filter(CodebaseFileClocRevisions::ignored)
+                .sorted()
+                .toList();
     }
 }

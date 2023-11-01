@@ -103,37 +103,21 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         for (DiffEntry fileDiff : diffs) {
             if (fileDiff.getNewMode().getObjectType() == FileMode.REGULAR_FILE.getObjectType()
                     && codebaseCurrentFiles.stream().anyMatch(codebaseCurrentFile -> fileDiff.getNewPath().contains(codebaseCurrentFile))) {
-                cloc(repository, fileDiff, files);
+                try (var out = new ByteArrayOutputStream();
+                     DiffFormatter formatter = new DiffFormatter(out)) {
+                    formatter.setRepository(repository);
+                    formatter.format(fileDiff);
+                    String diffText = out.toString();
+                    String[] diffLines = diffText.split("\r\n|\r|\n");
+                    var linesCount = FileLinesCount.from(diffLines, repository, fileDiff.getNewPath());
+                    files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), linesCount.nbLines(),
+                            linesCount.addedLines(), linesCount.deletedLines(), linesCount.modifiedLines()));
+                } catch (IOException e) {
+                    throw new CommitDiffException("Unable to find diff for commit", e);
+                }
             }
         }
         return files;
-    }
-
-    private static void cloc(Repository repository, DiffEntry fileDiff, ArrayList<CodeBaseHistoryCommitFile> files) {
-        int addedLines = 0;
-        int deletedLines = 0;
-        int modifiedLines = 0;
-        try (var out = new ByteArrayOutputStream()) {
-            try (DiffFormatter formatter = new DiffFormatter(out)) {
-                formatter.setRepository(repository);
-                formatter.format(fileDiff);
-            }
-            String diffText = out.toString();
-            String[] diffLines = diffText.split("\r\n|\r|\n");
-            for (String line : diffLines) {
-                if (line.startsWith("+") && !line.startsWith("+++")) {
-                    addedLines++;
-
-                } else if (line.startsWith("-") && !line.startsWith("---")) {
-                    deletedLines++;
-                } else if (line.startsWith("+++") || line.startsWith("---")) {
-                    modifiedLines++;
-                }
-            }
-        } catch (IOException e) {
-            throw new CommitDiffException("Unable to find diff for commit", e);
-        }
-        files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), addedLines, deletedLines, modifiedLines));
     }
 
     private List<DiffEntry> commitDiffs(Git git, Repository repository, RevTree parentTree, RevTree commitTree) {

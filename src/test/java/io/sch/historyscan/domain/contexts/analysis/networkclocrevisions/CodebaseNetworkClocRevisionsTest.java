@@ -27,51 +27,51 @@ class CodebaseNetworkClocRevisionsTest {
         var date = LocalDateTime.now();
         var network = CodebaseNetworkClocRevisions.of(List.of(
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-0", "author-0", date, "message 0"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName0, 1, 2, 5)
+                        new CodeBaseHistoryCommitFile(fileName0, 100, 1, 2, 5)
                 )),
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-1", "author-1", date, "message 1"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
-                        new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
+                        new CodeBaseHistoryCommitFile(fileName1, 100, 1, 2, 5),
+                        new CodeBaseHistoryCommitFile(fileName2, 100, 15, 30, 10)
                 )),
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-1-bis", "author-1", date, "message 1 bis"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 1, 2, 5),
-                        new CodeBaseHistoryCommitFile(fileName2, 15, 30, 10)
+                        new CodeBaseHistoryCommitFile(fileName1, 100, 1, 2, 5),
+                        new CodeBaseHistoryCommitFile(fileName2, 100, 15, 30, 10)
                 )),
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-2", "author-1", date, "message 2"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName1, 12, 0, 2),
-                        new CodeBaseHistoryCommitFile(fileName3, 150, 100, 45)
+                        new CodeBaseHistoryCommitFile(fileName1, 100, 12, 0, 2),
+                        new CodeBaseHistoryCommitFile(fileName3, 100, 150, 100, 45)
                 )),
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-3", "author-1", date, "message 3"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName2, 12, 0, 10),
-                        new CodeBaseHistoryCommitFile(fileName4, 12, 0, 10)
+                        new CodeBaseHistoryCommitFile(fileName2, 100, 12, 0, 10),
+                        new CodeBaseHistoryCommitFile(fileName4, 100, 12, 0, 10)
                 )),
                 new CodeBaseCommit(new CodeBaseHistoryCommitInfo("commit-4", "author-1", date, "message 4"), List.of(
-                        new CodeBaseHistoryCommitFile(fileName3, 12, 0, 10),
-                        new CodeBaseHistoryCommitFile(fileName4, 12, 0, 10),
-                        new CodeBaseHistoryCommitFile(fileName5, 12, 0, 10)
+                        new CodeBaseHistoryCommitFile(fileName3, 100, 12, 0, 10),
+                        new CodeBaseHistoryCommitFile(fileName4, 100, 12, 0, 10),
+                        new CodeBaseHistoryCommitFile(fileName5, 100, 12, 0, 10)
                 ))
         ), CodebaseClocRevisions.of(List.of(
-                new CodebaseFileClocRevisions(fileName1, 44),
-                new CodebaseFileClocRevisions(fileName2, 350)
+                new CodebaseFileClocRevisions(fileName1, 44, 100),
+                new CodebaseFileClocRevisions(fileName2, 350, 100)
         )));
 
         assertThat(network.extensions()).isEqualTo(List.of("java"));
-        assertThat(network.ignoredRevisions()).isEqualTo(List.of(new CodebaseFileClocRevisions(fileName5, 22)));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName0, 8))).isEmpty();
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName1, 30))).isEqualTo(Map.of(
+        assertThat(network.ignoredRevisions()).isEqualTo(List.of(new CodebaseFileClocRevisions(fileName5, 22, 100)));
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName0, 8, 100))).isEmpty();
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName1, 30, 100))).isEqualTo(Map.of(
                 new FileName(fileName2), new Weight(2),
                 new FileName(fileName3), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName2, 132))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName2, 132, 100))).isEqualTo(Map.of(
                 new FileName(fileName1), new Weight(2),
                 new FileName(fileName4), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName3, 317))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName3, 317, 100))).isEqualTo(Map.of(
                 new FileName(fileName1), new Weight(1),
                 new FileName(fileName4), new Weight(1),
                 new FileName(fileName5), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName4, 44))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName4, 44, 100))).isEqualTo(Map.of(
                 new FileName(fileName2), new Weight(1),
                 new FileName(fileName3), new Weight(1),
                 new FileName(fileName5), new Weight(1)

@@ -65,15 +65,15 @@ public class AnalysisMapper {
                 .flatMap(baseEntry -> {
                     final String filename = Paths.get(baseEntry.getKey().fileName()).getFileName().toString();
                     if (baseEntry.getValue().isEmpty()) {
-                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfModifs(), null, null));
+                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfRevisions(), null, null));
                     }
                     return baseEntry.getValue().entrySet().stream()
-                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfModifs(), entry.getKey().value(), entry.getValue().value()));
+                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfRevisions(), entry.getKey().value(), entry.getValue().value()));
                 }).toList();
     }
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
-        return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfModifs());
+        return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfRevisions());
     }
 
     public CodeBaseClusteredClocRevisionsDTO domainToWeb(CodebaseClusteredClocRevisions clusteredClocRevisions) {

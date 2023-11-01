@@ -31,9 +31,20 @@ public class CodebaseClocRevisionsAnalysis implements Analysis<CodebaseClocRevis
                 ))
                 .entrySet().stream()
                 .filter(entry -> entry.getValue() > 0)
-                .map(entry -> new CodebaseFileClocRevisions(entry.getKey(), entry.getValue()))
+                .map(entry -> new CodebaseFileClocRevisions(entry.getKey(), entry.getValue(), nbLines(entry.getKey(), history)))
                 .sorted()
                 .toList();
         return CodebaseClocRevisions.of(revisions);
+    }
+
+    private int nbLines(String fileName, CodeBaseHistory history) {
+        return history.commits().stream()
+                .filter(commit -> commit.files().stream().anyMatch(file -> file.fileName().equals(fileName)))
+                // take max of ng lines of the object
+                .flatMapToInt(commit -> commit.files().stream()
+                        .filter(file -> file.fileName().equals(fileName))
+                        .mapToInt(CodeBaseHistoryCommitFile::nbLines))
+                .max()
+                .orElse(0);
     }
 }
