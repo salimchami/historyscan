@@ -1,0 +1,29 @@
+{
+  "codebases": [
+    {
+      "name": "public-articles",
+      "url": "https://github.com/salimchami/public-articles.git",
+      "currentBranch": "main",
+      "_links": {
+        "self": {
+          "href": "http://localhost/api/v1/codebases/public-articles",
+          "title": "GET"
+        },
+        "analyze-history": {
+          "href": "http://localhost/api/v1/analyze/public-articles/history",
+          "title": "GET"
+        },
+        "analyze-cloc-revisions": {
+          "href": "http://localhost/api/v1/analyze/public-articles/cloc-revisions",
+          "title": "GET"
+        }
+      }
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "http://localhost/api/v1/codebases",
+      "title": "GET"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
   "url": "https://github.com/salimchami/public-articles.git",
-  "public-key": ""
+  "name": "public-articles",
+  "branch": "main"
 }

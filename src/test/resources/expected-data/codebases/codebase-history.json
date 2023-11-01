@@ -1,0 +1,92 @@
+{
+  "files": [
+    {
+      "info": {
+        "hash": "39880b625e677edb6778348fbc230435a23fcb1e",
+        "author": "Salim CHAMI",
+        "date": "2023-07-15T15:44:30",
+        "shortMessage": "update"
+      },
+      "files": [
+        {
+          "file-name": "audit-applicatif/application-audit.md",
+          "nb-lines-added": 46,
+          "nb-lines-deleted": 26,
+          "nbModifiedLines": 2
+        }
+      ]
+    },
+    {
+      "info": {
+        "hash": "2638876d6a15f05247c3ac8c104319aeb795021c",
+        "author": "salim",
+        "date": "2023-06-13T23:19:57",
+        "shortMessage": "adding audit article"
+      },
+      "files": [
+        {
+          "file-name": ".gitignore",
+          "nb-lines-added": 1,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        },
+        {
+          "file-name": "README.md",
+          "nb-lines-added": 7,
+          "nb-lines-deleted": 1,
+          "nbModifiedLines": 2
+        },
+        {
+          "file-name": "audit-applicatif/bugs.png",
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        },
+        {
+          "file-name": "audit-applicatif/modules-dependencies.png",
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        },
+        {
+          "file-name": "audit-applicatif/owasp.png",
+          "nb-lines-added": 0,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        }
+      ]
+    },
+    {
+      "info": {
+        "hash": "79b11d5e2158088a7ea1cbcf3f121911c12bb055",
+        "author": "salim",
+        "date": "2023-06-13T23:17:32",
+        "shortMessage": "adding audit article"
+      },
+      "files": [
+        {
+          "file-name": "audit-applicatif/application-audit.md",
+          "nb-lines-added": 1160,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        }
+      ]
+    },
+    {
+      "info": {
+        "hash": "2151fde68e04e741230937be0aa84d80234083e5",
+        "author": "Salim CHAMI",
+        "date": "2023-06-13T23:15:18",
+        "shortMessage": "Initial commit"
+      },
+      "files": [
+        {
+          "file-name": "README.md",
+          "nb-lines-added": 1,
+          "nb-lines-deleted": 0,
+          "nbModifiedLines": 2
+        }
+      ]
+    }
+  ]
+}
