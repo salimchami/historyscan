@@ -27,12 +27,15 @@ public record FileLinesCount(int nbLines,
                 modifiedLines++;
             }
         }
-        var nbLines = linesNumbedr(repository, filePath);
+        var nbLines = linesNumber(repository, filePath);
         return new FileLinesCount(nbLines, addedLines, deletedLines, modifiedLines);
     }
 
-    private static int linesNumbedr(Repository repository, String filePath) throws IOException {
-        ObjectId objectId = repository.resolve(filePath);
+    private static int linesNumber(Repository repository, String filePath) throws IOException {
+        ObjectId objectId = repository.resolve("HEAD:%s".formatted(filePath));
+        if(objectId == null) {
+            return 0;
+        }
         ObjectLoader loader = repository.open(objectId);
         byte[] bytes = loader.getBytes();
         String content = new String(bytes, StandardCharsets.UTF_8);

@@ -19,9 +19,9 @@ public record CodebaseFileClocRevisions(
 
     private static int nbLines(String fileName, CodeBaseHistory history) {
         return history.commits().stream()
-                .filter(commit -> commit.files().stream().anyMatch(file -> file.fileName().equals(fileName)))
+                .filter(commit -> commit.files().stream().anyMatch(file -> file.name().equals(fileName)))
                 .flatMapToInt(commit -> commit.files().stream()
-                        .filter(file -> file.fileName().equals(fileName))
+                        .filter(file -> file.name().equals(fileName))
                         .mapToInt(CodeBaseHistoryCommitFile::nbLines))
                 .max()
                 .orElse(0);

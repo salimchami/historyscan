@@ -26,7 +26,7 @@ public class CodebaseClocRevisionsAnalysis implements Analysis<CodebaseClocRevis
         var revisions = history.commits().stream()
                 .flatMap(codebaseFile -> codebaseFile.files().stream())
                 .collect(Collectors.groupingBy(
-                        CodeBaseHistoryCommitFile::fileName,
+                        CodeBaseHistoryCommitFile::name,
                         Collectors.summingInt(CodeBaseHistoryCommitFile::cloc)
                 ))
                 .entrySet().stream()

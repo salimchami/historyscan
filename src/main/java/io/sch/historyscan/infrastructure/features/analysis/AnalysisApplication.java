@@ -41,7 +41,7 @@ public class AnalysisApplication {
         // Cache TTL
     }
 
-    @Cacheable(cacheNames = "codebaseAnalysis", key="#name + #analysisType", condition = "#name != null && #analysisType != null")
+    @Cacheable(cacheNames = "codebaseAnalysis", key = "#name + #analysisType", condition = "#name != null && #analysisType != null")
     public Object analyze(String name, String analysisType) throws HistoryScanFunctionalException {
         final CodeBaseToAnalyze codeBaseToAnalyze = CodeBaseToAnalyze.of(name, analysisType);
         return switch (codeBaseToAnalyze.getType()) {
@@ -54,8 +54,7 @@ public class AnalysisApplication {
 
     private CodeBaseClusteredClocRevisionsDTO clusteredClocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         var analyzedCodeBaseClusteredClocRevisions = codebaseClusteredClocRevisionsAnalysis.of(codeBaseToAnalyze);
-        return analysisMapper.
-                domainToWeb(analyzedCodeBaseClusteredClocRevisions);
+        return analysisMapper.domainToWeb(analyzedCodeBaseClusteredClocRevisions);
     }
 
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {

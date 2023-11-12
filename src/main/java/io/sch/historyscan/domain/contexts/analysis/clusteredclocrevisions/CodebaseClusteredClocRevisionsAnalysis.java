@@ -22,6 +22,6 @@ public class CodebaseClusteredClocRevisionsAnalysis implements Analysis<Codebase
     public CodebaseClusteredClocRevisions of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         var history = codebaseHistoryAnalysis.of(codeBaseToAnalyze);
         var clocRevisions = codebaseClocRevisionsAnalysis.clocRevisionsFrom(history);
-        return CodebaseClusteredClocRevisions.of(history.commits(), clocRevisions);
+        return CodebaseClusteredClocRevisions.of(clocRevisions);
     }
 }
