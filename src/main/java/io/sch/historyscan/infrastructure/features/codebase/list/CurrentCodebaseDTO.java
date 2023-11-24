@@ -35,7 +35,7 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
         Arrays.stream(EnumAnalysisType.values()).forEach(analysisType ->
         {
             try {
-                add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
+                add(linkTo(methodOn(AnalysisController.class).analyze(name, analysisType.getTitle()))
                         .withRel("analyze-" + analysisType.getTitle())
                         .withTitle(HttpMethod.GET.name()));
             } catch (HistoryScanFunctionalException e) {

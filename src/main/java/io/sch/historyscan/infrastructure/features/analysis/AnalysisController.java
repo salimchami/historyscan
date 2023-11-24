@@ -18,8 +18,8 @@ public class AnalysisController {
 
     @GetMapping(path = "/analyze/{name}/{analysisType}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> analyse(@PathVariable("name") String name,
-                                                      @PathVariable("analysisType") String analysisType) throws HistoryScanFunctionalException {
+    public ResponseEntity<Object> analyze(@PathVariable("name") String name,
+                                          @PathVariable("analysisType") String analysisType) throws HistoryScanFunctionalException {
         var analysis = analysisApplication.analyze(name, analysisType);
         return ResponseEntity.ok(analysis);
     }

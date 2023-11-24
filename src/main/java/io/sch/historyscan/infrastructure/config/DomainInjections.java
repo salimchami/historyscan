@@ -1,6 +1,6 @@
 package io.sch.historyscan.infrastructure.config;
 
-import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;
@@ -36,36 +36,36 @@ public class DomainInjections {
     }
 
     @Bean
-    public Analysis<CodeBaseHistory> codebaseHistoryStrategy(HistoryAnalyzer historyAnalyzer) {
+    public Analyze<CodeBaseHistory> codebaseHistoryStrategy(HistoryAnalyzer historyAnalyzer) {
         return new CodebaseHistoryAnalysis(historyAnalyzer);
     }
 
     @Bean
-    public Analysis<CodebaseClusteredClocRevisions> codebaseHistoryStrategy(
-            Analysis<CodeBaseHistory> codebaseHistoryAnalysis,
+    public Analyze<CodebaseClusteredClocRevisions> codebaseHistoryStrategy(
+            Analyze<CodeBaseHistory> codebaseHistoryAnalysis,
             CodebaseClocRevisionsAnalysis codebaseClocRevisionsAnalysis) {
         return new CodebaseClusteredClocRevisionsAnalysis(codebaseHistoryAnalysis,
                 codebaseClocRevisionsAnalysis);
     }
 
     @Bean
-    public CodebaseClocRevisionsAnalysis codebaseClocRevisionsAnalysis(
-            Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
+    public CodebaseClocRevisionsAnalysis analyzeCodebaseClocRevisions(
+            Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
         return new CodebaseClocRevisionsAnalysis(
                 codebaseHistoryAnalysis
         );
     }
 
     @Bean
-    public Analysis<CodebaseClocRevisions> codebaseClocRevisionsStrategy(Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
-        return codebaseClocRevisionsAnalysis(codebaseHistoryAnalysis);
+    public Analyze<CodebaseClocRevisions> codebaseClocRevisionsStrategy(Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
+        return analyzeCodebaseClocRevisions(codebaseHistoryAnalysis);
     }
 
     @Bean
-    public Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsStrategy(
-            Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
+    public Analyze<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsStrategy(
+            Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
         return new CodebaseNetworkClocRevisionsAnalysis(
                 codebaseHistoryAnalysis,
-                codebaseClocRevisionsAnalysis(codebaseHistoryAnalysis));
+                analyzeCodebaseClocRevisions(codebaseHistoryAnalysis));
     }
 }

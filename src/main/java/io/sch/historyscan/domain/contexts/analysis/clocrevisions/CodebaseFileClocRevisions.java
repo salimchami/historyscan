@@ -22,7 +22,7 @@ public record CodebaseFileClocRevisions(
                 .filter(commit -> commit.files().stream().anyMatch(file -> file.name().equals(fileName)))
                 .flatMapToInt(commit -> commit.files().stream()
                         .filter(file -> file.name().equals(fileName))
-                        .mapToInt(CodeBaseHistoryCommitFile::nbLines))
+                        .mapToInt(CodeBaseHistoryCommitFile::currentNbLines))
                 .max()
                 .orElse(0);
     }

@@ -5,7 +5,7 @@ import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureAPI;
 
 @HexagonalArchitectureAPI
 @FunctionalInterface
-public interface Analysis<T> {
+public interface Analyze<T> {
 
-    T of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException;
+    T from(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException;
 }

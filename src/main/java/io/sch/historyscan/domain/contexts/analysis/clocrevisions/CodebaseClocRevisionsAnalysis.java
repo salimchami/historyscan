@@ -1,6 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -8,17 +8,17 @@ import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 
 import java.util.stream.Collectors;
 
-public class CodebaseClocRevisionsAnalysis implements Analysis<CodebaseClocRevisions> {
+public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisions> {
 
-    private final Analysis<CodeBaseHistory> codebaseHistoryAnalysis;
+    private final Analyze<CodeBaseHistory> codebaseHistoryAnalysis;
 
-    public CodebaseClocRevisionsAnalysis(Analysis<CodeBaseHistory> codebaseHistoryAnalysis) {
+    public CodebaseClocRevisionsAnalysis(Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
         this.codebaseHistoryAnalysis = codebaseHistoryAnalysis;
     }
 
     @Override
-    public CodebaseClocRevisions of(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var history = codebaseHistoryAnalysis.of(codeBaseToAnalyze);
+    public CodebaseClocRevisions from(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
+        var history = codebaseHistoryAnalysis.from(codeBaseToAnalyze);
         return clocRevisionsFrom(history);
     }
 
