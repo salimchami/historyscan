@@ -1,10 +1,13 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
+
+import java.util.List;
 
 import static io.sch.historyscan.domain.contexts.analysis.common.EnumIgnoredCodeBaseFiles.ignoredFiles;
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.reverseOrder;
 
 public record CodebaseFileClocRevisions(
         String fileName,
@@ -12,13 +15,13 @@ public record CodebaseFileClocRevisions(
         int nbLines) implements Comparable<CodebaseFileClocRevisions> {
 
     public static CodebaseFileClocRevisions of(String fileName,
-                                               int nbRevisions, CodeBaseHistory history) {
+                                               int nbRevisions, List<CodeBaseCommit> commits) {
         return new CodebaseFileClocRevisions(fileName, nbRevisions,
-                nbLines(fileName, history));
+                nbLines(fileName, commits));
     }
 
-    private static int nbLines(String fileName, CodeBaseHistory history) {
-        return history.commits().stream()
+    private static int nbLines(String fileName, List<CodeBaseCommit> commits) {
+        return commits.stream()
                 .filter(commit -> commit.files().stream().anyMatch(file -> file.name().equals(fileName)))
                 .flatMapToInt(commit -> commit.files().stream()
                         .filter(file -> file.name().equals(fileName))
@@ -33,9 +36,8 @@ public record CodebaseFileClocRevisions(
 
     @Override
     public int compareTo(CodebaseFileClocRevisions o) {
-        return comparing(CodebaseFileClocRevisions::numberOfRevisions)
+        return comparing(CodebaseFileClocRevisions::numberOfRevisions, reverseOrder())
                 .thenComparing(CodebaseFileClocRevisions::fileName)
-                .reversed()
                 .compare(this, o);
     }
 }

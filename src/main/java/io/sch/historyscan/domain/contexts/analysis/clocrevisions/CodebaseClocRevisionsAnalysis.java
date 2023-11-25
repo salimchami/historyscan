@@ -22,20 +22,16 @@ public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisi
         return clocRevisionsFrom(history);
     }
 
+
     public CodebaseClocRevisions clocRevisionsFrom(CodeBaseHistory history) {
-        var revisions = history.commits().stream()
+        var commitsByFile = history.commits().stream()
                 .flatMap(codebaseFile -> codebaseFile.files().stream())
                 .collect(Collectors.groupingBy(
                         CodeBaseHistoryCommitFile::name,
                         Collectors.summingInt(CodeBaseHistoryCommitFile::cloc)
-                ))
-                .entrySet().stream()
-                .filter(entry -> entry.getValue() > 0)
-                .map(entry -> CodebaseFileClocRevisions.of(
-                        entry.getKey(), entry.getValue(),
-                        history))
-                .sorted()
-                .toList();
+                ));
+        var revisions = new CommitsByFile(commitsByFile)
+                .toRevisionsFrom(history);
         return CodebaseClocRevisions.of(revisions);
     }
 }
