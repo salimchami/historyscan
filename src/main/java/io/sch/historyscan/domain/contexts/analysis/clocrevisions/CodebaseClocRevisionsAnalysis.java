@@ -3,35 +3,21 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
-import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDService;
 
-import java.util.stream.Collectors;
-
+@DDDService
 public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisions> {
 
-    private final Analyze<CodeBaseHistory> codebaseHistoryAnalysis;
+    private final Analyze<CodeBaseHistory> historyAnalysis;
 
-    public CodebaseClocRevisionsAnalysis(Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
-        this.codebaseHistoryAnalysis = codebaseHistoryAnalysis;
+    public CodebaseClocRevisionsAnalysis(Analyze<CodeBaseHistory> historyAnalysis) {
+        this.historyAnalysis = historyAnalysis;
     }
 
     @Override
-    public CodebaseClocRevisions from(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var history = codebaseHistoryAnalysis.from(codeBaseToAnalyze);
-        return clocRevisionsFrom(history);
-    }
-
-
-    public CodebaseClocRevisions clocRevisionsFrom(CodeBaseHistory history) {
-        var commitsByFile = history.commits().stream()
-                .flatMap(codebaseFile -> codebaseFile.files().stream())
-                .collect(Collectors.groupingBy(
-                        CodeBaseHistoryCommitFile::name,
-                        Collectors.summingInt(CodeBaseHistoryCommitFile::cloc)
-                ));
-        var revisions = new CommitsByFile(commitsByFile)
-                .toRevisionsFrom(history);
-        return CodebaseClocRevisions.of(revisions);
+    public CodebaseClocRevisions from(CodeBaseToAnalyze codeBase) throws HistoryScanFunctionalException {
+        var history = historyAnalysis.from(codeBase);
+        return CodebaseClocRevisions.of(history.commits());
     }
 }

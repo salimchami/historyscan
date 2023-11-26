@@ -2,7 +2,6 @@ package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -76,14 +75,5 @@ public class AnalysisMapper {
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
         return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfRevisions());
-    }
-
-    public CodeBaseClusteredClocRevisionsDTO domainToWeb(CodebaseClusteredClocRevisions clusteredClocRevisions) {
-        return new CodeBaseClusteredClocRevisionsDTO(
-                clusteredClocRevisions.revisions().stream()
-                        .map(revisions -> revisions.stream().map(this::domainToWeb).toList())
-                        .toList(),
-                clusteredClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
-                clusteredClocRevisions.extensions());
     }
 }

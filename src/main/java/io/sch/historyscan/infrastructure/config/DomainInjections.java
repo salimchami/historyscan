@@ -1,10 +1,8 @@
 package io.sch.historyscan.infrastructure.config;
 
-import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
-import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisionsAnalysis;
+import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodebaseHistoryAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer;
@@ -41,14 +39,6 @@ public class DomainInjections {
     }
 
     @Bean
-    public Analyze<CodebaseClusteredClocRevisions> codebaseHistoryStrategy(
-            Analyze<CodeBaseHistory> codebaseHistoryAnalysis,
-            CodebaseClocRevisionsAnalysis codebaseClocRevisionsAnalysis) {
-        return new CodebaseClusteredClocRevisionsAnalysis(codebaseHistoryAnalysis,
-                codebaseClocRevisionsAnalysis);
-    }
-
-    @Bean
     public CodebaseClocRevisionsAnalysis analyzeCodebaseClocRevisions(
             Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
         return new CodebaseClocRevisionsAnalysis(
@@ -64,8 +54,6 @@ public class DomainInjections {
     @Bean
     public Analyze<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsStrategy(
             Analyze<CodeBaseHistory> codebaseHistoryAnalysis) {
-        return new CodebaseNetworkClocRevisionsAnalysis(
-                codebaseHistoryAnalysis,
-                analyzeCodebaseClocRevisions(codebaseHistoryAnalysis));
+        return new CodebaseNetworkClocRevisionsAnalysis(codebaseHistoryAnalysis);
     }
 }

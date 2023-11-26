@@ -1,8 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
 import org.junit.jupiter.api.Test;
@@ -49,28 +48,25 @@ class CodebaseNetworkClocRevisionsTest {
                         new CodeBaseHistoryCommitFile(fileName4, 100, 12, 0, 10),
                         new CodeBaseHistoryCommitFile(fileName5, 100, 12, 0, 10)
                 ))
-        ), CodebaseClocRevisions.of(List.of(
-                new CodebaseFileClocRevisions(fileName1, 44, 100),
-                new CodebaseFileClocRevisions(fileName2, 350, 100)
-        )));
+        ), null);
 
         assertThat(network.extensions()).isEqualTo(List.of("java"));
-        assertThat(network.ignoredRevisions()).isEqualTo(List.of(new CodebaseFileClocRevisions(fileName5, 22, 100)));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName0, 8, 100))).isEmpty();
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName1, 30, 100))).isEqualTo(Map.of(
+        assertThat(network.ignoredRevisions()).isEqualTo(List.of(new CodebaseFileClocRevisions(fileName5, 22, 100, 10)));
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName0, 8, 100, 10))).isEmpty();
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName1, 30, 100, 10))).isEqualTo(Map.of(
                 new FileName(fileName2), new Weight(2),
                 new FileName(fileName3), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName2, 132, 100))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName2, 132, 100, 10))).isEqualTo(Map.of(
                 new FileName(fileName1), new Weight(2),
                 new FileName(fileName4), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName3, 317, 100))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName3, 317, 100, 10))).isEqualTo(Map.of(
                 new FileName(fileName1), new Weight(1),
                 new FileName(fileName4), new Weight(1),
                 new FileName(fileName5), new Weight(1)
         ));
-        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName4, 44, 100))).isEqualTo(Map.of(
+        assertThat(network.revisions().get(new CodebaseFileClocRevisions(fileName4, 44, 100, 10))).isEqualTo(Map.of(
                 new FileName(fileName2), new Weight(1),
                 new FileName(fileName3), new Weight(1),
                 new FileName(fileName5), new Weight(1)
