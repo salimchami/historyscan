@@ -18,7 +18,7 @@ public class CodebaseNetworkClocRevisionsAnalysis implements Analyze<CodebaseNet
     @Override
     public CodebaseNetworkClocRevisions from(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         var history = codebaseHistoryAnalysis.from(codeBaseToAnalyze);
-        var clocRevisions = CodebaseClocRevisions.of(history.commits());
+        var clocRevisions = CodebaseClocRevisions.of(history.commits(), "/boundedcontexts");
         return CodebaseNetworkClocRevisions.of(history.commits(), clocRevisions);
     }
 }

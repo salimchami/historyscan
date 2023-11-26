@@ -18,6 +18,6 @@ public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisi
     @Override
     public CodebaseClocRevisions from(CodeBaseToAnalyze codeBase) throws HistoryScanFunctionalException {
         var history = historyAnalysis.from(codeBase);
-        return CodebaseClocRevisions.of(history.commits());
+        return CodebaseClocRevisions.of(history.commits(), codeBase.getBaseFolder());
     }
 }

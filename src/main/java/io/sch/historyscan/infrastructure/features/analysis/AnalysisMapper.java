@@ -49,10 +49,11 @@ public class AnalysisMapper {
     }
 
     public CodeBaseClocRevisionsDTO domainToWeb(CodebaseClocRevisions analyzedCodeBaseClocRevisions) {
-        return new CodeBaseClocRevisionsDTO(
-                analyzedCodeBaseClocRevisions.revisions().stream().map(this::domainToWeb).toList(),
-                analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
-                analyzedCodeBaseClocRevisions.extensions());
+//        return new CodeBaseClocRevisionsDTO(
+//                analyzedCodeBaseClocRevisions.revisions().stream().map(this::domainToWeb).toList(),
+//                analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
+//                analyzedCodeBaseClocRevisions.extensions());
+        return null;
     }
 
     public CodeBaseNetworkClocRevisionsDTO domainToWeb(CodebaseNetworkClocRevisions revisions) {

@@ -26,9 +26,9 @@ class CodebaseFileClocRevisionsTest {
 
     @ParameterizedTest
     @MethodSource("should_sort_revisions_params")
-    void should_sort_revisions(int filename1Revisions, int filename2Revisions, List<String> expectedFiles) {
-        var revisions1 = new CodebaseFileClocRevisions("file-1.java", filename1Revisions, 1500, 10);
-        var revisions2 = new CodebaseFileClocRevisions("file-2.java", filename2Revisions, 20, 10);
+    void should_sort_revisions(int score1, int score2, List<String> expectedFiles) {
+        var revisions1 = new CodebaseFileClocRevisions("file-1.java", 10, 1500, score1);
+        var revisions2 = new CodebaseFileClocRevisions("file-2.java", 12, 20, score2);
         var sortedRevisions = Stream.of(revisions1, revisions2).sorted().toList();
         assertThat(sortedRevisions)
                 .extracting(CodebaseFileClocRevisions::fileName)
@@ -42,8 +42,36 @@ class CodebaseFileClocRevisionsTest {
         var revisions = CodebaseClocRevisions.of(commits);
 
         var expectedRevisions = List.of(
-                new CodebaseFileClocRevisions("file-2.java", 350, 1500, 23),
-                new CodebaseFileClocRevisions("file-1.java", 44, 20, 220)
+                new CodebaseFileClocRevisions("/boundedcontexts/featureA/file-1.java", 22, 20, 110),
+                new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-6.java", 22, 20, 110),
+                new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-4.java", 135, 150, 90),
+                new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-5.java", 222, 523, 42),
+                new CodebaseFileClocRevisions("/boundedcontexts/featureA/file-2.java", 310, 1500, 21),
+                new CodebaseFileClocRevisions("/boundedcontexts/featureA/file-3.java", 190, 1250, 15)
+        );
+        var expectedIgnoredRevisions = List.<CodebaseFileClocRevisions>of();
+        var expectedExtensions = List.of("java");
+        var expectedClocRevisions = new CodebaseClocRevisions(List.of(expectedRevisions), expectedIgnoredRevisions, expectedExtensions);
+        assertThat(revisions).isEqualTo(expectedClocRevisions);
+    }
+
+    @Test
+    void should_generate_cloc_revisions_based_on_base_folder() {
+        var commits = defaultHistory().commits();
+
+        var revisions = CodebaseClocRevisions.of(commits, "/boundedcontexts");
+
+        var expectedRevisions = List.of(
+                List.of(
+                        new CodebaseFileClocRevisions("/featureA/file-1.java", 22, 20, 110),
+                        new CodebaseFileClocRevisions("/featureA/file-2.java", 310, 1500, 21),
+                        new CodebaseFileClocRevisions("/featureA/file-3.java", 190, 1250, 15)
+                ),
+                List.of(
+                        new CodebaseFileClocRevisions("/featureB/file-6.java", 22, 20, 110),
+                        new CodebaseFileClocRevisions("/featureB/file-4.java", 135, 150, 90),
+                        new CodebaseFileClocRevisions("/featureB/file-5.java", 222, 523, 42)
+                )
         );
         var expectedIgnoredRevisions = List.<CodebaseFileClocRevisions>of();
         var expectedExtensions = List.of("java");

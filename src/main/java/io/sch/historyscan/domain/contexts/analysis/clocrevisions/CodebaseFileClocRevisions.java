@@ -47,7 +47,7 @@ public record CodebaseFileClocRevisions(
 
     @Override
     public int compareTo(CodebaseFileClocRevisions o) {
-        return comparing(CodebaseFileClocRevisions::numberOfRevisions, reverseOrder())
+        return comparing(CodebaseFileClocRevisions::score, reverseOrder())
                 .thenComparing(CodebaseFileClocRevisions::fileName)
                 .compare(this, o);
     }

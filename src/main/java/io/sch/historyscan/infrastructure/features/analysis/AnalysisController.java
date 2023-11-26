@@ -16,11 +16,10 @@ public class AnalysisController {
         this.analysisApplication = analysisApplication;
     }
 
-    @GetMapping(path = "/analyze/{name}/{analysisType}",
+    @PostMapping(path = "/analyze",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> analyze(@PathVariable("name") String name,
-                                          @PathVariable("analysisType") String analysisType) throws HistoryScanFunctionalException {
-        var analysis = analysisApplication.analyze(name, analysisType);
+    public ResponseEntity<Object> analyze(CodeBaseToAnalyzeDTO codeBaseToAnalyze) throws HistoryScanFunctionalException {
+        var analysis = analysisApplication.analyze(codeBaseToAnalyze);
         return ResponseEntity.ok(analysis);
     }
 }

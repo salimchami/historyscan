@@ -19,24 +19,24 @@ public record CodebaseNetworkClocRevisions(
                 revisionsList.extensions());
     }
 
-    private static Map<CodebaseFileClocRevisions, Map<FileName, Weight>> linksMap(List<CodebaseFileClocRevisions> revisions, List<CodeBaseCommit> commits) {
+    private static Map<CodebaseFileClocRevisions, Map<FileName, Weight>> linksMap(List<List<CodebaseFileClocRevisions>> revisions, List<CodeBaseCommit> commits) {
         var map = new HashMap<CodebaseFileClocRevisions, Map<FileName, Weight>>();
-        for (CodebaseFileClocRevisions revision : revisions) {
-            var fileMap = new HashMap<FileName, Weight>();
-            for (CodeBaseCommit commit : commits) {
-                commit.files().stream()
-                        .filter(codeBaseHistoryCommitFile -> codeBaseHistoryCommitFile.name().equals(revision.fileName()))
-                        .findFirst()
-                        .ifPresent(revisionFileCommit -> commit.files().forEach(fileCommit -> {
-                            if (!fileCommit.name().equals(revision.fileName())) {
-                                var linkedFileName = new FileName(fileCommit.name());
-                                var weight = fileMap.getOrDefault(linkedFileName, Weight.ZERO);
-                                fileMap.put(linkedFileName, new Weight(weight.value() + 1));
-                            }
-                        }));
-            }
-            map.put(revision, fileMap);
-        }
+//        for (CodebaseFileClocRevisions revision : revisions) {
+//            var fileMap = new HashMap<FileName, Weight>();
+//            for (CodeBaseCommit commit : commits) {
+//                commit.files().stream()
+//                        .filter(codeBaseHistoryCommitFile -> codeBaseHistoryCommitFile.name().equals(revision.fileName()))
+//                        .findFirst()
+//                        .ifPresent(revisionFileCommit -> commit.files().forEach(fileCommit -> {
+//                            if (!fileCommit.name().equals(revision.fileName())) {
+//                                var linkedFileName = new FileName(fileCommit.name());
+//                                var weight = fileMap.getOrDefault(linkedFileName, Weight.ZERO);
+//                                fileMap.put(linkedFileName, new Weight(weight.value() + 1));
+//                            }
+//                        }));
+//            }
+//            map.put(revision, fileMap);
+//        }
         return map;
     }
 }

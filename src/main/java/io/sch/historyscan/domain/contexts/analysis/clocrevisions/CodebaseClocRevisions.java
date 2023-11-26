@@ -9,15 +9,20 @@ import java.util.stream.Collectors;
 
 @DDDEntity
 public record CodebaseClocRevisions(
-        List<CodebaseFileClocRevisions> revisions,
+        List<List<CodebaseFileClocRevisions>> revisions,
         List<CodebaseFileClocRevisions> ignoredRevisions,
         List<String> extensions) {
+
     public static CodebaseClocRevisions of(List<CodeBaseCommit> commits) {
+        return CodebaseClocRevisions.of(commits, "");
+    }
+
+    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String baseFolder) {
         var revisions = revisionsFrom(commits);
         return new CodebaseClocRevisions(
-                revisions.stream()
+                List.of(revisions.stream()
                         .filter(file -> !file.ignored())
-                        .toList(),
+                        .toList()),
                 ignored(revisions),
                 extensions(revisions.stream()
                         .filter(file1 -> !file1.ignored())

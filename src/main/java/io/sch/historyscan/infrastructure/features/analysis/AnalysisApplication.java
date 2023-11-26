@@ -17,15 +17,17 @@ import java.util.concurrent.TimeUnit;
 public class AnalysisApplication {
 
     private final AnalysisMapper analysisMapper;
+    private final CodebaseToAnalyzeMapper codebaseToAnalyzeMapper;
     private final Analyze<CodeBaseHistory> analyzeCodebaseHistory;
     private final Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions;
     private final Analyze<CodebaseNetworkClocRevisions> analyzeCodebaseNetworkClocRevisions;
 
     public AnalysisApplication(AnalysisMapper analysisMapper,
-                               Analyze<CodeBaseHistory> analyzeCodebaseHistory,
+                               CodebaseToAnalyzeMapper codebaseToAnalyzeMapper, Analyze<CodeBaseHistory> analyzeCodebaseHistory,
                                Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions,
                                Analyze<CodebaseNetworkClocRevisions> analyzeCodebaseNetworkClocRevisions) {
         this.analysisMapper = analysisMapper;
+        this.codebaseToAnalyzeMapper = codebaseToAnalyzeMapper;
         this.analyzeCodebaseHistory = analyzeCodebaseHistory;
         this.analyzeCodebaseClocRevisions = analyzeCodebaseClocRevisions;
         this.analyzeCodebaseNetworkClocRevisions = analyzeCodebaseNetworkClocRevisions;
@@ -37,9 +39,10 @@ public class AnalysisApplication {
         // Cache TTL
     }
 
-    @Cacheable(cacheNames = "codebaseAnalysis", key = "#name + #analysisType", condition = "#name != null && #analysisType != null")
-    public Object analyze(String name, String analysisType) throws HistoryScanFunctionalException {
-        final CodeBaseToAnalyze codeBaseToAnalyze = CodeBaseToAnalyze.of(name, analysisType);
+    @Cacheable(cacheNames = "codebaseAnalysis", key = "#codeBaseToAnalyzeDTO.name + #codeBaseToAnalyzeDTO.type + #codeBaseToAnalyzeDTO.baseFolder",
+            condition = "#codeBaseToAnalyzeDTO.name != null && #codeBaseToAnalyzeDTO.type != null")
+    public Object analyze(CodeBaseToAnalyzeDTO codeBaseToAnalyzeDTO) throws HistoryScanFunctionalException {
+        var codeBaseToAnalyze = codebaseToAnalyzeMapper.webToDomain(codeBaseToAnalyzeDTO);
         return switch (codeBaseToAnalyze.getType()) {
             case COMMITS_SCAN -> historyAnalysis(codeBaseToAnalyze);
             case CLOC_REVISIONS -> clocRevisionsAnalysis(codeBaseToAnalyze);
