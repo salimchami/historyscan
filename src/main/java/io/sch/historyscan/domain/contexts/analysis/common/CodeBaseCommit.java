@@ -6,4 +6,7 @@ import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommit
 import java.util.List;
 
 public record CodeBaseCommit(CodeBaseHistoryCommitInfo info, List<CodeBaseHistoryCommitFile> files) {
+    public CodeBaseCommit {
+        files = List.copyOf(files);
+    }
 }

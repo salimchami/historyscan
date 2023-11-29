@@ -44,6 +44,8 @@ class CodebaseFileClocRevisionsTest {
         var expectedRevisions = List.of(
                 new CodebaseFileClocRevisions("/boundedcontexts/featureA/file-1.java", 22, 20, 110),
                 new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-6.java", 22, 20, 110),
+                new CodebaseFileClocRevisions("/boundedcontexts/single-file-1.java", 22, 20, 110),
+                new CodebaseFileClocRevisions("/boundedcontexts/single-file-2.java", 22, 20, 110),
                 new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-4.java", 135, 150, 90),
                 new CodebaseFileClocRevisions("/boundedcontexts/featureB/file-5.java", 222, 523, 42),
                 new CodebaseFileClocRevisions("/boundedcontexts/featureA/file-2.java", 310, 1500, 21),
@@ -63,16 +65,21 @@ class CodebaseFileClocRevisionsTest {
 
         var expectedRevisions = List.of(
                 List.of(
-                        new CodebaseFileClocRevisions("/featureA/file-1.java", 22, 20, 110),
-                        new CodebaseFileClocRevisions("/featureA/file-2.java", 310, 1500, 21),
-                        new CodebaseFileClocRevisions("/featureA/file-3.java", 190, 1250, 15)
+                        new CodebaseFileClocRevisions("/single-file-1.java", 22, 20, 110),
+                        new CodebaseFileClocRevisions("/single-file-2.java", 22, 20, 110)
                 ),
                 List.of(
                         new CodebaseFileClocRevisions("/featureB/file-6.java", 22, 20, 110),
                         new CodebaseFileClocRevisions("/featureB/file-4.java", 135, 150, 90),
                         new CodebaseFileClocRevisions("/featureB/file-5.java", 222, 523, 42)
+                ),
+                List.of(
+                        new CodebaseFileClocRevisions("/featureA/file-1.java", 22, 20, 110),
+                        new CodebaseFileClocRevisions("/featureA/file-2.java", 310, 1500, 21),
+                        new CodebaseFileClocRevisions("/featureA/file-3.java", 190, 1250, 15)
                 )
         );
+
         var expectedIgnoredRevisions = List.<CodebaseFileClocRevisions>of();
         var expectedExtensions = List.of("java");
         var expectedClocRevisions = new CodebaseClocRevisions(expectedRevisions, expectedIgnoredRevisions, expectedExtensions);

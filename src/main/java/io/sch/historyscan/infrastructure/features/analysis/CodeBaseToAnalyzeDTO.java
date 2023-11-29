@@ -10,16 +10,16 @@ public class CodeBaseToAnalyzeDTO {
     private final String name;
     private final EnumAnalysisType analysisType;
 
-    private final String baseFolder;
+    private final String rootFolder;
 
     @JsonCreator
     public CodeBaseToAnalyzeDTO(
             @JsonProperty("name") String name,
             @JsonProperty("analysis-type") EnumAnalysisType analysisType,
-            @JsonProperty("base-folder") String baseFolder) {
+            @JsonProperty("root-folder") String rootFolder) {
         this.name = name;
         this.analysisType = analysisType;
-        this.baseFolder = baseFolder;
+        this.rootFolder = rootFolder;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class CodeBaseToAnalyzeDTO {
         return analysisType;
     }
 
-    public String getBaseFolder() {
-        return baseFolder;
+    public String getRootFolder() {
+        return rootFolder;
     }
 
     @Override
@@ -39,11 +39,13 @@ public class CodeBaseToAnalyzeDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CodeBaseToAnalyzeDTO that = (CodeBaseToAnalyzeDTO) o;
-        return Objects.equals(name, that.name) && analysisType == that.analysisType && Objects.equals(baseFolder, that.baseFolder);
+        return Objects.equals(name, that.name)
+                && analysisType == that.analysisType
+                && Objects.equals(rootFolder, that.rootFolder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, analysisType, baseFolder);
+        return Objects.hash(name, analysisType, rootFolder);
     }
 }

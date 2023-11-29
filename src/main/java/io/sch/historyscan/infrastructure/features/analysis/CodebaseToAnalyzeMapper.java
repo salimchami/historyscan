@@ -9,6 +9,6 @@ public class CodebaseToAnalyzeMapper {
         return new CodeBaseToAnalyze(
                 codeBaseToAnalyzeDTO.getName(),
                 codeBaseToAnalyzeDTO.getType(),
-                codeBaseToAnalyzeDTO.getBaseFolder());
+                codeBaseToAnalyzeDTO.getRootFolder());
     }
 }

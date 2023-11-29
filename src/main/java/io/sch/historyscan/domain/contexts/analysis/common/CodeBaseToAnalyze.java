@@ -4,18 +4,18 @@ public class CodeBaseToAnalyze {
     private final String name;
     private final EnumAnalysisType analysisType;
 
-    private final String baseFolder;
+    private final String rootFolder;
 
-    public CodeBaseToAnalyze(String name, EnumAnalysisType analysisType, String baseFolder) {
+    public CodeBaseToAnalyze(String name, EnumAnalysisType analysisType, String rootFolder) {
         this.name = name;
         this.analysisType = analysisType;
-        this.baseFolder = baseFolder;
+        this.rootFolder = rootFolder;
     }
 
-    public static CodeBaseToAnalyze of(String name, String analysisType, String baseFolder) {
+    public static CodeBaseToAnalyze of(String name, String analysisType, String rootFolder) {
         var type = EnumAnalysisType.fromTitle(analysisType)
                 .orElseThrow(() -> new ScanTypeNotFoundException("Analysis type not found"));
-        return new CodeBaseToAnalyze(name, type, baseFolder);
+        return new CodeBaseToAnalyze(name, type, rootFolder);
     }
 
     public String getName() {
@@ -26,7 +26,7 @@ public class CodeBaseToAnalyze {
         return analysisType;
     }
 
-    public String getBaseFolder() {
-        return baseFolder;
+    public String getRootFolder() {
+        return rootFolder;
     }
 }

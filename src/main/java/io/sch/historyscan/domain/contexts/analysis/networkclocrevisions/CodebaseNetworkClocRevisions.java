@@ -12,6 +12,12 @@ public record CodebaseNetworkClocRevisions(
         Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions,
         List<CodebaseFileClocRevisions> ignoredRevisions,
         List<String> extensions) {
+
+    public CodebaseNetworkClocRevisions {
+        revisions = Map.copyOf(revisions);
+        ignoredRevisions = List.copyOf(ignoredRevisions);
+        extensions = List.copyOf(extensions);
+    }
     public static CodebaseNetworkClocRevisions of(List<CodeBaseCommit> commits, CodebaseClocRevisions revisionsList) {
         return new CodebaseNetworkClocRevisions(
                 linksMap(revisionsList.revisions(), commits),
