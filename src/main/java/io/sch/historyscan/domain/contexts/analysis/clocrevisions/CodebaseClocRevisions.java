@@ -27,7 +27,7 @@ public record CodebaseClocRevisions(
     }
 
     public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String rootFolder) {
-        var revisions = revisionsFrom(commits, rootFolder);
+        var revisions = revisionsFrom(commits, new RootFolder(rootFolder));
         var allRevisions = revisions.stream().flatMap(Collection::stream).toList();
         return new CodebaseClocRevisions(
                 notIgnoredGrouped(revisions),
@@ -36,9 +36,26 @@ public record CodebaseClocRevisions(
     }
 
 
+    private static List<List<CodebaseFileClocRevisions>> revisionsFrom(List<CodeBaseCommit> commits, RootFolder rootFolder) {
+        var sortedRevisions = sortedRevisionsFrom(commits);
 
-    private static List<List<CodebaseFileClocRevisions>> revisionsFrom(List<CodeBaseCommit> commits, String rootFolder) {
-        final List<CodebaseFileClocRevisions> sorted = commits.stream()
+        if (!rootFolder.isValid()) {
+            return List.of(sortedRevisions);
+        }
+
+        Map<String, List<CodebaseFileClocRevisions>> revisionsByDirectory = new HashMap<>();
+        sortedRevisions.forEach(revision -> {
+            String relativePath = revision.fileName().replace(rootFolder.value(), "");
+            String directory = relativePath.contains("/") ? relativePath.substring(0, relativePath.lastIndexOf('/')) : "/";
+            revisionsByDirectory.computeIfAbsent(directory, k -> new ArrayList<>())
+                    .add(new CodebaseFileClocRevisions(relativePath, revision.numberOfRevisions(),
+                            revision.nbLines(), revision.score()));
+        });
+        return new ArrayList<>(revisionsByDirectory.values());
+    }
+
+    private static List<CodebaseFileClocRevisions> sortedRevisionsFrom(List<CodeBaseCommit> commits) {
+        return commits.stream()
                 .flatMap(codebaseFile -> codebaseFile.files().stream())
                 .collect(Collectors.groupingBy(
                         CodeBaseHistoryCommitFile::name,
@@ -48,22 +65,6 @@ public record CodebaseClocRevisions(
                 .filter(entry -> entry.getValue() > 0)
                 .map(entry -> CodebaseFileClocRevisions.of(entry, commits))
                 .sorted().toList();
-
-        if( rootFolder.isEmpty()) {
-            return List.of(sorted);
-        }
-        Map<String, List<CodebaseFileClocRevisions>> map = new HashMap<>();
-        for (var revision : sorted) {
-            String relativePath = revision.fileName().replace(rootFolder, "");
-
-            String directory = relativePath.contains("/") ? relativePath.substring(0, relativePath.lastIndexOf('/')) : "/";
-
-            map.computeIfAbsent(directory, k -> new ArrayList<>())
-                    .add(new CodebaseFileClocRevisions(relativePath, revision.numberOfRevisions(),
-                            revision.nbLines(), revision.score()));
-        }
-
-        return new ArrayList<>(map.values());
     }
 
 }
