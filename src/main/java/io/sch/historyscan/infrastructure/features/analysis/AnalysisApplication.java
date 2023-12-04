@@ -1,8 +1,7 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.common.Analysis;
+import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.networkclocrevisions.CodebaseNetworkClocRevisions;
@@ -18,21 +17,20 @@ import java.util.concurrent.TimeUnit;
 public class AnalysisApplication {
 
     private final AnalysisMapper analysisMapper;
-    private final Analysis<CodeBaseHistory> codebaseHistoryAnalysis;
-    private final Analysis<CodebaseClocRevisions> codebaseClocRevisionsAnalysis;
-    private final Analysis<CodebaseClusteredClocRevisions> codebaseClusteredClocRevisionsAnalysis;
-    private final Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsAnalysis;
+    private final CodebaseToAnalyzeMapper codebaseToAnalyzeMapper;
+    private final Analyze<CodeBaseHistory> analyzeCodebaseHistory;
+    private final Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions;
+    private final Analyze<CodebaseNetworkClocRevisions> analyzeCodebaseNetworkClocRevisions;
 
     public AnalysisApplication(AnalysisMapper analysisMapper,
-                               Analysis<CodeBaseHistory> codebaseHistoryAnalysis,
-                               Analysis<CodebaseClocRevisions> codebaseClocRevisionsAnalysis,
-                               Analysis<CodebaseClusteredClocRevisions> codebaseClusteredClocRevisionsAnalysis,
-                               Analysis<CodebaseNetworkClocRevisions> codebaseNetworkClocRevisionsAnalysis) {
+                               CodebaseToAnalyzeMapper codebaseToAnalyzeMapper, Analyze<CodeBaseHistory> analyzeCodebaseHistory,
+                               Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions,
+                               Analyze<CodebaseNetworkClocRevisions> analyzeCodebaseNetworkClocRevisions) {
         this.analysisMapper = analysisMapper;
-        this.codebaseHistoryAnalysis = codebaseHistoryAnalysis;
-        this.codebaseClocRevisionsAnalysis = codebaseClocRevisionsAnalysis;
-        this.codebaseClusteredClocRevisionsAnalysis = codebaseClusteredClocRevisionsAnalysis;
-        this.codebaseNetworkClocRevisionsAnalysis = codebaseNetworkClocRevisionsAnalysis;
+        this.codebaseToAnalyzeMapper = codebaseToAnalyzeMapper;
+        this.analyzeCodebaseHistory = analyzeCodebaseHistory;
+        this.analyzeCodebaseClocRevisions = analyzeCodebaseClocRevisions;
+        this.analyzeCodebaseNetworkClocRevisions = analyzeCodebaseNetworkClocRevisions;
     }
 
     @CacheEvict(allEntries = true, cacheNames = {"codebaseAnalysis"})
@@ -41,34 +39,29 @@ public class AnalysisApplication {
         // Cache TTL
     }
 
-    @Cacheable(cacheNames = "codebaseAnalysis", key = "#name + #analysisType", condition = "#name != null && #analysisType != null")
-    public Object analyze(String name, String analysisType) throws HistoryScanFunctionalException {
-        final CodeBaseToAnalyze codeBaseToAnalyze = CodeBaseToAnalyze.of(name, analysisType);
+    @Cacheable(cacheNames = "codebaseAnalysis", key = "#codeBaseToAnalyzeDTO.name + #codeBaseToAnalyzeDTO.type + #codeBaseToAnalyzeDTO.rootFolder",
+            condition = "#codeBaseToAnalyzeDTO.name != null && #codeBaseToAnalyzeDTO.type != null")
+    public Object analyze(CodeBaseToAnalyzeDTO codeBaseToAnalyzeDTO) throws HistoryScanFunctionalException {
+        var codeBaseToAnalyze = codebaseToAnalyzeMapper.webToDomain(codeBaseToAnalyzeDTO);
         return switch (codeBaseToAnalyze.getType()) {
             case COMMITS_SCAN -> historyAnalysis(codeBaseToAnalyze);
             case CLOC_REVISIONS -> clocRevisionsAnalysis(codeBaseToAnalyze);
-            case CLUSTERED_CLOC_REVISIONS -> clusteredClocRevisionsAnalysis(codeBaseToAnalyze);
             case NETWORK_CLOC_REVISIONS -> networkClocRevisionsAnalysis(codeBaseToAnalyze);
         };
     }
 
-    private CodeBaseClusteredClocRevisionsDTO clusteredClocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseClusteredClocRevisions = codebaseClusteredClocRevisionsAnalysis.of(codeBaseToAnalyze);
-        return analysisMapper.domainToWeb(analyzedCodeBaseClusteredClocRevisions);
-    }
-
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseClocRevisions = codebaseClocRevisionsAnalysis.of(codeBaseToAnalyze);
+        var analyzedCodeBaseClocRevisions = analyzeCodebaseClocRevisions.from(codeBaseToAnalyze);
         return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
     }
 
     private CodeBaseNetworkClocRevisionsDTO networkClocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseClocRevisions = codebaseNetworkClocRevisionsAnalysis.of(codeBaseToAnalyze);
+        var analyzedCodeBaseClocRevisions = analyzeCodebaseNetworkClocRevisions.from(codeBaseToAnalyze);
         return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
     }
 
     private CodeBaseHistoryDTO historyAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
-        var analyzedCodeBaseHistory = codebaseHistoryAnalysis.of(codeBaseToAnalyze);
+        var analyzedCodeBaseHistory = analyzeCodebaseHistory.from(codeBaseToAnalyze);
         return analysisMapper.domainToWeb(analyzedCodeBaseHistory);
     }
 }

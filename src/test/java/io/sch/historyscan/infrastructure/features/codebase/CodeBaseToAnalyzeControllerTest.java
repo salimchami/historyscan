@@ -28,7 +28,7 @@ class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
     public static Stream<Arguments> should_clone_the_codebase_params() {
         return Stream.of(
                 Arguments.of("http-codebase", "http-added-codebase")
-//                Arguments.of("git-codebase", "git-added-codebase")
+//                Arguments.from("git-codebase", "git-added-codebase")
         );
     }
 

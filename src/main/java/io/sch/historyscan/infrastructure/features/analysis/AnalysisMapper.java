@@ -2,7 +2,6 @@ package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clusteredclocrevisions.CodebaseClusteredClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -39,7 +38,7 @@ public class AnalysisMapper {
     private CodeBaseHistoryCommitFileDTO domainToWeb(CodeBaseHistoryCommitFile codeBaseHistoryCommitFile) {
         return new CodeBaseHistoryCommitFileDTO(
                 codeBaseHistoryCommitFile.name(),
-                codeBaseHistoryCommitFile.nbLines(),
+                codeBaseHistoryCommitFile.currentNbLines(),
                 codeBaseHistoryCommitFile.nbAddedLines(),
                 codeBaseHistoryCommitFile.nbDeletedLines(),
                 codeBaseHistoryCommitFile.nbModifiedLines());
@@ -51,7 +50,8 @@ public class AnalysisMapper {
 
     public CodeBaseClocRevisionsDTO domainToWeb(CodebaseClocRevisions analyzedCodeBaseClocRevisions) {
         return new CodeBaseClocRevisionsDTO(
-                analyzedCodeBaseClocRevisions.revisions().stream().map(this::domainToWeb).toList(),
+                analyzedCodeBaseClocRevisions.revisions().stream()
+                        .map(revisions -> revisions.stream().map(this::domainToWeb).toList()).toList(),
                 analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
                 analyzedCodeBaseClocRevisions.extensions());
     }
@@ -76,14 +76,5 @@ public class AnalysisMapper {
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
         return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfRevisions());
-    }
-
-    public CodeBaseClusteredClocRevisionsDTO domainToWeb(CodebaseClusteredClocRevisions clusteredClocRevisions) {
-        return new CodeBaseClusteredClocRevisionsDTO(
-                clusteredClocRevisions.revisions().stream()
-                        .map(revisions -> revisions.stream().map(this::domainToWeb).toList())
-                        .toList(),
-                clusteredClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
-                clusteredClocRevisions.extensions());
     }
 }

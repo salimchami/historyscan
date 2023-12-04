@@ -28,32 +28,29 @@ public class StartupDTO extends RepresentationModel<StartupDTO> {
     }
 
     private void currentCodebases() throws NoSuchMethodException {
-        add(
-                linkTo(CodeBaseController.class,
-                        CodeBaseController.class.getMethod("currentCodeBases"))
-                        .withRel("list-codebases")
-                        .withTitle(HttpMethod.GET.name())
+        add(linkTo(CodeBaseController.class,
+                CodeBaseController.class.getMethod("currentCodeBases"))
+                .withRel("list-codebases")
+                .withTitle(HttpMethod.GET.name())
         );
 
     }
 
     private void addCodebase() throws NoSuchMethodException {
-        add(
-                linkTo(CodeBaseController.class,
-                        CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
-                        .withRel("add-codebase")
-                        .withTitle(HttpMethod.POST.name())
+        add(linkTo(CodeBaseController.class,
+                CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
+                .withRel("add-codebase")
+                .withTitle(HttpMethod.POST.name())
         );
 
     }
 
     private void addSelfLink() throws NoSuchMethodException {
-        add(
-                linkTo(StartupController.class,
-                        StartupController.class.getMethod("startup"))
-                        .withSelfRel()
-                        .withName("startup")
-                        .withTitle(HttpMethod.GET.name())
+        add(linkTo(StartupController.class,
+                StartupController.class.getMethod("startup"))
+                .withSelfRel()
+                .withName("startup")
+                .withTitle(HttpMethod.GET.name())
         );
     }
 

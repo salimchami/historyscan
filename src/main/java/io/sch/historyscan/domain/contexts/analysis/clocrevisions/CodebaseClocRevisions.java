@@ -1,35 +1,38 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDValueObject;
+
+import java.util.Collection;
 import java.util.List;
 
+import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.Extensions.extensionsOf;
+import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.IgnoredRevisions.ignored;
+import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.IgnoredRevisions.notIgnoredGrouped;
+
+@DDDValueObject
 public record CodebaseClocRevisions(
-        List<CodebaseFileClocRevisions> revisions,
+        List<List<CodebaseFileClocRevisions>> revisions,
         List<CodebaseFileClocRevisions> ignoredRevisions,
         List<String> extensions) {
-    public static CodebaseClocRevisions of(List<CodebaseFileClocRevisions> revisions) {
+
+    public CodebaseClocRevisions {
+        revisions = List.copyOf(revisions);
+        ignoredRevisions = List.copyOf(ignoredRevisions);
+        extensions = List.copyOf(extensions);
+    }
+
+    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits) {
+        return CodebaseClocRevisions.of(commits, "");
+    }
+
+    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String rootFolder) {
+        var clocRevisions = new ClocRevisions(commits, new RootFolder(rootFolder));
+        var revisions = clocRevisions.convertCommitsToRevisions();
+        var flattenRevisions = revisions.stream().flatMap(Collection::stream).toList();
         return new CodebaseClocRevisions(
-                revisions.stream()
-                        .filter(file -> !file.ignored())
-                        .toList(),
-                ignored(revisions),
-                extensions(revisions.stream()
-                        .filter(file1 -> !file1.ignored())
-                        .toList()));
-    }
-
-    private static List<String> extensions(List<CodebaseFileClocRevisions> revisions) {
-        return revisions.stream().filter(file -> !file.ignored())
-                .map(CodebaseFileClocRevisions::fileName)
-                .map(fileName -> fileName.substring(fileName.lastIndexOf(".") + 1))
-                .distinct()
-                .sorted()
-                .toList();
-    }
-
-    private static List<CodebaseFileClocRevisions> ignored(List<CodebaseFileClocRevisions> revisions) {
-        return revisions.stream()
-                .filter(CodebaseFileClocRevisions::ignored)
-                .sorted()
-                .toList();
+                notIgnoredGrouped(revisions),
+                ignored(flattenRevisions),
+                extensionsOf(flattenRevisions));
     }
 }
