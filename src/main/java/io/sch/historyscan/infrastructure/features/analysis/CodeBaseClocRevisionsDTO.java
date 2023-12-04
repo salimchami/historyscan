@@ -8,12 +8,12 @@ import java.util.Objects;
 
 public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRevisionsDTO> {
 
-    private final List<CodeBaseClocRevisionsFileDTO> revisions;
+    private final List<List<CodeBaseClocRevisionsFileDTO>> revisions;
     private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
-    public CodeBaseClocRevisionsDTO(List<CodeBaseClocRevisionsFileDTO> revisions,
+    public CodeBaseClocRevisionsDTO(List<List<CodeBaseClocRevisionsFileDTO>> revisions,
                                     List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
                                     List<String> extensions) {
         this.revisions = revisions;
@@ -21,7 +21,7 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
         this.extensions = extensions;
     }
 
-    public List<CodeBaseClocRevisionsFileDTO> getRevisions() {
+    public List<List<CodeBaseClocRevisionsFileDTO>> getRevisions() {
         return revisions;
     }
 

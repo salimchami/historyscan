@@ -3,9 +3,9 @@ package io.sch.historyscan.infrastructure.features.codebase.info;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType;
-import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
+import io.sch.historyscan.infrastructure.features.analysis.CodeBaseToAnalyzeDTO;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
@@ -35,10 +35,10 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
         Arrays.stream(EnumAnalysisType.values()).forEach(analysisType ->
         {
             try {
-                add(linkTo(methodOn(AnalysisController.class).analyse(name, analysisType.getTitle()))
+                add(linkTo(AnalysisController.class, AnalysisController.class.getMethod("analyze", CodeBaseToAnalyzeDTO.class))
                         .withRel("analyze-" + analysisType.getTitle())
                         .withTitle(HttpMethod.GET.name()));
-            } catch (HistoryScanFunctionalException e) {
+            } catch (NoSuchMethodException e) {
                 throw new HistoryScanTechnicalException("Error while adding analysis link", e);
             }
         });

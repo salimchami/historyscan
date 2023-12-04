@@ -10,7 +10,6 @@ import org.springframework.http.HttpMethod;
 import java.util.Objects;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
 
@@ -40,12 +39,10 @@ public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
     }
 
     private void addSelfLink() throws NoSuchMethodException {
-        add(
-                linkTo(CodeBaseController.class,
-                        CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
-                        .withSelfRel()
-                        .withTitle(HttpMethod.POST.name())
-        );
+        add(linkTo(CodeBaseController.class,
+                CodeBaseController.class.getMethod("add", CodeBaseToAddDTO.class))
+                .withSelfRel()
+                .withTitle(HttpMethod.POST.name()));
 
     }
 
