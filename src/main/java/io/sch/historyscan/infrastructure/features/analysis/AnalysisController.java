@@ -18,7 +18,7 @@ public class AnalysisController {
 
     @PostMapping(path = "/analyze",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> analyze(CodeBaseToAnalyzeDTO codeBase) throws HistoryScanFunctionalException {
+    public ResponseEntity<Object> analyze(@RequestBody CodeBaseToAnalyzeDTO codeBase) throws HistoryScanFunctionalException {
         var analysis = analysisApplication.analyze(codeBase);
         return ResponseEntity.ok(analysis);
     }

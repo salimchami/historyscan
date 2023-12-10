@@ -1,22 +1,20 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType;
 
 import java.util.Objects;
 
 public class CodeBaseToAnalyzeDTO {
     private final String name;
-    private final EnumAnalysisType analysisType;
+    private final String analysisType;
 
     private final String rootFolder;
 
     @JsonCreator
     public CodeBaseToAnalyzeDTO(
-            @JsonProperty("name") String name,
-            @JsonProperty("analysis-type") EnumAnalysisType analysisType,
-            @JsonProperty("root-folder") String rootFolder) {
+            String name,
+            String analysisType,
+            String rootFolder) {
         this.name = name;
         this.analysisType = analysisType;
         this.rootFolder = rootFolder;
@@ -26,7 +24,7 @@ public class CodeBaseToAnalyzeDTO {
         return name;
     }
 
-    public EnumAnalysisType getType() {
+    public String getType() {
         return analysisType;
     }
 
@@ -40,7 +38,7 @@ public class CodeBaseToAnalyzeDTO {
         if (o == null || getClass() != o.getClass()) return false;
         CodeBaseToAnalyzeDTO that = (CodeBaseToAnalyzeDTO) o;
         return Objects.equals(name, that.name)
-                && analysisType == that.analysisType
+                && analysisType.equals(that.analysisType)
                 && Objects.equals(rootFolder, that.rootFolder);
     }
 
