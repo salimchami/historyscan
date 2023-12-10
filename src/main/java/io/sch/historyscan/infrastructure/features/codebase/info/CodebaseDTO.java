@@ -46,7 +46,7 @@ public class CodebaseDTO extends RepresentationModel<CodebaseDTO> {
     }
 
     private void addSelfLink() {
-        add(linkTo(methodOn(CodeBaseController.class).findCodeBase(name))
+        add(linkTo(methodOn(CodeBaseController.class, name).findCodeBase(name))
                 .withSelfRel()
                 .withTitle(HttpMethod.GET.name()));
     }
