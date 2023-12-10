@@ -26,6 +26,9 @@ public record CodebaseFileClocRevisions(
     }
 
     private static int scoreFrom(int nbRevisions, int nbLines) {
+        if (nbLines == 0) {
+            nbLines = 1;
+        }
         return BigDecimal.valueOf(nbRevisions)
                 .divide(BigDecimal.valueOf(nbLines), 2, RoundingMode.HALF_UP)
                 .multiply(BigDecimal.valueOf(100)).intValue();
