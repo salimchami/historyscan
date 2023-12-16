@@ -10,7 +10,6 @@ public class CodebaseToAnalyzeMapper {
     public CodeBaseToAnalyze webToDomain(CodeBaseToAnalyzeDTO codeBaseToAnalyzeDTO) {
         return new CodeBaseToAnalyze(
                 codeBaseToAnalyzeDTO.getName(),
-                EnumAnalysisType.fromTitle(codeBaseToAnalyzeDTO.getType()).orElseThrow(() -> new RuntimeException("Analysis type not found")),
-                codeBaseToAnalyzeDTO.getRootFolder());
+                EnumAnalysisType.fromTitle(codeBaseToAnalyzeDTO.getType()).orElseThrow(() -> new RuntimeException("Analysis type not found")));
     }
 }

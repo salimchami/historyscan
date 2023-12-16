@@ -8,20 +8,26 @@ import java.util.Objects;
 public class CodeBaseClocRevisionsFileDTO extends RepresentationModel<CodeBaseClocRevisionsFileDTO> {
 
     private final String name;
-    private final long nbRevisions;
+    private final String path;
+    private final long score;
 
     @JsonCreator
-    public CodeBaseClocRevisionsFileDTO(String name, long nbRevisions) {
+    public CodeBaseClocRevisionsFileDTO(String name, String path, long score) {
         this.name = name;
-        this.nbRevisions = nbRevisions;
+        this.path = path;
+        this.score = score;
     }
 
     public String getName() {
         return name;
     }
 
-    public long getNbRevisions() {
-        return nbRevisions;
+    public String getPath() {
+        return path;
+    }
+
+    public long getScore() {
+        return score;
     }
 
     @Override
@@ -30,11 +36,13 @@ public class CodeBaseClocRevisionsFileDTO extends RepresentationModel<CodeBaseCl
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CodeBaseClocRevisionsFileDTO that = (CodeBaseClocRevisionsFileDTO) o;
-        return nbRevisions == that.nbRevisions && Objects.equals(name, that.name);
+        return Objects.equals(name, that.name)
+                && Objects.equals(path, that.path)
+                && score == that.score;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, nbRevisions);
+        return Objects.hash(super.hashCode(), name, path, score);
     }
 }

@@ -18,9 +18,7 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
     public static Stream<Arguments> should_analyze_history_of_the_codebase_params() {
         return Stream.of(
                 Arguments.of("codebase-to-analyze-history", "codebase-history"),
-                Arguments.of("codebase-to-analyze-history-with-root-folder", "codebase-history-with-root-folder"),
-                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
-                Arguments.of("codebase-to-analyze-cloc-revisions-with-root-folder", "codebase-cloc-revisions-with-root-folder")
+                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions")
         );
     }
 

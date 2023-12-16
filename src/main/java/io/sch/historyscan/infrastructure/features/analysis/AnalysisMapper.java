@@ -77,6 +77,9 @@ public class AnalysisMapper {
     }
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(ClocRevisionsFile clocRevisionsFile) {
-        return new CodeBaseClocRevisionsFileDTO(clocRevisionsFile.fileName(), clocRevisionsFile.stats().numberOfRevisions());
+        return new CodeBaseClocRevisionsFileDTO(
+                clocRevisionsFile.fileName(),
+                clocRevisionsFile.filePath(),
+                clocRevisionsFile.stats().score());
     }
 }

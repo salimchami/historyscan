@@ -9,28 +9,32 @@
       },
       "files": [
         {
-          "file-name": "/boundedcontexts/single-file-1.java",
+          "file-name": "single-file-1.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
           "nb-actual-lines": 20,
           "nb-added-lines": 20,
           "nb-deleted-lines": 2,
           "nb-modified-lines": 0
         },
         {
-          "file-name": "/boundedcontexts/featureA/file-1.java",
+          "file-name": "file-1.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-1.java",
           "nb-actual-lines": 20,
           "nb-added-lines": 1,
           "nb-deleted-lines": 2,
           "nb-modified-lines": 5
         },
         {
-          "file-name": "/boundedcontexts/featureA/file-2.java",
+          "file-name": "file-2.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-2.java",
           "nb-actual-lines": 1500,
           "nb-added-lines": 15,
           "nb-deleted-lines": 30,
           "nb-modified-lines": 10
         },
         {
-          "file-name": "/boundedcontexts/featureA/file-3.java",
+          "file-name": "file-3.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-3.java",
           "nb-actual-lines": 1250,
           "nb-added-lines": 150,
           "nb-deleted-lines": 30,
@@ -47,35 +51,40 @@
       },
       "files": [
         {
-          "file-name": "/boundedcontexts/single-file-2.java",
+          "file-name": "single-file-2.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
           "nb-actual-lines": 20,
           "nb-added-lines": 20,
           "nb-deleted-lines": 2,
           "nb-modified-lines": 0
         },
         {
-          "file-name": "/boundedcontexts/featureA/file-1.java",
+          "file-name": "file-1.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-1.java",
           "nb-actual-lines": 20,
           "nb-added-lines": 12,
           "nb-deleted-lines": 0,
           "nb-modified-lines": 2
         },
         {
-          "file-name": "/boundedcontexts/featureA/file-2.java",
+          "file-name": "file-2.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-2.java",
           "nb-actual-lines": 1000,
           "nb-added-lines": 150,
           "nb-deleted-lines": 5,
           "nb-modified-lines": 100
         },
         {
-          "file-name": "/boundedcontexts/featureB/file-4.java",
+          "file-name": "file-4.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-4.java",
           "nb-actual-lines": 150,
           "nb-added-lines": 10,
           "nb-deleted-lines": 100,
           "nb-modified-lines": 25
         },
         {
-          "file-name": "/boundedcontexts/featureB/file-5.java",
+          "file-name": "file-5.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-5.java",
           "nb-actual-lines": 523,
           "nb-added-lines": 90,
           "nb-deleted-lines": 100,
@@ -92,7 +101,8 @@
       },
       "files": [
         {
-          "file-name": "/boundedcontexts/featureB/file-6.java",
+          "file-name": "file-6.java",
+          "file-path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-6.java",
           "nb-actual-lines": 20,
           "nb-added-lines": 12,
           "nb-deleted-lines": 0,

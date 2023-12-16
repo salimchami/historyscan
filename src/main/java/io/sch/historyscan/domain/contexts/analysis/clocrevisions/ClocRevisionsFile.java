@@ -46,4 +46,8 @@ public record ClocRevisionsFile(
     public String fileName() {
         return file.fileName();
     }
+
+    public String filePath() {
+        return file.path();
+    }
 }
