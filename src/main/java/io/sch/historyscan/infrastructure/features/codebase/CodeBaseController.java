@@ -2,7 +2,7 @@ package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
-import io.sch.historyscan.infrastructure.features.codebase.errors.CodeBaseAlreadyExistsException;
+import io.sch.historyscan.infrastructure.features.codebase.exceptions.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import org.springframework.http.HttpStatus;

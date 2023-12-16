@@ -1,3 +1,54 @@
 {
-
+  "revisions": [
+    [
+      {
+        "name": "single-file-1.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
+        "score": 440
+      },
+      {
+        "name": "single-file-2.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
+        "score": 440
+      }
+    ],
+    [
+      {
+        "name": "file-2.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-2.java",
+        "score": 465000
+      },
+      {
+        "name": "file-3.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-3.java",
+        "score": 237500
+      },
+      {
+        "name": "file-1.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-1.java",
+        "score": 440
+      }
+    ],
+    [
+      {
+        "name": "file-5.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-5.java",
+        "score": 116106
+      },
+      {
+        "name": "file-4.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-4.java",
+        "score": 20250
+      },
+      {
+        "name": "file-6.java",
+        "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-6.java",
+        "score": 440
+      }
+    ]
+  ],
+  "ignoredRevisions": [],
+  "extensions": [
+    "java"
+  ]
 }

@@ -1,29 +1,48 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClusteredClocRevisions {
 
-    private final RootFolder rootFolder;
-    private final List<CodebaseFileClocRevisions> sortedRevisions;
+    private final List<ClocRevisionsFile> sortedRevisions;
 
-    public ClusteredClocRevisions(RootFolder rootFolder, List<CodebaseFileClocRevisions> sortedRevisions) {
-        this.rootFolder = rootFolder;
+    public ClusteredClocRevisions(List<ClocRevisionsFile> sortedRevisions) {
         this.sortedRevisions = sortedRevisions;
     }
 
-    public List<List<CodebaseFileClocRevisions>> toClusters() {
-        Map<String, List<CodebaseFileClocRevisions>> revisionsByDirectory = new HashMap<>();
-        sortedRevisions.forEach(revision -> {
-            String relativePath = revision.fileName().replace(rootFolder.value(), "");
-            String directory = relativePath.contains("/") ? relativePath.substring(0, relativePath.lastIndexOf('/')) : "/";
-            revisionsByDirectory.computeIfAbsent(directory, k -> new ArrayList<>())
-                    .add(new CodebaseFileClocRevisions(relativePath, revision.numberOfRevisions(),
-                            revision.nbLines(), revision.score()));
-        });
-        return new ArrayList<>(revisionsByDirectory.values());
+    public List<List<ClocRevisionsFile>> toClusters() {
+        Map<String, List<ClocRevisionsFile>> sortedFiles = new HashMap<>();
+
+        for (var file : sortedRevisions) {
+            String path = file.file().path();
+            String[] pathParts = path.split("/");
+            String directoryName = pathParts[pathParts.length - 2];
+
+            sortedFiles.computeIfAbsent(directoryName, k -> new ArrayList<>()).add(file);
+        }
+        final List<Map.Entry<String, List<ClocRevisionsFile>>> sortedEntries = reorder(sortedFiles);
+
+        return sortedEntries.stream().map(Map.Entry::getValue).map(list -> list.stream().sorted().toList()).toList();
+    }
+
+    private static List<Map.Entry<String, List<ClocRevisionsFile>>> reorder(Map<String, List<ClocRevisionsFile>> sortedFiles) {
+        sortedFiles.values().forEach(fileList ->
+                fileList.sort(Comparator.comparing(f -> f.file().path())));
+
+        var directoryFrequency = directoryFrequency(sortedFiles);
+
+        return sortedFiles.entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, List<ClocRevisionsFile>>comparingByKey(Comparator.comparingInt(directoryFrequency::get))
+                        .thenComparing(Map.Entry.comparingByKey()))
+                .toList();
+    }
+
+    private static Map<String, Integer> directoryFrequency(Map<String, List<ClocRevisionsFile>> sortedFiles) {
+        Map<String, Integer> directoryFrequency = new HashMap<>();
+        for (String directory : sortedFiles.keySet()) {
+            directoryFrequency.put(directory, directoryFrequency.getOrDefault(directory, 0) + 1);
+        }
+        return directoryFrequency;
     }
 }

@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.codebase.errors;
+package io.sch.historyscan.infrastructure.features.codebase.exceptions;
 
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
 

@@ -1,7 +1,8 @@
 package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 
 import java.util.HashMap;
@@ -9,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public record CodebaseNetworkClocRevisions(
-        Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions,
-        List<CodebaseFileClocRevisions> ignoredRevisions,
+        Map<ClocRevisionsFile, Map<FileInfo, Weight>> revisions,
+        List<ClocRevisionsFile> ignoredRevisions,
         List<String> extensions) {
 
     public CodebaseNetworkClocRevisions {
@@ -25,8 +26,8 @@ public record CodebaseNetworkClocRevisions(
                 revisionsList.extensions());
     }
 
-    private static Map<CodebaseFileClocRevisions, Map<FileName, Weight>> linksMap(List<List<CodebaseFileClocRevisions>> revisions, List<CodeBaseCommit> commits) {
-        var map = new HashMap<CodebaseFileClocRevisions, Map<FileName, Weight>>();
+    private static Map<ClocRevisionsFile, Map<FileInfo, Weight>> linksMap(List<List<ClocRevisionsFile>> revisions, List<CodeBaseCommit> commits) {
+        var map = new HashMap<ClocRevisionsFile, Map<FileInfo, Weight>>();
 //        for (CodebaseFileClocRevisions revision : revisions) {
 //            var fileMap = new HashMap<FileName, Weight>();
 //            for (CodeBaseCommit commit : commits) {

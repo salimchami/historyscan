@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.analysis;
+package io.sch.historyscan.infrastructure.features.analysis.dto;
 
 import org.springframework.hateoas.RepresentationModel;
 

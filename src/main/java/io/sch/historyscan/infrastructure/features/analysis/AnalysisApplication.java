@@ -6,6 +6,10 @@ import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.networkclocrevisions.CodebaseNetworkClocRevisions;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseNetworkClocRevisionsDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseToAnalyzeDTO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -39,7 +43,7 @@ public class AnalysisApplication {
         // Cache TTL
     }
 
-    @Cacheable(cacheNames = "codebaseAnalysis", key = "#codeBaseToAnalyzeDTO.name + #codeBaseToAnalyzeDTO.type + #codeBaseToAnalyzeDTO.rootFolder",
+    @Cacheable(cacheNames = "codebaseAnalysis", key = "#codeBaseToAnalyzeDTO.name + #codeBaseToAnalyzeDTO.type",
             condition = "#codeBaseToAnalyzeDTO.name != null && #codeBaseToAnalyzeDTO.type != null")
     public Object analyze(CodeBaseToAnalyzeDTO codeBaseToAnalyzeDTO) throws HistoryScanFunctionalException {
         var codeBaseToAnalyze = codebaseToAnalyzeMapper.webToDomain(codeBaseToAnalyzeDTO);

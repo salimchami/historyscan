@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
-import io.sch.historyscan.infrastructure.features.analysis.CodeBaseToAnalyzeDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseToAnalyzeDTO;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpMethod;
@@ -37,7 +37,8 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
             try {
                 add(linkTo(AnalysisController.class, AnalysisController.class.getMethod("analyze", CodeBaseToAnalyzeDTO.class))
                         .withRel("analyze-" + analysisType.getTitle())
-                        .withTitle(HttpMethod.GET.name()));
+                        .withTitle(HttpMethod.POST.name())
+                        .withType(analysisType.getTitle()));
             } catch (NoSuchMethodException e) {
                 throw new HistoryScanTechnicalException("Error while adding analysis link", e);
             }

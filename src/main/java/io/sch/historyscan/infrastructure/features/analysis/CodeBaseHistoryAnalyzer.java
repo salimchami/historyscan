@@ -1,5 +1,6 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -7,6 +8,10 @@ import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommit
 import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer;
 import io.sch.historyscan.domain.logging.spi.Logger;
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
+import io.sch.historyscan.infrastructure.features.analysis.exceptions.CodeBaseHeadNotFoundException;
+import io.sch.historyscan.infrastructure.features.analysis.exceptions.CodeBaseLogNotFoundException;
+import io.sch.historyscan.infrastructure.features.analysis.exceptions.CodeBaseNotOpenedException;
+import io.sch.historyscan.infrastructure.features.analysis.exceptions.CommitDiffException;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -110,7 +115,9 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
                     String diffText = out.toString();
                     String[] diffLines = diffText.split("\r\n|\r|\n");
                     var linesCount = FileLinesCount.from(diffLines, repository, fileDiff.getNewPath());
-                    files.add(new CodeBaseHistoryCommitFile(fileDiff.getNewPath(), linesCount.nbLines(),
+                    files.add(new CodeBaseHistoryCommitFile(
+                            new FileInfo(Paths.get(fileDiff.getNewPath()).getFileName().toString(),
+                                    fileDiff.getNewPath()), linesCount.nbLines(),
                             linesCount.addedLines(), linesCount.deletedLines(), linesCount.modifiedLines()));
                 } catch (IOException e) {
                     throw new CommitDiffException("Unable to find diff for commit", e);

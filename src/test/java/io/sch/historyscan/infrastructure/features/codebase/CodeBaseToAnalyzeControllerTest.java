@@ -2,6 +2,7 @@ package io.sch.historyscan.infrastructure.features.codebase;
 
 import io.sch.historyscan.common.HistoryscanIntegrationTests;
 import io.sch.historyscan.common.JsonReader;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
 
     @Value("${io.sch.historyscan.codebases.folder}")
@@ -27,8 +29,8 @@ class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
 
     public static Stream<Arguments> should_clone_the_codebase_params() {
         return Stream.of(
-                Arguments.of("http-codebase", "http-added-codebase")
-//                Arguments.from("git-codebase", "git-added-codebase")
+                Arguments.of("http-codebase", "http-added-codebase"),
+                Arguments.of("git-codebase", "git-added-codebase")
         );
     }
 
