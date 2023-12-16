@@ -12,8 +12,8 @@ import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.IgnoredR
 
 @DDDValueObject
 public record CodebaseClocRevisions(
-        List<List<CodebaseFileClocRevisions>> revisions,
-        List<CodebaseFileClocRevisions> ignoredRevisions,
+        List<List<ClocRevisionsFile>> revisions,
+        List<ClocRevisionsFile> ignoredRevisions,
         List<String> extensions) {
 
     public CodebaseClocRevisions {
@@ -23,15 +23,11 @@ public record CodebaseClocRevisions(
     }
 
     public static CodebaseClocRevisions of(List<CodeBaseCommit> commits) {
-        return CodebaseClocRevisions.of(commits, "");
-    }
-
-    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String rootFolder) {
-        var clocRevisions = new ClocRevisions(commits, new RootFolder(rootFolder));
-        var revisions = clocRevisions.convertCommitsToRevisions();
-        var flattenRevisions = revisions.stream().flatMap(Collection::stream).toList();
+        var initialClocRevisions = new ClocRevisions(commits);
+        var clocRevisions = initialClocRevisions.convertCommitsToRevisions();
+        var flattenRevisions = clocRevisions.stream().flatMap(Collection::stream).toList();
         return new CodebaseClocRevisions(
-                notIgnoredGrouped(revisions),
+                notIgnoredGrouped(clocRevisions),
                 ignored(flattenRevisions),
                 extensionsOf(flattenRevisions));
     }

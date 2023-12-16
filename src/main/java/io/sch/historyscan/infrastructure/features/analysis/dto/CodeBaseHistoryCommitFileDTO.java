@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.analysis;
+package io.sch.historyscan.infrastructure.features.analysis.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +9,7 @@ import java.util.Objects;
 public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHistoryCommitFileDTO> {
 
     private final String fileName;
+    private final String filePath;
     private final int nbActualLines;
     private final int nbAddedLines;
     private final int nbDeletedLines;
@@ -16,11 +17,13 @@ public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHi
 
     @JsonCreator
     public CodeBaseHistoryCommitFileDTO(@JsonProperty("file-name") String fileName,
+                                        @JsonProperty("file-path") String filePath,
                                         @JsonProperty("nb-actual-lines") int nbActualLines,
                                         @JsonProperty("nb-added-lines") int nbAddedLines,
                                         @JsonProperty("nb-deleted-lines") int nbDeletedLines,
                                         @JsonProperty("nb-modified-lines") int nbModifiedLines) {
         this.fileName = fileName;
+        this.filePath = filePath;
         this.nbActualLines = nbActualLines;
         this.nbAddedLines = nbAddedLines;
         this.nbDeletedLines = nbDeletedLines;
@@ -47,6 +50,10 @@ public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHi
         return nbActualLines;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,16 +64,18 @@ public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHi
                 && nbAddedLines == that.nbAddedLines
                 && nbDeletedLines == that.nbDeletedLines
                 && nbModifiedLines == that.nbModifiedLines
-                && Objects.equals(fileName, that.fileName);
+                && Objects.equals(fileName, that.fileName)
+                && Objects.equals(filePath, that.filePath);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(),
                 nbActualLines,
-                fileName,
                 nbAddedLines,
                 nbDeletedLines,
-                nbModifiedLines);
+                nbModifiedLines,
+                fileName,
+                filePath);
     }
 }

@@ -1,0 +1,55 @@
+{
+  "revisions": [
+    {
+      "name": "root",
+      "revisions": [
+        {
+          "name": "single-file-1.java",
+          "nbRevisions": 22
+        },
+        {
+          "name": "single-file-2.java",
+          "nbRevisions": 22
+        }
+      ]
+    },
+    {
+      "name": "featureA",
+      "revisions": [
+        {
+          "name": "/boundedcontexts/featureA/file-2.java",
+          "nbRevisions": 310
+        },
+        {
+          "name": "/boundedcontexts/featureA/file-3.java",
+          "nbRevisions": 190
+        },
+        {
+          "name": "/boundedcontexts/featureA/file-1.java",
+          "nbRevisions": 22
+        }
+      ]
+    },
+    {
+      "name": "featureB",
+      "revisions": [
+        {
+          "name": "file-5.java",
+          "nbRevisions": 222
+        },
+        {
+          "name": "file-4.java",
+          "nbRevisions": 135
+        },
+        {
+          "name": "file-6.java",
+          "nbRevisions": 22
+        }
+      ]
+    }
+  ],
+  "ignoredRevisions": [],
+  "extensions": [
+    "java"
+  ]
+}

@@ -1,7 +1,9 @@
 package io.sch.historyscan.domain.contexts.analysis.history;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
+
 public record CodeBaseHistoryCommitFile(
-        String name,
+        FileInfo fileInfo,
         int currentNbLines,
         int nbAddedLines,
         int nbDeletedLines,

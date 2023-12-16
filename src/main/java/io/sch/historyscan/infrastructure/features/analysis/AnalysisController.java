@@ -1,6 +1,7 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
+import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseToAnalyzeDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -3,7 +3,7 @@ package io.sch.historyscan.infrastructure.features.codebase.info;
 import io.sch.historyscan.domain.contexts.codebase.find.CodeBaseInfoInventory;
 import io.sch.historyscan.domain.contexts.codebase.find.CurrentCodeBase;
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
-import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHeadNotFoundException;
+import io.sch.historyscan.infrastructure.features.analysis.exceptions.CodeBaseHeadNotFoundException;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;

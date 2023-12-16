@@ -7,14 +7,14 @@ public class IgnoredRevisions {
     private IgnoredRevisions() {
     }
 
-    public static List<CodebaseFileClocRevisions> ignored(List<CodebaseFileClocRevisions> revisions) {
+    public static List<ClocRevisionsFile> ignored(List<ClocRevisionsFile> revisions) {
         return revisions.stream()
-                .filter(CodebaseFileClocRevisions::ignored)
+                .filter(ClocRevisionsFile::ignored)
                 .sorted()
                 .toList();
     }
 
-    public static List<List<CodebaseFileClocRevisions>> notIgnoredGrouped(List<List<CodebaseFileClocRevisions>> revisions) {
+    public static List<List<ClocRevisionsFile>> notIgnoredGrouped(List<List<ClocRevisionsFile>> revisions) {
         return revisions.stream()
                 .map(revisions1 -> revisions1.stream()
                         .filter(file -> !file.ignored())

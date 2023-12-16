@@ -1,14 +1,15 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseFileClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
 import io.sch.historyscan.domain.contexts.analysis.networkclocrevisions.CodebaseNetworkClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.networkclocrevisions.FileName;
 import io.sch.historyscan.domain.contexts.analysis.networkclocrevisions.Weight;
+import io.sch.historyscan.infrastructure.features.analysis.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Paths;
@@ -37,7 +38,8 @@ public class AnalysisMapper {
 
     private CodeBaseHistoryCommitFileDTO domainToWeb(CodeBaseHistoryCommitFile codeBaseHistoryCommitFile) {
         return new CodeBaseHistoryCommitFileDTO(
-                codeBaseHistoryCommitFile.name(),
+                codeBaseHistoryCommitFile.fileInfo().fileName(),
+                codeBaseHistoryCommitFile.fileInfo().path(),
                 codeBaseHistoryCommitFile.currentNbLines(),
                 codeBaseHistoryCommitFile.nbAddedLines(),
                 codeBaseHistoryCommitFile.nbDeletedLines(),
@@ -62,19 +64,19 @@ public class AnalysisMapper {
                 revisions.extensions());
     }
 
-    private List<FileRevisionsLinkDTO> toRevisionList(Map<CodebaseFileClocRevisions, Map<FileName, Weight>> revisions) {
+    private List<FileRevisionsLinkDTO> toRevisionList(Map<ClocRevisionsFile, Map<FileInfo, Weight>> revisions) {
         return revisions.entrySet().stream()
                 .flatMap(baseEntry -> {
                     final String filename = Paths.get(baseEntry.getKey().fileName()).getFileName().toString();
                     if (baseEntry.getValue().isEmpty()) {
-                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfRevisions(), null, null));
+                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().stats().numberOfRevisions(), null, null));
                     }
                     return baseEntry.getValue().entrySet().stream()
-                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().numberOfRevisions(), entry.getKey().value(), entry.getValue().value()));
+                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().stats().numberOfRevisions(), entry.getKey().fileName(), entry.getValue().value()));
                 }).toList();
     }
 
-    private CodeBaseClocRevisionsFileDTO domainToWeb(CodebaseFileClocRevisions codebaseFileClocRevisions) {
-        return new CodeBaseClocRevisionsFileDTO(codebaseFileClocRevisions.fileName(), codebaseFileClocRevisions.numberOfRevisions());
+    private CodeBaseClocRevisionsFileDTO domainToWeb(ClocRevisionsFile clocRevisionsFile) {
+        return new CodeBaseClocRevisionsFileDTO(clocRevisionsFile.fileName(), clocRevisionsFile.stats().numberOfRevisions());
     }
 }

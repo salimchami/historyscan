@@ -9,34 +9,28 @@ import java.util.stream.Collectors;
 public class ClocRevisions {
 
     private final  List<CodeBaseCommit> commits;
-    private final  RootFolder rootFolder;
 
-    public ClocRevisions(List<CodeBaseCommit> commits, RootFolder rootFolder) {
+    public ClocRevisions(List<CodeBaseCommit> commits) {
         this.commits = commits;
-        this.rootFolder = rootFolder;
     }
 
-    List<List<CodebaseFileClocRevisions>> convertCommitsToRevisions() {
+    List<List<ClocRevisionsFile>> convertCommitsToRevisions() {
         var sortedRevisions = sortedRevisionsFrom();
-
-        if (!this.rootFolder.isValid()) {
-            return List.of(sortedRevisions);
-        }
-
-        var revisions = new ClusteredClocRevisions(rootFolder, sortedRevisions);
+        var revisions = new ClusteredClocRevisions(sortedRevisions);
         return revisions.toClusters();
     }
 
-    private List<CodebaseFileClocRevisions> sortedRevisionsFrom() {
+    private List<ClocRevisionsFile> sortedRevisionsFrom() {
         return commits.stream()
                 .flatMap(codebaseFile -> codebaseFile.files().stream())
                 .collect(Collectors.groupingBy(
-                        CodeBaseHistoryCommitFile::name,
+                        CodeBaseHistoryCommitFile::fileInfo,
                         Collectors.summingInt(CodeBaseHistoryCommitFile::cloc)
                 ))
                 .entrySet().stream()
                 .filter(entry -> entry.getValue() > 0)
-                .map(entry -> CodebaseFileClocRevisions.of(entry, commits))
-                .sorted().toList();
+                .map(entry -> ClocRevisionsFile.of(entry, commits))
+                .sorted()
+                .toList();
     }
 }

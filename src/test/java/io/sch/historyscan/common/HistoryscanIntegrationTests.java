@@ -3,6 +3,7 @@ package io.sch.historyscan.common;
 import io.sch.historyscan.HistoryscanApplication;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
+import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Optional;
 
+import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = HistoryscanApplication.class)
@@ -31,16 +32,17 @@ import static org.mockito.Mockito.when;
 public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
     @MockBean
-    protected Clock clock;
-    protected EndPointCaller endPointCaller;
-    @Autowired
-    private MockMvc mockMvc;
+    private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
 
     @BeforeEach
     void setUp() {
-        when(clock.instant()).thenReturn(Dates.defaultFixedClock.instant());
-        when(clock.getZone()).thenReturn(Dates.zone);
+        var history = Optional.of(defaultHistory());
+        when(codeBaseHistoryAnalyzer.of(anyString())).thenReturn(history);
     }
+
+    protected EndPointCaller endPointCaller;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Override
     public void afterPropertiesSet() {
@@ -51,12 +53,6 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
         if (!Files.exists(Paths.get(folderName))) {
             fail("The codebase folder " + folderName + " does not exist");
         }
-    }
-
-    protected static class Dates {
-        private static final ZoneId zone = ZoneId.systemDefault();
-        private static final LocalDateTime defaultDateTime = LocalDateTime.of(2022, 2, 22, 22, 22, 22);
-        private static final Clock defaultFixedClock = Clock.fixed(defaultDateTime.atZone(zone).toInstant(), zone);
     }
 
     public static class EndPoints {
