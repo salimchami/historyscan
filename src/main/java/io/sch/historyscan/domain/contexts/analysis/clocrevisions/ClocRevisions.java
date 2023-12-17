@@ -14,7 +14,7 @@ public class ClocRevisions {
         this.commits = commits;
     }
 
-    List<List<ClocRevisionsFile>> convertCommitsToRevisions() {
+    List<ClocRevisionsFileCluster> convertCommitsToRevisions() {
         var sortedRevisions = sortedRevisionsFrom();
         var revisions = new ClusteredClocRevisions(sortedRevisions);
         return revisions.toClusters();

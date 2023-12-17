@@ -2,8 +2,8 @@ package io.sch.historyscan.infrastructure.features.codebase.list;
 
 import io.sch.historyscan.domain.contexts.codebase.find.CodeBasesListInventory;
 import io.sch.historyscan.domain.contexts.codebase.find.CurrentCodeBase;
-import io.sch.historyscan.infrastructure.features.codebase.info.CodeBaseInfoManagement;
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
+import io.sch.historyscan.infrastructure.features.codebase.info.CodeBaseInfoManagement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

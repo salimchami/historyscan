@@ -10,19 +10,23 @@ public class ClusteredClocRevisions {
         this.sortedRevisions = sortedRevisions;
     }
 
-    public List<List<ClocRevisionsFile>> toClusters() {
+    public List<ClocRevisionsFileCluster> toClusters() {
         Map<String, List<ClocRevisionsFile>> sortedFiles = new HashMap<>();
 
         for (var file : sortedRevisions) {
             String path = file.file().path();
             String[] pathParts = path.split("/");
-            String directoryName = pathParts[pathParts.length - 2];
+            String directoryName = pathParts.length > 1 ? pathParts[pathParts.length - 2] : pathParts[0];
 
             sortedFiles.computeIfAbsent(directoryName, k -> new ArrayList<>()).add(file);
         }
         final List<Map.Entry<String, List<ClocRevisionsFile>>> sortedEntries = reorder(sortedFiles);
 
-        return sortedEntries.stream().map(Map.Entry::getValue).map(list -> list.stream().sorted().toList()).toList();
+        return sortedEntries.stream()
+                .map(entry -> new ClocRevisionsFileCluster(entry.getKey(), entry.getValue().stream()
+                        .sorted()
+                        .toList()))
+                .toList();
     }
 
     private static List<Map.Entry<String, List<ClocRevisionsFile>>> reorder(Map<String, List<ClocRevisionsFile>> sortedFiles) {

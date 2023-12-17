@@ -8,21 +8,17 @@ import java.util.Objects;
 
 public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRevisionsDTO> {
 
-    private final List<List<CodeBaseClocRevisionsFileDTO>> revisions;
+    private final List<CodeBaseClocRevisionsFileClusterDTO> revisions;
     private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
-    public CodeBaseClocRevisionsDTO(List<List<CodeBaseClocRevisionsFileDTO>> revisions,
-                                    List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
-                                    List<String> extensions) {
+    public CodeBaseClocRevisionsDTO(
+            List<CodeBaseClocRevisionsFileClusterDTO> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
+            List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;
-    }
-
-    public List<List<CodeBaseClocRevisionsFileDTO>> getRevisions() {
-        return revisions;
     }
 
     public List<CodeBaseClocRevisionsFileDTO> getIgnoredRevisions() {
@@ -31,6 +27,10 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
 
     public List<String> getExtensions() {
         return extensions;
+    }
+
+    public List<CodeBaseClocRevisionsFileClusterDTO> getRevisions() {
+        return revisions;
     }
 
     @Override

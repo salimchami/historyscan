@@ -1,7 +1,6 @@
 package io.sch.historyscan.infrastructure.features.codebase.clone;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 import io.sch.historyscan.infrastructure.features.codebase.CodeBaseController;
 import org.springframework.hateoas.RepresentationModel;
@@ -18,8 +17,9 @@ public class AddedCodebaseDTO extends RepresentationModel<AddedCodebaseDTO> {
     private final String currentBranch;
 
     @JsonCreator
-    public AddedCodebaseDTO(String name, String url,
-                            @JsonProperty("currentBranch") String currentBranch) {
+    public AddedCodebaseDTO(String name,
+                            String url,
+                            String currentBranch) {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;

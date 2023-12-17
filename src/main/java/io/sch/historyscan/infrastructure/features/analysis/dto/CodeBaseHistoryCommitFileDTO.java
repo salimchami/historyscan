@@ -1,7 +1,6 @@
 package io.sch.historyscan.infrastructure.features.analysis.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Objects;
@@ -16,12 +15,12 @@ public class CodeBaseHistoryCommitFileDTO extends RepresentationModel<CodeBaseHi
     private final int nbModifiedLines;
 
     @JsonCreator
-    public CodeBaseHistoryCommitFileDTO(@JsonProperty("file-name") String fileName,
-                                        @JsonProperty("file-path") String filePath,
-                                        @JsonProperty("nb-actual-lines") int nbActualLines,
-                                        @JsonProperty("nb-added-lines") int nbAddedLines,
-                                        @JsonProperty("nb-deleted-lines") int nbDeletedLines,
-                                        @JsonProperty("nb-modified-lines") int nbModifiedLines) {
+    public CodeBaseHistoryCommitFileDTO(String fileName,
+                                        String filePath,
+                                        int nbActualLines,
+                                        int nbAddedLines,
+                                        int nbDeletedLines,
+                                        int nbModifiedLines) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.nbActualLines = nbActualLines;

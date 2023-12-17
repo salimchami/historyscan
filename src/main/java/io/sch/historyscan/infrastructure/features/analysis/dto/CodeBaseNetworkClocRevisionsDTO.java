@@ -13,7 +13,9 @@ public class CodeBaseNetworkClocRevisionsDTO extends RepresentationModel<CodeBas
     private final List<String> extensions;
 
     @JsonCreator
-    public CodeBaseNetworkClocRevisionsDTO(List<FileRevisionsLinkDTO> revisions, List<CodeBaseClocRevisionsFileDTO> ignoredRevisions, List<String> extensions) {
+    public CodeBaseNetworkClocRevisionsDTO(List<FileRevisionsLinkDTO> revisions,
+                                           List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
+                                           List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;

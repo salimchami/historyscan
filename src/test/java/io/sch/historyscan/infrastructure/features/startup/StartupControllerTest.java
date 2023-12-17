@@ -5,7 +5,7 @@ import io.sch.historyscan.common.JsonReader;
 import org.junit.jupiter.api.Test;
 
 import static io.sch.historyscan.common.HistoryscanIntegrationTests.EndPoints.BASE_URL;
-import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.*;
+import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.APP_STARTUP_FOLDER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
