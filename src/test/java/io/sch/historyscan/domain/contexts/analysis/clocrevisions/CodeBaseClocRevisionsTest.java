@@ -44,20 +44,20 @@ class CodeBaseClocRevisionsTest {
         var revisions = CodebaseClocRevisions.of(commits);
 
         var expectedRevisions = List.of(
-                List.of(
+                new ClocRevisionsFileCluster("boundedcontexts", List.of(
                         new ClocRevisionsFile(singleFile1, singleFile1Stats),
                         new ClocRevisionsFile(singleFile2, singleFile2Stats)
-                ),
-                List.of(
+                )),
+                new ClocRevisionsFileCluster("featureA", List.of(
                         new ClocRevisionsFile(file2, file2Stats),
                         new ClocRevisionsFile(file3, file3Stats),
                         new ClocRevisionsFile(file1, file1Stats)
-                ),
-                List.of(
+                )),
+                new ClocRevisionsFileCluster("featureB", List.of(
                         new ClocRevisionsFile(file5, file5Stats),
                         new ClocRevisionsFile(file4, file4Stats),
                         new ClocRevisionsFile(file6, file6Stats))
-        );
+                ));
 
         var expectedClocRevisions = new CodebaseClocRevisions(expectedRevisions, List.of(), List.of("java"));
         assertThat(revisions).isEqualTo(expectedClocRevisions);

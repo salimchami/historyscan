@@ -1,7 +1,6 @@
 package io.sch.historyscan.infrastructure.features.codebase.list;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType;
 import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 import io.sch.historyscan.infrastructure.features.analysis.AnalysisController;
@@ -22,8 +21,9 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
     private final String currentBranch;
 
     @JsonCreator
-    public CurrentCodebaseDTO(String name, String url,
-                              @JsonProperty("currentBranch") String currentBranch) {
+    public CurrentCodebaseDTO(String name,
+                              String url,
+                              String currentBranch) {
         this.name = name;
         this.url = url;
         this.currentBranch = currentBranch;

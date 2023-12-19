@@ -14,11 +14,11 @@ public class IgnoredRevisions {
                 .toList();
     }
 
-    public static List<List<ClocRevisionsFile>> notIgnoredGrouped(List<List<ClocRevisionsFile>> revisions) {
-        return revisions.stream()
-                .map(revisions1 -> revisions1.stream()
+    public static List<ClocRevisionsFileCluster> notIgnoredGrouped(List<ClocRevisionsFileCluster> clusters) {
+        return clusters.stream()
+                .map(cluster -> new ClocRevisionsFileCluster(cluster.folder(), cluster.files().stream()
                         .filter(file -> !file.ignored())
-                        .toList())
+                        .toList()))
                 .toList();
     }
 }

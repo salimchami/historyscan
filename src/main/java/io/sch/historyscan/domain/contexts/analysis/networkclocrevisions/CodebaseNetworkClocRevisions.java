@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.networkclocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 
@@ -21,7 +21,7 @@ public record CodebaseNetworkClocRevisions(
     }
     public static CodebaseNetworkClocRevisions of(List<CodeBaseCommit> commits, CodebaseClocRevisions revisionsList) {
         return new CodebaseNetworkClocRevisions(
-                linksMap(revisionsList.revisions(), commits),
+                Map.of(),
                 revisionsList.ignoredRevisions(),
                 revisionsList.extensions());
     }

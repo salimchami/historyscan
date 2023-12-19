@@ -62,7 +62,7 @@ public final class CloneCodeBaseManagement implements CodeBaseRepository {
                     codeBaseToClone.name(),
                     codeBaseToClone.branch());
         } catch (GitAPIException e) {
-            throw new CloneCodeBaseException(format("Error while cloning repository %s", codeBaseToClone.url()), e);
+            throw new CloneCodeBaseException(format("Error while cloning repository %s. Maybe it doesn't exist.", codeBaseToClone.url()), e);
         }
     }
 
