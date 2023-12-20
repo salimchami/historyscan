@@ -1,6 +1,21 @@
 {
   "revisions": [
     {
+      "folder": "",
+      "children": [
+        {
+          "name": "single-file-1.java",
+          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
+          "score": 880
+        },
+        {
+          "name": "single-file-2.java",
+          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
+          "score": 880
+        }
+      ]
+    },
+    {
       "folder": "featureB",
       "children": [
         {
@@ -47,21 +62,6 @@
           "name": "ClassFile1.java",
           "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
           "score": 440
-        }
-      ]
-    },
-    {
-      "folder": "boundedcontexts",
-      "children": [
-        {
-          "name": "single-file-1.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
-          "score": 880
-        },
-        {
-          "name": "single-file-2.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
-          "score": 880
         }
       ]
     }

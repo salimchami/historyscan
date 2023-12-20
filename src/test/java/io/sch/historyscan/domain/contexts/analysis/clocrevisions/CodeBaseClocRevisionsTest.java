@@ -40,11 +40,14 @@ class CodeBaseClocRevisionsTest {
     @Test
     void should_generate_cloc_revisions_based_on_base_folder() {
         var commits = defaultHistory().commits();
-        var rootFolder = "boundedcontexts";
 
-        var revisions = CodebaseClocRevisions.of(commits, rootFolder);
+        var revisions = CodebaseClocRevisions.of(commits, "boundedcontexts");
 
         var expectedRevisions = List.of(
+                new ClocRevisionsFileCluster("", List.of(
+                        new ClocRevisionsFile(singleFile1, singleFile1Stats),
+                        new ClocRevisionsFile(singleFile2, singleFile2Stats)
+                )),
                 new ClocRevisionsFileCluster("featureB", List.of(
                         new ClocRevisionsFile(file5, file5Stats),
                         new ClocRevisionsFile(file4, file4Stats),
@@ -56,10 +59,6 @@ class CodeBaseClocRevisionsTest {
                         new ClocRevisionsFile(file2, file2Stats),
                         new ClocRevisionsFile(file3, file3Stats),
                         new ClocRevisionsFile(file1, file1Stats)
-                )),
-                new ClocRevisionsFileCluster(rootFolder, List.of(
-                        new ClocRevisionsFile(singleFile1, singleFile1Stats),
-                        new ClocRevisionsFile(singleFile2, singleFile2Stats)
                 ))
         );
 

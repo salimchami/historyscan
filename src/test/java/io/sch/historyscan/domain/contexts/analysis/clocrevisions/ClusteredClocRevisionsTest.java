@@ -18,7 +18,7 @@ class ClusteredClocRevisionsTest {
     @BeforeEach
     void setUp() {
         var root = "src/main/java/io.mystartup.project";
-        var rootBoundedContexts = "src/main/java/io.mystartup.project/boundedcontexts";
+        var rootBoundedContexts = "%s/boundedcontexts".formatted(root);
         var revisions1 = new ClocRevisionsFile(new FileInfo("TheApplication.java", "%s/TheApplication.java".formatted(root)), new RevisionStats(1));
         var revisions2 = new ClocRevisionsFile(new FileInfo("TheApplicationConfig.java", "%s/TheApplicationConfig.java".formatted(root)), new RevisionStats(2));
         var revisions3 = new ClocRevisionsFile(new FileInfo("FeatureAComponent.java", "%s/featureA/FeatureAComponent.java".formatted(rootBoundedContexts)), new RevisionStats(1));
@@ -37,27 +37,27 @@ class ClusteredClocRevisionsTest {
         final String fullPrefix = "src/main/java/io.mystartup.project";
         final String prefix = "io.mystartup.project";
         return Stream.of(
-                Arguments.of(boundedContexts, boundedContexts),
-                Arguments.of("/%s".formatted(boundedContexts), boundedContexts),
-                Arguments.of("%s/".formatted(boundedContexts), boundedContexts),
-                Arguments.of("/%s/".formatted(boundedContexts), boundedContexts),
-                Arguments.of("%s/%s".formatted(fullPrefix, boundedContexts), "%s/%s".formatted(fullPrefix, boundedContexts)),
-                Arguments.of("%s/%s/".formatted(fullPrefix, boundedContexts), "%s/%s".formatted(fullPrefix, boundedContexts)),
-                Arguments.of("/%s/%s".formatted(prefix, boundedContexts), "%s/%s".formatted(prefix, boundedContexts)),
-                Arguments.of("/%s/%s/".formatted(prefix, boundedContexts), "%s/%s".formatted(prefix, boundedContexts)),
-                Arguments.of("%s/%s".formatted(prefix, boundedContexts), "%s/%s".formatted(prefix, boundedContexts)),
-                Arguments.of("%s/%s/".formatted(prefix, boundedContexts), "%s/%s".formatted(prefix, boundedContexts))
+                Arguments.of(boundedContexts),
+                Arguments.of("/%s".formatted(boundedContexts)),
+                Arguments.of("%s/".formatted(boundedContexts)),
+                Arguments.of("/%s/".formatted(boundedContexts)),
+                Arguments.of("%s/%s".formatted(fullPrefix, boundedContexts)),
+                Arguments.of("%s/%s/".formatted(fullPrefix, boundedContexts)),
+                Arguments.of("/%s/%s".formatted(prefix, boundedContexts)),
+                Arguments.of("/%s/%s/".formatted(prefix, boundedContexts)),
+                Arguments.of("%s/%s".formatted(prefix, boundedContexts)),
+                Arguments.of("%s/%s/".formatted(prefix, boundedContexts))
         );
     }
 
     @ParameterizedTest
     @MethodSource("should_create_clusters_params")
-    void should_create_clusters(String rootFolder, String expectedRootFolder) {
+    void should_create_clusters(String rootFolder) {
         var clusters = sut.toClusters(rootFolder);
 
         assertThat(clusters)
                 .extracting(ClocRevisionsFileCluster::folder)
-                .containsExactlyInAnyOrder(expectedRootFolder, "featureA", "featureB");
+                .containsExactlyInAnyOrder("", "featureA", "featureB");
 
         assertThat(clusters)
                 .flatExtracting(ClocRevisionsFileCluster::files)
