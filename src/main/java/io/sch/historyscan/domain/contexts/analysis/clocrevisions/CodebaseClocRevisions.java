@@ -22,9 +22,9 @@ public record CodebaseClocRevisions(
         extensions = List.copyOf(extensions);
     }
 
-    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits) {
+    public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String rootFolder) {
         var initialClocRevisions = new ClocRevisions(commits);
-        var clocRevisions = initialClocRevisions.convertCommitsToRevisions();
+        var clocRevisions = initialClocRevisions.convertCommitsToRevisions(rootFolder);
         var flattenRevisions = clocRevisions.stream()
                 .map(ClocRevisionsFileCluster::files)
                 .flatMap(Collection::stream)

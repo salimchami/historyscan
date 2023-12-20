@@ -3,16 +3,21 @@ package io.sch.historyscan.domain.contexts.analysis.common;
 public class CodeBaseToAnalyze {
     private final String name;
     private final EnumAnalysisType analysisType;
+    private final String rootFolder;
 
-    public CodeBaseToAnalyze(String name, EnumAnalysisType analysisType) {
+    private CodeBaseToAnalyze(String name, EnumAnalysisType analysisType, String rootFolder) {
         this.name = name;
         this.analysisType = analysisType;
+        this.rootFolder = rootFolder;
     }
 
-    public static CodeBaseToAnalyze of(String name, String analysisType) {
+    public static CodeBaseToAnalyze of(String name, String analysisType, String rootFolder) {
+        if(rootFolder == null || rootFolder.isEmpty()) {
+            throw new RootFolderNotFoundException("Root folder cannot be null or empty");
+        }
         var type = EnumAnalysisType.fromTitle(analysisType)
                 .orElseThrow(() -> new ScanTypeNotFoundException("Analysis type not found"));
-        return new CodeBaseToAnalyze(name, type);
+        return new CodeBaseToAnalyze(name, type, rootFolder);
     }
 
     public String getName() {
@@ -21,5 +26,9 @@ public class CodeBaseToAnalyze {
 
     public EnumAnalysisType getType() {
         return analysisType;
+    }
+
+    public String getRootFolder() {
+        return rootFolder;
     }
 }

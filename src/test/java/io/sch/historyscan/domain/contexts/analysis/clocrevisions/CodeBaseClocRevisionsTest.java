@@ -29,8 +29,8 @@ class CodeBaseClocRevisionsTest {
     @ParameterizedTest
     @MethodSource("should_sort_revisions_params")
     void should_sort_revisions(int score1, int score2, List<String> expectedFiles) {
-        var revisions1 = new ClocRevisionsFile(file1, new RevisionStats(10, 1500, score1));
-        var revisions2 = new ClocRevisionsFile(file2, new RevisionStats(12, 20, score2));
+        var revisions1 = new ClocRevisionsFile(file1, new RevisionStats(score1));
+        var revisions2 = new ClocRevisionsFile(file2, new RevisionStats(score2));
         var sortedRevisions = Stream.of(revisions1, revisions2).sorted().toList();
         assertThat(sortedRevisions)
                 .extracting(ClocRevisionsFile::fileName)
@@ -40,24 +40,28 @@ class CodeBaseClocRevisionsTest {
     @Test
     void should_generate_cloc_revisions_based_on_base_folder() {
         var commits = defaultHistory().commits();
+        var rootFolder = "boundedcontexts";
 
-        var revisions = CodebaseClocRevisions.of(commits);
+        var revisions = CodebaseClocRevisions.of(commits, rootFolder);
 
         var expectedRevisions = List.of(
-                new ClocRevisionsFileCluster("boundedcontexts", List.of(
-                        new ClocRevisionsFile(singleFile1, singleFile1Stats),
-                        new ClocRevisionsFile(singleFile2, singleFile2Stats)
+                new ClocRevisionsFileCluster("featureB", List.of(
+                        new ClocRevisionsFile(file5, file5Stats),
+                        new ClocRevisionsFile(file4, file4Stats),
+                        new ClocRevisionsFile(file8, file8Stats),
+                        new ClocRevisionsFile(file7, file7Stats),
+                        new ClocRevisionsFile(file6, file6Stats)
                 )),
                 new ClocRevisionsFileCluster("featureA", List.of(
                         new ClocRevisionsFile(file2, file2Stats),
                         new ClocRevisionsFile(file3, file3Stats),
                         new ClocRevisionsFile(file1, file1Stats)
                 )),
-                new ClocRevisionsFileCluster("featureB", List.of(
-                        new ClocRevisionsFile(file5, file5Stats),
-                        new ClocRevisionsFile(file4, file4Stats),
-                        new ClocRevisionsFile(file6, file6Stats))
-                ));
+                new ClocRevisionsFileCluster(rootFolder, List.of(
+                        new ClocRevisionsFile(singleFile1, singleFile1Stats),
+                        new ClocRevisionsFile(singleFile2, singleFile2Stats)
+                ))
+        );
 
         var expectedClocRevisions = new CodebaseClocRevisions(expectedRevisions, List.of(), List.of("java"));
         assertThat(revisions).isEqualTo(expectedClocRevisions);

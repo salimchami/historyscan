@@ -16,35 +16,35 @@ public record ClocRevisionsFile(
     public static ClocRevisionsFile of(Map.Entry<FileInfo, Integer> entry, List<CodeBaseCommit> commits) {
         var fileName = entry.getKey();
         var nbRevisions = entry.getValue();
-        var nbLines = nbLines(fileName.fileName(), commits);
+        var nbLines = nbLines(fileName.path(), commits);
         return new ClocRevisionsFile(
-                new FileInfo(fileName.fileName(), fileName.path()),
+                new FileInfo(fileName.name(), fileName.path()),
                 RevisionStats.of(nbRevisions, nbLines));
     }
 
-    private static int nbLines(String fileName, List<CodeBaseCommit> commits) {
+    private static int nbLines(String filePath, List<CodeBaseCommit> commits) {
         return commits.stream()
-                .filter(commit -> commit.files().stream().anyMatch(file -> file.fileInfo().fileName().equals(fileName)))
+                .filter(commit -> commit.files().stream().anyMatch(file -> file.fileInfo().path().equals(filePath)))
                 .flatMapToInt(commit -> commit.files().stream()
-                        .filter(file -> file.fileInfo().fileName().equals(fileName))
+                        .filter(file -> file.fileInfo().path().equals(filePath))
                         .mapToInt(CodeBaseHistoryCommitFile::currentNbLines))
                 .max()
                 .orElse(0);
     }
 
     public boolean ignored() {
-        return ignoredFiles().stream().anyMatch(ignoredFile -> file.fileName().contains(ignoredFile));
+        return ignoredFiles().stream().anyMatch(ignoredFile -> file.name().contains(ignoredFile));
     }
 
     @Override
     public int compareTo(ClocRevisionsFile o) {
         return comparing(ClocRevisionsFile::stats)
-                .thenComparing(ClocRevisionsFile::file)
+                .thenComparing(ClocRevisionsFile::filePath)
                 .compare(this, o);
     }
 
     public String fileName() {
-        return file.fileName();
+        return file.name();
     }
 
     public String filePath() {

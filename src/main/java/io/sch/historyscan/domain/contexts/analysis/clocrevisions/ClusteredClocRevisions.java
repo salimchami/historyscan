@@ -1,6 +1,13 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.PathsUtils.normalizeFolder;
+import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.PathsUtils.normalizePath;
 
 public class ClusteredClocRevisions {
 
@@ -10,43 +17,33 @@ public class ClusteredClocRevisions {
         this.sortedRevisions = sortedRevisions;
     }
 
-    public List<ClocRevisionsFileCluster> toClusters() {
-        Map<String, List<ClocRevisionsFile>> sortedFiles = new HashMap<>();
+    public List<ClocRevisionsFileCluster> toClusters(String rootFolder) {
+        var normalizedRootFolder = normalizeFolder(rootFolder);
+        Map<String, List<ClocRevisionsFile>> fileGroups = new HashMap<>();
 
-        for (var file : sortedRevisions) {
-            String path = file.file().path();
-            String[] pathParts = path.split("/");
-            String directoryName = pathParts.length > 1 ? pathParts[pathParts.length - 2] : pathParts[0];
+        for (ClocRevisionsFile file : sortedRevisions) {
+            String relativePath = getRelativePath(file.filePath(), normalizedRootFolder);
+            String folder = extractFolderName(relativePath, normalizedRootFolder);
 
-            sortedFiles.computeIfAbsent(directoryName, k -> new ArrayList<>()).add(file);
+            fileGroups.computeIfAbsent(folder, k -> new ArrayList<>()).add(file);
         }
-        final List<Map.Entry<String, List<ClocRevisionsFile>>> sortedEntries = reorder(sortedFiles);
 
-        return sortedEntries.stream()
-                .map(entry -> new ClocRevisionsFileCluster(entry.getKey(), entry.getValue().stream()
-                        .sorted()
-                        .toList()))
-                .toList();
+        List<ClocRevisionsFileCluster> clusters = new ArrayList<>();
+        fileGroups.forEach((folder, files) -> clusters.add(new ClocRevisionsFileCluster(folder, files)));
+        return clusters;
     }
 
-    private static List<Map.Entry<String, List<ClocRevisionsFile>>> reorder(Map<String, List<ClocRevisionsFile>> sortedFiles) {
-        sortedFiles.values().forEach(fileList ->
-                fileList.sort(Comparator.comparing(f -> f.file().path())));
-
-        var directoryFrequency = directoryFrequency(sortedFiles);
-
-        return sortedFiles.entrySet()
-                .stream()
-                .sorted(Map.Entry.<String, List<ClocRevisionsFile>>comparingByKey(Comparator.comparingInt(directoryFrequency::get))
-                        .thenComparing(Map.Entry.comparingByKey()))
-                .toList();
+    private String getRelativePath(String filePath, String rootFolder) {
+        String normalizedPath = normalizePath(filePath);
+        if (normalizedPath.contains(rootFolder + "/")) {
+            return normalizedPath.split(Pattern.quote(rootFolder + "/"))[1];
+        } else {
+            return "";
+        }
     }
 
-    private static Map<String, Integer> directoryFrequency(Map<String, List<ClocRevisionsFile>> sortedFiles) {
-        Map<String, Integer> directoryFrequency = new HashMap<>();
-        for (String directory : sortedFiles.keySet()) {
-            directoryFrequency.put(directory, directoryFrequency.getOrDefault(directory, 0) + 1);
-        }
-        return directoryFrequency;
+    private String extractFolderName(String relativePath, String rootFolder) {
+        String[] parts = relativePath.split("/");
+        return parts.length > 1 ? parts[0] : rootFolder;
     }
 }

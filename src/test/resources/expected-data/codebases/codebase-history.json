@@ -11,30 +11,30 @@
         {
           "fileName": "single-file-1.java",
           "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
-          "nbActualLines": 20,
+          "nbActualLines": 40,
           "nbAddedLines": 20,
           "nbDeletedLines": 2,
           "nbModifiedLines": 0
         },
         {
-          "fileName": "file-1.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-1.java",
+          "fileName": "ClassFile1.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
           "nbActualLines": 20,
           "nbAddedLines": 1,
           "nbDeletedLines": 2,
           "nbModifiedLines": 5
         },
         {
-          "fileName": "file-2.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-2.java",
+          "fileName": "ClassFile2.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
           "nbActualLines": 1500,
           "nbAddedLines": 15,
           "nbDeletedLines": 30,
           "nbModifiedLines": 10
         },
         {
-          "fileName": "file-3.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-3.java",
+          "fileName": "ClassFile3.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile3.java",
           "nbActualLines": 1250,
           "nbAddedLines": 150,
           "nbDeletedLines": 30,
@@ -53,38 +53,38 @@
         {
           "fileName": "single-file-2.java",
           "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
-          "nbActualLines": 20,
+          "nbActualLines": 40,
           "nbAddedLines": 20,
           "nbDeletedLines": 2,
           "nbModifiedLines": 0
         },
         {
-          "fileName": "file-1.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-1.java",
+          "fileName": "ClassFile1.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
           "nbActualLines": 20,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
           "nbModifiedLines": 2
         },
         {
-          "fileName": "file-2.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/file-2.java",
-          "nbActualLines": 1000,
+          "fileName": "ClassFile2.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
+          "nbActualLines": 1500,
           "nbAddedLines": 150,
           "nbDeletedLines": 5,
           "nbModifiedLines": 100
         },
         {
-          "fileName": "file-4.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-4.java",
+          "fileName": "ClassFile4.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile4.java",
           "nbActualLines": 150,
           "nbAddedLines": 10,
           "nbDeletedLines": 100,
           "nbModifiedLines": 25
         },
         {
-          "fileName": "file-5.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-5.java",
+          "fileName": "ClassFile5.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile5.java",
           "nbActualLines": 523,
           "nbAddedLines": 90,
           "nbDeletedLines": 100,
@@ -101,12 +101,38 @@
       },
       "files": [
         {
-          "fileName": "file-6.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/file-6.java",
-          "nbActualLines": 20,
+          "fileName": "ClassFile6.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile6.java",
+          "nbActualLines": 40,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
           "nbModifiedLines": 10
+        }
+      ]
+    },
+    {
+      "info": {
+        "hash": "654354sdfgsdfgsdf",
+        "author": "author-1",
+        "date": "2022-02-22T22:22:22",
+        "shortMessage": "message"
+      },
+      "files": [
+        {
+          "fileName": "ClassFile5.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile5.java",
+          "nbActualLines": 35,
+          "nbAddedLines": 35,
+          "nbDeletedLines": 0,
+          "nbModifiedLines": 0
+        },
+        {
+          "fileName": "ClassFile6.java",
+          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile6.java",
+          "nbActualLines": 50,
+          "nbAddedLines": 50,
+          "nbDeletedLines": 0,
+          "nbModifiedLines": 0
         }
       ]
     }
