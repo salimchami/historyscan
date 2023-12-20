@@ -24,13 +24,14 @@ public class ClusteredClocRevisions {
         for (ClocRevisionsFile file : sortedRevisions) {
             String relativePath = getRelativePath(file.filePath(), normalizedRootFolder);
             String folder = extractFolderName(relativePath, normalizedRootFolder);
-
-            fileGroups.computeIfAbsent(folder, k -> new ArrayList<>()).add(file);
+            if (file.filePath().contains(folder)) {
+                fileGroups.computeIfAbsent(folder, k -> new ArrayList<>()).add(file);
+            }
         }
-
-        List<ClocRevisionsFileCluster> clusters = new ArrayList<>();
-        fileGroups.forEach((folder, files) -> clusters.add(new ClocRevisionsFileCluster(folder, files)));
-        return clusters;
+        return fileGroups.entrySet().stream()
+                .map(e -> new ClocRevisionsFileCluster(e.getKey(), e.getValue()))
+                .filter(cluster -> !cluster.files().isEmpty())
+                .toList();
     }
 
     private String getRelativePath(String filePath, String rootFolder) {
