@@ -1,6 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public final class PathsUtils {
 
@@ -13,6 +14,9 @@ public final class PathsUtils {
     }
 
     public static String normalizeFolder(String folder) {
+        if(Objects.equals(folder.strip(), "/")) {
+            return "/";
+        }
         // delete trailing slash from start and end
         return folder.replaceAll("^/", "").replaceAll("/$", "");
     }
