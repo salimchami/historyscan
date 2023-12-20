@@ -1,4 +1,5 @@
 {
   "name": "codebase_1",
-  "analysisType": "cloc-revisions"
+  "analysisType": "cloc-revisions",
+  "rootFolder": "boundedcontexts"
 }

@@ -6,16 +6,14 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
 
 public record RevisionStats(
-        int numberOfRevisions,
-        int nbLines,
         long score) implements Comparable<RevisionStats> {
 
-    public static RevisionStats of(int numberOfRevisions, int nbLines) {
-        if (nbLines == 0) {
-            nbLines = 1;
+    public static RevisionStats of(int numberOfRevisions, int currentNbLines) {
+        if (currentNbLines == 0) {
+            currentNbLines = 1;
         }
-        var revisionsScore = calculateRevisionsScore(numberOfRevisions, nbLines);
-        return new RevisionStats(numberOfRevisions, nbLines, revisionsScore);
+        var revisionsScore = calculateRevisionsScore(numberOfRevisions, currentNbLines);
+        return new RevisionStats(revisionsScore);
     }
 
     static long calculateRevisionsScore(int numberOfRevisions, int nbLines) {

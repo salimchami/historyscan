@@ -11,4 +11,6 @@ public class FilePathFake {
     public static final String filePath4 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName4;
     public static final String filePath5 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName5;
     public static final String filePath6 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName6;
+    public static final String filePath7 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/" + fileName7;
+    public static final String filePath8 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/" + fileName8;
 }

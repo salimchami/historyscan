@@ -38,7 +38,7 @@ public class AnalysisMapper {
 
     private CodeBaseHistoryCommitFileDTO domainToWeb(CodeBaseHistoryCommitFile codeBaseHistoryCommitFile) {
         return new CodeBaseHistoryCommitFileDTO(
-                codeBaseHistoryCommitFile.fileInfo().fileName(),
+                codeBaseHistoryCommitFile.fileInfo().name(),
                 codeBaseHistoryCommitFile.fileInfo().path(),
                 codeBaseHistoryCommitFile.currentNbLines(),
                 codeBaseHistoryCommitFile.nbAddedLines(),
@@ -65,15 +65,16 @@ public class AnalysisMapper {
                 revisions.extensions());
     }
 
+    // FIXME: long to int
     private List<FileRevisionsLinkDTO> toRevisionList(Map<ClocRevisionsFile, Map<FileInfo, Weight>> revisions) {
         return revisions.entrySet().stream()
                 .flatMap(baseEntry -> {
                     final String filename = Paths.get(baseEntry.getKey().fileName()).getFileName().toString();
                     if (baseEntry.getValue().isEmpty()) {
-                        return Stream.of(new FileRevisionsLinkDTO(filename, baseEntry.getKey().stats().numberOfRevisions(), null, null));
+                        return Stream.of(new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().stats().score(), null, null));
                     }
                     return baseEntry.getValue().entrySet().stream()
-                            .map(entry -> new FileRevisionsLinkDTO(filename, baseEntry.getKey().stats().numberOfRevisions(), entry.getKey().fileName(), entry.getValue().value()));
+                            .map(entry -> new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().stats().score(), entry.getKey().name(), entry.getValue().value()));
                 }).toList();
     }
 

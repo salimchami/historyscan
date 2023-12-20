@@ -14,10 +14,10 @@ public class ClocRevisions {
         this.commits = commits;
     }
 
-    List<ClocRevisionsFileCluster> convertCommitsToRevisions() {
+    List<ClocRevisionsFileCluster> convertCommitsToRevisions(String rootFolder) {
         var sortedRevisions = sortedRevisionsFrom();
         var revisions = new ClusteredClocRevisions(sortedRevisions);
-        return revisions.toClusters();
+        return revisions.toClusters(rootFolder);
     }
 
     private List<ClocRevisionsFile> sortedRevisionsFrom() {
