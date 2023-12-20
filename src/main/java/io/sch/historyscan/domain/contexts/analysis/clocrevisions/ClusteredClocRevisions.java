@@ -43,8 +43,11 @@ public class ClusteredClocRevisions {
         }
     }
 
-    private String extractFolderName(String relativePath, String rootFolder) {
-        String[] parts = relativePath.split("/");
-        return parts.length > 1 ? parts[0] : rootFolder;
+   private String extractFolderName(String relativePath, String rootFolder) {
+    if (relativePath.isEmpty()) {
+        return rootFolder;
     }
+    String[] parts = relativePath.split("/");
+    return parts.length > 1 ? parts[0] : "";
+}
 }
