@@ -3,19 +3,21 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@DDDEntity
 public class FileSystemNode {
     private final String name;
     private final String path;
     private final boolean isFile;
-    private final RevisionScore score;
+    private RevisionScore score;
     private final Map<String, FileSystemNode> children;
 
-    public FileSystemNode(String name,String path, boolean isFile, RevisionScore score) {
+    public FileSystemNode(String name, String path, boolean isFile, RevisionScore score) {
         this.name = name;
         this.path = path;
         this.isFile = isFile;
@@ -23,8 +25,8 @@ public class FileSystemNode {
         this.children = new HashMap<>();
     }
 
-    public void addChild(String path, FileSystemNode node) {
-        children.put(path, node);
+    public void addChild(String name, FileSystemNode node) {
+        children.put(name, node);
     }
 
     public FileSystemNode getChild(String path) {
@@ -49,6 +51,10 @@ public class FileSystemNode {
 
     public Map<String, FileSystemNode> getChildren() {
         return children;
+    }
+
+    public void updateScoreFrom(int numberOfRevisions, int currentNbLines) {
+        this.score = RevisionScore.of(numberOfRevisions, currentNbLines, score.score());
     }
 
     @Override

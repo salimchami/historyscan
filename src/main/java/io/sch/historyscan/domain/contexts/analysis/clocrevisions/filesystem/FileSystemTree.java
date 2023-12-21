@@ -3,47 +3,92 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
+import static java.util.Optional.empty;
 
 public class FileSystemTree {
     private final FileSystemNode root;
-    private final String rootFolder;
+    private final RootFolder rootFolder;
 
-    public FileSystemTree(String rootFolder) {
+    public FileSystemTree(RootFolder rootFolder) {
         this.rootFolder = rootFolder;
-        root = new FileSystemNode("/", "/", false, null);
+        root = new FileSystemNode("root", null, false, new RevisionScore(0));
     }
 
-    public void addFile(ClocRevisionsFile file) {
-        if (file.filePath().contains(rootFolder)) {
-            var parts = file.filePath().split("/");
-            var current = root;
-            for (String part : parts) {
-                if (!part.isEmpty()) {
-                    if (!current.getChildren().containsKey(part)) {
-                        var newNode = new FileSystemNode(part, file.pathFrom(part), isFile(file.filePath(), part), file.revisionScore());
-                        current.addChild(part, newNode);
+    public void addFileNodes(File file, String codeBaseName) {
+        if (!file.getName().equals(codeBaseName)) {
+            throw new IllegalArgumentException("Codebase must be the same as the root folder name");
+        }
+        if (!file.getName().equals(".git")) {
+            try (var paths = Files.walk(file.toPath())) {
+                for (File child : paths.map(Path::toFile).toList()) {
+                    if (rootFolder.isIn(child)) {
+                        addFile(child, codeBaseName);
                     }
-                    current = current.getChild(part);
+                }
+            } catch (IOException e) {
+                throw new CodebasePathCanNotBeReadException("Error while reading codebase files tree", e);
+            }
+        }
+    }
+
+    private void addFile(File file, String codeBaseName) {
+        String fullPath = file.getAbsolutePath();
+        int index = fullPath.indexOf(codeBaseName);
+        if (index != -1) {
+            String path = fullPath.substring(index).replace("\\", "/");
+            var parts = path.split("/");
+            var current = root;
+            int rootIndex = java.util.Arrays.asList(parts).indexOf(rootFolder.value());
+            if (rootIndex != -1) {
+                for (int i = rootIndex; i < parts.length; i++) {
+                    String part = parts[i];
+                    if (!part.isEmpty()) {
+                        if (!current.getChildren().containsKey(part)) {
+                            var newNode = new FileSystemNode(part, path, file.isFile(), new RevisionScore(0));
+                            current.addChild(part, newNode);
+                        }
+                        current = current.getChild(part);
+                    }
                 }
             }
         }
     }
 
-    private boolean isFile(String path, String part) {
+    public void updateScoreFrom(List<CodeBaseCommit> history) {
+        for (CodeBaseCommit commit : history) {
+            for (var file : commit.files()) {
+                findNode(file.path()).ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
+            }
+        }
+    }
+
+    private Optional<FileSystemNode> findNode(String path) {
         String[] parts = path.split("/");
-        String lastPart = parts[parts.length - 1];
-        return lastPart.equals(part) && lastPart.contains(".");
+        FileSystemNode current = root;
+        for (String part : parts) {
+            if (!part.isEmpty()) {
+                current = current.getChild(part);
+                if (current == null) {
+                    return empty();
+                }
+            }
+        }
+        return Optional.of(current);
     }
 
     public FileSystemNode getRoot() {
         return root;
-    }
-
-    public void updateFoldersScore() {
-
     }
 
     public List<ClocRevisionsFile> ignoredRevisions() {
@@ -51,7 +96,8 @@ public class FileSystemTree {
     }
 
     public List<String> extensions() {
-        return new FileSystemNodeExtension(root).getAllExtensions();
+        return new FileSystemNodeExtension(root)
+                .getAllExtensions();
     }
 
     @Override

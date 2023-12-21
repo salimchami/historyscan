@@ -8,12 +8,12 @@ import static java.util.Comparator.reverseOrder;
 public record RevisionScore(
         long score) implements Comparable<RevisionScore> {
 
-    public static RevisionScore of(int numberOfRevisions, int currentNbLines) {
+    public static RevisionScore of(int numberOfRevisions, int currentNbLines, long existingScore) {
         if (currentNbLines == 0) {
             currentNbLines = 1;
         }
         var revisionsScore = calculateRevisionsScore(numberOfRevisions, currentNbLines);
-        return new RevisionScore(revisionsScore);
+        return new RevisionScore(revisionsScore + existingScore);
     }
 
     static long calculateRevisionsScore(int numberOfRevisions, int nbLines) {

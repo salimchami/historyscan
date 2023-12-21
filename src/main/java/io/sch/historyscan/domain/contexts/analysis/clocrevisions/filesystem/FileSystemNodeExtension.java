@@ -8,13 +8,16 @@ public record  FileSystemNodeExtension(FileSystemNode root) {
     public List<String> getAllExtensions() {
         List<String> extensions = new ArrayList<>();
         collectExtensions(root, extensions);
-        return extensions;
+        return extensions.stream()
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     private void collectExtensions(FileSystemNode node, List<String> extensions) {
         if (node.isFile()) {
             String extension = getExtension(node.getName());
-            if (extension != null) {
+            if (extension != null && !extensions.contains(extension)) {
                 extensions.add(extension);
             }
         } else {

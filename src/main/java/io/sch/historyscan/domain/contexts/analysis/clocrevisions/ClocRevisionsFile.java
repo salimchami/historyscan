@@ -19,7 +19,7 @@ public record ClocRevisionsFile(
         var nbLines = nbLines(fileName.path(), commits);
         return new ClocRevisionsFile(
                 new FileInfo(fileName.name(), fileName.path()),
-                RevisionScore.of(nbRevisions, nbLines));
+                RevisionScore.of(nbRevisions, nbLines, 0));
     }
 
     private static int nbLines(String filePath, List<CodeBaseCommit> commits) {

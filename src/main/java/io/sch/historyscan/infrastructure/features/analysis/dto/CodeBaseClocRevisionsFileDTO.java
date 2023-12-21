@@ -9,14 +9,14 @@ public class CodeBaseClocRevisionsFileDTO extends RepresentationModel<CodeBaseCl
 
     private final String name;
     private final String path;
-    private final String parentName;
+    private final String parentPath;
     private final Long score;
 
     @JsonCreator
-    public CodeBaseClocRevisionsFileDTO(String name, String parentName, String path, Long score) {
+    public CodeBaseClocRevisionsFileDTO(String name, String path, String parentPath, Long score) {
         this.name = name;
-        this.parentName = parentName;
         this.path = path;
+        this.parentPath = parentPath;
         this.score = score;
     }
 
@@ -32,8 +32,8 @@ public class CodeBaseClocRevisionsFileDTO extends RepresentationModel<CodeBaseCl
         return score;
     }
 
-    public String getParentName() {
-        return parentName;
+    public String getParentPath() {
+        return parentPath;
     }
 
     @Override
@@ -43,13 +43,13 @@ public class CodeBaseClocRevisionsFileDTO extends RepresentationModel<CodeBaseCl
         if (!super.equals(o)) return false;
         CodeBaseClocRevisionsFileDTO that = (CodeBaseClocRevisionsFileDTO) o;
         return Objects.equals(name, that.name)
-                && Objects.equals(parentName, that.parentName)
+                && Objects.equals(parentPath, that.parentPath)
                 && Objects.equals(path, that.path)
                 && Objects.equals(score, that.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, parentName, path, score);
+        return Objects.hash(super.hashCode(), name, parentPath, path, score);
     }
 }

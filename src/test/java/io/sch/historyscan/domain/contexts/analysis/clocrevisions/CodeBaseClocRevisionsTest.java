@@ -1,7 +1,5 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,11 +7,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
-import static io.sch.historyscan.fake.FileInfoFake.*;
+import static io.sch.historyscan.fake.FileInfoFake.file1;
+import static io.sch.historyscan.fake.FileInfoFake.file2;
 import static io.sch.historyscan.fake.FileNameFake.fileName1;
 import static io.sch.historyscan.fake.FileNameFake.fileName2;
-import static io.sch.historyscan.fake.RevisionsStatsFake.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CodeBaseClocRevisionsTest {
@@ -38,25 +35,5 @@ class CodeBaseClocRevisionsTest {
                 .isEqualTo(expectedFiles);
     }
 
-    @Test
-    void should_generate_cloc_revisions_based_on_base_folder() {
-        var commits = defaultHistory().commits();
 
-        var revisions = CodebaseClocRevisions.of(commits, "boundedcontexts");
-
-        var fsTree = new FileSystemTree("boundedcontexts");
-        fsTree.addFile(new ClocRevisionsFile(singleFile1, singleFile1Stats));
-        fsTree.addFile(new ClocRevisionsFile(singleFile2, singleFile2Stats));
-        fsTree.addFile(new ClocRevisionsFile(file5, file5Stats));
-        fsTree.addFile(new ClocRevisionsFile(file4, file4Stats));
-        fsTree.addFile(new ClocRevisionsFile(file8, file8Stats));
-        fsTree.addFile(new ClocRevisionsFile(file7, file7Stats));
-        fsTree.addFile(new ClocRevisionsFile(file6, file6Stats));
-        fsTree.addFile(new ClocRevisionsFile(file2, file2Stats));
-        fsTree.addFile(new ClocRevisionsFile(file3, file3Stats));
-        fsTree.addFile(new ClocRevisionsFile(file1, file1Stats));
-
-        var expectedClocRevisions = new CodebaseClocRevisions(fsTree, List.of(), List.of("java"));
-        assertThat(revisions).isEqualTo(expectedClocRevisions);
-    }
 }
