@@ -23,7 +23,7 @@ public record FileSystemManager() {
     public Optional<File> findFolder(String baseFolder, String folderName) {
         return listFoldersFrom(baseFolder)
                 .stream()
-                .filter(folder -> folder.getName().equals(folderName))
+                .filter(folder -> folder.getName().equals(folderName) || folder.getName().endsWith(folderName))
                 .findFirst();
     }
 

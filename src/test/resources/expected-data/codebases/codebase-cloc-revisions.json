@@ -1,69 +1,88 @@
 {
   "revisions": [
     {
-      "folder": "",
-      "children": [
-        {
-          "name": "single-file-1.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
-          "score": 880
-        },
-        {
-          "name": "single-file-2.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
-          "score": 880
-        }
-      ]
+      "name": "boundedcontexts",
+      "parentName": "io.enterprise.theapp",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts",
+      "score": 465000
     },
     {
-      "folder": "featureB",
-      "children": [
-        {
-          "name": "ClassFile5.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile5.java",
-          "score": 116106
-        },
-        {
-          "name": "ClassFile4.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile4.java",
-          "score": 20250
-        },
-        {
-          "name": "ClassFile6.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile6.java",
-          "score": 2500
-        },
-        {
-          "name": "ClassFile5.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile5.java",
-          "score": 1225
-        },
-        {
-          "name": "ClassFile6.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile6.java",
-          "score": 880
-        }
-      ]
+      "name": "featureB",
+      "parentName": "boundedcontexts",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB",
+      "score": 116106
     },
     {
-      "folder": "featureA",
-      "children": [
-        {
-          "name": "ClassFile2.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
-          "score": 465000
-        },
-        {
-          "name": "ClassFile3.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile3.java",
-          "score": 237500
-        },
-        {
-          "name": "ClassFile1.java",
-          "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
-          "score": 440
-        }
-      ]
+      "name": "ClassFile6.java",
+      "parentName": "featureB",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile6.java",
+      "score": 880
+    },
+    {
+      "name": "ClassFile5.java",
+      "parentName": "featureB",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile5.java",
+      "score": 116106
+    },
+    {
+      "name": "ClassFile4.java",
+      "parentName": "featureB",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile4.java",
+      "score": 20250
+    },
+    {
+      "name": "refactored",
+      "parentName": "featureB",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored",
+      "score": 2500
+    },
+    {
+      "name": "ClassFile6.java",
+      "parentName": "refactored",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile6.java",
+      "score": 2500
+    },
+    {
+      "name": "ClassFile5.java",
+      "parentName": "refactored",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile5.java",
+      "score": 1225
+    },
+    {
+      "name": "single-file-1.java",
+      "parentName": "boundedcontexts",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
+      "score": 880
+    },
+    {
+      "name": "single-file-2.java",
+      "parentName": "boundedcontexts",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
+      "score": 880
+    },
+    {
+      "name": "featureA",
+      "parentName": "boundedcontexts",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA",
+      "score": 465000
+    },
+    {
+      "name": "ClassFile2.java",
+      "parentName": "featureA",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
+      "score": 465000
+    },
+    {
+      "name": "ClassFile3.java",
+      "parentName": "featureA",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile3.java",
+      "score": 237500
+    },
+    {
+      "name": "ClassFile1.java",
+      "parentName": "featureA",
+      "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
+      "score": 440
     }
   ],
   "ignoredRevisions": [],

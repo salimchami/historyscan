@@ -8,7 +8,16 @@ public record CodeBaseHistoryCommitFile(
         int nbAddedLines,
         int nbDeletedLines,
         int nbModifiedLines) {
+
     public int cloc() {
         return nbAddedLines + nbDeletedLines + nbModifiedLines;
+    }
+
+    public String path() {
+        return fileInfo.path();
+    }
+
+    public String name() {
+        return fileInfo.name();
     }
 }

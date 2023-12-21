@@ -11,7 +11,7 @@ import static java.util.Comparator.comparing;
 
 public record ClocRevisionsFile(
         FileInfo file,
-        RevisionStats stats) implements Comparable<ClocRevisionsFile> {
+        RevisionScore revisionScore) implements Comparable<ClocRevisionsFile> {
 
     public static ClocRevisionsFile of(Map.Entry<FileInfo, Integer> entry, List<CodeBaseCommit> commits) {
         var fileName = entry.getKey();
@@ -19,7 +19,7 @@ public record ClocRevisionsFile(
         var nbLines = nbLines(fileName.path(), commits);
         return new ClocRevisionsFile(
                 new FileInfo(fileName.name(), fileName.path()),
-                RevisionStats.of(nbRevisions, nbLines));
+                RevisionScore.of(nbRevisions, nbLines, 0));
     }
 
     private static int nbLines(String filePath, List<CodeBaseCommit> commits) {
@@ -38,7 +38,7 @@ public record ClocRevisionsFile(
 
     @Override
     public int compareTo(ClocRevisionsFile o) {
-        return comparing(ClocRevisionsFile::stats)
+        return comparing(ClocRevisionsFile::revisionScore)
                 .thenComparing(ClocRevisionsFile::filePath)
                 .compare(this, o);
     }
@@ -49,5 +49,13 @@ public record ClocRevisionsFile(
 
     public String filePath() {
         return file.path();
+    }
+
+    public String pathFrom(String part) {
+        int index = filePath().indexOf(part);
+        if (index != -1) {
+            return filePath().substring(0, index + part.length());
+        }
+        return null;
     }
 }

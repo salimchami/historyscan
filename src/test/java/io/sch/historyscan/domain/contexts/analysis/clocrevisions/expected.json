@@ -1,0 +1,53 @@
+{
+  "name": "domain",
+  "path": "domain",
+  "score": null,
+  "children": {
+    "boundedcontexts": {
+      "name": "boundedcontexts",
+      "path": "domain/boundedcontexts",
+      "score": null,
+      "children": {
+        "featureB": {
+          "name": "featureB",
+          "path": "domain/boundedcontexts/featureB",
+          "score": null,
+          "children": {
+            "FinallyLoading.java": {
+              "name": "FinallyLoading.java",
+              "path": "domain/boundedcontexts/featureB/FinallyLoading.java",
+              "score": null,
+              "children": {},
+              "file": true
+            }
+          },
+          "file": false
+        },
+        "featureA": {
+          "name": "featureA",
+          "path": "domain/boundedcontexts/featureA",
+          "score": null,
+          "children": {
+            "Extensions.java": {
+              "name": "Extensions.java",
+              "path": "domain/boundedcontexts/featureA/Extensions.java",
+              "score": null,
+              "children": {},
+              "file": true
+            },
+            "Loading.java": {
+              "name": "Loading.java",
+              "path": "domain/boundedcontexts/featureA/Loading.java",
+              "score": null,
+              "children": {},
+              "file": true
+            }
+          },
+          "file": false
+        }
+      },
+      "file": false
+    }
+  },
+  "file": false
+}
