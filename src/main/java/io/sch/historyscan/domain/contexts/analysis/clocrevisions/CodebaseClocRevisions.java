@@ -1,37 +1,29 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDValueObject;
 
-import java.util.Collection;
 import java.util.List;
-
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.Extensions.extensionsOf;
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.IgnoredRevisions.ignored;
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.IgnoredRevisions.notIgnoredGrouped;
 
 @DDDValueObject
 public record CodebaseClocRevisions(
-        List<ClocRevisionsFileCluster> revisions,
+        FileSystemTree revisionsFsTree,
         List<ClocRevisionsFile> ignoredRevisions,
         List<String> extensions) {
 
     public CodebaseClocRevisions {
-        revisions = List.copyOf(revisions);
         ignoredRevisions = List.copyOf(ignoredRevisions);
         extensions = List.copyOf(extensions);
     }
 
     public static CodebaseClocRevisions of(List<CodeBaseCommit> commits, String rootFolder) {
         var initialClocRevisions = new ClocRevisions(commits);
-        var clocRevisions = initialClocRevisions.convertCommitsToRevisions(rootFolder);
-        var flattenRevisions = clocRevisions.stream()
-                .map(ClocRevisionsFileCluster::files)
-                .flatMap(Collection::stream)
-                .toList();
+        var clocRevisions = initialClocRevisions.commitsToRevisions(rootFolder);
+        //FIXME add ignored revisions in FileTree
         return new CodebaseClocRevisions(
-                notIgnoredGrouped(clocRevisions),
-                ignored(flattenRevisions),
-                extensionsOf(flattenRevisions));
+                clocRevisions,
+                clocRevisions.ignoredRevisions(),
+                clocRevisions.extensions());
     }
 }

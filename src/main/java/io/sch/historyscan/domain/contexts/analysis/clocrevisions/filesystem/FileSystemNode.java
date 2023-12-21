@@ -1,0 +1,80 @@
+package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+public class FileSystemNode {
+    private final String name;
+    private final String path;
+    private final boolean isFile;
+    private final RevisionScore score;
+    private final Map<String, FileSystemNode> children;
+
+    public FileSystemNode(String name,String path, boolean isFile, RevisionScore score) {
+        this.name = name;
+        this.path = path;
+        this.isFile = isFile;
+        this.score = score;
+        this.children = new HashMap<>();
+    }
+
+    public void addChild(String path, FileSystemNode node) {
+        children.put(path, node);
+    }
+
+    public FileSystemNode getChild(String path) {
+        return children.get(path);
+    }
+
+    public boolean isFile() {
+        return isFile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Long getScore() {
+        return score != null ? score.score() : null;
+    }
+
+    public Map<String, FileSystemNode> getChildren() {
+        return children;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FileSystemNode that = (FileSystemNode) o;
+        return isFile == that.isFile
+                && Objects.equals(name, that.name)
+                && Objects.equals(path, that.path)
+                && Objects.equals(score, that.score)
+                && Objects.equals(children, that.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, path, isFile, score, children);
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

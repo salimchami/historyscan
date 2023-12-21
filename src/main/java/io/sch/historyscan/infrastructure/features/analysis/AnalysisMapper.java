@@ -3,6 +3,7 @@ package io.sch.historyscan.infrastructure.features.analysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -13,6 +14,7 @@ import io.sch.historyscan.infrastructure.features.analysis.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -51,12 +53,22 @@ public class AnalysisMapper {
     }
 
     public CodeBaseClocRevisionsDTO domainToWeb(CodebaseClocRevisions analyzedCodeBaseClocRevisions) {
+        List<CodeBaseClocRevisionsFileDTO> revisions = new ArrayList<>();
+        var root = analyzedCodeBaseClocRevisions.revisionsFsTree().getRoot();
+        convertNode(root, revisions, null);
+
         return new CodeBaseClocRevisionsDTO(
-                analyzedCodeBaseClocRevisions.revisions().stream()
-                        .map(cluster -> new CodeBaseClocRevisionsFileClusterDTO(cluster.folder(), cluster.files()
-                                .stream().map(this::domainToWeb).toList())).toList(),
+                revisions,
                 analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
                 analyzedCodeBaseClocRevisions.extensions());
+    }
+
+    private void convertNode(FileSystemNode node, List<CodeBaseClocRevisionsFileDTO> revisions, String parentName) {
+        CodeBaseClocRevisionsFileDTO dto = new CodeBaseClocRevisionsFileDTO(node.getName(), parentName, node.getPath(), node.getScore());
+        revisions.add(dto);
+        for (FileSystemNode child : node.getChildren().values()) {
+            convertNode(child, revisions, node.getName());
+        }
     }
 
     public CodeBaseNetworkClocRevisionsDTO domainToWeb(CodebaseNetworkClocRevisions revisions) {
@@ -71,17 +83,18 @@ public class AnalysisMapper {
                 .flatMap(baseEntry -> {
                     final String filename = Paths.get(baseEntry.getKey().fileName()).getFileName().toString();
                     if (baseEntry.getValue().isEmpty()) {
-                        return Stream.of(new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().stats().score(), null, null));
+                        return Stream.of(new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().revisionScore().score(), null, null));
                     }
                     return baseEntry.getValue().entrySet().stream()
-                            .map(entry -> new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().stats().score(), entry.getKey().name(), entry.getValue().value()));
+                            .map(entry -> new FileRevisionsLinkDTO(filename, (int) baseEntry.getKey().revisionScore().score(), entry.getKey().name(), entry.getValue().value()));
                 }).toList();
     }
 
     private CodeBaseClocRevisionsFileDTO domainToWeb(ClocRevisionsFile clocRevisionsFile) {
         return new CodeBaseClocRevisionsFileDTO(
                 clocRevisionsFile.fileName(),
+                "",
                 clocRevisionsFile.filePath(),
-                clocRevisionsFile.stats().score());
+                clocRevisionsFile.revisionScore().score());
     }
 }

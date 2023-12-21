@@ -1,5 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,8 +30,8 @@ class CodeBaseClocRevisionsTest {
     @ParameterizedTest
     @MethodSource("should_sort_revisions_params")
     void should_sort_revisions(int score1, int score2, List<String> expectedFiles) {
-        var revisions1 = new ClocRevisionsFile(file1, new RevisionStats(score1));
-        var revisions2 = new ClocRevisionsFile(file2, new RevisionStats(score2));
+        var revisions1 = new ClocRevisionsFile(file1, new RevisionScore(score1));
+        var revisions2 = new ClocRevisionsFile(file2, new RevisionScore(score2));
         var sortedRevisions = Stream.of(revisions1, revisions2).sorted().toList();
         assertThat(sortedRevisions)
                 .extracting(ClocRevisionsFile::fileName)
@@ -43,26 +44,19 @@ class CodeBaseClocRevisionsTest {
 
         var revisions = CodebaseClocRevisions.of(commits, "boundedcontexts");
 
-        var expectedRevisions = List.of(
-                new ClocRevisionsFileCluster("", List.of(
-                        new ClocRevisionsFile(singleFile1, singleFile1Stats),
-                        new ClocRevisionsFile(singleFile2, singleFile2Stats)
-                )),
-                new ClocRevisionsFileCluster("featureB", List.of(
-                        new ClocRevisionsFile(file5, file5Stats),
-                        new ClocRevisionsFile(file4, file4Stats),
-                        new ClocRevisionsFile(file8, file8Stats),
-                        new ClocRevisionsFile(file7, file7Stats),
-                        new ClocRevisionsFile(file6, file6Stats)
-                )),
-                new ClocRevisionsFileCluster("featureA", List.of(
-                        new ClocRevisionsFile(file2, file2Stats),
-                        new ClocRevisionsFile(file3, file3Stats),
-                        new ClocRevisionsFile(file1, file1Stats)
-                ))
-        );
+        var fsTree = new FileSystemTree("boundedcontexts");
+        fsTree.addFile(new ClocRevisionsFile(singleFile1, singleFile1Stats));
+        fsTree.addFile(new ClocRevisionsFile(singleFile2, singleFile2Stats));
+        fsTree.addFile(new ClocRevisionsFile(file5, file5Stats));
+        fsTree.addFile(new ClocRevisionsFile(file4, file4Stats));
+        fsTree.addFile(new ClocRevisionsFile(file8, file8Stats));
+        fsTree.addFile(new ClocRevisionsFile(file7, file7Stats));
+        fsTree.addFile(new ClocRevisionsFile(file6, file6Stats));
+        fsTree.addFile(new ClocRevisionsFile(file2, file2Stats));
+        fsTree.addFile(new ClocRevisionsFile(file3, file3Stats));
+        fsTree.addFile(new ClocRevisionsFile(file1, file1Stats));
 
-        var expectedClocRevisions = new CodebaseClocRevisions(expectedRevisions, List.of(), List.of("java"));
+        var expectedClocRevisions = new CodebaseClocRevisions(fsTree, List.of(), List.of("java"));
         assertThat(revisions).isEqualTo(expectedClocRevisions);
     }
 }

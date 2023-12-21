@@ -1,0 +1,144 @@
+{
+  "root": {
+    "name": "/",
+    "path": "/",
+    "score": null,
+    "children": {
+      "src": {
+        "name": "src",
+        "path": "src",
+        "score": 465000,
+        "children": {
+          "main": {
+            "name": "main",
+            "path": "src/main",
+            "score": 465000,
+            "children": {
+              "java": {
+                "name": "java",
+                "path": "src/main/java",
+                "score": 465000,
+                "children": {
+                  "io.enterprise.theapp": {
+                    "name": "io.enterprise.theapp",
+                    "path": "src/main/java/io.enterprise.theapp",
+                    "score": 465000,
+                    "children": {
+                      "boundedcontexts": {
+                        "name": "boundedcontexts",
+                        "path": "src/main/java/io.enterprise.theapp/boundedcontexts",
+                        "score": 465000,
+                        "children": {
+                          "featureB": {
+                            "name": "featureB",
+                            "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB",
+                            "score": 116106,
+                            "children": {
+                              "ClassFile6.java": {
+                                "name": "ClassFile6.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile6.java",
+                                "score": 880,
+                                "children": {},
+                                "file": true
+                              },
+                              "ClassFile5.java": {
+                                "name": "ClassFile5.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile5.java",
+                                "score": 116106,
+                                "children": {},
+                                "file": true
+                              },
+                              "ClassFile4.java": {
+                                "name": "ClassFile4.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile4.java",
+                                "score": 20250,
+                                "children": {},
+                                "file": true
+                              },
+                              "refactored": {
+                                "name": "refactored",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored",
+                                "score": 2500,
+                                "children": {
+                                  "ClassFile6.java": {
+                                    "name": "ClassFile6.java",
+                                    "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile6.java",
+                                    "score": 2500,
+                                    "children": {},
+                                    "file": true
+                                  },
+                                  "ClassFile5.java": {
+                                    "name": "ClassFile5.java",
+                                    "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile5.java",
+                                    "score": 1225,
+                                    "children": {},
+                                    "file": true
+                                  }
+                                },
+                                "file": false
+                              }
+                            },
+                            "file": false
+                          },
+                          "single-file-1.java": {
+                            "name": "single-file-1.java",
+                            "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
+                            "score": 880,
+                            "children": {},
+                            "file": true
+                          },
+                          "single-file-2.java": {
+                            "name": "single-file-2.java",
+                            "path": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
+                            "score": 880,
+                            "children": {},
+                            "file": true
+                          },
+                          "featureA": {
+                            "name": "featureA",
+                            "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA",
+                            "score": 465000,
+                            "children": {
+                              "ClassFile2.java": {
+                                "name": "ClassFile2.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
+                                "score": 465000,
+                                "children": {},
+                                "file": true
+                              },
+                              "ClassFile3.java": {
+                                "name": "ClassFile3.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile3.java",
+                                "score": 237500,
+                                "children": {},
+                                "file": true
+                              },
+                              "ClassFile1.java": {
+                                "name": "ClassFile1.java",
+                                "path": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
+                                "score": 440,
+                                "children": {},
+                                "file": true
+                              }
+                            },
+                            "file": false
+                          }
+                        },
+                        "file": false
+                      }
+                    },
+                    "file": false
+                  }
+                },
+                "file": false
+              }
+            },
+            "file": false
+          }
+        },
+        "file": false
+      }
+    },
+    "file": false
+  }
+}

@@ -1,5 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 
@@ -14,10 +15,10 @@ public class ClocRevisions {
         this.commits = commits;
     }
 
-    List<ClocRevisionsFileCluster> convertCommitsToRevisions(String rootFolder) {
+    FileSystemTree commitsToRevisions(String rootFolder) {
         var sortedRevisions = sortedRevisionsFrom();
         var revisions = new ClusteredClocRevisions(sortedRevisions);
-        return revisions.toClusters(rootFolder);
+        return revisions.toFileSystemTree(rootFolder);
     }
 
     private List<ClocRevisionsFile> sortedRevisionsFrom() {

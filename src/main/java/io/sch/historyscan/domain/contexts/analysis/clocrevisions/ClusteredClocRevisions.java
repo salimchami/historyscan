@@ -1,13 +1,8 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.PathsUtils.normalizeFolder;
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.PathsUtils.normalizePath;
+import java.util.List;
 
 public class ClusteredClocRevisions {
 
@@ -17,37 +12,11 @@ public class ClusteredClocRevisions {
         this.sortedRevisions = sortedRevisions;
     }
 
-    public List<ClocRevisionsFileCluster> toClusters(String rootFolder) {
-        var normalizedRootFolder = normalizeFolder(rootFolder);
-        Map<String, List<ClocRevisionsFile>> fileGroups = new HashMap<>();
-
-        for (ClocRevisionsFile file : sortedRevisions) {
-            String relativePath = getRelativePath(file.filePath(), normalizedRootFolder);
-            String folder = extractFolderName(relativePath, normalizedRootFolder);
-            if (file.filePath().contains(folder)) {
-                fileGroups.computeIfAbsent(folder, k -> new ArrayList<>()).add(file);
-            }
-        }
-        return fileGroups.entrySet().stream()
-                .map(e -> new ClocRevisionsFileCluster(e.getKey(), e.getValue()))
-                .filter(cluster -> !cluster.files().isEmpty())
-                .toList();
+    public FileSystemTree toFileSystemTree(String rootFolder) {
+        var fsTree = new FileSystemTree(rootFolder);
+        sortedRevisions.forEach(fsTree::addFile);
+        fsTree.updateFoldersScore();
+        return fsTree;
     }
 
-    private String getRelativePath(String filePath, String rootFolder) {
-        String normalizedPath = normalizePath(filePath);
-        if (normalizedPath.contains(rootFolder + "/")) {
-            return normalizedPath.split(Pattern.quote(rootFolder + "/"))[1];
-        } else {
-            return "";
-        }
-    }
-
-   private String extractFolderName(String relativePath, String rootFolder) {
-    if (relativePath.isEmpty()) {
-        return rootFolder;
-    }
-    String[] parts = relativePath.split("/");
-    return parts.length > 1 ? parts[0] : "";
-}
 }

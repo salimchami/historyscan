@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RevisionStatsTest {
+class RevisionScoreTest {
 
     public static Stream<Arguments> should_calculate_revisions_score_params() {
         return Stream.of(
@@ -23,7 +23,7 @@ class RevisionStatsTest {
     @ParameterizedTest
     @MethodSource("should_calculate_revisions_score_params")
     void should_calculate_revisions_score(int numberOfRevisions, int nbLines, int expectedScore) {
-        var score = RevisionStats.calculateRevisionsScore(numberOfRevisions, nbLines);
+        var score = RevisionScore.calculateRevisionsScore(numberOfRevisions, nbLines);
         assertThat(score).isEqualTo(expectedScore);
     }
 }
