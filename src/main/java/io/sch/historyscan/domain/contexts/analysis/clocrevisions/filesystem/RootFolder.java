@@ -6,10 +6,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public record RootFolder(String value) {
+public class RootFolder {
+
+    private final String value;
+    private final String codebaseName;
+
+    private RootFolder(String value, String codebaseName) {
+        this.value = value;
+        this.codebaseName = codebaseName;
+    }
+
+    public static RootFolder of(String rootFolder, String codeBaseName) {
+        var actualValue = formattedValue(rootFolder, codeBaseName);
+        return new RootFolder(actualValue, codeBaseName);
+    }
+
     public boolean isIn(File file) {
         var actualValue = actualValue();
-        return file.getPath().contains(actualValue) || isInSubFolders(file, actualValue);
+        return file.getPath().contains(actualValue) || isInSubFolders(file, actualValue) || codebaseName.equals(file.getName());
     }
 
     private static boolean isInSubFolders(File file, String actualValue) {
@@ -24,10 +38,27 @@ public record RootFolder(String value) {
     }
 
     private String actualValue() {
-        return value.replace("/", "\\");
+        return formattedValue(value, codebaseName);
+    }
+
+    private static String formattedValue(String value, String codebaseName) {
+        if (value.isEmpty() || value.startsWith("/") || value.startsWith("\\")) {
+            return codebaseName;
+        }
+        return value
+                .replace("/", "\\")
+                .replace("\\\\", "\\");
     }
 
     public boolean existsIn(String fullPath) {
         return fullPath.contains(actualValue());
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getCodebaseName() {
+        return codebaseName;
     }
 }

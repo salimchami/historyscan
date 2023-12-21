@@ -20,9 +20,12 @@ public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisi
 
     @Override
     public CodebaseClocRevisions from(CodeBaseToAnalyze codeBase) throws HistoryScanFunctionalException {
-        var actualFilesTree = actualFileSystemTree.from(codeBase.getRootFolder(), codeBase.getName());
         var history = historyAnalysis.from(codeBase);
-        actualFilesTree.updateScoreFrom(history.commits());
+        var actualFilesTree = actualFileSystemTree.from(codeBase.getRootFolder(), codeBase.getName())
+                .then()
+                .updateFilesScoreFrom(history.commits())
+                .then()
+                .updateFoldersScore();
         return new CodebaseClocRevisions(
                 actualFilesTree,
                 actualFilesTree.ignoredRevisions(),

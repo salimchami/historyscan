@@ -20,7 +20,7 @@ public class FileSystemReader implements ActualFileSystemTree {
 
     @Override
     public FileSystemTree from(String rootFolder, String codeBaseName) {
-        FileSystemTree tree = new FileSystemTree(new RootFolder(rootFolder));
+        FileSystemTree tree = new FileSystemTree(RootFolder.of(rootFolder, codeBaseName));
         this.fileSystemManager.findFolder(codebasesFolder, codeBaseName)
                 .ifPresent(file -> tree.addFileNodes(file, codeBaseName));
         return tree;

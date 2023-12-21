@@ -56,6 +56,9 @@ public class FileSystemNode {
     public void updateScoreFrom(int numberOfRevisions, int currentNbLines) {
         this.score = RevisionScore.of(numberOfRevisions, currentNbLines, score.score());
     }
+    public void updateScoreFrom(RevisionScore score) {
+        this.score = score;
+    }
 
     @Override
     public boolean equals(Object o) {

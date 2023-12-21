@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
 import static java.util.Optional.empty;
 
 public class FileSystemTree {
@@ -21,8 +22,8 @@ public class FileSystemTree {
     private final RootFolder rootFolder;
 
     public FileSystemTree(RootFolder rootFolder) {
-        this.rootFolder = rootFolder;
-        root = new FileSystemNode("root", null, false, new RevisionScore(0));
+        this.rootFolder = Objects.requireNonNull(rootFolder);
+        root = new FileSystemNode("root", "/", false, new RevisionScore(0));
     }
 
     public void addFileNodes(File file, String codeBaseName) {
@@ -49,7 +50,7 @@ public class FileSystemTree {
             String path = fullPath.substring(index).replace("\\", "/");
             var parts = path.split("/");
             var current = root;
-            int rootIndex = java.util.Arrays.asList(parts).indexOf(rootFolder.value());
+            int rootIndex = asList(parts).indexOf(rootFolder.getValue()) ;
             if (rootIndex != -1) {
                 for (int i = rootIndex; i < parts.length; i++) {
                     String part = parts[i];
@@ -65,12 +66,13 @@ public class FileSystemTree {
         }
     }
 
-    public void updateScoreFrom(List<CodeBaseCommit> history) {
+    public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history) {
         for (CodeBaseCommit commit : history) {
             for (var file : commit.files()) {
                 findNode(file.path()).ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
             }
         }
+        return this;
     }
 
     private Optional<FileSystemNode> findNode(String path) {
@@ -120,6 +122,29 @@ public class FileSystemTree {
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public FileSystemTree then() {
+        return this;
+    }
+
+    public FileSystemTree updateFoldersScore() {
+        updateFolderScore(root);
+        return this;
+    }
+
+
+    private long updateFolderScore(FileSystemNode node) {
+        if (node.isFile()) {
+            return node.getScore();
+        } else {
+            long totalScore = 0;
+            for (FileSystemNode child : node.getChildren().values()) {
+                totalScore += updateFolderScore(child);
+            }
+            node.updateScoreFrom(new RevisionScore(totalScore));
+            return totalScore;
         }
     }
 }

@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FileSystemTreeTest {
     @Test
     void should_load_file_system_tree_from_disk() throws IOException {
-        var fsTree = new FileSystemTree(new RootFolder("domain"));
+        final RootFolder rootFolder = RootFolder.of("domain", "theglobalproject");
+        var fsTree = new FileSystemTree(rootFolder);
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
 
         fsTree.addFileNodes(codebasesResource.getFile(), "theglobalproject");
@@ -25,7 +26,7 @@ class FileSystemTreeTest {
 
     @NotNull
     private static FileSystemNode expectedRootFs() {
-        var expectedRoot = new FileSystemNode("root", null, false, new RevisionScore(0));
+        var expectedRoot = new FileSystemNode("root", "/", false, new RevisionScore(0));
         var domain = new FileSystemNode("domain", "theglobalproject/src/main/java/io/mycompany/theproject/domain", false, new RevisionScore(0));
         expectedRoot.addChild("domain", domain);
         var boundedcontexts = new FileSystemNode("boundedcontexts", "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts", false, new RevisionScore(0));
