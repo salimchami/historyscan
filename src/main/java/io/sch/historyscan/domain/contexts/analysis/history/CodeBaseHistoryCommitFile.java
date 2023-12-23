@@ -16,8 +16,4 @@ public record CodeBaseHistoryCommitFile(
     public String path() {
         return fileInfo.path();
     }
-
-    public String name() {
-        return fileInfo.name();
-    }
 }

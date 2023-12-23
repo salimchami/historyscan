@@ -22,6 +22,7 @@ public record ClocRevisionsFile(
                 RevisionScore.of(nbRevisions, nbLines, 0));
     }
 
+    // FIXME: Check if the nbLines is correctly calculated in SystemTreeNode
     private static int nbLines(String filePath, List<CodeBaseCommit> commits) {
         return commits.stream()
                 .filter(commit -> commit.files().stream().anyMatch(file -> file.fileInfo().path().equals(filePath)))
@@ -32,6 +33,7 @@ public record ClocRevisionsFile(
                 .orElse(0);
     }
 
+    // FIXME: add ignored files to SystemTreeNode
     public boolean ignored() {
         return ignoredFiles().stream().anyMatch(ignoredFile -> file.name().contains(ignoredFile));
     }

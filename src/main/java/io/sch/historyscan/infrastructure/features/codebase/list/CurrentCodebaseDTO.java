@@ -40,7 +40,7 @@ public class CurrentCodebaseDTO extends RepresentationModel<CurrentCodebaseDTO> 
                         .withTitle(HttpMethod.POST.name())
                         .withType(analysisType.getTitle()));
             } catch (NoSuchMethodException e) {
-                throw new HistoryScanTechnicalException("Error while adding analysis link", e);
+                throw new HistoryScanTechnicalException("Error while adding an analysis link", e);
             }
         });
     }

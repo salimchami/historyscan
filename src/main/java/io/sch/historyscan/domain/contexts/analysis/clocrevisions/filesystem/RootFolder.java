@@ -50,15 +50,7 @@ public class RootFolder {
                 .replace("\\\\", "\\");
     }
 
-    public boolean existsIn(String fullPath) {
-        return fullPath.contains(actualValue());
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public String getCodebaseName() {
-        return codebaseName;
     }
 }
