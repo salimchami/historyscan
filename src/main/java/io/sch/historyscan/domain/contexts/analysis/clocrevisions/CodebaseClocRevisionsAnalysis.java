@@ -24,7 +24,7 @@ public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisi
         var actualFilesTree = actualFileSystemTree.
                 from(codeBase.getRootFolder(), codeBase.getName())
                 .then()
-                .updateFilesScoreFrom(history.commits())
+                .updateFilesScoreFrom(history.commits(), codeBase.getName())
                 .then()
                 .updateFoldersScore();
         return new CodebaseClocRevisions(
