@@ -16,7 +16,7 @@ public class CodeBaseToAnalyze {
             throw new RootFolderNotFoundException("Root folder cannot be null or empty");
         }
         var type = EnumAnalysisType.fromTitle(analysisType)
-                .orElseThrow(() -> new ScanTypeNotFoundException("Analysis type not found"));
+                .orElseThrow(() -> new ScanTypeNotFoundException("Analysis type isn't found"));
         return new CodeBaseToAnalyze(name, type, rootFolder);
     }
 
