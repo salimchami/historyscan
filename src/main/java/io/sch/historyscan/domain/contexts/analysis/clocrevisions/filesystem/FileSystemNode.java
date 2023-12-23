@@ -88,16 +88,16 @@ public class FileSystemNode {
                 '}';
     }
 
-    public Optional<FileSystemNode> findFileNode(String path) {
-        return findFileNode(this, path);
+    public Optional<FileSystemNode> findFileNode(String path, String codebaseName) {
+        return findFileNode(this, path, codebaseName);
     }
 
-    private Optional<FileSystemNode> findFileNode(FileSystemNode current, String path) {
-        if (current.getPath().equals(path)) {
+    private Optional<FileSystemNode> findFileNode(FileSystemNode current, String path, String codebaseName) {
+        if (current.getPath().equals(path) || current.getPath().equals(codebaseName + "/" + path)) {
             return Optional.of(current);
         } else {
             for (FileSystemNode child : current.getChildren().values()) {
-                Optional<FileSystemNode> result = findFileNode(child, path);
+                Optional<FileSystemNode> result = findFileNode(child, path, codebaseName);
                 if (result.isPresent()) {
                     return result;
                 }

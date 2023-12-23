@@ -62,10 +62,10 @@ public class FileSystemTree {
         }
     }
 
-    public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history) {
+    public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history, String codebaseName) {
         for (CodeBaseCommit commit : history) {
             for (var file : commit.files()) {
-                root.findFileNode(file.path())
+                root.findFileNode(file.path(), codebaseName)
                         .ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
             }
         }

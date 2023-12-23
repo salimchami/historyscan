@@ -36,7 +36,13 @@ by Adam Tornhill.
 
 #### Backend
 
-Start the spring boot application on the default port.
+- update the application.properties to update the codebases root folder path.
+
+```
+    io.sch.historyscan.codebases.folder=[YOUR_PATH]
+```
+
+- Start the spring boot application on the default port.
 
 ```
     ./gradlew build

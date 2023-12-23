@@ -24,13 +24,14 @@ class FileSystemTreeUpdatingScoresTest {
     @ParameterizedTest
     @MethodSource("should_load_file_system_tree_from_disk_params")
     void should_load_file_system_tree_from_disk(String rootFolderName, String expectedRootTestCase) throws IOException {
-        final RootFolder rootFolder = RootFolder.of(rootFolderName, "theglobalproject");
+        final String codebaseName = "theglobalproject";
+        final RootFolder rootFolder = RootFolder.of(rootFolderName, codebaseName);
         var fsTree = new FileSystemTree(rootFolder);
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
 
-        fsTree.addFileNodes(codebasesResource.getFile(), "theglobalproject");
+        fsTree.addFileNodes(codebasesResource.getFile(), codebaseName);
         fsTree = fsTree
-                .updateFilesScoreFrom(defaultHistory().commits())
+                .updateFilesScoreFrom(defaultHistory().commits(), codebaseName)
                 .then()
                 .updateFoldersScore();
 
