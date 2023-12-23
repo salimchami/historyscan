@@ -1,0 +1,177 @@
+{
+  "name": "root",
+  "path": "/",
+  "score": 0,
+  "children": {
+    "theglobalproject": {
+      "name": "theglobalproject",
+      "path": "theglobalproject",
+      "score": 0,
+      "children": {
+        "src": {
+          "name": "src",
+          "path": "theglobalproject/src",
+          "score": 0,
+          "children": {
+            "main": {
+              "name": "main",
+              "path": "theglobalproject/src/main",
+              "score": 0,
+              "children": {
+                "java": {
+                  "name": "java",
+                  "path": "theglobalproject/src/main/java",
+                  "score": 0,
+                  "children": {
+                    "io": {
+                      "name": "io",
+                      "path": "theglobalproject/src/main/java/io",
+                      "score": 0,
+                      "children": {
+                        "mycompany": {
+                          "name": "mycompany",
+                          "path": "theglobalproject/src/main/java/io/mycompany",
+                          "score": 0,
+                          "children": {
+                            "theproject": {
+                              "name": "theproject",
+                              "path": "theglobalproject/src/main/java/io/mycompany/theproject",
+                              "score": 0,
+                              "children": {
+                                "infrastructure": {
+                                  "name": "infrastructure",
+                                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
+                                  "score": 0,
+                                  "children": {
+                                    "boundedcontexts": {
+                                      "name": "boundedcontexts",
+                                      "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
+                                      "score": 0,
+                                      "children": {
+                                        "featureA": {
+                                          "name": "featureA",
+                                          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
+                                          "score": 0,
+                                          "children": {
+                                            "ExtensionsAdapter.java": {
+                                              "name": "ExtensionsAdapter.java",
+                                              "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+                                              "score": 0,
+                                              "children": {},
+                                              "file": true
+                                            }
+                                          },
+                                          "file": false
+                                        }
+                                      },
+                                      "file": false
+                                    }
+                                  },
+                                  "file": false
+                                },
+                                "domain": {
+                                  "name": "domain",
+                                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+                                  "score": 0,
+                                  "children": {
+                                    "boundedcontexts": {
+                                      "name": "boundedcontexts",
+                                      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                                      "score": 0,
+                                      "children": {
+                                        "featureB": {
+                                          "name": "featureB",
+                                          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+                                          "score": 0,
+                                          "children": {
+                                            "FinallyLoading.java": {
+                                              "name": "FinallyLoading.java",
+                                              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+                                              "score": 0,
+                                              "children": {},
+                                              "file": true
+                                            }
+                                          },
+                                          "file": false
+                                        },
+                                        "featureA": {
+                                          "name": "featureA",
+                                          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                                          "score": 0,
+                                          "children": {
+                                            "Extensions.java": {
+                                              "name": "Extensions.java",
+                                              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+                                              "score": 0,
+                                              "children": {},
+                                              "file": true
+                                            },
+                                            "refactored": {
+                                              "name": "refactored",
+                                              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                                              "score": 0,
+                                              "children": {
+                                                "Extensions.java": {
+                                                  "name": "Extensions.java",
+                                                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+                                                  "score": 0,
+                                                  "children": {},
+                                                  "file": true
+                                                },
+                                                "Loading.java": {
+                                                  "name": "Loading.java",
+                                                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+                                                  "score": 0,
+                                                  "children": {},
+                                                  "file": true
+                                                }
+                                              },
+                                              "file": false
+                                            },
+                                            "Loading.java": {
+                                              "name": "Loading.java",
+                                              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+                                              "score": 0,
+                                              "children": {},
+                                              "file": true
+                                            }
+                                          },
+                                          "file": false
+                                        }
+                                      },
+                                      "file": false
+                                    }
+                                  },
+                                  "file": false
+                                }
+                              },
+                              "file": false
+                            }
+                          },
+                          "file": false
+                        }
+                      },
+                      "file": false
+                    }
+                  },
+                  "file": false
+                }
+              },
+              "file": false
+            }
+          },
+          "file": false
+        },
+        "build.gradle": {
+          "name": "build.gradle",
+          "path": "theglobalproject/build.gradle",
+          "score": 0,
+          "children": {},
+          "file": true
+        }
+      },
+      "file": false
+    }
+  },
+  "file": false
+}

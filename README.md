@@ -19,9 +19,9 @@ by Adam Tornhill.
 
 - **Git Repository Cloning**: Clones a Git repository from a remote URL to the local file system.
 
-- **inputs**: you must provide a git repository and a root folder name to start the analysis based on this root folder.
-    - git repository: the git repository URL to clone and analyze. The repository must be public **for now**.
-    - root folder name (optional): the root folder name to start the analysis based on this root folder.
+- **Inputs**: You must provide a git repository and a root folder name to start the analysis based on this root folder.
+    - Git repository: The git repository URL to clone and analyze. The repository must be public **for now**.
+    - Root folder name (optional): The root folder name to start the analysis based on it.
       Its name must be a folder in the git repository.
 
 ## Getting Started

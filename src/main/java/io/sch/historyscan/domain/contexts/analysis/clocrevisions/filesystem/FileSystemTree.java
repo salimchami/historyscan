@@ -1,7 +1,5 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
@@ -12,10 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import static java.util.Arrays.asList;
-import static java.util.Optional.empty;
 
 public class FileSystemTree {
     private final FileSystemNode root;
@@ -50,7 +46,7 @@ public class FileSystemTree {
             String path = fullPath.substring(index).replace("\\", "/");
             var parts = path.split("/");
             var current = root;
-            int rootIndex = asList(parts).indexOf(rootFolder.getValue()) ;
+            int rootIndex = asList(parts).indexOf(rootFolder.getValue());
             if (rootIndex != -1) {
                 for (int i = rootIndex; i < parts.length; i++) {
                     String part = parts[i];
@@ -69,24 +65,11 @@ public class FileSystemTree {
     public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history) {
         for (CodeBaseCommit commit : history) {
             for (var file : commit.files()) {
-                findNode(file.path()).ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
+                root.findFileNode(file.path())
+                        .ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
             }
         }
         return this;
-    }
-
-    private Optional<FileSystemNode> findNode(String path) {
-        String[] parts = path.split("/");
-        FileSystemNode current = root;
-        for (String part : parts) {
-            if (!part.isEmpty()) {
-                current = current.getChild(part);
-                if (current == null) {
-                    return empty();
-                }
-            }
-        }
-        return Optional.of(current);
     }
 
     public FileSystemNode getRoot() {
@@ -117,12 +100,10 @@ public class FileSystemTree {
 
     @Override
     public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return "FileSystemTree{" +
+                "root=" + root +
+                ", rootFolder=" + rootFolder +
+                '}';
     }
 
     public FileSystemTree then() {

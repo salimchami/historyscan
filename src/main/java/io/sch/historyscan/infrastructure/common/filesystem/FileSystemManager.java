@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public record FileSystemManager() {
+public class FileSystemManager {
 
     public List<File> listFoldersFrom(String folder) {
         return Arrays.stream(Objects.requireNonNull(new File(folder).listFiles(File::isDirectory)))

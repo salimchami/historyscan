@@ -9,32 +9,24 @@
       },
       "files": [
         {
-          "fileName": "single-file-1.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-1.java",
-          "nbActualLines": 40,
-          "nbAddedLines": 20,
-          "nbDeletedLines": 2,
-          "nbModifiedLines": 0
-        },
-        {
-          "fileName": "ClassFile1.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
+          "fileName": "build.gradle",
+          "filePath": "theglobalproject/build.gradle",
           "nbActualLines": 20,
           "nbAddedLines": 1,
           "nbDeletedLines": 2,
           "nbModifiedLines": 5
         },
         {
-          "fileName": "ClassFile2.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
+          "fileName": "Extensions.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
           "nbActualLines": 1500,
           "nbAddedLines": 15,
           "nbDeletedLines": 30,
           "nbModifiedLines": 10
         },
         {
-          "fileName": "ClassFile3.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile3.java",
+          "fileName": "Loading.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
           "nbActualLines": 1250,
           "nbAddedLines": 150,
           "nbDeletedLines": 30,
@@ -51,40 +43,32 @@
       },
       "files": [
         {
-          "fileName": "single-file-2.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/single-file-2.java",
-          "nbActualLines": 40,
-          "nbAddedLines": 20,
-          "nbDeletedLines": 2,
-          "nbModifiedLines": 0
-        },
-        {
-          "fileName": "ClassFile1.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile1.java",
+          "fileName": "build.gradle",
+          "filePath": "theglobalproject/build.gradle",
           "nbActualLines": 20,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
           "nbModifiedLines": 2
         },
         {
-          "fileName": "ClassFile2.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/ClassFile2.java",
+          "fileName": "ExtensionsAdapter.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
           "nbActualLines": 1500,
           "nbAddedLines": 150,
           "nbDeletedLines": 5,
           "nbModifiedLines": 100
         },
         {
-          "fileName": "ClassFile4.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile4.java",
+          "fileName": "Loading.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
           "nbActualLines": 150,
           "nbAddedLines": 10,
           "nbDeletedLines": 100,
           "nbModifiedLines": 25
         },
         {
-          "fileName": "ClassFile5.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile5.java",
+          "fileName": "Extensions.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
           "nbActualLines": 523,
           "nbAddedLines": 90,
           "nbDeletedLines": 100,
@@ -101,8 +85,8 @@
       },
       "files": [
         {
-          "fileName": "ClassFile6.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/ClassFile6.java",
+          "fileName": "FinallyLoading.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
           "nbActualLines": 40,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
@@ -119,18 +103,10 @@
       },
       "files": [
         {
-          "fileName": "ClassFile5.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile5.java",
-          "nbActualLines": 35,
+          "fileName": "FinallyLoading.java",
+          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "nbActualLines": 40,
           "nbAddedLines": 35,
-          "nbDeletedLines": 0,
-          "nbModifiedLines": 0
-        },
-        {
-          "fileName": "ClassFile6.java",
-          "filePath": "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/ClassFile6.java",
-          "nbActualLines": 50,
-          "nbAddedLines": 50,
           "nbDeletedLines": 0,
           "nbModifiedLines": 0
         }

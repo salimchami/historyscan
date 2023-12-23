@@ -3,14 +3,11 @@ package io.sch.historyscan.fake;
 import static io.sch.historyscan.fake.FileNameFake.*;
 
 public class FilePathFake {
-    public static final String singleFilePath1 = "src/main/java/io.enterprise.theapp/boundedcontexts/" + singleFileName1;
-    public static final String singleFilePath2 = "src/main/java/io.enterprise.theapp/boundedcontexts/" + singleFileName2;
-    public static final String filePath1 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/" + fileName1;
-    public static final String filePath2 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/" + fileName2;
-    public static final String filePath3 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureA/" + fileName3;
-    public static final String filePath4 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName4;
-    public static final String filePath5 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName5;
-    public static final String filePath6 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/" + fileName6;
-    public static final String filePath7 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/" + fileName7;
-    public static final String filePath8 = "src/main/java/io.enterprise.theapp/boundedcontexts/featureB/refactored/" + fileName8;
+    public static final String featureARefactoredExtensionsFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/" + featureARefactoredExtensionsFileName;
+    public static final String featureARefactoredLoadingFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/" + featureARefactoredLoadingFileName;
+    public static final String featureAExtensionsFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/" + featureAExtensionsFileName;
+    public static final String featureALoadingFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/" + featureALoadingFileName;
+    public static final String featureBFinallyLoadingFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/" + featureBFinallyLoadingFileName;
+    public static final String featureAExtensionsAdapterFilePath = "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/" + featureAExtensionsAdapterFileName;
+    public static final String buildGradleFilePath = "theglobalproject/" + buildGradleFileName;
 }
