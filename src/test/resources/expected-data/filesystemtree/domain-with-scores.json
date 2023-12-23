@@ -1,0 +1,83 @@
+{
+  "name": "root",
+  "path": "/",
+  "score": 458636,
+  "children": {
+    "domain": {
+      "name": "domain",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+      "score": 458636,
+      "children": {
+        "boundedcontexts": {
+          "name": "boundedcontexts",
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+          "score": 458636,
+          "children": {
+            "featureB": {
+              "name": "featureB",
+              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+              "score": 2280,
+              "children": {
+                "FinallyLoading.java": {
+                  "name": "FinallyLoading.java",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+                  "score": 2280,
+                  "children": {},
+                  "file": true
+                }
+              },
+              "file": false
+            },
+            "featureA": {
+              "name": "featureA",
+              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+              "score": 456356,
+              "children": {
+                "Extensions.java": {
+                  "name": "Extensions.java",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+                  "score": 82500,
+                  "children": {},
+                  "file": true
+                },
+                "refactored": {
+                  "name": "refactored",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                  "score": 136356,
+                  "children": {
+                    "Extensions.java": {
+                      "name": "Extensions.java",
+                      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+                      "score": 116106,
+                      "children": {},
+                      "file": true
+                    },
+                    "Loading.java": {
+                      "name": "Loading.java",
+                      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+                      "score": 20250,
+                      "children": {},
+                      "file": true
+                    }
+                  },
+                  "file": false
+                },
+                "Loading.java": {
+                  "name": "Loading.java",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+                  "score": 237500,
+                  "children": {},
+                  "file": true
+                }
+              },
+              "file": false
+            }
+          },
+          "file": false
+        }
+      },
+      "file": false
+    }
+  },
+  "file": false
+}

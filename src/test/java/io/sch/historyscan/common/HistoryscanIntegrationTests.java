@@ -1,6 +1,7 @@
 package io.sch.historyscan.common;
 
 import io.sch.historyscan.HistoryscanApplication;
+import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
 import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
@@ -10,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -33,11 +36,15 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
     @MockBean
     private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
+    @MockBean
+    private FileSystemManager fileSystemManager;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         var history = Optional.of(defaultHistory());
         when(codeBaseHistoryAnalyzer.of(anyString())).thenReturn(history);
+        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
+        when(fileSystemManager.findFolder(anyString(), anyString())).thenReturn(Optional.of(codebasesResource.getFile()));
     }
 
     protected EndPointCaller endPointCaller;

@@ -1,13 +1,12 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @DDDEntity
 public class FileSystemNode {
@@ -56,6 +55,7 @@ public class FileSystemNode {
     public void updateScoreFrom(int numberOfRevisions, int currentNbLines) {
         this.score = RevisionScore.of(numberOfRevisions, currentNbLines, score.score());
     }
+
     public void updateScoreFrom(RevisionScore score) {
         this.score = score;
     }
@@ -79,11 +79,31 @@ public class FileSystemNode {
 
     @Override
     public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+        return "FileSystemNode{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", isFile=" + isFile +
+                ", score=" + score +
+                ", children=" + children +
+                '}';
+    }
+
+    public Optional<FileSystemNode> findFileNode(String path) {
+        return findFileNode(this, path);
+    }
+
+    private Optional<FileSystemNode> findFileNode(FileSystemNode current, String path) {
+        if (current.getPath().equals(path)) {
+            return Optional.of(current);
+        } else {
+            for (FileSystemNode child : current.getChildren().values()) {
+                Optional<FileSystemNode> result = findFileNode(child, path);
+                if (result.isPresent()) {
+                    return result;
+                }
+            }
+            return Optional.empty();
         }
+
     }
 }
