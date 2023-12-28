@@ -27,4 +27,8 @@ public class RootFolder {
     public String getValue() {
         return value;
     }
+
+    public String getCodebaseName() {
+        return codebaseName;
+    }
 }
