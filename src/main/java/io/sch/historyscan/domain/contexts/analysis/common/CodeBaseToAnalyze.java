@@ -13,10 +13,10 @@ public class CodeBaseToAnalyze {
 
     public static CodeBaseToAnalyze of(String name, String analysisType, String rootFolder) {
         if(rootFolder == null || rootFolder.isEmpty()) {
-            throw new RootFolderNotFoundException("Root folder cannot be null or empty");
+            throw new RootFolderNotFound("Root folder cannot be null or empty");
         }
         var type = EnumAnalysisType.fromTitle(analysisType)
-                .orElseThrow(() -> new ScanTypeNotFoundException("Analysis type isn't found"));
+                .orElseThrow(() -> new ScanTypeNotFound("Analysis type isn't found"));
         return new CodeBaseToAnalyze(name, type, rootFolder);
     }
 

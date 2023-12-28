@@ -1,6 +1,6 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
@@ -43,6 +43,7 @@ import java.util.stream.StreamSupport;
 @HexagonalArchitectureAdapter
 public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
 
+    private static final String UNABLE_TO_FIND_DIFF_FOR_COMMIT = "Unable to find diff for commit";
     private final String codebasesFolder;
     private final FileSystemManager fileSystemManager;
     private final Logger logger;
@@ -115,12 +116,13 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
                     String diffText = out.toString();
                     String[] diffLines = diffText.split("\r\n|\r|\n");
                     var linesCount = FileLinesCount.from(diffLines, repository, fileDiff.getNewPath());
+                    boolean isFile = fileDiff.getNewMode().equals(FileMode.REGULAR_FILE);
                     files.add(new CodeBaseHistoryCommitFile(
                             new FileInfo(Paths.get(fileDiff.getNewPath()).getFileName().toString(),
-                                    fileDiff.getNewPath()), linesCount.nbLines(),
+                                    fileDiff.getNewPath(), isFile), linesCount.nbLines(),
                             linesCount.addedLines(), linesCount.deletedLines(), linesCount.modifiedLines()));
                 } catch (IOException e) {
-                    throw new CommitDiffException("Unable to find diff for commit", e);
+                    throw new CommitDiffException(UNABLE_TO_FIND_DIFF_FOR_COMMIT, e);
                 }
             }
         }
@@ -141,7 +143,7 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
                         .call();
             }
         } catch (GitAPIException e) {
-            throw new CommitDiffException("Unable to find diff for commit", e);
+            throw new CommitDiffException(UNABLE_TO_FIND_DIFF_FOR_COMMIT, e);
         }
     }
 
@@ -153,7 +155,7 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
             }
             return treeParser;
         } catch (IOException e) {
-            throw new CommitDiffException("Unable to find diff for commit", e);
+            throw new CommitDiffException(UNABLE_TO_FIND_DIFF_FOR_COMMIT, e);
         }
     }
 

@@ -1,6 +1,5 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.ClocRevisionsFile;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
@@ -53,7 +52,7 @@ public class AnalysisMapper {
 
         return new CodeBaseClocRevisionsDTO(
                 revisions,
-                analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::domainToWeb).toList(),
+                analyzedCodeBaseClocRevisions.ignoredRevisions(),
                 analyzedCodeBaseClocRevisions.extensions());
     }
 
@@ -65,11 +64,4 @@ public class AnalysisMapper {
         }
     }
 
-    private CodeBaseClocRevisionsFileDTO domainToWeb(ClocRevisionsFile clocRevisionsFile) {
-        return new CodeBaseClocRevisionsFileDTO(
-                clocRevisionsFile.fileName(),
-                clocRevisionsFile.filePath(),
-                "",
-                clocRevisionsFile.revisionScore().score());
-    }
 }

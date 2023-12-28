@@ -139,7 +139,13 @@
       "score": 440
     }
   ],
-  "ignoredRevisions": [],
+  "ignoredRevisions": [
+    {
+      "name": "Money.java",
+      "path": "theglobalproject/lib/Money.java",
+      "isFile": true
+    }
+  ],
   "extensions": [
     "gradle",
     "java"

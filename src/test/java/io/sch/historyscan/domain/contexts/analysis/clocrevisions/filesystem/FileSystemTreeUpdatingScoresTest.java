@@ -29,9 +29,9 @@ class FileSystemTreeUpdatingScoresTest {
         var fsTree = new FileSystemTree(rootFolder);
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
 
-        fsTree.addFileNodes(codebasesResource.getFile(), codebaseName);
+        fsTree.createFrom(new CodeBaseFile(codebasesResource.getFile(), rootFolder));
         fsTree = fsTree
-                .updateFilesScoreFrom(defaultHistory().commits(), codebaseName)
+                .updateFilesScoreFrom(defaultHistory().commits())
                 .then()
                 .updateFoldersScore();
 

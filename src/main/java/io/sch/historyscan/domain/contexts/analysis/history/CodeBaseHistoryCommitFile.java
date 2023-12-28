@@ -1,6 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.history;
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 
 public record CodeBaseHistoryCommitFile(
         FileInfo fileInfo,

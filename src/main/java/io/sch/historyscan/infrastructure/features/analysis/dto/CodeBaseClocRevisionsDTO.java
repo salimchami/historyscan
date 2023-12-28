@@ -1,6 +1,7 @@
 package io.sch.historyscan.infrastructure.features.analysis.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
@@ -9,20 +10,20 @@ import java.util.Objects;
 public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRevisionsDTO> {
 
     private final List<CodeBaseClocRevisionsFileDTO> revisions;
-    private final List<CodeBaseClocRevisionsFileDTO> ignoredRevisions;
+    private final List<FileInfo> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
     public CodeBaseClocRevisionsDTO(
             List<CodeBaseClocRevisionsFileDTO> revisions,
-            List<CodeBaseClocRevisionsFileDTO> ignoredRevisions,
+            List<FileInfo> ignoredRevisions,
             List<String> extensions) {
         this.revisions = revisions;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;
     }
 
-    public List<CodeBaseClocRevisionsFileDTO> getIgnoredRevisions() {
+    public List<FileInfo> getIgnoredRevisions() {
         return ignoredRevisions;
     }
 

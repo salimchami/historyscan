@@ -4,8 +4,8 @@ import io.sch.historyscan.domain.error.HistoryScanTechnicalException;
 
 import java.io.IOException;
 
-public class CodebasePathCanNotBeReadException extends HistoryScanTechnicalException {
-    public CodebasePathCanNotBeReadException(String message, IOException e) {
+public class CodebasePathCanNotBeRead extends HistoryScanTechnicalException {
+    public CodebasePathCanNotBeRead(String message, IOException e) {
         super(message, e);
 
     }

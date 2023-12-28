@@ -1,6 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
+import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDAggregate;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @DDDAggregate
 public record CodebaseClocRevisions(
         FileSystemTree actualFsTree,
-        List<ClocRevisionsFile> ignoredRevisions,
+        List<FileInfo> ignoredRevisions,
         List<String> extensions) {
 
     public CodebaseClocRevisions {
