@@ -6,5 +6,5 @@ import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureSPI;
 @FunctionalInterface
 public interface ActualFileSystemTree {
 
-    FileSystemTree from(String rootFolder, String codebaseName);
+    FileSystemTree from(RootFolder rootFolder);
 }

@@ -16,7 +16,7 @@ public class CodebaseHistoryAnalysis implements Analyze<CodeBaseHistory> {
     public CodeBaseHistory from(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         return historyAnalyzer.of(codeBaseToAnalyze.getName())
                 .orElseThrow(() ->
-                        new CodeBaseHistoryNotFoundException(
+                        new CodeBaseHistoryNotFound(
                                 "CodeBase '%s' history isn't found".formatted(codeBaseToAnalyze.getName())));
     }
 }

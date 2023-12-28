@@ -27,7 +27,7 @@ class FileSystemTreeTest {
         var fsTree = new FileSystemTree(rootFolder);
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
 
-        fsTree.addFileNodes(codebasesResource.getFile(), "theglobalproject");
+        fsTree.createFrom(new CodeBaseFile(codebasesResource.getFile(), rootFolder));
 
         final var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
         assertThat(fsTree)

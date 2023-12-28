@@ -1,6 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.ActualFileSystemTree;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.RootFolder;
 import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
@@ -21,10 +22,11 @@ public class CodebaseClocRevisionsAnalysis implements Analyze<CodebaseClocRevisi
     @Override
     public CodebaseClocRevisions from(CodeBaseToAnalyze codeBase) throws HistoryScanFunctionalException {
         var history = historyAnalysis.from(codeBase);
+        final RootFolder rootFolder = RootFolder.of(codeBase.getRootFolder(), codeBase.getName());
         var actualFilesTree = actualFileSystemTree.
-                from(codeBase.getRootFolder(), codeBase.getName())
+                from(rootFolder)
                 .then()
-                .updateFilesScoreFrom(history.commits(), codeBase.getName())
+                .updateFilesScoreFrom(history.commits())
                 .then()
                 .updateFoldersScore();
         return new CodebaseClocRevisions(
