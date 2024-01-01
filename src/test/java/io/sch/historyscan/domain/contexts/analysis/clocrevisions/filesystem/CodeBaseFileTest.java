@@ -1,6 +1,5 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
-import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

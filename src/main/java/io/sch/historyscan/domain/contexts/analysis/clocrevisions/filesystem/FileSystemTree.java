@@ -2,7 +2,6 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
-import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class FileSystemTree {
     public FileSystemTree(RootFolder rootFolder) {
         this.rootFolder = Objects.requireNonNull(rootFolder);
         this.ignoredFiles = new ArrayList<>();
-        root = new FileSystemNode("root", "/", false, new RevisionScore(0));
+        root = new FileSystemNode("root", "/", null, false, new RevisionScore(0));
     }
 
     public void createFrom(CodeBaseFile codeBaseFile) {
@@ -43,11 +42,24 @@ public class FileSystemTree {
         for (int i = partsIndexFromRootFolder; i < codeBaseParts.size(); i++) {
             String part = codeBaseParts.get(i);
             if (!current.getChildren().containsKey(part)) {
-                var newNode = new FileSystemNode(part, file.path(), file.isFile(), new RevisionScore(0));
+                var parentPath = parentPath(file, i, part);
+                var newNode = new FileSystemNode(
+                        part,
+                        file.pathFrom(part),
+                         parentPath,
+                        file.isFileFrom(part),
+                        new RevisionScore(0));
                 current.addChild(part, newNode);
             }
             current = current.getChild(part);
         }
+    }
+
+    private String parentPath(FileInfo file, int i, String part) {
+        if(rootFolder.getCodebaseName().equals(part)) {
+            return "/";
+        }
+        return i == 0 ? null : file.parentPathFrom(part);
     }
 
     public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history) {

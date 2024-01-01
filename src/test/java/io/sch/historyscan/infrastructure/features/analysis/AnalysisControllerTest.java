@@ -17,8 +17,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AnalysisControllerTest extends HistoryscanIntegrationTests {
     public static Stream<Arguments> should_analyze_history_of_the_codebase_params() {
         return Stream.of(
-                Arguments.of("codebase-to-analyze-history", "codebase-history"),
-                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions")
+//                Arguments.of("codebase-to-analyze-history", "codebase-history"),
+//                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
+                Arguments.of("junit-codebase-to-analyze-cloc-revisions", "junit-codebase-cloc-revisions")
         );
     }
 

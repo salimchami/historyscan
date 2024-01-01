@@ -18,15 +18,16 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class AnalysisApplication {
 
-    private final AnalysisMapper analysisMapper;
+    private final HistoryMapper historyMapper;
+    private final ClocRevisionsMapper clocRevisionsMapper;
     private final CodebaseToAnalyzeMapper codebaseToAnalyzeMapper;
     private final Analyze<CodeBaseHistory> analyzeCodebaseHistory;
     private final Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions;
 
-    public AnalysisApplication(AnalysisMapper analysisMapper,
-                               CodebaseToAnalyzeMapper codebaseToAnalyzeMapper, Analyze<CodeBaseHistory> analyzeCodebaseHistory,
+    public AnalysisApplication(HistoryMapper historyMapper, ClocRevisionsMapper clocRevisionsMapper, CodebaseToAnalyzeMapper codebaseToAnalyzeMapper, Analyze<CodeBaseHistory> analyzeCodebaseHistory,
                                Analyze<CodebaseClocRevisions> analyzeCodebaseClocRevisions) {
-        this.analysisMapper = analysisMapper;
+        this.historyMapper = historyMapper;
+        this.clocRevisionsMapper = clocRevisionsMapper;
         this.codebaseToAnalyzeMapper = codebaseToAnalyzeMapper;
         this.analyzeCodebaseHistory = analyzeCodebaseHistory;
         this.analyzeCodebaseClocRevisions = analyzeCodebaseClocRevisions;
@@ -51,11 +52,11 @@ public class AnalysisApplication {
 
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         var analyzedCodeBaseClocRevisions = analyzeCodebaseClocRevisions.from(codeBaseToAnalyze);
-        return analysisMapper.domainToWeb(analyzedCodeBaseClocRevisions);
+        return clocRevisionsMapper.domainToWeb(analyzedCodeBaseClocRevisions);
     }
 
     private CodeBaseHistoryDTO historyAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {
         var analyzedCodeBaseHistory = analyzeCodebaseHistory.from(codeBaseToAnalyze);
-        return analysisMapper.domainToWeb(analyzedCodeBaseHistory);
+        return historyMapper.domainToWeb(analyzedCodeBaseHistory);
     }
 }

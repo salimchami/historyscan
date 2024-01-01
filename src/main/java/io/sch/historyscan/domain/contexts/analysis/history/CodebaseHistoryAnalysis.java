@@ -17,6 +17,6 @@ public class CodebaseHistoryAnalysis implements Analyze<CodeBaseHistory> {
         return historyAnalyzer.of(codeBaseToAnalyze.getName())
                 .orElseThrow(() ->
                         new CodeBaseHistoryNotFound(
-                                "CodeBase '%s' history isn't found".formatted(codeBaseToAnalyze.getName())));
+                                "CodeBase '%s' history was not found".formatted(codeBaseToAnalyze.getName())));
     }
 }

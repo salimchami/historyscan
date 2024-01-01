@@ -1,7 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
-import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileInfo;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDAggregate;
 
 import java.util.List;
