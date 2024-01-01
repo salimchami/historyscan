@@ -23,6 +23,7 @@ import java.util.Optional;
 import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = HistoryscanApplication.class)
@@ -42,9 +43,10 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
     @BeforeEach
     void setUp() throws IOException {
         var history = Optional.of(defaultHistory());
-        when(codeBaseHistoryAnalyzer.of(anyString())).thenReturn(history);
+        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(history);
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
-        when(fileSystemManager.findFolder(anyString(), anyString())).thenReturn(Optional.of(codebasesResource.getFile()));
+        when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
+                .thenReturn(Optional.of(codebasesResource.getFile()));
     }
 
     protected EndPointCaller endPointCaller;

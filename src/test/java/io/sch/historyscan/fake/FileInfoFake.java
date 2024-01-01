@@ -1,6 +1,6 @@
 package io.sch.historyscan.fake;
 
-import io.sch.historyscan.domain.contexts.analysis.common.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.history.FileInfo;
 
 import static io.sch.historyscan.fake.FileNameFake.*;
 import static io.sch.historyscan.fake.FilePathFake.*;

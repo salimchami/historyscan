@@ -12,19 +12,24 @@ import java.util.Optional;
 public class FileSystemNode {
     private final String name;
     private final String path;
+    private final String parentPath;
     private final boolean isFile;
     private RevisionScore score;
     private final Map<String, FileSystemNode> children;
 
-    public FileSystemNode(String name, String path, boolean isFile, RevisionScore score) {
+    public FileSystemNode(String name, String path, String parentPath, boolean isFile, RevisionScore score) {
         this.name = name;
         this.path = path;
+        this.parentPath = parentPath;
         this.isFile = isFile;
         this.score = score;
         this.children = new HashMap<>();
     }
 
     public void addChild(String name, FileSystemNode node) {
+        if (!this.name.equals("root") && !"%s/%s".formatted(node.parentPath, node.name).equals(node.path)) {
+            throw new IllegalArgumentException("The node path must be equal to the parent path + the name");
+        }
         children.put(name, node);
     }
 
@@ -44,6 +49,10 @@ public class FileSystemNode {
         return path;
     }
 
+    public String getParentPath() {
+        return parentPath;
+    }
+
     public Long getScore() {
         return score != null ? score.score() : null;
     }
@@ -58,34 +67,6 @@ public class FileSystemNode {
 
     public void updateScoreFrom(RevisionScore score) {
         this.score = score;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FileSystemNode that = (FileSystemNode) o;
-        return isFile == that.isFile
-                && Objects.equals(name, that.name)
-                && Objects.equals(path, that.path)
-                && Objects.equals(score, that.score)
-                && Objects.equals(children, that.children);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, path, isFile, score, children);
-    }
-
-    @Override
-    public String toString() {
-        return "FileSystemNode{" +
-                "name='" + name + '\'' +
-                ", path='" + path + '\'' +
-                ", isFile=" + isFile +
-                ", score=" + score +
-                ", children=" + children +
-                '}';
     }
 
     public Optional<FileSystemNode> findFileNode(String path) {
@@ -105,5 +86,39 @@ public class FileSystemNode {
             return Optional.empty();
         }
 
+    }
+
+    public boolean isRoot() {
+        return name.equals("root");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FileSystemNode that = (FileSystemNode) o;
+        return isFile == that.isFile
+                && Objects.equals(name, that.name)
+                && Objects.equals(path, that.path)
+                && Objects.equals(parentPath, that.parentPath)
+                && Objects.equals(score, that.score)
+                && children.equals(that.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, path, parentPath, isFile, score, children);
+    }
+
+    @Override
+    public String toString() {
+        return "FileSystemNode{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", parentPath='" + parentPath + '\'' +
+                ", isFile=" + isFile +
+                ", score=" + score +
+                ", children=" + children +
+                '}';
     }
 }
