@@ -6,56 +6,67 @@
     "theglobalproject": {
       "name": "theglobalproject",
       "path": "theglobalproject",
+      "parentPath": "/",
       "score": 841576,
       "children": {
         "src": {
           "name": "src",
           "path": "theglobalproject/src",
+          "parentPath": "theglobalproject",
           "score": 841136,
           "children": {
             "main": {
               "name": "main",
               "path": "theglobalproject/src/main",
+              "parentPath": "theglobalproject/src",
               "score": 841136,
               "children": {
                 "java": {
                   "name": "java",
                   "path": "theglobalproject/src/main/java",
+                  "parentPath": "theglobalproject/src/main",
                   "score": 841136,
                   "children": {
                     "io": {
                       "name": "io",
                       "path": "theglobalproject/src/main/java/io",
+                      "parentPath": "theglobalproject/src/main/java",
                       "score": 841136,
                       "children": {
                         "mycompany": {
                           "name": "mycompany",
                           "path": "theglobalproject/src/main/java/io/mycompany",
+                          "parentPath": "theglobalproject/src/main/java/io",
                           "score": 841136,
                           "children": {
                             "theproject": {
                               "name": "theproject",
                               "path": "theglobalproject/src/main/java/io/mycompany/theproject",
+                              "parentPath": "theglobalproject/src/main/java/io/mycompany",
                               "score": 841136,
                               "children": {
                                 "infrastructure": {
                                   "name": "infrastructure",
                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
+                                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
                                   "score": 382500,
                                   "children": {
                                     "boundedcontexts": {
                                       "name": "boundedcontexts",
                                       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
+                                      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
                                       "score": 382500,
                                       "children": {
                                         "featureA": {
                                           "name": "featureA",
                                           "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
+                                          "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
                                           "score": 382500,
                                           "children": {
                                             "ExtensionsAdapter.java": {
                                               "name": "ExtensionsAdapter.java",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+                                              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
                                               "score": 382500,
                                               "children": {},
                                               "file": true
@@ -72,21 +83,25 @@
                                 "domain": {
                                   "name": "domain",
                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+                                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
                                   "score": 458636,
                                   "children": {
                                     "boundedcontexts": {
                                       "name": "boundedcontexts",
                                       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                                      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
                                       "score": 458636,
                                       "children": {
                                         "featureB": {
                                           "name": "featureB",
                                           "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+                                          "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                                           "score": 2280,
                                           "children": {
                                             "FinallyLoading.java": {
                                               "name": "FinallyLoading.java",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+                                              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
                                               "score": 2280,
                                               "children": {},
                                               "file": true
@@ -97,11 +112,13 @@
                                         "featureA": {
                                           "name": "featureA",
                                           "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                                          "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                                           "score": 456356,
                                           "children": {
                                             "Extensions.java": {
                                               "name": "Extensions.java",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+                                              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                               "score": 82500,
                                               "children": {},
                                               "file": true
@@ -109,11 +126,13 @@
                                             "refactored": {
                                               "name": "refactored",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                                              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                               "score": 136356,
                                               "children": {
                                                 "Extensions.java": {
                                                   "name": "Extensions.java",
                                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+                                                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                                                   "score": 116106,
                                                   "children": {},
                                                   "file": true
@@ -121,6 +140,7 @@
                                                 "Loading.java": {
                                                   "name": "Loading.java",
                                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+                                                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                                                   "score": 20250,
                                                   "children": {},
                                                   "file": true
@@ -131,6 +151,7 @@
                                             "Loading.java": {
                                               "name": "Loading.java",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+                                              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                               "score": 237500,
                                               "children": {},
                                               "file": true
@@ -165,6 +186,7 @@
         "build.gradle": {
           "name": "build.gradle",
           "path": "theglobalproject/build.gradle",
+          "parentPath": "theglobalproject",
           "score": 440,
           "children": {},
           "file": true

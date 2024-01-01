@@ -1,13 +1,17 @@
 package io.sch.historyscan.common;
 
 import io.sch.historyscan.HistoryscanApplication;
+import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
+import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,6 +22,9 @@ import java.util.Optional;
 
 import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = HistoryscanApplication.class)
 @ContextConfiguration(classes = {
@@ -28,21 +35,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 @AutoConfigureMockMvc
 public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
-//    @MockBean
-//    private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
-//    @MockBean
-//    private FileSystemManager fileSystemManager;
+    @MockBean
+    private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
+    @MockBean
+    private FileSystemManager fileSystemManager;
 
     @BeforeEach
     void setUp() throws IOException {
         var history = Optional.of(defaultHistory());
-//        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(history);
-//        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
-//        when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
-//                .thenReturn(Optional.of(codebasesResource.getFile()));
-//        // junit test case
-//        when(codeBaseHistoryAnalyzer.of("junit5")).thenCallRealMethod();
-//        when(fileSystemManager.findFolder(anyString(), eq("junit5"))).thenCallRealMethod();
+        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(history);
+        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
+        when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
+                .thenReturn(Optional.of(codebasesResource.getFile()));
     }
 
     protected EndPointCaller endPointCaller;

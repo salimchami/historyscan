@@ -102,7 +102,7 @@ public class FileSystemNode {
                 && Objects.equals(path, that.path)
                 && Objects.equals(parentPath, that.parentPath)
                 && Objects.equals(score, that.score)
-                && Objects.equals(children, that.children);
+                && children.equals(that.children);
     }
 
     @Override

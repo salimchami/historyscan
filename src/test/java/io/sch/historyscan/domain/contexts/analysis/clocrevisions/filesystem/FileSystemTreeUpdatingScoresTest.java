@@ -35,7 +35,7 @@ class FileSystemTreeUpdatingScoresTest {
                 .then()
                 .updateFoldersScore();
 
-        final var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
+        var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
         assertThat(fsTree)
                 .extracting(FileSystemTree::getRoot)
                 .isEqualTo(expectedRoot);
