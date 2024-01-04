@@ -4,146 +4,145 @@
       "name": "root",
       "path": "/",
       "parentPath": null,
-      "score": 841576
+      "score": 29270
     },
     {
       "name": "theglobalproject",
       "path": "theglobalproject",
       "parentPath": "/",
-      "score": 841576
+      "score": 29270
     },
     {
       "name": "src",
       "path": "theglobalproject/src",
       "parentPath": "theglobalproject",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "main",
       "path": "theglobalproject/src/main",
       "parentPath": "theglobalproject/src",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "java",
       "path": "theglobalproject/src/main/java",
       "parentPath": "theglobalproject/src/main",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "io",
       "path": "theglobalproject/src/main/java/io",
       "parentPath": "theglobalproject/src/main/java",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "mycompany",
       "path": "theglobalproject/src/main/java/io/mycompany",
       "parentPath": "theglobalproject/src/main/java/io",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "theproject",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject",
       "parentPath": "theglobalproject/src/main/java/io/mycompany",
-      "score": 841136
+      "score": 29248
     },
     {
       "name": "infrastructure",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
-      "score": 382500
+      "score": 8160
     },
     {
       "name": "boundedcontexts",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
-      "score": 382500
+      "score": 8160
     },
     {
       "name": "featureA",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
-      "score": 382500
+      "score": 8160
     },
     {
       "name": "ExtensionsAdapter.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
-      "score": 382500
+      "score": 8160
     },
     {
       "name": "domain",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
-      "score": 458636
+      "score": 21088
     },
     {
       "name": "boundedcontexts",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
-      "score": 458636
+      "score": 21088
     },
     {
       "name": "featureB",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
-      "score": 2280
+      "score": 1824
     },
     {
       "name": "FinallyLoading.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
-      "score": 2280
+      "score": 1824
     },
     {
       "name": "featureA",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
-      "score": 456356
+      "score": 19264
     },
     {
       "name": "Extensions.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-      "score": 82500
+      "score": 1760
     },
     {
       "name": "refactored",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-      "score": 136356
+      "score": 11424
     },
     {
       "name": "Extensions.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
-      "score": 116106
+      "score": 7104
     },
     {
       "name": "Loading.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
-      "score": 20250
+      "score": 4320
     },
     {
       "name": "Loading.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-      "score": 237500
+      "score": 6080
     },
     {
       "name": "build.gradle",
       "path": "theglobalproject/build.gradle",
       "parentPath": "theglobalproject",
-      "score": 440
+      "score": 22
     }
   ],
   "ignoredRevisions": [
     {
       "name": "Money.java",
-      "path": "theglobalproject/lib/Money.java",
-      "isFile": true
+      "path": "theglobalproject/lib/Money.java"
     }
   ],
   "extensions": [

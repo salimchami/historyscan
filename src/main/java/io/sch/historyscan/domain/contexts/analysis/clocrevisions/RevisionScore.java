@@ -8,15 +8,15 @@ import static java.util.Comparator.reverseOrder;
 public record RevisionScore(
         long score) implements Comparable<RevisionScore> {
 
-    public static RevisionScore of(int numberOfRevisions, int currentNbLines, long existingScore) {
+    public static RevisionScore of(int revisions, long currentNbLines) {
         if (currentNbLines == 0) {
             currentNbLines = 1;
         }
-        var revisionsScore = calculateRevisionsScore(numberOfRevisions, currentNbLines);
-        return new RevisionScore(revisionsScore + existingScore);
+        var revisionsScore = calculateRevisionsScore(revisions, currentNbLines);
+        return new RevisionScore(revisionsScore);
     }
 
-    static long calculateRevisionsScore(int numberOfRevisions, int nbLines) {
+    static long calculateRevisionsScore(int numberOfRevisions, long nbLines) {
         return BigDecimal.valueOf(numberOfRevisions)
                 .multiply(BigDecimal.valueOf(nbLines))
                 .longValue();

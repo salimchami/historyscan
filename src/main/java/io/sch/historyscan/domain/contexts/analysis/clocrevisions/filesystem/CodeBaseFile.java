@@ -2,6 +2,7 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CodeBaseFile {
     public List<FileInfo> children() {
         try (var codeBaseFiles = Files.walk(rootFile.toPath())) {
             return codeBaseFiles.map(Path::toFile)
-                    .filter(codeBaseFile -> !codeBaseFile.getPath().contains("/.git"))
+                    .filter(CodeBaseFile::filterGitFolder)
                     .map(this::child)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
@@ -39,22 +40,41 @@ public class CodeBaseFile {
         }
     }
 
+    private static boolean filterGitFolder(File codeBaseFile) {
+        var filePath = codeBaseFile.getPath().replace("\\", "/");
+        return !filePath.contains("/.git");
+    }
+
     private Optional<FileInfo> child(File codeBaseFile) {
         var path = pathFromCodebaseName(codeBaseFile);
-        if (this.filterFromRootFolder(path) && this.filterIgnoredFiles(codeBaseFile, path)) {
-            return Optional.of(new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile()));
+        var currentNbLines = nbLinesOfCode(codeBaseFile);
+        final FileInfo fileInfo = new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile(), currentNbLines);
+        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo) && this.filterFromRootFolder(path)) {
+            return Optional.of(fileInfo);
         }
         return Optional.empty();
+    }
+
+    private long nbLinesOfCode(File codeBaseFile) {
+        if (codeBaseFile.isDirectory()) {
+            return 0;
+        }
+        try {
+            var lines = Files.readAllLines(codeBaseFile.toPath(), Charset.defaultCharset());
+            return lines.size();
+        } catch (IOException ex) {
+            return 0;
+        }
     }
 
     private boolean filterFromRootFolder(String path) {
         return path.contains(rootFolder.getValue());
     }
 
-    private boolean filterIgnoredFiles(File currentFile, String path) {
+    private boolean filterIgnoredFiles(File currentFile, String path, FileInfo fileInfo) {
         var isIgnored = isIgnored(path, currentFile.isFile());
         if (isIgnored && currentFile.isFile()) {
-            this.ignoredFiles.add(new FileInfo(currentFile.getName(), path, currentFile.isFile()));
+            this.ignoredFiles.add(fileInfo);
         }
         return !isIgnored;
     }

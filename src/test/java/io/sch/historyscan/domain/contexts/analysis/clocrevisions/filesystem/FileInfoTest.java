@@ -11,13 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FileInfoTest {
 
     public static Stream<Arguments> should_create_file_path_from_a_path_part_params() {
-        var commonFileInfo = new FileInfo("file.ts", "path/to/file.ts", true);
+        var commonFileInfo = new FileInfo("file.ts", "path/to/file.ts", true, 40);
         return Stream.of(
                 Arguments.of(commonFileInfo, "path", "path"),
                 Arguments.of(commonFileInfo, "to", "path/to"),
                 Arguments.of(commonFileInfo, "file.ts", "path/to/file.ts"),
-                Arguments.of(new FileInfo("junit", "junit5/junit-jupiter-api/src/main/java/org/junit", false), "junit", "junit5/junit-jupiter-api/src/main/java/org/junit"),
-                Arguments.of(new FileInfo("documentation.gradle.kts", "junit5/documentation/documentation.gradle.kts", true), "documentation", "junit5/documentation")
+                Arguments.of(new FileInfo("junit", "junit5/junit-jupiter-api/src/main/java/org/junit",
+                        false, 40), "junit", "junit5/junit-jupiter-api/src/main/java/org/junit"),
+                Arguments.of(new FileInfo("documentation.gradle.kts", "junit5/documentation/documentation.gradle.kts",
+                        true, 40), "documentation", "junit5/documentation")
         );
     }
 
@@ -29,9 +31,9 @@ class FileInfoTest {
     }
 
     public static Stream<Arguments> should_find_is_file_path_from_a_path_part_params() {
-        var fileTs = new FileInfo("file.ts", "path/to/file.ts", true);
+        var fileTs = new FileInfo("file.ts", "path/to/file.ts", true, 40);
         var domain = new FileInfo("domain",
-                "theglobalproject/src/main/java/io/mycompany/theproject/domain", false);
+                "theglobalproject/src/main/java/io/mycompany/theproject/domain", false, 0);
         return Stream.of(
                 Arguments.of(domain, "domain", false),
                 Arguments.of(fileTs, "to", false),
@@ -48,9 +50,9 @@ class FileInfoTest {
 
     public static Stream<Arguments> should_find_parent_path_from_a_part_of_path_params() {
         return Stream.of(
-                Arguments.of(new FileInfo("file.ts", "path/to/file.ts", true), "to", "path"),
-                Arguments.of(new FileInfo(".file.ts", "path/.file.ts", true), ".file.ts", "path"),
-                Arguments.of(new FileInfo("documentation.gradle.kts", "junit5/documentation/documentation.gradle.kts", true), "documentation", "junit5")
+                Arguments.of(new FileInfo("file.ts", "path/to/file.ts", true, 40), "to", "path"),
+                Arguments.of(new FileInfo(".file.ts", "path/.file.ts", true, 40), ".file.ts", "path"),
+                Arguments.of(new FileInfo("documentation.gradle.kts", "junit5/documentation/documentation.gradle.kts", true, 40), "documentation", "junit5")
         );
     }
 
