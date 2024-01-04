@@ -32,6 +32,8 @@ public enum EnumIgnoredCodeBaseFiles {
     OUT("out", FOLDER),
     GENERATED("generated", FOLDER),
     GRADLEW("gradlew", FILE),
+    DOT_GRADLE(".gradle", FOLDER),
+    GRADLE("gradle", FOLDER),
     GITATTRIBUTES("gitattributes", FILE),
     DOCUMENTATION("documentation", FOLDER),
     PACKAGE_INFO_JAVA("package-info.java", FILE);

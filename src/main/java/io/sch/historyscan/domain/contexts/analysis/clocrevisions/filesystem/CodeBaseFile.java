@@ -41,7 +41,7 @@ public class CodeBaseFile {
 
     private Optional<FileInfo> child(File codeBaseFile) {
         var path = pathFromCodebaseName(codeBaseFile);
-        if (this.filterFromRootFolder(path) && this.filterIgnoredFiles(codeBaseFile, path)) {
+        if (this.filterIgnoredFiles(codeBaseFile, path) && this.filterFromRootFolder(path)) {
             return Optional.of(new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile()));
         }
         return Optional.empty();
