@@ -14,14 +14,16 @@ public class FileSystemNode {
     private final String path;
     private final String parentPath;
     private final boolean isFile;
+    private final long currentNbLines;
     private RevisionScore score;
     private final Map<String, FileSystemNode> children;
 
-    public FileSystemNode(String name, String path, String parentPath, boolean isFile, RevisionScore score) {
+    public FileSystemNode(String name, String path, String parentPath, boolean isFile, long currentNbLines, RevisionScore score) {
         this.name = name;
         this.path = path;
         this.parentPath = parentPath;
         this.isFile = isFile;
+        this.currentNbLines = currentNbLines;
         this.score = score;
         this.children = new HashMap<>();
     }
@@ -53,6 +55,10 @@ public class FileSystemNode {
         return parentPath;
     }
 
+    public long getCurrentNbLines() {
+        return currentNbLines;
+    }
+
     public Long getScore() {
         return score != null ? score.score() : null;
     }
@@ -61,8 +67,8 @@ public class FileSystemNode {
         return children;
     }
 
-    public void updateScoreFrom(int numberOfRevisions, int currentNbLines) {
-        this.score = RevisionScore.of(numberOfRevisions, currentNbLines, score.score());
+    public void updateScoreFrom(int numberOfRevisions) {
+        this.score = RevisionScore.of(numberOfRevisions, currentNbLines);
     }
 
     public void updateScoreFrom(RevisionScore score) {

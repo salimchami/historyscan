@@ -2,10 +2,12 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class FileSystemTree {
     private final FileSystemNode root;
@@ -15,7 +17,7 @@ public class FileSystemTree {
     public FileSystemTree(RootFolder rootFolder) {
         this.rootFolder = Objects.requireNonNull(rootFolder);
         this.ignoredFiles = new ArrayList<>();
-        root = new FileSystemNode("root", "/", null, false, new RevisionScore(0));
+        root = new FileSystemNode("root", "/", null, false, 0, new RevisionScore(0));
     }
 
     public void createFrom(CodeBaseFile codeBaseFile) {
@@ -42,11 +44,13 @@ public class FileSystemTree {
             String part = codeBaseParts.get(i);
             if (!current.getChildren().containsKey(part)) {
                 var parentPath = parentPath(file, i, part);
+                var isFile = file.isFileFrom(part);
                 var newNode = new FileSystemNode(
                         part,
                         file.pathFrom(part),
-                         parentPath,
-                        file.isFileFrom(part),
+                        parentPath,
+                        isFile,
+                        isFile ? file.currentNbLines() : 0,
                         new RevisionScore(0));
                 current.addChild(part, newNode);
             }
@@ -55,19 +59,24 @@ public class FileSystemTree {
     }
 
     private String parentPath(FileInfo file, int i, String part) {
-        if(rootFolder.getCodebaseName().equals(part) && file.path().lastIndexOf(part) == 0) {
+        if (rootFolder.getCodebaseName().equals(part) && file.path().lastIndexOf(part) == 0) {
             return "/";
         }
         return i == 0 ? null : file.parentPathFrom(part);
     }
 
     public FileSystemTree updateFilesScoreFrom(List<CodeBaseCommit> history) {
-        for (CodeBaseCommit commit : history) {
-            for (var file : commit.files()) {
-                root.findFileNode(file.path())
-                        .ifPresent(node -> node.updateScoreFrom(file.cloc(), file.currentNbLines()));
-            }
-        }
+        history.stream()
+                .flatMap(commit -> commit.files().stream())
+                .collect(Collectors.groupingBy(CodeBaseHistoryCommitFile::fileInfo))
+                .forEach((key, value) -> {
+
+                    final Integer revisions = value.stream()
+                            .map(CodeBaseHistoryCommitFile::cloc)
+                            .reduce(0, Integer::sum);
+                    root.findFileNode(key.path())
+                            .ifPresent(node -> node.updateScoreFrom(revisions));
+                });
         return this;
     }
 

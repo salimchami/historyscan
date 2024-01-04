@@ -18,11 +18,12 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         String name = node.get("name").asText();
         String path = node.get("path").asText();
+        int currentNbLines = node.get("currentNbLines").asInt();
         String parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
         boolean isFile = node.get("file").asBoolean();
         RevisionScore score = new RevisionScore(node.get("score").asInt());
 
-        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, score);
+        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
 
         JsonNode childrenNode = node.get("children");
         Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();
@@ -38,11 +39,12 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
     private FileSystemNode deserialize(JsonNode node, FileSystemNode parent) {
         String name = node.get("name").asText();
         String path = node.get("path").asText();
+        int currentNbLines = node.get("currentNbLines").asInt();
         String parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
         boolean isFile = node.get("file").asBoolean();
         RevisionScore score = new RevisionScore(node.get("score").asInt());
 
-        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, score);
+        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
 
         JsonNode childrenNode = node.get("children");
         Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();

@@ -1,9 +1,11 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
 import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsDTO;
 import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsFileDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.FileInfoDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,8 +20,12 @@ public class ClocRevisionsMapper {
 
         return new CodeBaseClocRevisionsDTO(
                 revisions,
-                analyzedCodeBaseClocRevisions.ignoredRevisions(),
+                analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::fileInfoDomainToWeb).toList(),
                 analyzedCodeBaseClocRevisions.extensions());
+    }
+
+    private FileInfoDTO fileInfoDomainToWeb(FileInfo fileInfo) {
+        return new FileInfoDTO(fileInfo.name(), fileInfo.path());
     }
 
     private void convertNode(FileSystemNode node, List<CodeBaseClocRevisionsFileDTO> revisions) {

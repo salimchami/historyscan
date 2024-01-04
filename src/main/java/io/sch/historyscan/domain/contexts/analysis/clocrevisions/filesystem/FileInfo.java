@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 
 public record FileInfo(String name,
-                       String path, boolean isFile) implements Comparable<FileInfo> {
+                       String path, boolean isFile, long currentNbLines) implements Comparable<FileInfo> {
     public List<String> pathParts() {
         return Arrays.stream(path.trim().split("/")).filter(part -> !part.isEmpty()).toList();
     }
