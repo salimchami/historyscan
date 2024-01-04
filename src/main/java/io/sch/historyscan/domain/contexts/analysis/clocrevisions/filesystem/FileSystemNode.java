@@ -33,7 +33,7 @@ public class FileSystemNode {
         children.put(name, node);
     }
 
-    public FileSystemNode getChild(String path) {
+    public FileSystemNode findChild(String path) {
         return children.get(path);
     }
 

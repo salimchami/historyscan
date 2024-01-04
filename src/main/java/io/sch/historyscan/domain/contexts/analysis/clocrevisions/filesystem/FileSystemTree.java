@@ -10,7 +10,6 @@ import java.util.Objects;
 public class FileSystemTree {
     private final FileSystemNode root;
     private final RootFolder rootFolder;
-
     private final List<FileInfo> ignoredFiles;
 
     public FileSystemTree(RootFolder rootFolder) {
@@ -23,7 +22,7 @@ public class FileSystemTree {
         if (!codeBaseFile.hasSameNameAsCodeBase()) {
             throw new IllegalArgumentException("Codebase must be the same as the root folder name");
         }
-        for (FileInfo nestedCodeBaseFile : codeBaseFile.children()) {
+        for (var nestedCodeBaseFile : codeBaseFile.children()) {
             addFile(nestedCodeBaseFile);
         }
         this.ignoredFiles.addAll(codeBaseFile.getIgnoredFiles());
@@ -51,7 +50,7 @@ public class FileSystemTree {
                         new RevisionScore(0));
                 current.addChild(part, newNode);
             }
-            current = current.getChild(part);
+            current = current.findChild(part);
         }
     }
 

@@ -1,7 +1,6 @@
 package io.sch.historyscan.domain.contexts.analysis.common;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 import static io.sch.historyscan.domain.contexts.analysis.common.EnumPathType.FILE;
 import static io.sch.historyscan.domain.contexts.analysis.common.EnumPathType.FOLDER;
@@ -36,7 +35,9 @@ public enum EnumIgnoredCodeBaseFiles {
     GRADLE("gradle", FOLDER),
     GITATTRIBUTES("gitattributes", FILE),
     DOCUMENTATION("documentation", FOLDER),
-    PACKAGE_INFO_JAVA("package-info.java", FILE);
+    PACKAGE_INFO_JAVA("package-info.java", FILE),
+    IDEA_INTELLIJ(".idea", FOLDER),
+    HTML_REPORT("htmlreport", FOLDER);
 
     private final String title;
     private final EnumPathType type;
@@ -48,18 +49,16 @@ public enum EnumIgnoredCodeBaseFiles {
 
     public static boolean isIgnored(String path, boolean isFile) {
         return Arrays.stream(values()).anyMatch(ignoredFile -> isIgnored(path, isFile, ignoredFile));
-
     }
 
     private static boolean isIgnored(String path, boolean isFile, EnumIgnoredCodeBaseFiles ignoredFile) {
-        final String formattedPath = path.replace("\\", "/").trim().toLowerCase(Locale.ROOT);
-        final boolean containsFolder = formattedPath.contains("/%s".formatted(ignoredFile.title));
+        final String formattedPath = path.replace("\\", "/").trim().toLowerCase();
         if (isFile) {
-            var fileName = formattedPath.substring(formattedPath.lastIndexOf("/") + 1);
-            return (containsFolder && !fileName.startsWith(ignoredFile.title)) || fileName.equals(ignoredFile.title);
-        } else if (ignoredFile.type == FOLDER) {
-            return containsFolder;
+            return Arrays.stream(values()).anyMatch(folder -> folder.type == FOLDER && formattedPath.contains(folder.title + "/"))
+                    || formattedPath.substring(formattedPath.lastIndexOf("/") + 1)
+                    .equals(ignoredFile.title) && ignoredFile.type == FILE;
+        } else {
+            return formattedPath.contains(ignoredFile.title + "/") || formattedPath.contains("/" + ignoredFile.title);
         }
-        return false;
     }
 }

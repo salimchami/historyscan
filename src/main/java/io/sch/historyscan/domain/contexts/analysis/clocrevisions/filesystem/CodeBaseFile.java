@@ -29,7 +29,7 @@ public class CodeBaseFile {
     public List<FileInfo> children() {
         try (var codeBaseFiles = Files.walk(rootFile.toPath())) {
             return codeBaseFiles.map(Path::toFile)
-                    .filter(codeBaseFile -> !codeBaseFile.getPath().contains("/.git"))
+                    .filter(CodeBaseFile::filterGitFolder)
                     .map(this::child)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
@@ -37,6 +37,11 @@ public class CodeBaseFile {
         } catch (IOException e) {
             throw new CodebasePathCanNotBeRead("Error while reading codebase files tree", e);
         }
+    }
+
+    private static boolean filterGitFolder(File codeBaseFile) {
+        var filePath = codeBaseFile.getPath().replace("\\", "/");
+        return !filePath.contains("/.git");
     }
 
     private Optional<FileInfo> child(File codeBaseFile) {

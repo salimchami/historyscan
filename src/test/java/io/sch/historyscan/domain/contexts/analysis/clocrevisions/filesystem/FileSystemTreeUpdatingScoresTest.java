@@ -40,5 +40,4 @@ class FileSystemTreeUpdatingScoresTest {
                 .extracting(FileSystemTree::getRoot)
                 .isEqualTo(expectedRoot);
     }
-
 }
