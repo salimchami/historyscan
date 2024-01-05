@@ -4,7 +4,6 @@ import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRev
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
 import io.sch.historyscan.infrastructure.features.analysis.dto.ClocRevisionsFileNodeDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.ClocRevisionsFileTreeDTO;
 import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsDTO;
 import io.sch.historyscan.infrastructure.features.analysis.dto.FileInfoDTO;
 import org.springframework.stereotype.Component;
@@ -23,10 +22,9 @@ public class ClocRevisionsMapper {
                 analyzedCodeBaseClocRevisions.extensions());
     }
 
-    private ClocRevisionsFileTreeDTO domainToWeb(FileSystemNode root) {
-        return new ClocRevisionsFileTreeDTO(
-                new ClocRevisionsFileNodeDTO(root.getName(), root.getPath(), root.getParentPath(), root.isFile(),
-                        root.getCurrentNbLines(), root.getScore(), domainToWebChildren(root.getChildren())));
+    private ClocRevisionsFileNodeDTO domainToWeb(FileSystemNode node) {
+        return new ClocRevisionsFileNodeDTO(node.getName(), node.getPath(), node.getParentPath(), node.isFile(),
+                        node.getCurrentNbLines(), node.getScore(), domainToWebChildren(node.getChildren()));
     }
 
     private List<ClocRevisionsFileNodeDTO> domainToWebChildren(Map<String, FileSystemNode> children) {
