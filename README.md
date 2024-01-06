@@ -60,8 +60,15 @@ work@salimchami.net
 
 ## Version History
 
-* current version:
-    * 1.0.0-BETA
+* 1.0.0-ALPHA:
+    * better score calculation
+    * file system tree domain entity corresponding to the codebase file system tree
+
+* 0.0.1
+    * init project
+    * add git repository cloning feature (fetch, pull...)
+    * add git repository analysis feature
+    * add score calculation feature
 
 ## License
 
