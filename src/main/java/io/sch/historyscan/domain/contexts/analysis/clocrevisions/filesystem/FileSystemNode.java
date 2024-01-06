@@ -29,9 +29,6 @@ public class FileSystemNode {
     }
 
     public void addChild(String name, FileSystemNode node) {
-        if (!this.name.equals("root") && !"%s/%s".formatted(node.parentPath, node.name).equals(node.path)) {
-            throw new IllegalArgumentException("The node path must be equal to the parent path + the name");
-        }
         children.put(name, node);
     }
 
