@@ -1,0 +1,5 @@
+{
+  "name": "theglobalproject",
+  "analysisType": "cloc-revisions",
+  "rootFolder": "domain"
+}

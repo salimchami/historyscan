@@ -7,7 +7,7 @@
     "domain": {
       "name": "domain",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
+      "parentPath": "/",
       "score": 0,
       "currentNbLines": 0,
       "children": {
