@@ -61,7 +61,7 @@ work@salimchami.net
 ## Version History
 
 * current version:
-    * 0.0.1-SNAPSHOT
+    * 1.0.0-BETA
 
 ## License
 
