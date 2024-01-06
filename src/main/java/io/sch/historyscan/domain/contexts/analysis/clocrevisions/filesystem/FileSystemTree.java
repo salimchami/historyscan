@@ -59,7 +59,8 @@ public class FileSystemTree {
     }
 
     private String parentPath(FileInfo file, int i, String part) {
-        if (rootFolder.getCodebaseName().equals(part) && file.path().lastIndexOf(part) == 0) {
+        if ((rootFolder.getCodebaseName().equals(part)
+                && file.path().lastIndexOf(part) == 0) || rootFolder.getValue().equals(part)) {
             return "/";
         }
         return i == 0 ? null : file.parentPathFrom(part);
