@@ -8,16 +8,15 @@ import java.util.Objects;
 
 public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRevisionsDTO> {
 
-    private final List<CodeBaseClocRevisionsFileDTO> revisions;
+    private final ClocRevisionsFileNodeDTO node;
     private final List<FileInfoDTO> ignoredRevisions;
     private final List<String> extensions;
 
     @JsonCreator
     public CodeBaseClocRevisionsDTO(
-            List<CodeBaseClocRevisionsFileDTO> revisions,
-            List<FileInfoDTO> ignoredRevisions,
+            ClocRevisionsFileNodeDTO node, List<FileInfoDTO> ignoredRevisions,
             List<String> extensions) {
-        this.revisions = revisions;
+        this.node = node;
         this.ignoredRevisions = ignoredRevisions;
         this.extensions = extensions;
     }
@@ -30,8 +29,8 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
         return extensions;
     }
 
-    public List<CodeBaseClocRevisionsFileDTO> getRevisions() {
-        return revisions;
+    public ClocRevisionsFileNodeDTO getNode() {
+        return node;
     }
 
     @Override
@@ -40,13 +39,11 @@ public class CodeBaseClocRevisionsDTO extends RepresentationModel<CodeBaseClocRe
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CodeBaseClocRevisionsDTO that = (CodeBaseClocRevisionsDTO) o;
-        return Objects.equals(revisions, that.revisions)
-                && Objects.equals(ignoredRevisions, that.ignoredRevisions)
-                && Objects.equals(extensions, that.extensions);
+        return Objects.equals(node, that.node) && Objects.equals(ignoredRevisions, that.ignoredRevisions) && Objects.equals(extensions, that.extensions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), revisions, ignoredRevisions, extensions);
+        return Objects.hash(super.hashCode(), node, ignoredRevisions, extensions);
     }
 }
