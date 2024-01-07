@@ -28,10 +28,15 @@ by Adam Tornhill.
 
 ### Dependencies
 
+#### Backend 
 - Java
 - Spring Boot
 - Gradle
 
+#### Frontend 
+- NodeJS
+- Angular 
+- 
 ### Install and start
 
 #### Backend
@@ -50,8 +55,27 @@ by Adam Tornhill.
 ```
 
 #### Frontend
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
-Please refer to the README.md file in the [frontend repository](https://github.com/salimchami/historyscan-statics.git).
+##### Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+##### Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+##### Build
+
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+##### Running unit tests
+
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+##### Running end-to-end tests
+
+Run `npm run e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Authors
 
@@ -72,4 +96,4 @@ work@salimchami.net
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the CC BY-NC License - see the LICENSE.md file for details.

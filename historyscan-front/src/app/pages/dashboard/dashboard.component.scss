@@ -1,0 +1,20 @@
+.container {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: 500px;
+}
+
+.add-repository {
+  width: 100%;
+}

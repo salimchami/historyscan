@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+  <img [ngSrc]="'favicon.ico'" alt="Git History Scan" [height]="30" [width]="30" />
+  <a class="navbar-link" [routerLink]="['']">
+    Git History Scan</a>
+  <mat-divider [vertical]="true"></mat-divider>
+  <a class="navbar-link" mat-button (click)="goToCodebases()">Codebases</a>
+</mat-toolbar>

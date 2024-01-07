@@ -1,0 +1,23 @@
+@import "src/theme/variables";
+
+mat-progress-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: red;
+}
+
+.actions-buttons-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+
+.actions-buttons-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}

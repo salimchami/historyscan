@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Root folder</h1>
+<div mat-dialog-content>
+  <p>Please indicate the root directory from which the grouping will be performed</p>
+  <span class="root-folder-examples">
+    <pre>If the root folder is a sub-folder, you can put only its name without the full path.</pre>
+    <pre style="color: #732f2f">The root folder must be unique !</pre>
+    <pre>Examples:</pre>
+    <pre>- /</pre>
+    <pre>- src/main/java/io.mycompany.myproject/domain/boundedcontexts/</pre>
+    <pre>- /boundedcontexts</pre>
+    <pre>- boundedcontexts</pre>
+  </span>
+  <mat-form-field>
+    <mat-label>Folder</mat-label>
+    <input matInput [(ngModel)]="folder" [required]="true">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [disabled]="!folderValid()" [mat-dialog-close]="folder">Ok</button>
+</div>
