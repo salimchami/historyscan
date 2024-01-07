@@ -71,3 +71,10 @@ Thumbs.db
 
 ### VS Code ###
 .vscode/
+
+### Build ###
+!**/node_modules/
+**/out-tsc/
+**/dist/
+**/build/
+**/.angular
