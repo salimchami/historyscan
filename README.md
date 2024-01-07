@@ -35,13 +35,13 @@ by Adam Tornhill.
 
 #### Frontend 
 - NodeJS
-- Angular 
-- 
+- Angular
+
 ### Install and start
 
 #### Backend
 
-- update the application.properties to update the codebases root folder path.
+- Update the application.properties to update the codebases root folder path.
 
 ```
     io.sch.historyscan.codebases.folder=[YOUR_PATH]
@@ -55,27 +55,26 @@ by Adam Tornhill.
 ```
 
 #### Frontend
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
-##### Development server
+- Install dependencies.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+    npm i
+```
 
-##### Code scaffolding
+- Start the Angular application on the default port.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+    npm run start
+```
 
-##### Build
+#### Url 
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Open the application on the default port.
 
-##### Running unit tests
-
-Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-##### Running end-to-end tests
-
-Run `npm run e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+    http://localhost:4200
+```
 
 ## Authors
 
