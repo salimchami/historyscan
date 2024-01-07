@@ -1,0 +1,45 @@
+<div class="container" [formGroup]="analysisForm">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle #ignored_files>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ignored files
+          <button mat-icon-button>
+            <i class="material-icons" *ngIf="!ignored_files.expanded">arrow_downward</i>
+            <i class="material-icons" *ngIf="ignored_files.expanded">arrow_upward</i>
+          </button>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="bold" *ngIf="!codebaseClocRevisions.ignoredRevisions.length">No data</div>
+      <ul>
+        <li *ngFor="let ignoredRevision of codebaseClocRevisions.ignoredRevisions">
+          <div>
+            <div>Name: {{ ignoredRevision.name }}</div>
+          </div>
+        </li>
+      </ul>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-divider></mat-divider>
+  <div style="margin-top: 15px">
+    <section>
+      <div class="buttons-row">
+        <button mat-raised-button (click)="unselectAll()" color="warn" *ngIf="!disabledButtons()">Unselect all</button>
+        <button mat-raised-button (click)="selectAll()" color="warn" *ngIf="!disabledButtons()">Select all</button>
+        <button mat-raised-button (click)="onRefresh()" color="primary" *ngIf="!disabledButtons()">Refresh graph
+        </button>
+      </div>
+    </section>
+    <div formArrayName="extensions">
+      <ng-container *ngFor="let extension of codebaseClocRevisions.extensions; let i = index">
+        <mat-checkbox [formControlName]="i">
+          {{ extension }}
+        </mat-checkbox>
+      </ng-container>
+    </div>
+  </div>
+  <div style="margin-top: 15px; margin-left: 20px; width: 97%; border: solid #732f2f;">
+    <app-treemap-chart #treemapChart></app-treemap-chart>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+section {
+  display: table;
+}
+
+.buttons-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.buttons-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.node {
+  box-sizing: border-box;
+  position: absolute;
+  overflow: hidden;
+}
+
+.node-label {
+  padding: 4px;
+  line-height: 1em;
+  white-space: pre;
+}
+
+.node-value {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 9px;
+  margin-top: 1px;
+}

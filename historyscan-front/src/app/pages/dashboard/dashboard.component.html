@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="vertical-center">
+    <h2>Add a Git repository</h2>
+    <form [formGroup]="addRepoForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="add-repository">
+        <mat-label>Url</mat-label>
+        <input matInput autofocus placeholder="Repository url (https://, git://)"
+               formControlName="url">
+      </mat-form-field>
+      <mat-form-field class="add-repository">
+        <mat-label>Name</mat-label>
+        <input matInput autofocus placeholder="Repository name (without '.git')"
+               formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="add-repository">
+        <mat-label>Branch</mat-label>
+        <input matInput autofocus placeholder="Repository branch name (main, feature, ...)"
+               formControlName="branch">
+      </mat-form-field>
+      <mat-form-field class="add-repository">
+        <mat-label>Secret key</mat-label>
+        <input matInput autofocus placeholder="Repository secret key (git, ssh)"
+               formControlName="secretKey" [readonly]="!secretKeyEnabled">
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="primary"
+              [disabled]="!isSubmitButtonEnabled()">Add Repository</button>
+    </form>
+  </div>
+</div>
