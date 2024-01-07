@@ -222,6 +222,7 @@
     ],
     "file": false
   },
+  "llmAnalysis":"",
   "ignoredRevisions": [
     {
       "name": "Money.java",
