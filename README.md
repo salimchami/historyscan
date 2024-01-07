@@ -8,6 +8,10 @@ This project is a Java application built with Spring Boot and Gradle.
 It's inspired from the book [Your Code as a Crime Scene](https://pragprog.com/titles/atcrime2/your-code-as-a-crime-scene-second-edition)
 by Adam Tornhill.
 
+**the result is a tree of cloc revisions with score**.
+
+![treemap screenshot](treemap-screenshot.png)
+
 ## Features
 
 - **Git Repository Analysis**: Analyzes a Git repository history and the current codebase file system tree from the disk
