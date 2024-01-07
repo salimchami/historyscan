@@ -5,7 +5,7 @@
 This project is a Java application built with Spring Boot and Gradle.
 
 **It involves features for codebase Git analysis**.
-It's inspired from the book [Your Code as a Crime Scene](https://pragprog.com/book/atcrime/your-code-as-a-crime-scene)
+It's inspired from the book [Your Code as a Crime Scene](https://pragprog.com/titles/atcrime2/your-code-as-a-crime-scene-second-edition)
 by Adam Tornhill.
 
 ## Features
