@@ -24,7 +24,6 @@ export class RootFolderDialog {
 
   constructor(
     public dialogRef: MatDialogRef<RootFolderDialog>,
-    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
   }
 
