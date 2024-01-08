@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'io.sch'
-version = '1.0.0-ALPHA'
+version = '1.0.1-BETA'
 
 java {
     sourceCompatibility = '17'

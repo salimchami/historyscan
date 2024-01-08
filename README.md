@@ -87,6 +87,9 @@ work@salimchami.net
 
 ## Version History
 
+* 1.0.1-BETA:
+    * fix path and name of file when root folder is a path like "src/main/java/com/example/domain"
+
 * 1.0.0-ALPHA:
     * better score calculation
     * file system tree domain entity corresponding to the codebase file system tree
