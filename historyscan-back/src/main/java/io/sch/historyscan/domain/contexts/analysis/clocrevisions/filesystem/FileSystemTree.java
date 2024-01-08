@@ -31,7 +31,7 @@ public class FileSystemTree {
     }
 
     private void addFile(FileInfo file) {
-        final List<String> parts = file.pathParts();
+        final List<String> parts = file.pathParts(rootFolder.getValue());
         int partsIndexFromRootFolder = parts.indexOf(rootFolder.getValue());
         if (partsIndexFromRootFolder != -1) {
             addFileParts(parts, file, partsIndexFromRootFolder);
@@ -44,7 +44,7 @@ public class FileSystemTree {
             String part = codeBaseParts.get(i);
             if (!current.getChildren().containsKey(part)) {
                 var parentPath = parentPath(file, i, part);
-                var isFile = file.isFileFrom(part);
+                var isFile = file.isFileFrom(part, rootFolder.getValue());
                 var newNode = new FileSystemNode(
                         part,
                         file.pathFrom(part),

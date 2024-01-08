@@ -12,7 +12,8 @@ public class RootFolder {
 
     public static RootFolder of(String rootFolder, String codeBaseName) {
         var actualValue = formattedValue(rootFolder, codeBaseName);
-        return new RootFolder(actualValue, codeBaseName);
+        return new RootFolder(actualValue.replace("\\", "/"),
+                codeBaseName.replace("\\", "/"));
     }
 
     private static String formattedValue(String value, String codebaseName) {

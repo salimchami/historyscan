@@ -49,7 +49,7 @@ public class CodeBaseFile {
         var path = pathFromCodebaseName(codeBaseFile);
         var currentNbLines = nbLinesOfCode(codeBaseFile);
         final FileInfo fileInfo = new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile(), currentNbLines);
-        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo) && this.filterFromRootFolder(path)) {
+        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo) && path.contains(rootFolder.getValue())) {
             return Optional.of(fileInfo);
         }
         return Optional.empty();
@@ -65,10 +65,6 @@ public class CodeBaseFile {
         } catch (IOException ex) {
             return 0;
         }
-    }
-
-    private boolean filterFromRootFolder(String path) {
-        return path.contains(rootFolder.getValue());
     }
 
     private boolean filterIgnoredFiles(File currentFile, String path, FileInfo fileInfo) {

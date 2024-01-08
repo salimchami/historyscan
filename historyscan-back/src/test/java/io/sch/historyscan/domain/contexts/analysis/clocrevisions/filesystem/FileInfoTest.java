@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +20,10 @@ class FileInfoTest {
                 Arguments.of(new FileInfo("junit", "junit5/junit-jupiter-api/src/main/java/org/junit",
                         false, 40), "junit", "junit5/junit-jupiter-api/src/main/java/org/junit"),
                 Arguments.of(new FileInfo("documentation.gradle.kts", "junit5/documentation/documentation.gradle.kts",
-                        true, 40), "documentation", "junit5/documentation")
+                        true, 40), "documentation", "junit5/documentation"),
+                Arguments.of(new FileInfo("mycompany/theproject/domain", "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+                        true, 40), "mycompany/theproject/domain", "theglobalproject/src/main/java/io/mycompany/theproject/domain")
+
         );
     }
 
@@ -28,6 +32,21 @@ class FileInfoTest {
     void should_create_file_path_from_a_path_part(FileInfo fileInfo, String part, String expectedPath) {
         var path = fileInfo.pathFrom(part);
         assertThat(path).isEqualTo(expectedPath);
+    }
+
+    public static Stream<Arguments> should_find_path_parts_even_if_rootfolder_contains_slashes_params() {
+        return Stream.of(
+                Arguments.of("path", List.of("path", "to", "file.ts")),
+                Arguments.of("path/to", List.of("path/to", "file.ts"))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("should_find_path_parts_even_if_rootfolder_contains_slashes_params")
+    void should_find_path_parts_even_if_rootfolder_contains_slashes(String rootFolder, List<String> expectedParts) {
+        var fileInfo = new FileInfo("file.ts", "path/to/file.ts", true, 40);
+        var pathParts = fileInfo.pathParts(rootFolder);
+        assertThat(pathParts).isEqualTo(expectedParts);
     }
 
     public static Stream<Arguments> should_find_is_file_path_from_a_path_part_params() {
@@ -44,7 +63,7 @@ class FileInfoTest {
     @ParameterizedTest
     @MethodSource("should_find_is_file_path_from_a_path_part_params")
     void should_find_is_file_path_from_a_path_part(FileInfo fileInfo, String pathPart, boolean expectedIsFile) {
-        var isFile = fileInfo.isFileFrom(pathPart);
+        var isFile = fileInfo.isFileFrom(pathPart, "domain");
         assertThat(isFile).isEqualTo(expectedIsFile);
     }
 

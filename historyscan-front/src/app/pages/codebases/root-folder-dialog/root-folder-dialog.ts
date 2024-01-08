@@ -24,12 +24,15 @@ export class RootFolderDialog {
 
   constructor(
     public dialogRef: MatDialogRef<RootFolderDialog>,
-    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  submitFolder() {
+    this.dialogRef.close(this.folder);
   }
 
   folderValid() {
