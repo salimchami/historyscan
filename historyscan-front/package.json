@@ -1,6 +1,6 @@
 {
   "name": "history-scan-web",
-  "version": "1.0.0-alpha",
+  "version": "1.0.1-beta",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config src/environments/proxy.config.json --watch --port 4200",
