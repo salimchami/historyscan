@@ -18,13 +18,14 @@ public class ClocRevisionsMapper {
 
         return new CodeBaseClocRevisionsDTO(
                 domainToWeb(root),
+                analyzedCodeBaseClocRevisions.llmAnalysis(),
                 analyzedCodeBaseClocRevisions.ignoredRevisions().stream().map(this::fileInfoDomainToWeb).toList(),
                 analyzedCodeBaseClocRevisions.extensions());
     }
 
     private ClocRevisionsFileNodeDTO domainToWeb(FileSystemNode node) {
         return new ClocRevisionsFileNodeDTO(node.getName(), node.getPath(), node.getParentPath(), node.isFile(),
-                        node.getCurrentNbLines(), node.getScore(), domainToWebChildren(node.getChildren()));
+                node.getCurrentNbLines(), node.getScore(), domainToWebChildren(node.getChildren()));
     }
 
     private List<ClocRevisionsFileNodeDTO> domainToWebChildren(Map<String, FileSystemNode> children) {
