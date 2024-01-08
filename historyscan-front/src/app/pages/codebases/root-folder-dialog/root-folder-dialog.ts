@@ -32,6 +32,10 @@ export class RootFolderDialog {
     this.dialogRef.close();
   }
 
+  submitFolder() {
+    this.dialogRef.close(this.folder);
+  }
+
   folderValid() {
     return this.folder && this.folder.length >= 1;
   }
