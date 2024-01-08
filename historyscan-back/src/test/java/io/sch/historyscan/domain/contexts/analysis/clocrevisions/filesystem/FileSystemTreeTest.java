@@ -15,6 +15,7 @@ class FileSystemTreeTest {
     public static Stream<Arguments> should_load_file_system_tree_from_disk_params() {
         return Stream.of(
                 Arguments.of("domain", "domain"),
+                Arguments.of("mycompany/theproject/domain", "domain-with-path"),
                 Arguments.of("/", "theglobalproject"),
                 Arguments.of("", "theglobalproject")
         );
