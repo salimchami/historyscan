@@ -20,7 +20,7 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
                 Arguments.of("codebase-to-analyze-history", "codebase-history"),
                 Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
                 Arguments.of("codebase-to-analyze-cloc-revisions-domain", "codebase-cloc-revisions-domain"),
-                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain")
+                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path")
         );
     }
 

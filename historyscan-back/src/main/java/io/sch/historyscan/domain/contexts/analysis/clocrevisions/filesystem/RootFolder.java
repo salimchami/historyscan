@@ -17,7 +17,13 @@ public class RootFolder {
     }
 
     private static String formattedValue(String value, String codebaseName) {
-        if (value.isEmpty() || value.startsWith("/") || value.startsWith("\\")) {
+        if (value.isEmpty()
+            || value.equals("/")
+            || value.equals("\\")
+            || value.equals(codebaseName)
+            || value.equals("\\".concat(codebaseName))
+            || value.equals("/".concat(codebaseName))
+        ) {
             return codebaseName;
         }
         return value
