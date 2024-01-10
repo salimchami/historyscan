@@ -71,7 +71,6 @@ public class FileSystemTree {
                 .flatMap(commit -> commit.files().stream())
                 .collect(Collectors.groupingBy(CodeBaseHistoryCommitFile::fileInfo))
                 .forEach((key, value) -> {
-
                     final Integer revisions = value.stream()
                             .map(CodeBaseHistoryCommitFile::cloc)
                             .reduce(0, Integer::sum);
