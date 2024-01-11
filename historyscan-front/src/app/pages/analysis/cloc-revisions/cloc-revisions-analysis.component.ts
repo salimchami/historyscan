@@ -7,6 +7,8 @@ import {LocalstorageService} from "../../../shared/localstorage.service";
 import {TreemapChartComponent} from "../../../components/treemap-chart/treemap-chart.component";
 import {ClocRevisionsService} from "./cloc-revisions.service";
 import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrevisions-file-tree.model";
+import {MatDialog} from "@angular/material/dialog";
+import {ClocRevisionsTreeUploadDialogComponent} from "./upload-dialog/cloc-revisions-tree-upload-dialog.component";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
@@ -24,7 +26,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
               private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService,
-              private readonly clocRevisionsService: ClocRevisionsService) {
+              private readonly clocRevisionsService: ClocRevisionsService,
+              private readonly dialog: MatDialog) {
     this.analysisForm = this.fb.group({
       extensions: this.fb.array([]),
       search: [''],
@@ -118,7 +121,19 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
         this.codebaseClocRevisions.node));
   }
 
-  canDownload() {
-    return this.codebaseClocRevisions?.node !== undefined;
+  canDownloadOrUpload() {
+    return !!this.codebaseClocRevisions?.node?.children?.length;
+  }
+
+  upload() {
+    this.dialog.open(ClocRevisionsTreeUploadDialogComponent, {
+      width: '50%',
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.initialCodebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
+        this.codebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
+        this.initRevisionsTreeMap();
+      }
+    });
   }
 }

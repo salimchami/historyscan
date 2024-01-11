@@ -1,6 +1,7 @@
 package io.sch.historyscan.infrastructure.features.analysis.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
@@ -16,7 +17,8 @@ public class ClocRevisionsFileNodeDTO extends RepresentationModel<ClocRevisionsF
     private final List<ClocRevisionsFileNodeDTO> children;
 
     @JsonCreator
-    public ClocRevisionsFileNodeDTO(String name, String path, String parentPath, boolean isFile, long currentNbLines, long score,
+    public ClocRevisionsFileNodeDTO(String name, String path, String parentPath,
+                                    @JsonProperty("isFile") boolean isFile, long currentNbLines, long score,
                                     List<ClocRevisionsFileNodeDTO> children) {
         this.name = name;
         this.path = path;
@@ -39,6 +41,7 @@ public class ClocRevisionsFileNodeDTO extends RepresentationModel<ClocRevisionsF
         return parentPath;
     }
 
+    @JsonProperty("isFile")
     public boolean isFile() {
         return isFile;
     }
