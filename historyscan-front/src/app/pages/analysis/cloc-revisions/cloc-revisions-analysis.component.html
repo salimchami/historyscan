@@ -49,11 +49,11 @@
         Increase the chances of finding your file or folder by providing the most complete path possible.
       </mat-hint>
     </mat-form-field>
-    <button mat-raised-button class="user-action-button" (click)="download()" color="primary" [disabled]="!canDownloadOrUpload()"
+    <button mat-raised-button class="user-action-button" (click)="download()" color="primary" [disabled]="!canDownload()"
             matTooltip="Download codebase files tree (json)">Download
       <span class="material-icons">download</span>
     </button>
-    <button mat-raised-button class="user-action-button" (click)="upload()" color="warn" [disabled]="!canDownloadOrUpload()"
+    <button mat-raised-button class="user-action-button" (click)="upload()" color="warn" [disabled]="!canUpload()"
             matTooltip="Uplaod codebase files tree (json)">Upload
       <span class="material-icons">upload</span>
     </button>
