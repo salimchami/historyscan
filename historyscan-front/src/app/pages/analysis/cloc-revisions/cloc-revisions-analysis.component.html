@@ -22,7 +22,7 @@
     </mat-expansion-panel>
   </mat-accordion>
   <mat-divider></mat-divider>
-  <div style="margin-top: 15px; margin-left: 15px">
+  <div style="margin-top: 15px; margin-left: 15px" *ngIf="codebaseClocRevisions.extensions.length > 1">
     <section>
       <div class="buttons-row">
         <button mat-raised-button (click)="unselectAll()" color="warn" *ngIf="!disabledButtons()">Unselect all</button>
