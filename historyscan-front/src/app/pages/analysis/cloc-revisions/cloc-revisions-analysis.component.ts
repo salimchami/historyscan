@@ -4,6 +4,8 @@ import {AnalysisService} from "../../codebases/analysis.service";
 import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocalstorageService} from "../../../shared/localstorage.service";
+import {CodebaseClocRevisionsFileTree} from "./codebase-cloc-revisions-file-tree.model";
+import {TreemapChartComponent} from "../../../components/treemap-chart/treemap-chart.component";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
@@ -11,21 +13,28 @@ import {LocalstorageService} from "../../../shared/localstorage.service";
   styleUrls: ['./cloc-revisions-analysis.component.scss'],
 })
 export class ClocRevisionsAnalysisComponent implements OnInit {
-  @ViewChild('treemapChart') treemapChart: any;
+  @ViewChild('treemapChart') treemapChart!: TreemapChartComponent;
   analysisForm: FormGroup;
   initialCodebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
   codebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
+  showSearchHint: boolean = false;
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService) {
     this.analysisForm = this.fb.group({
-      extensions: this.fb.array([])
+      extensions: this.fb.array([]),
+      search: [''],
     });
   }
 
   ngOnInit(): void {
+    this.initData();
+    this.onSearchType();
+  }
+
+  private initData() {
     this.activatedRoute.paramMap.subscribe(() => {
       this.analysisService.clocAndRevisions().subscribe({
         next: (codebaseClocRevisions) => {
@@ -88,6 +97,14 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   private select(value: boolean) {
     this.extensionsFormArray.controls.forEach((control) => {
       control.setValue(value);
+    });
+  }
+
+  private onSearchType() {
+    this.analysisForm.get('search')?.valueChanges.subscribe((targetItem: string) => {
+      if (targetItem && targetItem.length > 3) {
+        this.treemapChart.zoomOn(targetItem);
+      }
     });
   }
 }
