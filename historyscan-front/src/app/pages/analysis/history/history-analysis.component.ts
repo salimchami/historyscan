@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AnalysisService} from "../../codebases/analysis.service";
+import {AnalysisService} from "../analysis.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {CodebaseHistoryFile} from "./codebase-history-file.model";
 import {HistoryTableService} from "./history-table.service";

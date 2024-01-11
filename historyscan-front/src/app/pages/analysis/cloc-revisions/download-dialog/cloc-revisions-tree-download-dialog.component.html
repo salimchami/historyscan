@@ -1,0 +1,32 @@
+<h2 style="text-align: center"><strong>Codebase files tree</strong></h2>
+
+<h2 mat-dialog-title><span><strong>Url:</strong></span> {{ codebaseUrl }}</h2>
+<h4 mat-dialog-title><span><strong>Branch:</strong></span> {{ codebaseBranch }}</h4>
+<mat-divider></mat-divider>
+<mat-dialog-actions class="app-dialog-actions">
+  <div style="display: flex; justify-content: space-between; width: 100%;">
+    <div>
+      <a mat-raised-button [href]="sanitizedBlobUrl"
+         [download]="filename" color="primary" (click)="download()">Download
+        <mat-icon matIconSuffix>download</mat-icon>
+      </a>
+      <button mat-raised-button (click)="viewInBrowser()"> View in browser
+        <mat-icon matIconSuffix>code</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="warn" (click)="close()"> Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>
+<mat-card *ngIf="displayJson" class="display-json-card">
+  <mat-card-content>
+    <div class="copy-icon">
+      <button mat-icon-button (click)="copyText()">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <pre class="scrollable-content" >{{ jsonPayload }}</pre>
+  </mat-card-content>
+</mat-card>
