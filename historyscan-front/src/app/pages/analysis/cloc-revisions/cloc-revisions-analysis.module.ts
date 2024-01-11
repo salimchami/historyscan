@@ -3,10 +3,11 @@ import {ClocRevisionsAnalysisComponent} from "./cloc-revisions-analysis.componen
 import {SharedModule} from "../../../shared";
 import {AnalysisService} from "../../codebases/analysis.service";
 import {TreemapChartModule} from "../../../components/treemap-chart/treemap-chart.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [ClocRevisionsAnalysisComponent],
-  imports: [SharedModule, TreemapChartModule],
+  imports: [SharedModule, TreemapChartModule, ReactiveFormsModule],
   providers: [AnalysisService]
 })
 export class ClocRevisionsAnalysisModule {

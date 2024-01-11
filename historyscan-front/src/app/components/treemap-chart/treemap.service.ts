@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {EChartsOption} from "echarts";
+import {EChartsOption, SeriesOption} from "echarts";
 import {
   CodebaseClocRevisionsFileTree
 } from "../../pages/analysis/cloc-revisions/codebase-cloc-revisions-file-tree.model";
@@ -14,9 +14,17 @@ export class TreemapService {
     };
   }
 
+  public searchItemInTreemap(seriesItem: SeriesOption, targetItem: string) {
+    if (seriesItem && 'type' in seriesItem && seriesItem.type === 'treemap' && 'data' in seriesItem) {
+      const data = seriesItem.data;
+      return this.findInSeries(data![0], targetItem);
+    }
+    return null;
+  }
+
   toTreeMapOptions(node: CodebaseClocRevisionsFileTree, title: string, description: string): EChartsOption {
     const data = this.createTreeStructure(node);
-    console.log(data);
+    const maxScore = this.findMaxScore(node);
     return {
       title: {
         text: title,
@@ -38,13 +46,27 @@ export class TreemapService {
           fontFamily: 'monospace',
         },
         formatter: (params: any) => {
-          // params contient toutes les informations sur l'élément survolé
-          const name = params.name; // ou params.data.name
-          const path = params.data.path; // ou params.data.value
-          const score = this.formatScore(params.value); // Accès à la propriété extraInfo
-
+          const name = params.name;
+          const path = params.data.path;
+          const score = this.formatScore(params.value);
           return `Name: ${name}<br>Path: ${path}<br>Score: ${score}`;
         }
+      },
+      visualMap: {
+        type: 'continuous',
+        min: 0,
+        max: maxScore,
+        inRange: {
+          color: [
+            '#2f6e7c',
+            '#8b63d3',
+            '#a1597f',
+
+            '#c95239',
+            '#c74a21',
+            '#b13333',
+          ]
+        },
       },
       series: [
         {
@@ -55,7 +77,11 @@ export class TreemapService {
           },
           label: {
             show: true,
-            formatter: '{b}'
+            color: '#000',
+            formatter: (params: any) => params.data.isFile ? `${params.name}\n ${params.value}` : params.name,
+          },
+          breadcrumb: {
+            top: 1,
           },
           height: '100%',
           upperLabel: {
@@ -66,45 +92,46 @@ export class TreemapService {
             fontSize: 10,
             lineHeight: 10,
           },
-          visibleMin: 300,
+          visibleMin: 2,
           levels: this.levelOption(),
           data,
+          selectedMode: 'single',
         },
-      ],
+
+      ] as SeriesOption[],
     };
   }
 
- levelOption() {
+  private findMaxScore(node: CodebaseClocRevisionsFileTree): number {
+    let maxScore = node.isFile ? node.score : 0;
+
+    if (node.children && node.children.length > 0) {
+      for (const child of node.children) {
+        const childMax = this.findMaxScore(child);
+        if (childMax > maxScore) {
+          maxScore = childMax;
+        }
+      }
+    }
+
+    return maxScore;
+
+  }
+
+  private levelOption() {
     return [
       {
-        itemStyle: {
-          borderColor: '#777',
-          borderWidth: 0,
-          gapWidth: 1
-        },
-        upperLabel: {
-          show: false
-        }
-      },
-      {
-        itemStyle: {
-          borderColor: '#555',
-          borderWidth: 5,
-          gapWidth: 1
-        },
         emphasis: {
           itemStyle: {
             borderColor: '#ddd'
           }
-        }
-      },
-      {
-        colorSaturation: [0.35, 0.5],
-        itemStyle: {
-          borderWidth: 5,
-          gapWidth: 1,
-          borderColorSaturation: 0.6
-        }
+        },
+        upperLabel: {
+          show: true
+        },
+        borderWidth: 3,
+        borderColorSaturation: 0.6,
+        mappingBy: 'value',
       }
     ];
   }
@@ -115,7 +142,8 @@ export class TreemapService {
 
   private createTreeStructure(revisions: CodebaseClocRevisionsFileTree): any[] {
     const nodesMap: any = {};
-    this.createNodes(revisions, nodesMap);
+    this.createNodes(revisions, nodesMap, 1);
+    console.log(nodesMap);
 
     const root = {name: 'root', children: []};
     this.assignChildren(revisions, nodesMap, root);
@@ -123,17 +151,23 @@ export class TreemapService {
     return root.children;
   }
 
-  private createNodes(revisions: CodebaseClocRevisionsFileTree, nodesMap: any) {
+  private createNodes(revisions: CodebaseClocRevisionsFileTree, nodesMap: any, index: number) {
     if (revisions.path !== undefined && revisions.score !== undefined) {
       nodesMap[revisions.path] = {
         name: revisions.name,
         value: revisions.score,
         path: revisions.path,
+        isFile: revisions.isFile,
+        dataIndex: index,
         children: []
       };
+      index++;
     }
 
-    revisions.children.forEach(child => this.createNodes(child, nodesMap));
+    revisions.children.forEach(child => {
+      index = this.createNodes(child, nodesMap, index);
+    });
+    return index;
   }
 
   private assignChildren(revisions: CodebaseClocRevisionsFileTree, nodesMap: any, root: any) {
@@ -141,7 +175,6 @@ export class TreemapService {
       let parentNode = nodesMap[revisions.parentPath];
       let node = nodesMap[revisions.path];
 
-      // Skip nodes that have only one child and that child is not a file, or nodes that have a certain path
       if ((node.children.length === 1 && !node.children[0].isFile) || node.path === 'pathToSkip') {
         node = node.children[0];
       }
@@ -150,10 +183,22 @@ export class TreemapService {
     } else if (revisions.path === '/') {
       const node = nodesMap[revisions.path];
       root.children.push(node);
-    } else {
-      // throw new Error(`No parent found for ${revisions.path}`);
     }
-
     revisions.children.forEach(child => this.assignChildren(child, nodesMap, root));
+  }
+
+  findInSeries(node: any, targetPath: string): any {
+    if (node.path.includes(targetPath)) {
+      return node;
+    }
+    if (node.children) {
+      for (let child of node.children) {
+        const result = this.findInSeries(child, targetPath);
+        if (result) {
+          return result;
+        }
+      }
+    }
+    return null;
   }
 }

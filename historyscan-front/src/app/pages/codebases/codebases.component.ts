@@ -44,7 +44,6 @@ export class CodebasesComponent implements AfterContentInit {
   clocAndRevisions(element: CurrentCodebase): void {
     const dialogRef = this.dialog.open(RootFolderDialog);
     dialogRef.afterClosed().subscribe(rootFolder => {
-      debugger;
       if (rootFolder) {
         this.addToLocalStorage(element, rootFolder, 'analyze-cloc-revisions');
         this.router.navigateByUrl('/analysis/cloc-revisions').then();

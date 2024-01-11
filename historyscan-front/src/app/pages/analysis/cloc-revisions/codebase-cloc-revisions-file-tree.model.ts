@@ -14,7 +14,7 @@ export class CodebaseClocRevisionsFileTree {
       fileTree.name,
       fileTree.path,
       fileTree.parentPath,
-      fileTree.isFile,
+      fileTree.file,
       fileTree.currentNbLines,
       fileTree.score,
       fileTree.children.map((child: any) => CodebaseClocRevisionsFileTree.of(child))

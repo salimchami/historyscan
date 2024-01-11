@@ -22,7 +22,7 @@
     </mat-expansion-panel>
   </mat-accordion>
   <mat-divider></mat-divider>
-  <div style="margin-top: 15px">
+  <div style="margin-top: 15px; margin-left: 15px">
     <section>
       <div class="buttons-row">
         <button mat-raised-button (click)="unselectAll()" color="warn" *ngIf="!disabledButtons()">Unselect all</button>
@@ -39,6 +39,16 @@
       </ng-container>
     </div>
   </div>
+  <p>
+    <mat-form-field class="treemap-search-input">
+      <mat-label>Show tooltip on a file or folder by 'path' : path/to/file/TheFile.ext</mat-label>
+      <input matInput [formControlName]="'search'"
+             (focus)="showSearchHint = true"
+             (blur)="showSearchHint = false">
+      <mat-hint class="small-hint" *ngIf="showSearchHint">
+        Increase the chances of finding your file or folder by providing the most complete path possible.</mat-hint>
+    </mat-form-field>
+  </p>
   <div style="margin-top: 15px; margin-left: 20px; width: 97%; border: solid #732f2f;">
     <app-treemap-chart #treemapChart></app-treemap-chart>
   </div>

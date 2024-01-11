@@ -5,6 +5,7 @@ section {
 .buttons-row {
   display: table-cell;
   max-width: 600px;
+  margin-left: 15px;
 }
 
 .buttons-row .mat-mdc-button-base {
@@ -27,4 +28,14 @@ section {
   color: rgba(0, 0, 0, 0.8);
   font-size: 9px;
   margin-top: 1px;
+}
+
+.treemap-search-input {
+  width: 97%;
+  padding-left: 15px;
+  margin-right: 15px;
+}
+
+.small-hint {
+  font-size: 10px;
 }
