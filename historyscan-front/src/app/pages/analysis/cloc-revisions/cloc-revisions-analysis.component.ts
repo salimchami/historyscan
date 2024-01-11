@@ -132,6 +132,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
       if (result) {
         this.initialCodebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
         this.codebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
+        this.localStorageService.addItem('codebase-url', '');
+        this.localStorageService.addItem('codebase-branch', '');
         this.initRevisionsTreeMap();
       }
     });
