@@ -49,9 +49,13 @@
         Increase the chances of finding your file or folder by providing the most complete path possible.
       </mat-hint>
     </mat-form-field>
-    <button mat-raised-button class="user-action-button" (click)="download()" color="primary" [disabled]="!canDownload()"
-            matTooltip="Download codebase files tree (json)">Codebase files tree
-      <mat-icon>file_download</mat-icon>
+    <button mat-raised-button class="user-action-button" (click)="download()" color="primary" [disabled]="!canDownloadOrUpload()"
+            matTooltip="Download codebase files tree (json)">Download
+      <span class="material-icons">download</span>
+    </button>
+    <button mat-raised-button class="user-action-button" (click)="upload()" color="warn" [disabled]="!canDownloadOrUpload()"
+            matTooltip="Uplaod codebase files tree (json)">Upload
+      <span class="material-icons">upload</span>
     </button>
   </div>
   <div style="margin-top: 15px; margin-left: 20px; width: 97%; border: solid #732f2f;">

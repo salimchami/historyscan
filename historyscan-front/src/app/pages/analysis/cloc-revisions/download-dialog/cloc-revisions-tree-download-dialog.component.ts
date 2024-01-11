@@ -1,6 +1,5 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -38,7 +37,6 @@ export class ClocRevisionsTreeDownloadDialogComponent {
   private readonly payload: CodebaseClocRevisionsFileTree;
 
   constructor(
-    private router: Router,
     public dialogRef: MatDialogRef<ClocRevisionsTreeDownloadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sanitizer: DomSanitizer

@@ -23,7 +23,7 @@ export class CodebaseClocRevisions {
   }
 
   isEmpty() {
-    return this.node.name === "";
+    return this.node.name === "" || this.node.children.length === 0 || this.node.path === "";
   }
 
   static empty() {
