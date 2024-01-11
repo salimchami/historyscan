@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AnalysisService} from "../../codebases/analysis.service";
+import {AnalysisService} from "../analysis.service";
 import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocalstorageService} from "../../../shared/localstorage.service";
-import {CodebaseClocRevisionsFileTree} from "./codebase-cloc-revisions-file-tree.model";
 import {TreemapChartComponent} from "../../../components/treemap-chart/treemap-chart.component";
+import {ClocRevisionsService} from "./cloc-revisions.service";
+import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrevisions-file-tree.model";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
@@ -22,7 +23,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
-              private readonly localStorageService: LocalstorageService) {
+              private readonly localStorageService: LocalstorageService,
+              private readonly clocRevisionsService: ClocRevisionsService) {
     this.analysisForm = this.fb.group({
       extensions: this.fb.array([]),
       search: [''],
@@ -47,7 +49,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
     });
   }
 
-  initRevisionsTreeMap() {
+  private initRevisionsTreeMap() {
     if (!this.codebaseClocRevisions.isEmpty()) {
       this.treemapChart.updateChartSeries(
         this.codebaseClocRevisions.node,
@@ -106,5 +108,17 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
         this.treemapChart.zoomOn(targetItem);
       }
     });
+  }
+
+  download() {
+    this.clocRevisionsService.download(
+      new DownloadCodebaseClocrevisionsFileTree(
+        this.localStorageService.getItem('codebase-url')!,
+        this.localStorageService.getItem('codebase-branch')!,
+        this.codebaseClocRevisions.node));
+  }
+
+  canDownload() {
+    return this.codebaseClocRevisions?.node !== undefined;
   }
 }
