@@ -21,6 +21,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   initialCodebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
   codebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
   showSearchHint: boolean = false;
+  fileUploaded = false;
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly analysisService: AnalysisService,
@@ -121,7 +122,11 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
         this.codebaseClocRevisions.node));
   }
 
-  canDownloadOrUpload() {
+  canDownload() {
+    return this.canUpload() && !this.fileUploaded;
+  }
+
+  canUpload() {
     return !!this.codebaseClocRevisions?.node?.children?.length;
   }
 
@@ -135,6 +140,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
         this.localStorageService.addItem('codebase-url', '');
         this.localStorageService.addItem('codebase-branch', '');
         this.initRevisionsTreeMap();
+        this.fileUploaded = true;
       }
     });
   }
