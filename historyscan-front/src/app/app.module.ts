@@ -52,7 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
     TranslateModule.forRoot({
-      defaultLanguage: 'fr',
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),

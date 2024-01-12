@@ -5,7 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class MyskoolinTranslateService {
 
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('fr');
-    translate.use('fr');
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 }

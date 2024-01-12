@@ -1,24 +1,25 @@
 <div class="container dialog-header">
-  <h2 style="text-align: center"><strong>Codebase files tree</strong></h2>
-  <h4 style="text-align: center">Upload your custom codebase files tree</h4>
+  <h2 style="text-align: center">
+    <strong>{{ 'global.pages.analysis.cloc-revisions.dialogs.upload.title'|translate }}</strong></h2>
+  <h4 style="text-align: center">{{ 'global.pages.analysis.cloc-revisions.dialogs.upload.description'|translate }}</h4>
   <mat-error *ngIf="fileError">{{ fileError }}</mat-error>
   <mat-divider></mat-divider>
   <mat-dialog-actions class="app-dialog-actions">
     <div style="display: flex; justify-content: space-between; width: 100%;">
       <div>
         <input type="file" #fileInput style="display: none" (change)="upload($event)">
-        <button mat-raised-button color="primary" (click)="fileInput.click()">Upload
+        <button mat-raised-button color="primary" (click)="fileInput.click()">{{ 'global.buttons.upload'|translate }}
           <mat-icon matIconSuffix>file_upload</mat-icon>
         </button>
       </div>
       <div>
-        <button mat-raised-button color="warn" (click)="close()"> Close
+        <button mat-raised-button color="warn" (click)="close()"> {{ 'global.buttons.close'|translate }}
         </button>
       </div>
     </div>
   </mat-dialog-actions>
   <mat-dialog-content>
-    <div style="font-size: medium">The json file must respect the following format</div>
+    <div style="font-size: medium">{{'global.pages.analysis.cloc-revisions.dialogs.upload.hint'|translate}}</div>
     <mat-card class="display-json-card">
       <mat-card-content>
         <pre>{{ exampleOfFilesTree | json }}</pre>
