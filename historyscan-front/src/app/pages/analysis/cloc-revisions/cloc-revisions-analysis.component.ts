@@ -23,6 +23,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   codebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
   showSearchHint: boolean = false;
   fileUploaded = false;
+  rootFolder: string = '';
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly analysisService: AnalysisService,
@@ -38,6 +39,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.rootFolder = this.localStorageService.getItem('analysis-root-folder')!
     this.initData();
     this.onSearchType();
   }

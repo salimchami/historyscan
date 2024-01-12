@@ -81,6 +81,7 @@
         "cloc-revisions": {
           "title": "Cloc revisions",
           "title-uploaded-file": "(uploaded file)",
+          "root-folder": "Root folder",
           "ignored-files": {
             "title": "Ignored files",
             "no-data": "No data",
