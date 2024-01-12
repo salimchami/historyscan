@@ -1,33 +1,17 @@
 <div class="container" [formGroup]="analysisForm">
-  <mat-accordion>
-    <mat-expansion-panel hideToggle #ignored_files>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Ignored files
-          <button mat-icon-button>
-            <i class="material-icons" *ngIf="!ignored_files.expanded">arrow_downward</i>
-            <i class="material-icons" *ngIf="ignored_files.expanded">arrow_upward</i>
-          </button>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="bold" *ngIf="!codebaseClocRevisions.ignoredRevisions.length">No data</div>
-      <ul>
-        <li *ngFor="let ignoredRevision of codebaseClocRevisions.ignoredRevisions">
-          <div>
-            <div>Name: {{ ignoredRevision.name }}</div>
-          </div>
-        </li>
-      </ul>
-
-    </mat-expansion-panel>
-  </mat-accordion>
+  <h3 class="title">{{ 'global.pages.analysis.cloc-revisions.title'|translate }} <i>{{ codebaseName() }}</i></h3>
   <mat-divider></mat-divider>
   <div style="margin-top: 15px; margin-left: 15px" *ngIf="codebaseClocRevisions.extensions.length > 1">
     <section>
       <div class="buttons-row">
-        <button mat-raised-button (click)="unselectAll()" color="warn" *ngIf="!disabledButtons()">Unselect all</button>
-        <button mat-raised-button (click)="selectAll()" color="warn" *ngIf="!disabledButtons()">Select all</button>
-        <button mat-raised-button (click)="onRefresh()" color="primary" *ngIf="!disabledButtons()">Refresh graph
+        <button mat-raised-button (click)="unselectAll()" color="warn"
+                *ngIf="!disabledButtons()">{{ 'global.buttons.unselect-all'|translate }}
+        </button>
+        <button mat-raised-button (click)="selectAll()" color="warn"
+                *ngIf="!disabledButtons()">{{ 'global.buttons.select-all'|translate }}
+        </button>
+        <button mat-raised-button (click)="onRefresh()" color="primary"
+                *ngIf="!disabledButtons()">{{ 'global.buttons.refresh-graph'|translate }}
         </button>
       </div>
     </section>
@@ -39,26 +23,53 @@
       </ng-container>
     </div>
   </div>
-  <div >
+  <mat-divider></mat-divider>
+  <div style="margin-top: 15px">
     <mat-form-field class="treemap-search-input user-action-input">
-      <mat-label>Show tooltip on a file or folder by 'path' : path/to/file/TheFile.ext</mat-label>
+      <mat-label>{{ 'global.pages.analysis.cloc-revisions.search.placeholder'|translate }}</mat-label>
       <input matInput [formControlName]="'search'"
              (focus)="showSearchHint = true"
              (blur)="showSearchHint = false">
       <mat-hint class="small-hint" *ngIf="showSearchHint">
-        Increase the chances of finding your file or folder by providing the most complete path possible.
+        {{ 'global.pages.analysis.cloc-revisions.search.hint'|translate }}
       </mat-hint>
     </mat-form-field>
-    <button mat-raised-button class="user-action-button" (click)="download()" color="primary" [disabled]="!canDownload()"
-            matTooltip="Download codebase files tree (json)">Download
+    <button mat-raised-button class="user-action-button" (click)="download()" color="primary"
+            [disabled]="!canDownload()"
+            matTooltip="Download codebase files tree (json)">{{ 'global.buttons.download'|translate }}
       <span class="material-icons">download</span>
     </button>
     <button mat-raised-button class="user-action-button" (click)="upload()" color="warn" [disabled]="!canUpload()"
-            matTooltip="Uplaod codebase files tree (json)">Upload
+            matTooltip="Uplaod codebase files tree (json)">{{ 'global.buttons.upload'|translate }}
       <span class="material-icons">upload</span>
     </button>
   </div>
   <div style="margin-top: 15px; margin-left: 20px; width: 97%; border: solid #732f2f;">
     <app-treemap-chart #treemapChart></app-treemap-chart>
   </div>
+  <mat-divider></mat-divider>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle #ignored_files>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ 'global.pages.analysis.cloc-revisions.ignored-files.title'|translate }}
+          <button mat-icon-button>
+            <i class="material-icons" *ngIf="!ignored_files.expanded">arrow_downward</i>
+            <i class="material-icons" *ngIf="ignored_files.expanded">arrow_upward</i>
+          </button>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="bold"
+           *ngIf="!codebaseClocRevisions.ignoredRevisions.length">{{ 'global.pages.analysis.cloc-revisions.ignored-files.no-data'|translate }}
+      </div>
+      <ul>
+        <li *ngFor="let ignoredRevision of codebaseClocRevisions.ignoredRevisions">
+          <div>
+            <div>{{ 'global.pages.analysis.cloc-revisions.ignored-files.name'|translate }} {{ ignoredRevision.name }}</div>
+          </div>
+        </li>
+      </ul>
+
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

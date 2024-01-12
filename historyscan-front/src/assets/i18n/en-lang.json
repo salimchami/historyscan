@@ -1,0 +1,110 @@
+{
+  "global": {
+    "app-name": "Git History Scan",
+    "buttons": {
+      "cancel": "Cancel",
+      "close": "Close",
+      "delete": "Delete",
+      "ok": "Ok",
+      "download": "Download",
+      "upload": "Upload",
+      "view-in-browser": "View in browser",
+      "copy": "Copy",
+      "unselect-all": "Unselect all",
+      "select-all": "Select all",
+      "refresh-graph": "Refresh graph"
+    },
+    "components": {
+      "page-not-found": {
+        "404": "404 !",
+        "back": "Back to home"
+      },
+      "navbar": {
+        "codebases": "Codebases"
+      },
+      "unavailable": {
+        "description-1": "Temporarily down for maintenance",
+        "description-2": "We’ll be back soon!",
+        "paragraph-1": "Sorry for the inconvenience, but we’re performing some maintenance at the moment.",
+        "signature": "— The Team",
+        "home": "Take Me Home"
+      }
+    },
+    "pages": {
+      "dashboard": {
+        "title": "Add a Git repository",
+        "form": {
+          "url": "Url",
+          "url-placeholder": "Repository url (https://, git://)",
+          "name": "Name",
+          "branch": "Branch",
+          "branch-placeholder": "Repository branch name (main, feature, ...)",
+          "secret-key": "Secret key",
+          "secret-key-placeholder": "Repository secret key (git, ssh)",
+          "add-repository": "Add repository",
+          "add-repository-placeholder": "Repository name (without '.git')"
+        }
+      },
+      "codebases": {
+        "title": "Code bases",
+        "table": {
+          "columns": {
+            "name": "Name",
+            "url": "Url",
+            "branch": "Branch",
+            "actions": {
+              "title": "Actions",
+              "cloc-revisions": "Cloc revisions",
+              "network-cloc-revisions": "Network CR"
+            }
+          }
+        },
+        "cloc-revisions": {
+          "root-folder": {
+            "dialog": {
+              "title": "Root folder",
+              "description": "Please indicate the root directory from which the grouping will be performed",
+              "hint-1": "If the root folder is a sub - folder, you can put only its name without the full path.",
+              "hint-2": "The root folder must be unique !",
+              "examples": "Examples:",
+              "hint-3": "- /",
+              "hint-4": "- src/main/java/io/my/company/my/project/domain/bounded/contexts/",
+              "hint-5": "- /bounded/contexts",
+              "hint-6": "- contexts",
+              "folder": "Folder",
+              "cancel": "Cancel"
+            }
+          }
+        }
+      },
+      "analysis": {
+        "cloc-revisions": {
+          "title": "Cloc revisions",
+          "title-uploaded-file": "(uploaded file)",
+          "ignored-files": {
+            "title": "Ignored files",
+            "no-data": "No data",
+            "name": "Name:"
+          },
+          "search": {
+            "placeholder": "Show tooltip on a file or folder by 'path': path/to/file/TheFile.ext",
+            "hint": "Increase the chances of finding your file or folder by providing the most complete path possible."
+          },
+          "dialogs": {
+            "download": {
+              "title": "Codebase files tree",
+              "url": "Url:",
+              "branch": "Branch:",
+              "download": "Download"
+            },
+            "upload": {
+              "title": "Codebase files tree",
+              "description": "Upload your custom codebase files tree",
+              "hint": "The json file must respect the following format"
+            }
+          }
+        }
+      }
+    }
+  }
+}

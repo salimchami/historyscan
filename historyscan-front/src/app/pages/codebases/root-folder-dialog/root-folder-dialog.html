@@ -1,21 +1,24 @@
-<h1 mat-dialog-title>Root folder</h1>
+<h1 mat-dialog-title>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.title'|translate }}</h1>
 <div mat-dialog-content>
-  <p>Please indicate the root directory from which the grouping will be performed</p>
+  <p>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.description'|translate }}</p>
   <span class="root-folder-examples">
-    <pre>If the root folder is a sub-folder, you can put only its name without the full path.</pre>
-    <pre style="color: #732f2f; font-weight: bold">The root folder must be unique !</pre>
-    <pre>Examples:</pre>
-    <pre>- /</pre>
-    <pre>- src/main/java/io/mycompany/myproject/domain/boundedcontexts/</pre>
-    <pre>- /boundedcontexts</pre>
-    <pre>- boundedcontexts</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-1'|translate }}</pre>
+    <pre
+      style="color: #732f2f; font-weight: bold">{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-2'|translate }}</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.examples'|translate }}</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-3'|translate }}</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-4'|translate }}</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-5'|translate }}</pre>
+    <pre>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.hint-6'|translate }}</pre>
   </span>
   <mat-form-field>
-    <mat-label>Folder</mat-label>
+    <mat-label>{{ 'global.pages.codebases.cloc-revisions.root-folder.dialog.folder'|translate }}</mat-label>
     <input matInput [(ngModel)]="folder" [required]="true">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [disabled]="!folderValid()" (click)="submitFolder()" [mat-dialog-close]="folder">Ok</button>
+  <button mat-button (click)="onNoClick()">{{ 'global.buttons.cancel'|translate }}</button>
+  <button mat-button [disabled]="!folderValid()" (click)="submitFolder()"
+          [mat-dialog-close]="folder">{{ 'global.buttons.ok'|translate }}
+  </button>
 </div>

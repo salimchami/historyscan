@@ -6,7 +6,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {CodebaseClocRevisionsFileTree} from "../codebase-cloc-revisions-file-tree.model";
-import {MaterialModule} from "../../../../shared";
+import {MaterialModule, SharedModule} from "../../../../shared";
 import {MatCardModule} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
 
@@ -23,7 +23,8 @@ import {CommonModule} from "@angular/common";
     MatButtonModule,
     MaterialModule,
     MatCardModule,
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
 })
 export class ClocRevisionsTreeDownloadDialogComponent {

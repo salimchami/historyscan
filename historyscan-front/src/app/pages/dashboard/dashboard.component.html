@@ -1,29 +1,30 @@
 <div class="container">
   <div class="vertical-center">
-    <h2>Add a Git repository</h2>
+    <h2>{{ 'global.pages.dashboard.title'|translate }}</h2>
     <form [formGroup]="addRepoForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="add-repository">
-        <mat-label>Url</mat-label>
-        <input matInput autofocus placeholder="Repository url (https://, git://)"
+        <mat-label>{{ 'global.pages.dashboard.form.url'|translate }}</mat-label>
+        <input matInput autofocus [placeholder]="'global.pages.dashboard.form.url-placeholder'|translate"
                formControlName="url">
       </mat-form-field>
       <mat-form-field class="add-repository">
-        <mat-label>Name</mat-label>
-        <input matInput autofocus placeholder="Repository name (without '.git')"
+        <mat-label>{{ 'global.pages.dashboard.form.name'|translate }}</mat-label>
+        <input matInput autofocus [placeholder]="'global.pages.dashboard.form.add-repository-placeholder'|translate"
                formControlName="name">
       </mat-form-field>
       <mat-form-field class="add-repository">
-        <mat-label>Branch</mat-label>
-        <input matInput autofocus placeholder="Repository branch name (main, feature, ...)"
+        <mat-label>{{ 'global.pages.dashboard.form.branch'|translate }}</mat-label>
+        <input matInput autofocus [placeholder]="'global.pages.dashboard.form.branch-placeholder'|translate"
                formControlName="branch">
       </mat-form-field>
       <mat-form-field class="add-repository">
-        <mat-label>Secret key</mat-label>
-        <input matInput autofocus placeholder="Repository secret key (git, ssh)"
+        <mat-label>{{ 'global.pages.dashboard.form.secret-key'|translate }}</mat-label>
+        <input matInput autofocus [placeholder]="'global.pages.dashboard.form.secret-key-placeholder'|translate"
                formControlName="secretKey" [readonly]="!secretKeyEnabled">
       </mat-form-field>
       <button mat-raised-button type="submit" color="primary"
-              [disabled]="!isSubmitButtonEnabled()">Add Repository</button>
+              [disabled]="!isSubmitButtonEnabled()">{{ 'global.pages.dashboard.form.add-repository'|translate }}
+      </button>
     </form>
   </div>
 </div>

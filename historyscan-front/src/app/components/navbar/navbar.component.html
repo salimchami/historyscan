@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
-  <img [ngSrc]="'favicon.ico'" alt="Git History Scan" [height]="30" [width]="30" />
+  <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}"
+       [height]="30" [width]="30"/>
   <a class="navbar-link" [routerLink]="['']">
-    Git History Scan</a>
+    {{ 'global.components.navbar.title'|translate }}</a>
   <mat-divider [vertical]="true"></mat-divider>
-  <a class="navbar-link" mat-button (click)="goToCodebases()">Codebases</a>
+  <a class="navbar-link" mat-button (click)="goToCodebases()">{{ 'global.components.navbar.codebases'|translate }}</a>
 </mat-toolbar>

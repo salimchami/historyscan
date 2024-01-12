@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AnalysisService} from "../analysis.service";
+import {AnalysisService} from "./analysis.service";
 import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocalstorageService} from "../../../shared/localstorage.service";
@@ -9,6 +9,7 @@ import {ClocRevisionsService} from "./cloc-revisions.service";
 import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrevisions-file-tree.model";
 import {MatDialog} from "@angular/material/dialog";
 import {ClocRevisionsTreeUploadDialogComponent} from "./upload-dialog/cloc-revisions-tree-upload-dialog.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
@@ -28,7 +29,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService,
               private readonly clocRevisionsService: ClocRevisionsService,
-              private readonly dialog: MatDialog) {
+              private readonly dialog: MatDialog,
+              private readonly translate: TranslateService) {
     this.analysisForm = this.fb.group({
       extensions: this.fb.array([]),
       search: [''],
@@ -137,11 +139,14 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
       if (result) {
         this.initialCodebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
         this.codebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
-        this.localStorageService.addItem('codebase-url', '');
-        this.localStorageService.addItem('codebase-branch', '');
         this.initRevisionsTreeMap();
         this.fileUploaded = true;
       }
     });
+  }
+
+  codebaseName() {
+    return this.fileUploaded ? this.translate.instant('global.pages.analysis.cloc-revisions.title-uploaded-file') :
+      "'" + this.localStorageService.getItem('codebase-url')?.split('/').pop()?.split('.')[0] + "'";
   }
 }

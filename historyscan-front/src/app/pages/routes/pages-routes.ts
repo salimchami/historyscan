@@ -4,7 +4,6 @@ import {inject} from "@angular/core";
 import {StartupService} from "../dashboard/startup/startup.service";
 import {DashboardComponent} from "../dashboard";
 import {CodebasesComponent} from "../codebases/codebases.component";
-import {HistoryAnalysisComponent} from "../analysis/history/history-analysis.component";
 import {ClocRevisionsAnalysisComponent} from "../analysis/cloc-revisions/cloc-revisions-analysis.component";
 import {
   NetworkClocRevisionsAnalysisComponent
@@ -32,12 +31,6 @@ export const PagesRoutes: Routes = [
         component: CodebasesComponent,
         loadChildren: () => import('../codebases/codebases.module')
           .then(m => m.CodebasesModule)
-      },
-      {
-        path: 'analysis/history',
-        component: HistoryAnalysisComponent,
-        loadChildren: () => import('../analysis/history/history.module')
-          .then(m => m.HistoryModule)
       },
       {
         path: 'analysis/cloc-revisions',
