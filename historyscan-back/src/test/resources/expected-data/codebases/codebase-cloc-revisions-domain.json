@@ -3,6 +3,7 @@
     "name": "root",
     "path": "/",
     "parentPath": null,
+    "isFile": false,
     "currentNbLines": 0,
     "score": 21088,
     "children": [
@@ -10,6 +11,7 @@
         "name": "domain",
         "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
         "parentPath": "/",
+        "isFile": false,
         "currentNbLines": 0,
         "score": 21088,
         "children": [
@@ -17,6 +19,7 @@
             "name": "boundedcontexts",
             "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
             "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+            "isFile": false,
             "currentNbLines": 0,
             "score": 21088,
             "children": [
@@ -24,6 +27,7 @@
                 "name": "featureB",
                 "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
                 "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "isFile": false,
                 "currentNbLines": 0,
                 "score": 1824,
                 "children": [
@@ -31,18 +35,18 @@
                     "name": "FinallyLoading.java",
                     "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
                     "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+                    "isFile": true,
                     "currentNbLines": 32,
                     "score": 1824,
-                    "children": [],
-                    "file": true
+                    "children": []
                   }
-                ],
-                "file": false
+                ]
               },
               {
                 "name": "featureA",
                 "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                 "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "isFile": false,
                 "currentNbLines": 0,
                 "score": 19264,
                 "children": [
@@ -50,15 +54,16 @@
                     "name": "Extensions.java",
                     "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
                     "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "isFile": true,
                     "currentNbLines": 32,
                     "score": 1760,
-                    "children": [],
-                    "file": true
+                    "children": []
                   },
                   {
                     "name": "refactored",
                     "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                     "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "isFile": false,
                     "currentNbLines": 0,
                     "score": 11424,
                     "children": [
@@ -66,43 +71,38 @@
                         "name": "Extensions.java",
                         "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
                         "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                        "isFile": true,
                         "currentNbLines": 32,
                         "score": 7104,
-                        "children": [],
-                        "file": true
+                        "children": []
                       },
                       {
                         "name": "Loading.java",
                         "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
                         "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                        "isFile": true,
                         "currentNbLines": 32,
                         "score": 4320,
-                        "children": [],
-                        "file": true
+                        "children": []
                       }
-                    ],
-                    "file": false
+                    ]
                   },
                   {
                     "name": "Loading.java",
                     "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
                     "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "isFile": true,
                     "currentNbLines": 32,
                     "score": 6080,
-                    "children": [],
-                    "file": true
+                    "children": []
                   }
-                ],
-                "file": false
+                ]
               }
-            ],
-            "file": false
+            ]
           }
-        ],
-        "file": false
+        ]
       }
-    ],
-    "file": false
+    ]
   },
   "ignoredRevisions": [
     {

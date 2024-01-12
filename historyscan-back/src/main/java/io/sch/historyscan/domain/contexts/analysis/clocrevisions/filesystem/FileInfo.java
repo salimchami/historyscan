@@ -2,7 +2,6 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
@@ -14,23 +13,24 @@ public record FileInfo(String name, String path, boolean isFile, long currentNbL
                     .filter(part -> !part.isEmpty())
                     .toList();
         }
-        String[] splitPath = path.trim().split(Pattern.quote(rootFolder), -1);
+        var pathParts = Arrays.stream(path.trim().split(rootFolder + "/", -1))
+                .toList();
         return Stream.concat(
-                        pathPartsRootFolderWithPrefix(rootFolder, splitPath),
-                        pathPartsRootFolderSuffix(splitPath)
+                        pathPartsRootFolderWithPrefix(rootFolder, pathParts),
+                        pathPartsRootFolderSuffix(pathParts)
                 )
                 .filter(part -> !part.isEmpty())
                 .toList();
     }
 
-    private static Stream<String> pathPartsRootFolderSuffix(String[] splitPath) {
-        return Arrays.stream(splitPath[splitPath.length - 1].split("/"))
+    private static Stream<String> pathPartsRootFolderSuffix(List<String> splitPath) {
+        return Arrays.stream(splitPath.get(splitPath.size() - 1).split("/"))
                 .filter(subPart -> !subPart.isEmpty());
     }
 
-    private static Stream<String> pathPartsRootFolderWithPrefix(String rootFolder, String[] splitPath) {
-        return Arrays.stream(splitPath)
-                .limit(splitPath.length - 1L)
+    private static Stream<String> pathPartsRootFolderWithPrefix(String rootFolder, List<String> splitPath) {
+        return splitPath.stream()
+                .limit(splitPath.size() - 1L)
                 .flatMap(part -> Stream.concat(
                         Arrays.stream(part.split("/"))
                                 .filter(subPart -> !subPart.isEmpty()),
