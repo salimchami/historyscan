@@ -25,13 +25,15 @@
     </div>
   </div>
 </mat-dialog-actions>
-<mat-card *ngIf="displayJson" class="display-json-card">
-  <mat-card-content>
-    <div class="copy-icon">
-      <button mat-icon-button (click)="copyText()" [matTooltip]="'global.buttons.copy'|translate">
-        <mat-icon>content_copy</mat-icon>
-      </button>
-    </div>
-    <pre class="scrollable-content">{{ jsonPayload }}</pre>
-  </mat-card-content>
-</mat-card>
+@if (displayJson) {
+  <mat-card class="display-json-card">
+    <mat-card-content>
+      <div class="copy-icon">
+        <button mat-icon-button (click)="copyText()" [matTooltip]="'global.buttons.copy'|translate">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+      <pre class="scrollable-content">{{ jsonPayload }}</pre>
+    </mat-card-content>
+  </mat-card>
+}

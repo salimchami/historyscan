@@ -2,7 +2,9 @@
   <h2 style="text-align: center">
     <strong>{{ 'global.pages.analysis.cloc-revisions.dialogs.upload.title'|translate }}</strong></h2>
   <h4 style="text-align: center">{{ 'global.pages.analysis.cloc-revisions.dialogs.upload.description'|translate }}</h4>
-  <mat-error *ngIf="fileError">{{ fileError }}</mat-error>
+  @if (fileError) {
+    <mat-error>{{ fileError }}</mat-error>
+  }
   <mat-divider></mat-divider>
   <mat-dialog-actions class="app-dialog-actions">
     <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -19,7 +21,7 @@
     </div>
   </mat-dialog-actions>
   <mat-dialog-content>
-    <div style="font-size: medium">{{'global.pages.analysis.cloc-revisions.dialogs.upload.hint'|translate}}</div>
+    <div style="font-size: medium">{{ 'global.pages.analysis.cloc-revisions.dialogs.upload.hint'|translate }}</div>
     <mat-card class="display-json-card">
       <mat-card-content>
         <pre>{{ exampleOfFilesTree | json }}</pre>

@@ -1,28 +1,34 @@
 <div class="container" [formGroup]="analysisForm">
-  <h3 class="title">{{ 'global.pages.analysis.cloc-revisions.title'|translate }} <i>{{ codebaseName() }}</i></h3>
+  <h3 class="title">{{ 'global.pages.analysis.cloc-revisions.title'|translate }} <i>{{ codebaseName() }}</i>
+    @if (!fileUploaded) {
+      &nbsp;-&nbsp;{{ 'global.pages.analysis.cloc-revisions.root-folder'|translate }}: <i>'{{ rootFolder }}'</i>
+    }
+  </h3>
   <mat-divider></mat-divider>
-  <div style="margin-top: 15px; margin-left: 15px" *ngIf="codebaseClocRevisions.extensions.length > 1">
-    <section>
-      <div class="buttons-row">
-        <button mat-raised-button (click)="unselectAll()" color="warn"
-                *ngIf="!disabledButtons()">{{ 'global.buttons.unselect-all'|translate }}
-        </button>
-        <button mat-raised-button (click)="selectAll()" color="warn"
-                *ngIf="!disabledButtons()">{{ 'global.buttons.select-all'|translate }}
-        </button>
-        <button mat-raised-button (click)="onRefresh()" color="primary"
-                *ngIf="!disabledButtons()">{{ 'global.buttons.refresh-graph'|translate }}
-        </button>
+  @if (codebaseClocRevisions.extensions.length > 1) {
+    <div style="margin-top: 15px; margin-left: 15px">
+      @if (!disabledButtons()) {
+        <section>
+          <div class="buttons-row">
+            <button mat-raised-button (click)="unselectAll()" color="warn">{{ 'global.buttons.unselect-all'|translate }}
+            </button>
+            <button mat-raised-button (click)="selectAll()" color="warn">{{ 'global.buttons.select-all'|translate }}
+            </button>
+            <button mat-raised-button (click)="onRefresh()"
+                    color="primary">{{ 'global.buttons.refresh-graph'|translate }}
+            </button>
+          </div>
+        </section>
+      }
+      <div formArrayName="extensions">
+        <ng-container *ngFor="let extension of codebaseClocRevisions.extensions; let i = index">
+          <mat-checkbox [formControlName]="i">
+            {{ extension }}
+          </mat-checkbox>
+        </ng-container>
       </div>
-    </section>
-    <div formArrayName="extensions">
-      <ng-container *ngFor="let extension of codebaseClocRevisions.extensions; let i = index">
-        <mat-checkbox [formControlName]="i">
-          {{ extension }}
-        </mat-checkbox>
-      </ng-container>
     </div>
-  </div>
+  }
   <mat-divider></mat-divider>
   <div style="margin-top: 15px">
     <mat-form-field class="treemap-search-input user-action-input">
@@ -30,9 +36,11 @@
       <input matInput [formControlName]="'search'"
              (focus)="showSearchHint = true"
              (blur)="showSearchHint = false">
-      <mat-hint class="small-hint" *ngIf="showSearchHint">
-        {{ 'global.pages.analysis.cloc-revisions.search.hint'|translate }}
-      </mat-hint>
+      @if (showSearchHint) {
+        <mat-hint class="small-hint">
+          {{ 'global.pages.analysis.cloc-revisions.search.hint'|translate }}
+        </mat-hint>
+      }
     </mat-form-field>
     <button mat-raised-button class="user-action-button" (click)="download()" color="primary"
             [disabled]="!canDownload()"
@@ -54,14 +62,18 @@
         <mat-panel-title>
           {{ 'global.pages.analysis.cloc-revisions.ignored-files.title'|translate }}
           <button mat-icon-button>
-            <i class="material-icons" *ngIf="!ignored_files.expanded">arrow_downward</i>
-            <i class="material-icons" *ngIf="ignored_files.expanded">arrow_upward</i>
+            @if (!ignored_files.expanded) {
+              <i class="material-icons">arrow_downward</i>
+            }
+            @if (ignored_files.expanded) {
+              <i class="material-icons">arrow_upward</i>
+            }
           </button>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="bold"
-           *ngIf="!codebaseClocRevisions.ignoredRevisions.length">{{ 'global.pages.analysis.cloc-revisions.ignored-files.no-data'|translate }}
-      </div>
+      @if (!codebaseClocRevisions.ignoredRevisions.length) {
+        <div class="bold">{{ 'global.pages.analysis.cloc-revisions.ignored-files.no-data'|translate }}</div>
+      }
       <ul>
         <li *ngFor="let ignoredRevision of codebaseClocRevisions.ignoredRevisions">
           <div>
