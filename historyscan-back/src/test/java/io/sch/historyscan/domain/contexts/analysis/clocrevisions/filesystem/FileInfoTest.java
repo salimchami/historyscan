@@ -36,15 +36,16 @@ class FileInfoTest {
 
     public static Stream<Arguments> should_find_path_parts_even_if_rootfolder_contains_slashes_params() {
         return Stream.of(
-                Arguments.of("path", List.of("path", "to", "file.ts")),
-                Arguments.of("path/to", List.of("path/to", "file.ts"))
+                Arguments.of("path", "file.ts", "path/to/file.ts", List.of("path", "to", "file.ts")),
+                Arguments.of("path/to", "file.ts", "path/to/file.ts", List.of("path/to", "file.ts")),
+                Arguments.of("folder", "folder-application", "folder/folder-application", List.of("folder", "folder-application"))
         );
     }
 
     @ParameterizedTest
     @MethodSource("should_find_path_parts_even_if_rootfolder_contains_slashes_params")
-    void should_find_path_parts_even_if_rootfolder_contains_slashes(String rootFolder, List<String> expectedParts) {
-        var fileInfo = new FileInfo("file.ts", "path/to/file.ts", true, 40);
+    void should_find_path_parts_even_if_rootfolder_contains_slashes(String rootFolder, String fileName, String filePath, List<String> expectedParts) {
+        var fileInfo = new FileInfo(fileName, filePath, true, 40);
         var pathParts = fileInfo.pathParts(rootFolder);
         assertThat(pathParts).isEqualTo(expectedParts);
     }
