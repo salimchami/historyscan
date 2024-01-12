@@ -1,0 +1,29 @@
+{
+  "global": {
+    "components": {
+      "page-not-found": {
+        "404": "404 !",
+        "back": "Back to home"
+      }
+    },
+    "pages": {
+      "dashboard": {
+        "title": "Add a Git repository",
+        "form": {
+          "url": "Url",
+          "url-placeholder": "Repository url (https://, git://)",
+          "name": "Name",
+          "branch": "Branch",
+          "branch-placeholder": "Repository branch name (main, feature, ...)",
+          "secret-key": "Secret key",
+          "secret-key-placeholder": "Repository secret key (git, ssh)",
+          "add-repository": "Add repository",
+          "add-repository-placeholder": "Repository name (without '.git')"
+        }
+      },
+      "codebases": {
+        "title": "Code bases"
+      }
+    }
+  }
+}
