@@ -37,7 +37,9 @@ public enum EnumIgnoredCodeBaseFiles {
     DOCUMENTATION("documentation", FOLDER),
     PACKAGE_INFO_JAVA("package-info.java", FILE),
     IDEA_INTELLIJ(".idea", FOLDER),
-    HTML_REPORT("htmlreport", FOLDER);
+    HTML_REPORT("htmlreport", FOLDER),
+    RUN("run", FOLDER),
+    ;
 
     private final String title;
     private final EnumPathType type;
