@@ -4,7 +4,7 @@ import io.sch.historyscan.domain.contexts.codebase.clone.ClonedCodeBase;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseRepository;
 import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseToClone;
 import io.sch.historyscan.infrastructure.features.codebase.exceptions.CloneCodeBaseException;
-import io.sch.historyscan.infrastructure.features.codebase.exceptions.CodeBaseAlreadyExistsException;
+import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.exceptions.PullCodeBaseException;
 import io.sch.historyscan.infrastructure.hexagonalarchitecture.HexagonalArchitectureAdapter;
 import io.sch.historyscan.infrastructure.logging.AppLogger;

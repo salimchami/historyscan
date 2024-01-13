@@ -87,6 +87,14 @@ work@salimchami.net
 
 ## Version History
 
+* 1.1.0:
+    * multiple code fixes
+    * upload and download files tree as json file
+    * treemap colors
+    * treemap tooltip
+    * treemap legend
+
+
 * 1.0.1-BETA:
     * fix path and name of file when root folder is a path like "src/main/java/com/example/domain"
 
