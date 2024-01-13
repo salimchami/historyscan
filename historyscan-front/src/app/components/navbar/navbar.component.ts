@@ -9,7 +9,4 @@ import {Router} from "@angular/router";
 export class NavbarComponent {
   constructor(private readonly router: Router) {
   }
-  goToCodebases() {
-    this.router.navigateByUrl('/codebases').then();
-  }
 }

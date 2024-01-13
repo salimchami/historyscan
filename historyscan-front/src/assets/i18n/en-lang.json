@@ -43,6 +43,20 @@
           "secret-key-placeholder": "Repository secret key (git, ssh)",
           "add-repository": "Add repository",
           "add-repository-placeholder": "Repository name (without '.git')"
+        },
+        "analysis": {
+          "title": "Codebase Analysis",
+          "description-1": "Currently, only",
+          "description-2": "cloc-revisions",
+          "description-3":"analysis is available. This analysis allows you to see on a treemap, the complexity of your codebase based on the number of lines and commits history",
+          "description-4": "Open",
+          "description-5": "codebases",
+          "description-6": "page or",
+          "description-7": "upload",
+          "description-8": "a file to load it in the analysis graph.",
+
+          "cloc-revisions": "Cloc revisions",
+          "network-cloc-revisions": "Network CR"
         }
       },
       "codebases": {
@@ -72,7 +86,8 @@
               "hint-5": "- /bounded/contexts",
               "hint-6": "- contexts",
               "folder": "Folder",
-              "cancel": "Cancel"
+              "cancel": "Cancel",
+              "upload-hint": "You can also upload a json file to display it on the analysis graph"
             }
           }
         }
@@ -82,6 +97,8 @@
           "title": "Cloc revisions",
           "title-uploaded-file": "(uploaded file)",
           "root-folder": "Root folder",
+          "download-tooltip": "Download codebase files tree (json)",
+          "upload-tooltip": "Uplaod codebase files tree (json)",
           "ignored-files": {
             "title": "Ignored files",
             "no-data": "No data",

@@ -14,10 +14,10 @@ export class AnalysisService extends HttpService {
   }
 
   clocAndRevisions(): Observable<CodebaseClocRevisions> {
-    return this.post(this.localstorageService.getItem('analysis-href')!, new CodebaseToAnalyze(
-      this.localstorageService.getItem('analysis-name')!,
-      this.localstorageService.getItem('analysis-type')!,
-      this.localstorageService.getItem('analysis-root-folder')!,
+    return this.post(this.localstorageService.getAnalysisHref()!, new CodebaseToAnalyze(
+      this.localstorageService.getAnalysisName()!,
+      this.localstorageService.getAnalysisType()!,
+      this.localstorageService.getAnalysisRootFolder()!,
     ));
   }
 }
