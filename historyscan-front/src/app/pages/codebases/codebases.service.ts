@@ -11,7 +11,8 @@ export class CodebasesService extends HttpService {
   constructor(http: HttpClient, private localStorageService: LocalstorageService) {
     super(http);
   }
-    getCodebases(): Observable<CurrentCodebases> {
-        return this.get(this.localStorageService.getItem('codebases-url')!);
-    }
+
+  getCodebases(): Observable<CurrentCodebases> {
+    return this.get(this.localStorageService.getCodebasesUrl()!);
+  }
 }

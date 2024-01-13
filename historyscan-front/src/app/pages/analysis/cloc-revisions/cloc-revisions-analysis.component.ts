@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AnalysisService} from "./analysis.service";
 import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
@@ -10,13 +10,14 @@ import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrev
 import {MatDialog} from "@angular/material/dialog";
 import {ClocRevisionsTreeUploadDialogComponent} from "./upload-dialog/cloc-revisions-tree-upload-dialog.component";
 import {TranslateService} from "@ngx-translate/core";
+import {CodebaseClocRevisionsFileTree} from "./codebase-cloc-revisions-file-tree.model";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
   templateUrl: './cloc-revisions-analysis.component.html',
   styleUrls: ['./cloc-revisions-analysis.component.scss'],
 })
-export class ClocRevisionsAnalysisComponent implements OnInit {
+export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   @ViewChild('treemapChart') treemapChart!: TreemapChartComponent;
   analysisForm: FormGroup;
   initialCodebaseClocRevisions: CodebaseClocRevisions = CodebaseClocRevisions.empty();
@@ -24,6 +25,9 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   showSearchHint: boolean = false;
   fileUploaded = false;
   rootFolder: string = '';
+  codebaseName: string = '';
+  canUpload = false;
+  canDownload = false;
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly analysisService: AnalysisService,
@@ -38,10 +42,29 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => {
+      const filesTree = this.localStorageService.getFilesTree();
+      if (filesTree) {
+        this.loadUploadedFile(filesTree, false);
+        this.translate.get('foo')
+          .subscribe(() => this.codebaseName = this.translate.instant('global.pages.analysis.cloc-revisions.title-uploaded-file'));
+        this.fileUploaded = true;
+      } else {
+        this.rootFolder = this.localStorageService.getAnalysisRootFolder()!;
+        this.codebaseName = "'" + this.localStorageService.getCodebaseUrl()?.split('/').pop()?.split('.')[0] + "'";
+        this.initData();
+      }
+    })
+  }
+
   ngOnInit(): void {
-    this.rootFolder = this.localStorageService.getItem('analysis-root-folder')!
-    this.initData();
     this.onSearchType();
+  }
+
+  private initCanDownloadAndUpload() {
+    this.canUpload = true;
+    this.canDownload = this.canUpload && !this.fileUploaded;
   }
 
   private initData() {
@@ -52,6 +75,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
           this.codebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
           this.initRevisionsTreeMap();
           this.initExtensionsFormArray();
+          this.initCanDownloadAndUpload();
         }
       });
     });
@@ -61,8 +85,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
     if (!this.codebaseClocRevisions.isEmpty()) {
       this.treemapChart.updateChartSeries(
         this.codebaseClocRevisions.node,
-        this.localStorageService.getItem('codebase-url')!,
-        this.localStorageService.getItem('codebase-branch')!,
+        this.localStorageService.getCodebaseUrl()!,
+        this.localStorageService.getCodebaseBranch()!,
       );
     }
   }
@@ -113,7 +137,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   private onSearchType() {
     this.analysisForm.get('search')?.valueChanges.subscribe((targetItem: string) => {
       if (targetItem && targetItem.length > 3) {
-        this.treemapChart.zoomOn(targetItem);
+        this.treemapChart.tooltipOn(targetItem);
       }
     });
   }
@@ -121,17 +145,9 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
   download() {
     this.clocRevisionsService.download(
       new DownloadCodebaseClocrevisionsFileTree(
-        this.localStorageService.getItem('codebase-url')!,
-        this.localStorageService.getItem('codebase-branch')!,
+        this.localStorageService.getCodebaseUrl()!,
+        this.localStorageService.getCodebaseBranch()!,
         this.codebaseClocRevisions.node));
-  }
-
-  canDownload() {
-    return this.canUpload() && !this.fileUploaded;
-  }
-
-  canUpload() {
-    return !!this.codebaseClocRevisions?.node?.children?.length;
   }
 
   upload() {
@@ -139,16 +155,24 @@ export class ClocRevisionsAnalysisComponent implements OnInit {
       width: '50%',
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.initialCodebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
-        this.codebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
-        this.initRevisionsTreeMap();
-        this.fileUploaded = true;
+        this.loadUploadedFile(result, true);
       }
     });
   }
 
-  codebaseName() {
-    return this.fileUploaded ? this.translate.instant('global.pages.analysis.cloc-revisions.title-uploaded-file') :
-      "'" + this.localStorageService.getItem('codebase-url')?.split('/').pop()?.split('.')[0] + "'";
+  private loadUploadedFile(result: CodebaseClocRevisionsFileTree, updateFileStorage: boolean) {
+    this.localStorageService.clearCodebaseUrl();
+    this.localStorageService.clearCodebaseBranch();
+    if (updateFileStorage) {
+      this.localStorageService.addFilesTree(result);
+    }
+    this.initialCodebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
+    this.codebaseClocRevisions = new CodebaseClocRevisions(result, [], []);
+    this.fileUploaded = true;
+    this.codebaseName = this.translate.instant('global.pages.analysis.cloc-revisions.title-uploaded-file');
+    this.rootFolder = '';
+    this.initCanDownloadAndUpload();
+    this.initRevisionsTreeMap();
+
   }
 }

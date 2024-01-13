@@ -2,7 +2,7 @@
   <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}"
        [height]="30" [width]="30"/>
   <a class="navbar-link" [routerLink]="['']">
-    {{ 'global.components.navbar.title'|translate }}</a>
+    {{ 'global.app-name'|translate }}</a>
   <mat-divider [vertical]="true"></mat-divider>
-  <a class="navbar-link" mat-button (click)="goToCodebases()">{{ 'global.components.navbar.codebases'|translate }}</a>
+  <a class="navbar-link" mat-button [routerLink]="['codebases']">{{ 'global.components.navbar.codebases'|translate }}</a>
 </mat-toolbar>

@@ -36,7 +36,7 @@ export class TreemapChartComponent implements OnDestroy {
     this.chartOptions = this.treemapService.toTreeMapOptions(node, title, description);
   }
 
-  zoomOn(targetItem: string) {
+  tooltipOn(targetItem: string) {
     if (this.chartOptions.series && Array.isArray(this.chartOptions.series)) {
       const seriesItem = this.chartOptions.series[0];
       const foundItem = this.treemapService.searchItemInTreemap(seriesItem, targetItem);

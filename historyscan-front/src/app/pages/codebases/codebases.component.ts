@@ -46,6 +46,7 @@ export class CodebasesComponent implements AfterContentInit {
     dialogRef.afterClosed().subscribe(rootFolder => {
       if (rootFolder) {
         this.addToLocalStorage(element, rootFolder, 'analyze-cloc-revisions');
+       this.localStorageService.clearFilesTree()
         this.router.navigateByUrl('/analysis/cloc-revisions').then();
       }
     });
@@ -57,15 +58,11 @@ export class CodebasesComponent implements AfterContentInit {
   }
 
   private addToLocalStorage(element: CurrentCodebase, rootFolder: string, analysisType: string) {
-    this.localStorageService.removeItems(['analysis-href', 'analysis-name', 'analysis-type',
-      'analysis-root-folder', 'codebase-url', 'codebase-branch']);
-    this.localStorageService.addItems([
-      {key: 'analysis-href', value: element._links[analysisType]?.href},
-      {key: 'analysis-name', value: element.name},
-      {key: 'analysis-type', value: element._links[analysisType]?.type},
-      {key: 'analysis-root-folder', value: rootFolder},
-      {key: 'codebase-url', value: element.url},
-      {key: 'codebase-branch', value: element.currentBranch}
-    ]);
+    this.localStorageService.clearAllItems();
+    this.localStorageService.addItems(
+      element,
+      rootFolder,
+      element._links[analysisType]?.type,
+      element._links[analysisType]?.href);
   }
 }

@@ -7,29 +7,29 @@ import {StartupService} from "../pages/dashboard/startup/startup.service";
 import {LocalstorageService} from "../shared/localstorage.service";
 
 @Component({
-    selector: 'app-main',
-    templateUrl: './main.component.html',
-    styleUrls: ['./main.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
 
-    loading$: Observable<boolean>;
-    startup: Startup = {} as Startup;
+  loading$: Observable<boolean>;
+  startup: Startup = {} as Startup;
 
-    constructor(private readonly loadingService: LoadingService,
-                private readonly startupService: StartupService,
-                private readonly activatedRoute: ActivatedRoute,
-                private readonly localStorageService: LocalstorageService) {
-        this.loading$ = of(false);
-    }
+  constructor(private readonly loadingService: LoadingService,
+              private readonly startupService: StartupService,
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly localStorageService: LocalstorageService) {
+    this.loading$ = of(false);
+  }
 
-    ngOnInit(): void {
-        this.loading$ = this.loadingService.loading$;
-        this.activatedRoute.data.subscribe(
-            ({startup}) => {
-                this.startup = startup;
-                this.localStorageService.addItem('codebases-url', this.startup._links['list-codebases']?.href);
-                this.startupService.initAddCodeBaseUrl(this.startup._links['add-codebase']?.href);
-            });
-    }
+  ngOnInit(): void {
+    this.loading$ = this.loadingService.loading$;
+    this.activatedRoute.data.subscribe(
+      ({startup}) => {
+        this.startup = startup;
+        this.localStorageService.addCodebasesUrl(this.startup._links['list-codebases']?.href);
+        this.startupService.initAddCodeBaseUrl(this.startup._links['add-codebase']?.href);
+      });
+  }
 }

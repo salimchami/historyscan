@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {StartupService} from "./startup/startup.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CodebaseToAdd} from "./codebase-to-add.model";
+import {
+  ClocRevisionsTreeUploadDialogComponent
+} from "../analysis/cloc-revisions/upload-dialog/cloc-revisions-tree-upload-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {NavigationExtras, Router} from "@angular/router";
+import {LocalstorageService} from "../../shared/localstorage.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +24,10 @@ export class DashboardComponent implements OnInit {
     branch: new FormControl('main', Validators.required),
   });
 
-  constructor(private readonly startupService: StartupService) {
+  constructor(private readonly startupService: StartupService,
+              private readonly dialog: MatDialog,
+              private readonly router: Router,
+              private readonly localStorageService: LocalstorageService) {
   }
 
   ngOnInit(): void {
@@ -54,5 +63,16 @@ export class DashboardComponent implements OnInit {
 
   isSubmitButtonEnabled() {
     return this.addRepoForm.dirty && this.addRepoForm.valid;
+  }
+
+  uploadGraph() {
+    this.dialog.open(ClocRevisionsTreeUploadDialogComponent, {
+      width: '50%',
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.localStorageService.addFilesTree(result);
+        this.router.navigateByUrl('/analysis/cloc-revisions').then();
+      }
+    });
   }
 }
