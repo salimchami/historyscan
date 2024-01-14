@@ -10,6 +10,9 @@ export class TreemapService {
     return {
       title: {
         text: 'Loading...',
+        textStyle: {
+          color: '#9f9f9f'
+        },
       },
     };
   }

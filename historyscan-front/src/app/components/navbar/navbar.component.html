@@ -5,9 +5,11 @@
       <span class="logo-text">{{ 'global.app-name' | translate }}</span>
     </a>
   </div>
-  <a class="navbar-link" mat-button
-     [routerLink]="['codebases']">{{ 'global.components.navbar.codebases'|translate }}</a>
   <span fxFlex></span>
+  <div>
+    <a class="navbar-link" mat-button
+       [routerLink]="['codebases']">{{ 'global.components.navbar.codebases'|translate }}</a>
+  </div>
   <div>
     <button mat-button matTooltip="{{'global.components.navbar.help'|translate}}" [routerLink]="['', 'help']">
       <mat-icon>help_outline</mat-icon>
