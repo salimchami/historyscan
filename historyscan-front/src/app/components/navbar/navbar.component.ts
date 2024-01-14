@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +6,4 @@ import {Router} from "@angular/router";
   templateUrl: 'navbar.component.html',
 })
 export class NavbarComponent {
-  constructor(private readonly router: Router) {
-  }
 }

@@ -4,7 +4,7 @@ import {UnavailableComponent} from "../components/unavailable";
 
 export const errorRoutes: Routes = [
   {
-    path: 'error',
+    path: 'not-found',
     component: PageNotFoundComponent,
   },
   {
@@ -13,6 +13,6 @@ export const errorRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/error'
+    redirectTo: '/not-found'
   }
 ];

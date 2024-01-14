@@ -1,0 +1,33 @@
+footer {
+  height: auto;
+  text-align: center;
+  background-color: #3f51b5;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a:visited {
+    color: #fff;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-text {
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}

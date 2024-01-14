@@ -1,8 +1,16 @@
-<mat-toolbar color="primary">
-  <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}"
-       [height]="30" [width]="30"/>
-  <a class="navbar-link" [routerLink]="['']">
-    {{ 'global.app-name'|translate }}</a>
-  <mat-divider [vertical]="true"></mat-divider>
-  <a class="navbar-link" mat-button [routerLink]="['codebases']">{{ 'global.components.navbar.codebases'|translate }}</a>
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="logo-container">
+    <a class="navbar-link" [routerLink]="['']" fxLayout="row" fxLayoutAlign="center center">
+      <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name' | translate }}" height="30" width="30"/>
+      <span class="logo-text">{{ 'global.app-name' | translate }}</span>
+    </a>
+  </div>
+  <a class="navbar-link" mat-button
+     [routerLink]="['codebases']">{{ 'global.components.navbar.codebases'|translate }}</a>
+  <span fxFlex></span>
+  <div>
+    <button mat-button matTooltip="{{'global.components.navbar.help'|translate}}" [routerLink]="['', 'help']">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

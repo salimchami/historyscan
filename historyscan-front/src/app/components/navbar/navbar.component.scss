@@ -1,18 +1,25 @@
 .mat-toolbar {
-  background-color: cornflowerblue;
-  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.mat-button {
-  color: white;
-}
-
-.spacer {
-  flex: 1 1 auto;
+.mat-toolbar a, .mat-toolbar button {
+  margin-right: 8px;
 }
 
 .navbar-link {
+  display: flex;
+  align-items: center;
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  margin-left: 5px;
 }
