@@ -28,7 +28,13 @@ export class TreemapService {
     return {
       title: {
         text: title,
+        textStyle: {
+          color: '#9f9f9f'
+        },
         subtext: description,
+        subtextStyle: {
+          color: '#9f9f9f'
+        }
       },
       autoResize: true,
       animation: true,
