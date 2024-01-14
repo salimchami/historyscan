@@ -124,8 +124,13 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
     this.select(true);
   }
 
-  disabledButtons() {
+  disabledButtons(): boolean {
     return this.codebaseClocRevisions?.extensions?.length === 0;
+  }
+
+  containsOneExtension(): boolean {
+    debugger;
+    return this.codebaseClocRevisions?.extensions?.length === 1;
   }
 
   private select(value: boolean) {
