@@ -10,12 +10,12 @@
     <div style="display: flex; justify-content: space-between; width: 100%;">
       <div>
         <input type="file" #fileInput style="display: none" (change)="upload($event)">
-        <button mat-raised-button color="primary" (click)="fileInput.click()">{{ 'global.buttons.upload'|translate }}
+        <button mat-raised-button color="warn" (click)="fileInput.click()">{{ 'global.buttons.upload'|translate }}
           <mat-icon matIconSuffix>file_upload</mat-icon>
         </button>
       </div>
       <div>
-        <button mat-raised-button color="warn" (click)="close()"> {{ 'global.buttons.close'|translate }}
+        <button mat-raised-button color="accent" (click)="close()"> {{ 'global.buttons.close'|translate }}
         </button>
       </div>
     </div>

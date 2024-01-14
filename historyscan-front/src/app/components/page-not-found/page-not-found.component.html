@@ -1,21 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="error-template">
-        <h2>
-          <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}" [height]="30" [width]="30"/>
-          {{ 'global.app-name'|translate }}
-        </h2>
-        <h2>{{ 'global.components.not-found.description-1'|translate }}</h2>
-        <h1>{{ 'global.components.not-found.description-2'|translate }}</h1>
-        <div class="error-actions">
-          <a href="" (click)="back()" style="margin-top: 10px;" class="btn btn-info btn-lg"><span
-            class="glyphicon glyphicon-home">
-                    </span>{{ 'global.components.not-found.back'|translate }}</a>
-          <a href="#" style="margin-top: 10px;" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-home">
-                    </span>{{ 'global.components.not-found.home'|translate }}</a>
-        </div>
-      </div>
-    </div>
+<div class="error-template">
+  <h2>
+    <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}" [height]="30" [width]="30"/>
+    {{ 'global.app-name'|translate }}
+  </h2>
+  <h2>{{ 'global.components.not-found.description-1'|translate }}</h2>
+  <h1>{{ 'global.components.not-found.description-2'|translate }}</h1>
+  <div class="error-actions">
+    <button mat-raised-button (click)="back()"
+            style="margin-top: 10px;">{{ 'global.components.not-found.back'|translate }}
+      <mat-icon matPrefix>arrow_back</mat-icon>
+    </button>
+    <button mat-raised-button [routerLink]="['']"
+            style="margin-top: 10px; margin-left: 10px">{{ 'global.components.not-found.home'|translate }}
+      <mat-icon matPrefix>home</mat-icon>
+    </button>
   </div>
 </div>
