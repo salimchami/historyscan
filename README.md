@@ -87,6 +87,9 @@ work@salimchami.net
 
 ## Version History
 
+* 1.2.0:
+    * multiple code fixes
+  
 * 1.1.0:
     * multiple code fixes
     * upload and download files tree as json file
