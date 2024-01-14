@@ -1,8 +1,8 @@
 package io.sch.historyscan.infrastructure.features.codebase;
 
+import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.clone.AddedCodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.clone.CodeBaseToAddDTO;
-import io.sch.historyscan.domain.contexts.codebase.clone.CodeBaseAlreadyExistsException;
 import io.sch.historyscan.infrastructure.features.codebase.info.CodebaseDTO;
 import io.sch.historyscan.infrastructure.features.codebase.list.CurrentCodebasesDTO;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static io.sch.historyscan.infrastructure.common.filesystem.WebConstants.ENDPOINT_ROOT;
+import static io.sch.historyscan.infrastructure.common.WebConstants.ENDPOINT_ROOT;
+
 
 @RestController
 @RequestMapping(path = ENDPOINT_ROOT + "/codebases")

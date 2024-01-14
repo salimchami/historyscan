@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {ClocRevisionsAnalysisComponent} from "./cloc-revisions-analysis.component";
 import {MaterialModule, SharedModule} from "../../../shared";
-import {AnalysisService} from "./analysis.service";
+import {AnalysisService} from "../analysis.service";
 import {TreemapChartModule} from "../../../components/treemap-chart/treemap-chart.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
