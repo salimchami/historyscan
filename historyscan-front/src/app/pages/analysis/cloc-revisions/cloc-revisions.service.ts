@@ -12,7 +12,6 @@ export class ClocRevisionsService {
   }
 
   download(fileTreeToDownload: DownloadCodebaseClocrevisionsFileTree) {
-
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = {fileTreeToDownload};

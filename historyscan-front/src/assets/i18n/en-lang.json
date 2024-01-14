@@ -20,13 +20,20 @@
         "back": "Back to home"
       },
       "navbar": {
-        "codebases": "Codebases"
+        "codebases": "Codebases",
+        "help": "Help"
       },
       "unavailable": {
         "description-1": "Temporarily down for maintenance",
         "description-2": "We’ll be back soon!",
         "paragraph-1": "Sorry for the inconvenience, but we’re performing some maintenance at the moment.",
         "signature": "— The Team",
+        "home": "Take Me Home"
+      },
+      "not-found": {
+        "description-1": "404, Not found",
+        "description-2": "Maybe you were looking for something that exists on our site",
+        "back": "Go to previous page",
         "home": "Take Me Home"
       }
     },
@@ -48,13 +55,12 @@
           "title": "Codebase Analysis",
           "description-1": "Currently, only",
           "description-2": "cloc-revisions",
-          "description-3":"analysis is available. This analysis allows you to see on a treemap, the complexity of your codebase based on the number of lines and commits history",
+          "description-3": "analysis is available. This analysis allows you to see on a treemap, the complexity of your codebase based on the number of lines and commits history",
           "description-4": "Open",
           "description-5": "codebases",
           "description-6": "page or",
           "description-7": "upload",
           "description-8": "a file to load it in the analysis graph.",
-
           "cloc-revisions": "Cloc revisions",
           "network-cloc-revisions": "Network CR"
         }
@@ -120,6 +126,30 @@
               "description": "Upload your custom codebase files tree",
               "hint": "The json file must respect the following format"
             }
+          }
+        }
+      },
+      "help": {
+        "title": "Help Page",
+        "application-desc": {
+          "title": "How to use this application",
+          "text": "This application allows you to analyze your codebase based on the number of lines and commits history. To do this, you must first add a git repository. Then, you can analyze it by clicking on the 'Cloc revisions' button on 'codebases' page. You can also upload a custom codebase files tree to display it on the analysis graph."
+        },
+        "analysis": {
+          "title": "Analysis",
+          "cloc-revisions": {
+            "title": "Cloc revisions",
+            "text": "This analysis allows you to see on a treemap, the complexity of your codebase based on the number of lines and commits history. The size of the files and folders is proportional to the number of lines of code. The color of the files and folders is proportional to the number of commits. The more commits a file or folder has, the more it tends towards red."
+          }
+        },
+        "contact": {
+          "title": "Contact",
+          "text-1": "If you have any questions, please visit the",
+          "text-2": "Github page",
+          "text-3": "and submit an issue.",
+          "contributors": {
+            "title": "Contributors",
+            "text": "Thanks to all the contributors who helped to improve this application. You can find them on the"
           }
         }
       }

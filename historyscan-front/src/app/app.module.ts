@@ -22,6 +22,8 @@ import {UnavailableComponent} from "./components/unavailable";
 import {MainComponent} from "./main";
 import {RouterModule} from "@angular/router";
 import {NgxEchartsModule} from "ngx-echarts";
+import {NavbarModule} from "./components/navbar/navbar.module";
+import {FooterModule} from "./components/footer/navbar.module";
 
 registerLocaleData(localeFr);
 
@@ -48,6 +50,8 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
+    NavbarModule,
+    FooterModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),

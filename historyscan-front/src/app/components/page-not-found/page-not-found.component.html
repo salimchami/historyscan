@@ -1,3 +1,21 @@
-{{ 'global.components.page-not-found.404'|translate }}<a (click)="back()">
-  {{ 'global.components.page-not-found.back'|translate }}
-</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="error-template">
+        <h2>
+          <img [ngSrc]="'favicon.ico'" alt="{{ 'global.app-name'|translate }}" [height]="30" [width]="30"/>
+          {{ 'global.app-name'|translate }}
+        </h2>
+        <h2>{{ 'global.components.not-found.description-1'|translate }}</h2>
+        <h1>{{ 'global.components.not-found.description-2'|translate }}</h1>
+        <div class="error-actions">
+          <a href="" (click)="back()" style="margin-top: 10px;" class="btn btn-info btn-lg"><span
+            class="glyphicon glyphicon-home">
+                    </span>{{ 'global.components.not-found.back'|translate }}</a>
+          <a href="#" style="margin-top: 10px;" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-home">
+                    </span>{{ 'global.components.not-found.home'|translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
