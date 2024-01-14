@@ -32,6 +32,9 @@ export class CodebaseClocRevisionsFileTree {
         return CodebaseClocRevisionsFileTree.emptyRoot();
       }
     }
+    if (!fileTree.isFile && children.length === 0) {
+      return CodebaseClocRevisionsFileTree.emptyRoot();
+    }
     return new CodebaseClocRevisionsFileTree(
       fileTree.name,
       fileTree.path,

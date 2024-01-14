@@ -149,11 +149,8 @@ export class TreemapService {
   private createTreeStructure(revisions: CodebaseClocRevisionsFileTree): any[] {
     const nodesMap: any = {};
     this.createNodes(revisions, nodesMap, 1);
-    console.log(nodesMap);
-
     const root = {name: 'root', children: []};
     this.assignChildren(revisions, nodesMap, root);
-
     return root.children;
   }
 

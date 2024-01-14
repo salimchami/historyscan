@@ -129,7 +129,6 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   containsOneExtension(): boolean {
-    debugger;
     return this.codebaseClocRevisions?.extensions?.length === 1;
   }
 
