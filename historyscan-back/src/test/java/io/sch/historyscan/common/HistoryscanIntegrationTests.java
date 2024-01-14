@@ -4,7 +4,7 @@ import io.sch.historyscan.HistoryscanApplication;
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
-import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
+import io.sch.historyscan.infrastructure.features.analysis.history.CodeBaseHistoryAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

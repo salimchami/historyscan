@@ -3,9 +3,9 @@ package io.sch.historyscan.infrastructure.features.analysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileInfo;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
-import io.sch.historyscan.infrastructure.features.analysis.dto.ClocRevisionsFileNodeDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.FileInfoDTO;
+import io.sch.historyscan.infrastructure.features.analysis.clocrevisions.ClocRevisionsFileNodeDTO;
+import io.sch.historyscan.infrastructure.features.analysis.clocrevisions.CodeBaseClocRevisionsDTO;
+import io.sch.historyscan.infrastructure.features.analysis.clocrevisions.FileInfoDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -5,9 +5,9 @@ import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.error.HistoryScanFunctionalException;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseClocRevisionsDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseToAnalyzeDTO;
+import io.sch.historyscan.infrastructure.features.analysis.clocrevisions.CodeBaseClocRevisionsDTO;
+import io.sch.historyscan.infrastructure.features.analysis.history.CodeBaseHistoryDTO;
+import io.sch.historyscan.infrastructure.features.analysis.history.HistoryMapper;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -47,7 +47,12 @@ public class AnalysisApplication {
         return switch (codeBaseToAnalyze.getType()) {
             case COMMITS_SCAN -> historyAnalysis(codeBaseToAnalyze);
             case CLOC_REVISIONS -> clocRevisionsAnalysis(codeBaseToAnalyze);
+            case NETWORK_CLOC_REVISIONS -> networkClocRevisionsAnalysis(codeBaseToAnalyze);
         };
+    }
+
+    private CodeBaseNetworkClocRevisionsDTO networkClocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) {
+        return null;
     }
 
     private CodeBaseClocRevisionsDTO clocRevisionsAnalysis(CodeBaseToAnalyze codeBaseToAnalyze) throws HistoryScanFunctionalException {

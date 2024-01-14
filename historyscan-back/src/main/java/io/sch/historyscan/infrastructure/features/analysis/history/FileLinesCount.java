@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.analysis;
+package io.sch.historyscan.infrastructure.features.analysis.history;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.analysis;
+package io.sch.historyscan.infrastructure.features.analysis.history;
 
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer;

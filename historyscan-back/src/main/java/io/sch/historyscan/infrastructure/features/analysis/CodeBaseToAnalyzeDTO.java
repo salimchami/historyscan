@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.features.analysis.dto;
+package io.sch.historyscan.infrastructure.features.analysis;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
