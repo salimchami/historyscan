@@ -1,39 +1,24 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
+@import "@angular/material/theming";
 
 @import 'theme/historyscan';
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$history-scan-web-primary: mat.define-palette(mat.$indigo-palette);
-$history-scan-web-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$angular-primary: mat.define-palette(mat.$indigo-palette, 300, 400, 700);
+$angular-accent: mat.define-palette(mat.$red-palette, A100, A400, A700);
+$angular-warn: mat.define-palette(mat.$red-palette);
 
-// The warn palette is optional (defaults to red).
-$history-scan-web-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$history-scan-web-theme: mat.define-light-theme((
-  color: (
-    primary: $history-scan-web-primary,
-    accent: $history-scan-web-accent,
-    warn: $history-scan-web-warn,
+$angular-default-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $angular-primary,
+      accent: $angular-accent,
+      warn: $angular-warn,
+    ),
   )
-));
+);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($history-scan-web-theme);
-
-/* You can add global styles to this file, and also import other style files */
+@include mat.all-component-themes($angular-default-theme);
 
 html, body {
   height: 100%;
@@ -44,4 +29,14 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100%;
+  background-color: #424242;
+  color: #cecbcb;
+}
+
+a {
+  color: #cecbcb;
+}
+
+a:visited {
+  color: #9a9a9a;
 }
