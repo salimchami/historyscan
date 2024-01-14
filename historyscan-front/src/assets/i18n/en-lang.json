@@ -35,6 +35,11 @@
         "description-2": "Maybe you were looking for something that exists on our site",
         "back": "Go to previous page",
         "home": "Take Me Home"
+      },
+      "footer": {
+        "is-licensed-under": "is licensed under",
+        "license": "Attribution-NonCommercial-NoDerivatives 4.0 International",
+        "license-initials": "(CC BY-NC-ND 4.0)"
       }
     },
     "pages": {
