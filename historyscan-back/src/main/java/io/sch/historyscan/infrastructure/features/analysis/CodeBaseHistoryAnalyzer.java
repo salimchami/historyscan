@@ -64,8 +64,8 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
     private CodeBaseHistory codeBaseHistory(File codebase) {
         try (var repository = new FileRepositoryBuilder().setGitDir(Paths.get(codebase.toString(), ".git").toFile()).build();
              var git = new Git(repository)) {
-//            git.fetch().call();
-//            git.pull().call();
+            git.fetch().call();
+            git.pull().call();
             var codebaseCurrentFiles = fileSystemManager.allFilesFrom(codebase, ".git");
             return new CodeBaseHistory(StreamSupport.stream(git.log().all().call().spliterator(), false)
                     .map(revCommit -> initCodeBaseHistoryCommit(revCommit, git, repository, codebaseCurrentFiles))
@@ -164,7 +164,7 @@ public class CodeBaseHistoryAnalyzer implements HistoryAnalyzer {
         if (commit.getParentCount() > 0) {
             parentTree = commit.getParent(0).getTree();
         } else {
-            parentTree = null; // No parent for the initial commit
+            parentTree = null;
         }
         return parentTree;
     }

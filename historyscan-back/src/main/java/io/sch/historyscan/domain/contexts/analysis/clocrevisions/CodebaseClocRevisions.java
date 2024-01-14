@@ -9,6 +9,7 @@ import java.util.List;
 @DDDAggregate
 public record CodebaseClocRevisions(
         FileSystemTree actualFsTree,
+        String llmAnalysis,
         List<FileInfo> ignoredRevisions,
         List<String> extensions) {
 

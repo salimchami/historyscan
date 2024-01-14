@@ -5,6 +5,7 @@ import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
 import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
+import io.sch.historyscan.infrastructure.features.llm.client.LlmCodeBaseAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,7 @@ import java.util.Optional;
 
 import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = HistoryscanApplication.class)
@@ -34,7 +34,8 @@ import static org.mockito.Mockito.when;
 })
 @AutoConfigureMockMvc
 public abstract class HistoryscanIntegrationTests implements InitializingBean {
-
+    @MockBean
+    private LlmCodeBaseAnalyzer llmCodeBaseAnalyzer;
     @MockBean
     private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
     @MockBean
@@ -47,6 +48,7 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
         var codebasesResource = new ClassPathResource("codebases/theglobalproject");
         when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
                 .thenReturn(Optional.of(codebasesResource.getFile()));
+        when(llmCodeBaseAnalyzer.analyzeCodebase(any())).thenReturn("");
     }
 
     protected EndPointCaller endPointCaller;

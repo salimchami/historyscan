@@ -104,6 +104,7 @@
       }
     ]
   },
+  "llmAnalysis": "",
   "ignoredRevisions": [
     {
       "name": "Money.java",

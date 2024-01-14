@@ -3,6 +3,7 @@ package io.sch.historyscan.infrastructure.config;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisionsAnalysis;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.ActualFileSystemTree;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.llm.AnalyzeCodeBaseByLlm;
 import io.sch.historyscan.domain.contexts.analysis.common.Analyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodebaseHistoryAnalysis;
@@ -39,13 +40,13 @@ public class DomainInjections {
 
     @Bean
     public CodebaseClocRevisionsAnalysis analyzeCodebaseClocRevisions(
-            Analyze<CodeBaseHistory> codebaseHistoryAnalysis, ActualFileSystemTree actualFileSystemTree) {
-        return new CodebaseClocRevisionsAnalysis(codebaseHistoryAnalysis, actualFileSystemTree);
+            Analyze<CodeBaseHistory> codebaseHistoryAnalysis, ActualFileSystemTree actualFileSystemTree, AnalyzeCodeBaseByLlm analyzeCodeBaseByLlm) {
+        return new CodebaseClocRevisionsAnalysis(codebaseHistoryAnalysis, actualFileSystemTree, analyzeCodeBaseByLlm);
     }
 
     @Bean
     public Analyze<CodebaseClocRevisions> codebaseClocRevisionsStrategy(Analyze<CodeBaseHistory> codebaseHistoryAnalysis,
-                                                                        ActualFileSystemTree actualFileSystemTree) {
-        return analyzeCodebaseClocRevisions(codebaseHistoryAnalysis, actualFileSystemTree);
+                                                                        ActualFileSystemTree actualFileSystemTree, AnalyzeCodeBaseByLlm analyzeCodeBaseByLlm) {
+        return analyzeCodebaseClocRevisions(codebaseHistoryAnalysis, actualFileSystemTree, analyzeCodeBaseByLlm);
     }
 }
