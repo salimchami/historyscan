@@ -14,6 +14,9 @@
       "select-all": "Select all",
       "refresh-graph": "Refresh graph"
     },
+    "notifications": {
+      "copied-path": "Copied path"
+    },
     "components": {
       "page-not-found": {
         "404": "404 !",
@@ -110,6 +113,7 @@
           "root-folder": "Root folder",
           "download-tooltip": "Download codebase files tree (json)",
           "upload-tooltip": "Uplaod codebase files tree (json)",
+          "one-extension": "The analysis contains only one extension",
           "ignored-files": {
             "title": "Ignored files",
             "no-data": "No data",

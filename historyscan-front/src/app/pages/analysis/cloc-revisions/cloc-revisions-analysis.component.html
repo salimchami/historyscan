@@ -31,7 +31,8 @@
     </div>
   }
   @if (containsOneExtension()) {
-    <p style="margin-left: 20px">The analysis contains only one extension : '<strong>{{ codebaseClocRevisions.extensions[0] }}</strong>'</p>
+    <p style="margin-left: 20px">{{ 'global.pages.analysis.cloc-revisions.one-extension'|translate }}:
+      '<strong>{{ codebaseClocRevisions.extensions[0] }}</strong>'</p>
   }
 
   <mat-divider></mat-divider>

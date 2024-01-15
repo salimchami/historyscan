@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   providers: [
@@ -20,6 +21,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     RouterModule,
     FlexLayoutModule,
     CommonModule,
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
@@ -30,6 +32,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     FormsModule,
     RouterModule,
     FlexLayoutModule,
+    MatSnackBarModule 
   ]
 })
 export class SharedModule {
