@@ -1,9 +1,10 @@
-import {Component, OnDestroy} from "@angular/core";
+import {Component, OnDestroy, ViewEncapsulation} from "@angular/core";
 import {TreemapService} from "./treemap.service";
 import {ECharts, EChartsOption} from "echarts";
 import {
   CodebaseClocRevisionsFileTree
 } from "../../pages/analysis/cloc-revisions/codebase-cloc-revisions-file-tree.model";
+import {NotificationService} from "../../shared/common/notification.service";
 
 @Component({
   selector: 'app-treemap-chart',
@@ -16,12 +17,14 @@ export class TreemapChartComponent implements OnDestroy {
   chartOptions: EChartsOption;
   private echartsInstance!: ECharts;
 
-  constructor(private readonly treemapService: TreemapService) {
+  constructor(private readonly treemapService: TreemapService,
+              private readonly notificationService: NotificationService) {
     this.chartOptions = this.treemapService.defaultChartOptions();
   }
 
   onChartInit(ec: ECharts) {
     this.echartsInstance = ec;
+    this.copyPathOnNodeClick();
   }
 
   ngOnDestroy() {
@@ -48,5 +51,15 @@ export class TreemapChartComponent implements OnDestroy {
         });
       }
     }
+  }
+
+  copyPathOnNodeClick() {
+    this.echartsInstance.on('click', (params: any) => {
+      if (params?.data?.path) {
+        navigator.clipboard.writeText(params.data.path).then(() => {
+          this.notificationService.showCopiedText(params.data.path);
+        });
+      }
+    });
   }
 }
