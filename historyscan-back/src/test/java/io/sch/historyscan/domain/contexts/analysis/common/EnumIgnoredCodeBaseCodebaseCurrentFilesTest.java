@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class EnumIgnoredCodeBaseCodebaseCurrentFilesTest {
+class EnumIgnoredCodeBaseFilesTest {
 
     @Test
     void should_ignore_html_report_folder() {
