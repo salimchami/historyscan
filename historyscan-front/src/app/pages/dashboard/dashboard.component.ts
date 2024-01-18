@@ -6,7 +6,7 @@ import {
   ClocRevisionsTreeUploadDialogComponent
 } from "../analysis/cloc-revisions/upload-dialog/cloc-revisions-tree-upload-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {LocalstorageService} from "../../shared/localstorage.service";
 
 @Component({

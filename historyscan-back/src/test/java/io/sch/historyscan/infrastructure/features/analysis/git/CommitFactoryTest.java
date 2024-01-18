@@ -29,7 +29,7 @@ class CommitFactoryTest extends GitTest {
         paths = fileSystemManager.allFilesFrom(codebase, ".git");
         expectedCommitFiles = List.of(new CodeBaseHistoryCommitFile(
                 new FileInfo("file1.txt", "file1.txt", true),
-                3, 3, 0, 0));
+                3, 3, 0, 1));
     }
 
     @Test

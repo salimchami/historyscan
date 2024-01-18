@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewEncapsulation} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {TreemapService} from "./treemap.service";
 import {ECharts, EChartsOption} from "echarts";
 import {

@@ -72,8 +72,4 @@ public class GitOperations implements AutoCloseable {
     public Repository getRepository() {
         return repository;
     }
-
-    public Git getGit() {
-        return git;
-    }
 }
