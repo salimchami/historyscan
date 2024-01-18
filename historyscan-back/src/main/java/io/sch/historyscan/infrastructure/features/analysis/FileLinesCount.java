@@ -1,10 +1,5 @@
 package io.sch.historyscan.infrastructure.features.analysis;
 
-import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.ObjectLoader;
-import org.eclipse.jgit.lib.Repository;
-
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public record FileLinesCount(int nbLines,
@@ -13,7 +8,7 @@ public record FileLinesCount(int nbLines,
                              int modifiedLines
 ) {
 
-    public static FileLinesCount from(String[] diffLines, Repository repository, String filePath) throws IOException {
+    public static FileLinesCount from(String[] diffLines, byte[] fileContent) {
         int addedLines = 0;
         int deletedLines = 0;
         int modifiedLines = 0;
@@ -27,18 +22,13 @@ public record FileLinesCount(int nbLines,
                 modifiedLines++;
             }
         }
-        var nbLines = linesNumber(repository, filePath);
+        var nbLines = linesNumber(fileContent);
         return new FileLinesCount(nbLines, addedLines, deletedLines, modifiedLines);
     }
 
-    private static int linesNumber(Repository repository, String filePath) throws IOException {
-        ObjectId objectId = repository.resolve("HEAD:%s".formatted(filePath));
-        if(objectId == null) {
-            return 0;
-        }
-        ObjectLoader loader = repository.open(objectId);
-        byte[] bytes = loader.getBytes();
-        String content = new String(bytes, StandardCharsets.UTF_8);
+    private static int linesNumber(byte[] fileContent) {
+
+        String content = new String(fileContent, StandardCharsets.UTF_8);
         return content.split("\n").length;
     }
 }
