@@ -85,22 +85,8 @@ public class FileSystemTree {
     }
 
     public FileSystemTree updateFoldersScore() {
-        updateFolderScore(root);
+        root.updateFolderScore();
         return this;
-    }
-
-
-    private long updateFolderScore(FileSystemNode node) {
-        if (node.isFile()) {
-            return node.getScore();
-        } else {
-            long totalScore = 0;
-            for (FileSystemNode child : node.getChildren().values()) {
-                totalScore += updateFolderScore(child);
-            }
-            node.updateScoreFrom(new RevisionScore(totalScore));
-            return totalScore;
-        }
     }
 
     public FileSystemNode getRoot() {

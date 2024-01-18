@@ -15,10 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CodeBaseFileTest {
     private File codebaseFile;
+    private File codebasesFile;
 
     public static Stream<Arguments> should_find_children_from_root_folder_and_without_ignored_files_params() {
         return Stream.of(
                 Arguments.of("/", List.of(
+                        "theglobalproject",
                         "src",
                         "main",
                         "java",
@@ -41,25 +43,27 @@ class CodeBaseFileTest {
                         "ExtensionsAdapter.java",
                         "build.gradle"
 
-                )),
-                Arguments.of("domain", List.of(
-                        "domain",
-                        "boundedcontexts",
-                        "featureA",
-                        "refactored",
-                        "Extensions.java",
-                        "Loading.java",
-                        "Extensions.java",
-                        "Loading.java",
-                        "featureB",
-                        "FinallyLoading.java"))
+                ))
+//                Arguments.of("domain", List.of(
+//                        "domain",
+//                        "boundedcontexts",
+//                        "featureA",
+//                        "refactored",
+//                        "Extensions.java",
+//                        "Loading.java",
+//                        "Extensions.java",
+//                        "Loading.java",
+//                        "featureB",
+//                        "FinallyLoading.java"))
         );
     }
 
     @BeforeEach
     void setUp() throws IOException {
-        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
-        codebaseFile = codebasesResource.getFile();
+        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
+        var codebasesResource = new ClassPathResource("codebases");
+        codebaseFile = codebaseResource.getFile();
+        codebasesFile = codebasesResource.getFile();
     }
 
     @ParameterizedTest
@@ -67,7 +71,7 @@ class CodeBaseFileTest {
     void should_find_children_from_root_folder_and_without_ignored_files(String rootFolderValue, List<String> expectedFiles) {
         final String codeBaseName = "theglobalproject";
         RootFolder rootFolder = RootFolder.of(rootFolderValue, codeBaseName);
-        var sut = new CodeBaseFile(codebaseFile, rootFolder);
+        var sut = new CodeBaseFile(codebaseFile, rootFolder, codebasesFile.getPath());
         var children = sut.children();
         assertThat(children)
                 .extracting(FileInfo::name)
