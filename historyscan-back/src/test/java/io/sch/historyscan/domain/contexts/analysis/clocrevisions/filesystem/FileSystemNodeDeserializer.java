@@ -29,14 +29,14 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
         Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();
         while (fields.hasNext()) {
             Map.Entry<String, JsonNode> field = fields.next();
-            FileSystemNode child = deserialize(field.getValue(), fileSystemNode);
+            FileSystemNode child = deserialize(field.getValue());
             fileSystemNode.addChild(field.getKey(), child);
         }
 
         return fileSystemNode;
     }
 
-    private FileSystemNode deserialize(JsonNode node, FileSystemNode parent) {
+    private FileSystemNode deserialize(JsonNode node) {
         String name = node.get("name").asText();
         String path = node.get("path").asText();
         int currentNbLines = node.get("currentNbLines").asInt();
@@ -50,7 +50,7 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
         Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();
         while (fields.hasNext()) {
             Map.Entry<String, JsonNode> field = fields.next();
-            FileSystemNode child = deserialize(field.getValue(), fileSystemNode);
+            FileSystemNode child = deserialize(field.getValue());
             fileSystemNode.addChild(field.getKey(), child);
         }
 
