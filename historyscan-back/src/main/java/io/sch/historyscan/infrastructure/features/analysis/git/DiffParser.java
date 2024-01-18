@@ -26,7 +26,7 @@ public class DiffParser {
             String diffText = out.toString();
             String[] diffLines = diffText.split("\r\n|\r|\n");
             var fileContent = fileContentFrom(repository, fileDiff.getNewPath());
-            var linesCount = FileLinesCount.from(diffLines, fileContent);
+            var linesCount = FileLinesCount.from(diffLines, fileContent, fileDiff.getNewId().name());
             boolean isFile = fileDiff.getNewMode().equals(FileMode.REGULAR_FILE);
             return new CodeBaseHistoryCommitFile(
                     new FileInfo(Paths.get(fileDiff.getNewPath()).getFileName().toString(),

@@ -8,25 +8,26 @@ public record FileLinesCount(int nbLines,
                              int modifiedLines
 ) {
 
-    public static FileLinesCount from(String[] diffLines, byte[] fileContent) {
+    public static FileLinesCount from(String[] diffLines, byte[] fileContent, String fileName) {
         int addedLines = 0;
         int deletedLines = 0;
         int modifiedLines = 0;
         for (String line : diffLines) {
-            if (line.startsWith("+") && !line.startsWith("+++")) {
-                addedLines++;
-
-            } else if (line.startsWith("-") && !line.startsWith("---")) {
-                deletedLines++;
-            } else if (line.startsWith("+++") || line.startsWith("---")) {
-                modifiedLines++;
+            if (!line.endsWith("/dev/null") && !line.endsWith(fileName)) {
+                if (line.startsWith("+") && !line.startsWith("+++")) {
+                    addedLines++;
+                } else if (line.startsWith("-") && !line.startsWith("---")) {
+                    deletedLines++;
+                } else if (line.startsWith("+++") || line.startsWith("---")) {
+                    modifiedLines++;
+                }
             }
         }
-        var nbLines = linesNumber(fileContent, fileContent.length);
+        var nbLines = linesNumber(fileContent);
         return new FileLinesCount(nbLines, addedLines, deletedLines, modifiedLines);
     }
 
-    private static int linesNumber(byte[] fileContent, int contentLength) {
+    private static int linesNumber(byte[] fileContent) {
         if (fileContent.length == 0) {
             return 0;
         }

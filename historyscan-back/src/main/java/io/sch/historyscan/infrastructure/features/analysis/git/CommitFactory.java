@@ -7,6 +7,7 @@ import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.lib.FileMode;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class CommitFactory {
     public Optional<CodeBaseCommit> createCommit(RevCommit revCommit, List<String> codebaseCurrentFilesPaths, GitOperations gitOperations) {
         var codeBaseHistoryCommitFiles = commitFilesList(revCommit, gitOperations, codebaseCurrentFilesPaths);
