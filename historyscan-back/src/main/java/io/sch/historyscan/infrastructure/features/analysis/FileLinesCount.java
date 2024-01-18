@@ -22,12 +22,14 @@ public record FileLinesCount(int nbLines,
                 modifiedLines++;
             }
         }
-        var nbLines = linesNumber(fileContent);
+        var nbLines = linesNumber(fileContent, fileContent.length);
         return new FileLinesCount(nbLines, addedLines, deletedLines, modifiedLines);
     }
 
-    private static int linesNumber(byte[] fileContent) {
-
+    private static int linesNumber(byte[] fileContent, int contentLength) {
+        if (fileContent.length == 0) {
+            return 0;
+        }
         String content = new String(fileContent, StandardCharsets.UTF_8);
         return content.split("\n").length;
     }

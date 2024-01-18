@@ -39,6 +39,9 @@ public class DiffParser {
 
     private byte[] fileContentFrom(Repository repository, String filePath) throws IOException {
         ObjectId objectId = repository.resolve("HEAD:%s".formatted(filePath));
+        if (objectId == null) {
+            return new byte[0];
+        }
         ObjectLoader loader = repository.open(objectId);
         return loader.getBytes();
     }
