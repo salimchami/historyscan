@@ -19,7 +19,6 @@ class CodeBaseFileTest {
     public static Stream<Arguments> should_find_children_from_root_folder_and_without_ignored_files_params() {
         return Stream.of(
                 Arguments.of("/", List.of(
-                        "theglobalproject",
                         "src",
                         "main",
                         "java",

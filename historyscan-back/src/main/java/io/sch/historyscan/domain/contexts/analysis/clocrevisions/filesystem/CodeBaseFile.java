@@ -30,7 +30,7 @@ public class CodeBaseFile {
     public List<FileInfo> children() {
         try (var codeBaseFiles = Files.walk(rootFile.toPath())) {
             return codeBaseFiles.map(Path::toFile)
-                    .filter(CodeBaseFile::filterGitFolder)
+                    .filter(this::filterFolderPath)
                     .map(this::child)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
@@ -40,16 +40,19 @@ public class CodeBaseFile {
         }
     }
 
-    private static boolean filterGitFolder(File codeBaseFile) {
+    private boolean filterFolderPath(File codeBaseFile) {
         var filePath = codeBaseFile.getPath().replace("\\", "/");
-        return !filePath.contains("/.git");
+        var rootPath = rootFile.getPath().replace("\\", "/");
+        return !filePath.contains("/.git")
+               && !filePath.equals(rootPath)
+               && filePath.contains(rootFolder.getValue());
     }
 
     private Optional<FileInfo> child(File codeBaseFile) {
         var path = pathFromCodebaseName(codeBaseFile);
         var currentNbLines = nbLinesOfCode(codeBaseFile);
         final FileInfo fileInfo = new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile(), currentNbLines);
-        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo) && path.contains(rootFolder.getValue())) {
+        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo)) {
             return Optional.of(fileInfo);
         }
         return Optional.empty();

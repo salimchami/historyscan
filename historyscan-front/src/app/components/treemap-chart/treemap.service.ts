@@ -113,7 +113,6 @@ export class TreemapService {
 
   private findMaxScore(node: CodebaseClocRevisionsFileTree): number {
     let maxScore = node.isFile ? node.score : 0;
-
     if (node.children && node.children.length > 0) {
       for (const child of node.children) {
         const childMax = this.findMaxScore(child);
@@ -122,9 +121,7 @@ export class TreemapService {
         }
       }
     }
-
     return maxScore;
-
   }
 
   private levelOption() {
@@ -171,7 +168,9 @@ export class TreemapService {
     }
 
     revisions.children.forEach(child => {
-      index = this.createNodes(child, nodesMap, index);
+      if (child.isFile || !!child.children.length) {
+        index = this.createNodes(child, nodesMap, index);
+      }
     });
     return index;
   }
