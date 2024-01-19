@@ -1,5 +1,7 @@
 package io.sch.historyscan.domain.contexts.analysis.common;
 
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FilePath;
+
 import java.util.Arrays;
 
 import static io.sch.historyscan.domain.contexts.analysis.common.EnumPathType.FILE;
@@ -49,12 +51,17 @@ public enum EnumIgnoredCodeBaseFiles {
         this.type = type;
     }
 
-    public static boolean isIgnored(String rootFolder, String path, boolean isFile) {
-        return Arrays.stream(values()).noneMatch(ignoredFile -> sameAsRootFolder(rootFolder, ignoredFile.title))
-        && Arrays.stream(values()).anyMatch(ignoredFile -> isIgnored(path, isFile, ignoredFile));
+    public static boolean isIgnored(String codebasesFolder, String path, boolean isFile) {
+        var commonPart = FilePath.commonPartOf(codebasesFolder, path);
+        var filteredPath = path.substring(commonPart.length());
+        return Arrays.stream(values()).anyMatch(ignoredFile -> isIgnored(filteredPath, isFile, ignoredFile));
     }
 
+
     private static boolean isIgnored(String path, boolean isFile, EnumIgnoredCodeBaseFiles ignoredFile) {
+        if (path.isEmpty()) {
+            return false;
+        }
         final String formattedPath = path.replace("\\", "/").trim().toLowerCase();
         if (isFile) {
             return (ignoredFile.type == FOLDER && formattedPath.contains(ignoredFile.title + "/"))
@@ -65,9 +72,5 @@ public enum EnumIgnoredCodeBaseFiles {
                    || formattedPath.contains("/" + ignoredFile.title)
                    || ignoredFile.title.contains(formattedPath);
         }
-    }
-
-    private static boolean sameAsRootFolder(String rootFolder, String itemValue) {
-        return rootFolder.contains(itemValue) || itemValue.contains(rootFolder);
     }
 }

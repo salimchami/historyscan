@@ -66,7 +66,7 @@ public class CodeBaseFile {
     }
 
     private boolean filterIgnoredFiles(File currentFile, String path, FileInfo fileInfo) {
-        var isIgnored = isIgnored(rootFolder.getValue(), path, currentFile.isFile());
+        var isIgnored = isIgnored(rootFile.getPath(), path, currentFile.isFile());
         if (isIgnored && currentFile.isFile()) {
             this.ignoredFiles.add(fileInfo);
         }

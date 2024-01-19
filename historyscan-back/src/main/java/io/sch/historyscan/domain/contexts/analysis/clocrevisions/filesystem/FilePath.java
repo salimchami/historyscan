@@ -30,4 +30,13 @@ public record FilePath(File currentFile, String rootFolder, String codebaseName,
         }
         return sanitizedPAth;
     }
+
+    public static String commonPartOf(String firstPath, String secondPath) {
+        var firstChar = secondPath.split("/")[0];
+        var firstPathSplitIndex = firstPath.lastIndexOf(firstChar);
+        var commonPart = firstPath.substring(firstPathSplitIndex);
+        return secondPath.substring(0, commonPart.length());
+    }
+
+
 }
