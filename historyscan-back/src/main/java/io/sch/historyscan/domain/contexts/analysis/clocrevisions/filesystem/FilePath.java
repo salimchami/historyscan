@@ -5,26 +5,28 @@ import java.util.Objects;
 
 public record FilePath(File currentFile, String rootFolder, String codebaseName, String codebasesPath) {
     public String pathFromCodebaseName(File currentFile) {
-        var fullPath = Objects.requireNonNull(currentFile).getPath().replace("\\", "/");
-        var projectPath = fullPath.substring(0, (codebasesPath + "/" + codebaseName).length());
+        var fullPath = sanitizePath(Objects.requireNonNull(currentFile).getPath());
+        var projectPath = sanitizePath(fullPath.substring(0, (codebasesPath).length()));
         var filePath = fullPath.substring(projectPath.length());
         return sanitizePath(filePath);
     }
 
     public boolean isValid() {
-        var filePath = currentFile.getPath().replace("\\", "/");
-        return !filePath.contains("/.git")
-               && !filePath.equals(codebasesPath.replace("\\", "/"))
-               && filePath.contains(rootFolder);
+        var filePath = sanitizePath(currentFile.getPath());
+        var isGitFolder = filePath.contains("/.git");
+        var isCodebasesPath = filePath.equals(sanitizePath(codebasesPath));
+        var isCodebasePath = filePath.equals(sanitizePath(codebasesPath) + "/" + codebaseName);
+        var containsRootFolder = filePath.contains(sanitizePath(rootFolder));
+        return !isGitFolder && !isCodebasesPath && !isCodebasePath && containsRootFolder;
     }
 
     private String sanitizePath(String path) {
-        String sanitizedPAth = "";
-        if (path.endsWith("/")) {
-            sanitizedPAth = path.substring(0, path.length() - 1);
+        String sanitizedPAth = path.replace("\\", "/");
+        if (sanitizedPAth.endsWith("/")) {
+            sanitizedPAth = sanitizedPAth.substring(0, path.length() - 1);
         }
-        if (path.startsWith("/")) {
-            sanitizedPAth = path.substring(1);
+        if (sanitizedPAth.startsWith("/")) {
+            sanitizedPAth = sanitizedPAth.substring(1);
         }
         return sanitizedPAth;
     }

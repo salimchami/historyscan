@@ -24,23 +24,17 @@ public class FileSystemTree {
         if (!codeBaseFile.hasSameNameAsCodeBase()) {
             throw new IllegalArgumentException("Codebase must be the same as the root folder name");
         }
-        for (var nestedCodeBaseFile : codeBaseFile.children()) {
-            addFile(nestedCodeBaseFile);
+        var filteredChildren = codeBaseFile.filteredChildren();
+        for (var nestedCodeBaseFile : filteredChildren) {
+            var parts = nestedCodeBaseFile.pathParts(rootFolder.getValue());
+            addFileParts(parts, nestedCodeBaseFile);
         }
         this.ignoredFiles.addAll(codeBaseFile.getIgnoredFiles());
     }
 
-    private void addFile(FileInfo file) {
-        final List<String> parts = file.pathParts(rootFolder.getValue());
-        int partsIndexFromRootFolder = parts.indexOf(rootFolder.getValue());
-        if (partsIndexFromRootFolder != -1) {
-            addFileParts(parts, file, partsIndexFromRootFolder);
-        }
-    }
-
-    private void addFileParts(List<String> codeBaseParts, FileInfo file, int partsIndexFromRootFolder) {
+    private void addFileParts(List<String> codeBaseParts, FileInfo file) {
         var current = root;
-        for (int i = partsIndexFromRootFolder; i < codeBaseParts.size(); i++) {
+        for (int i = 0; i < codeBaseParts.size(); i++) {
             String part = codeBaseParts.get(i);
             if (!current.getChildren().containsKey(part)) {
                 var parentPath = parentPath(file, i, part);
@@ -59,8 +53,7 @@ public class FileSystemTree {
     }
 
     private String parentPath(FileInfo file, int i, String part) {
-        if ((rootFolder.getCodebaseName().equals(part)
-                && file.path().lastIndexOf(part) == 0) || rootFolder.getValue().equals(part)) {
+        if (file.path().lastIndexOf(part) == 0 || rootFolder.getValue().equals(part)) {
             return "/";
         }
         return i == 0 ? null : file.parentPathFrom(part);
@@ -118,8 +111,8 @@ public class FileSystemTree {
     @Override
     public String toString() {
         return "FileSystemTree{" +
-                "root=" + root +
-                ", rootFolder=" + rootFolder +
-                '}';
+               "root=" + root +
+               ", rootFolder=" + rootFolder +
+               '}';
     }
 }

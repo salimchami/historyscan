@@ -28,7 +28,7 @@ public class CodeBaseFile {
         return rootFile.getName().equals(rootFolder.getCodebaseName());
     }
 
-    public List<FileInfo> children() {
+    public List<FileInfo> filteredChildren() {
         try (var codeBaseFiles = Files.walk(rootFile.toPath())) {
             return codeBaseFiles.map(Path::toFile)
                     .filter(file -> new FilePath(file, rootFolder.getValue(), rootFolder.getCodebaseName(), codebasesPath)
@@ -43,8 +43,8 @@ public class CodeBaseFile {
     }
 
     private Optional<FileInfo> child(File codeBaseFile) {
-        var path = new FilePath(codeBaseFile, rootFolder.getValue(), rootFolder.getCodebaseName(), codebasesPath)
-                .pathFromCodebaseName(codeBaseFile);
+        var filePath = new FilePath(codeBaseFile, rootFolder.getValue(), rootFolder.getCodebaseName(), codebasesPath);
+        var path = filePath.pathFromCodebaseName(codeBaseFile);
         var currentNbLines = nbLinesOfCode(codeBaseFile);
         final FileInfo fileInfo = new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile(), currentNbLines);
         if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo)) {
@@ -66,7 +66,7 @@ public class CodeBaseFile {
     }
 
     private boolean filterIgnoredFiles(File currentFile, String path, FileInfo fileInfo) {
-        var isIgnored = isIgnored(path, currentFile.isFile());
+        var isIgnored = isIgnored(rootFolder.getValue(), path, currentFile.isFile());
         if (isIgnored && currentFile.isFile()) {
             this.ignoredFiles.add(fileInfo);
         }

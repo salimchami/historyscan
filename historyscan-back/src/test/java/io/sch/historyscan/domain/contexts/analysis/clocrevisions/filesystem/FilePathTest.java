@@ -15,11 +15,11 @@ class FilePathTest {
         var fullFilePath = "C:\\Users\\slim\\historyscan\\codebases\\historyscan\\historyscan-back" +
                            "\\src\\main\\java\\io\\sch\\historyscan\\domain\\contexts\\analysis" +
                            "\\clocrevisions\\filesystem\\CodeBaseFile.java";
-        var expectedFilePath = "historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem/CodeBaseFile.java";
+        var expectedFilePath = "historyscan/historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem/CodeBaseFile.java";
         var fullFolderPath = "C:\\Users\\slim\\historyscan\\codebases\\historyscan\\historyscan-back" +
                            "\\src\\main\\java\\io\\sch\\historyscan\\domain\\contexts\\analysis" +
                            "\\clocrevisions\\filesystem";
-        var expectedFolderPath = "historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem";
+        var expectedFolderPath = "historyscan/historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem";
         final String codebaseName = "historyscan";
         return Stream.of(
                 Arguments.of("/", codebaseName, fullFilePath, expectedFilePath),

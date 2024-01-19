@@ -4,8 +4,8 @@
   "currentNbLines": 0,
   "score": 21088,
   "children": {
-    "domain": {
-      "name": "domain",
+    "theglobalproject/src/main/java/io/mycompany/theproject/domain": {
+      "name": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
       "parentPath": "/",
       "currentNbLines": 0,

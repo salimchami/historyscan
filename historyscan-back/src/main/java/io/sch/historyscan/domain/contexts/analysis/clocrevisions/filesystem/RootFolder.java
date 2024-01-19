@@ -17,7 +17,8 @@ public class RootFolder {
     }
 
     private static String formattedValue(String value, String codebaseName) {
-        if (value.isEmpty()
+        var actualValue = value.trim();
+        if (actualValue.isEmpty()
             || value.equals("/")
             || value.equals("\\")
             || value.equals(codebaseName)

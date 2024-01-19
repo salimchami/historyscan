@@ -49,18 +49,25 @@ public enum EnumIgnoredCodeBaseFiles {
         this.type = type;
     }
 
-    public static boolean isIgnored(String path, boolean isFile) {
-        return Arrays.stream(values()).anyMatch(ignoredFile -> isIgnored(path, isFile, ignoredFile));
+    public static boolean isIgnored(String rootFolder, String path, boolean isFile) {
+        return Arrays.stream(values()).noneMatch(ignoredFile -> sameAsRootFolder(rootFolder, ignoredFile.title))
+        && Arrays.stream(values()).anyMatch(ignoredFile -> isIgnored(path, isFile, ignoredFile));
     }
 
     private static boolean isIgnored(String path, boolean isFile, EnumIgnoredCodeBaseFiles ignoredFile) {
         final String formattedPath = path.replace("\\", "/").trim().toLowerCase();
         if (isFile) {
-            return Arrays.stream(values()).anyMatch(folder -> folder.type == FOLDER && formattedPath.contains(folder.title + "/"))
-                    || formattedPath.substring(formattedPath.lastIndexOf("/") + 1)
-                    .equals(ignoredFile.title) && ignoredFile.type == FILE;
+            return (ignoredFile.type == FOLDER && formattedPath.contains(ignoredFile.title + "/"))
+                   || formattedPath.substring(formattedPath.lastIndexOf("/") + 1)
+                              .equals(ignoredFile.title) && ignoredFile.type == FILE;
         } else {
-            return formattedPath.contains(ignoredFile.title + "/") || formattedPath.contains("/" + ignoredFile.title);
+            return formattedPath.contains(ignoredFile.title + "/")
+                   || formattedPath.contains("/" + ignoredFile.title)
+                   || ignoredFile.title.contains(formattedPath);
         }
+    }
+
+    private static boolean sameAsRootFolder(String rootFolder, String itemValue) {
+        return rootFolder.contains(itemValue) || itemValue.contains(rootFolder);
     }
 }
