@@ -155,7 +155,7 @@ export class TreemapService {
   }
 
   private createNodes(revisions: CodebaseClocRevisionsFileTree, nodesMap: any, index: number) {
-    if (revisions.path !== undefined && revisions.score !== undefined) {
+    if ((revisions.isFile || !!revisions.children.length)) {
       nodesMap[revisions.path] = {
         name: revisions.name,
         value: revisions.score,
@@ -166,7 +166,6 @@ export class TreemapService {
       };
       index++;
     }
-
     revisions.children.forEach(child => {
       if (child.isFile || !!child.children.length) {
         index = this.createNodes(child, nodesMap, index);
