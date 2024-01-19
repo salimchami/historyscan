@@ -23,7 +23,7 @@ public class FileSystemReader implements ActualFileSystemTree {
     public FileSystemTree from(RootFolder rootFolder) {
         FileSystemTree tree = new FileSystemTree(rootFolder);
         this.fileSystemManager.findFolder(codebasesFolder, rootFolder.getCodebaseName())
-                .ifPresent(file -> tree.createFrom(new CodeBaseFile(file,  rootFolder)));
+                .ifPresent(file -> tree.createFrom(new CodeBaseFile(file, rootFolder, codebasesFolder)));
         return tree;
     }
 }

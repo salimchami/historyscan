@@ -38,7 +38,9 @@ class FileInfoTest {
         return Stream.of(
                 Arguments.of("path", "file.ts", "path/to/file.ts", List.of("path", "to", "file.ts")),
                 Arguments.of("path/to", "file.ts", "path/to/file.ts", List.of("path/to", "file.ts")),
-                Arguments.of("folder", "folder-application", "folder/folder-application", List.of("folder", "folder-application"))
+                Arguments.of("folder", "folder-application", "folder/folder-application", List.of("folder", "folder-application")),
+                Arguments.of("domain", "boundedcontexts", "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts", List.of("theglobalproject/src/main/java/io/mycompany/theproject/domain", "boundedcontexts")),
+                Arguments.of("java/io/mycompany/theproject/domain", "boundedcontexts", "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts", List.of("theglobalproject/src/main/java/io/mycompany/theproject/domain", "boundedcontexts"))
         );
     }
 

@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static io.sch.historyscan.domain.contexts.analysis.common.EnumIgnoredCodeBaseFiles.isIgnored;
@@ -16,10 +15,12 @@ public class CodeBaseFile {
     private final File rootFile;
     private final RootFolder rootFolder;
     private final List<FileInfo> ignoredFiles;
+    private final String codebasesPath;
 
-    public CodeBaseFile(File rootFile, RootFolder rootFolder) {
+    public CodeBaseFile(File rootFile, RootFolder rootFolder, String codebasesPath) {
         this.rootFile = rootFile;
         this.rootFolder = rootFolder;
+        this.codebasesPath = codebasesPath;
         this.ignoredFiles = new ArrayList<>();
     }
 
@@ -27,10 +28,11 @@ public class CodeBaseFile {
         return rootFile.getName().equals(rootFolder.getCodebaseName());
     }
 
-    public List<FileInfo> children() {
+    public List<FileInfo> filteredChildren() {
         try (var codeBaseFiles = Files.walk(rootFile.toPath())) {
             return codeBaseFiles.map(Path::toFile)
-                    .filter(CodeBaseFile::filterGitFolder)
+                    .filter(file -> new FilePath(file, rootFolder.getValue(), rootFolder.getCodebaseName(), codebasesPath)
+                            .isValid())
                     .map(this::child)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
@@ -40,16 +42,12 @@ public class CodeBaseFile {
         }
     }
 
-    private static boolean filterGitFolder(File codeBaseFile) {
-        var filePath = codeBaseFile.getPath().replace("\\", "/");
-        return !filePath.contains("/.git");
-    }
-
     private Optional<FileInfo> child(File codeBaseFile) {
-        var path = pathFromCodebaseName(codeBaseFile);
+        var filePath = new FilePath(codeBaseFile, rootFolder.getValue(), rootFolder.getCodebaseName(), codebasesPath);
+        var path = filePath.pathFromCodebaseName(codeBaseFile);
         var currentNbLines = nbLinesOfCode(codeBaseFile);
         final FileInfo fileInfo = new FileInfo(codeBaseFile.getName(), path, codeBaseFile.isFile(), currentNbLines);
-        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo) && path.contains(rootFolder.getValue())) {
+        if (this.filterIgnoredFiles(codeBaseFile, path, fileInfo)) {
             return Optional.of(fileInfo);
         }
         return Optional.empty();
@@ -68,18 +66,11 @@ public class CodeBaseFile {
     }
 
     private boolean filterIgnoredFiles(File currentFile, String path, FileInfo fileInfo) {
-        var isIgnored = isIgnored(path, currentFile.isFile());
+        var isIgnored = isIgnored(rootFile.getPath(), path, currentFile.isFile());
         if (isIgnored && currentFile.isFile()) {
             this.ignoredFiles.add(fileInfo);
         }
         return !isIgnored;
-    }
-
-    private String pathFromCodebaseName(File currentFile) {
-        final String path = Objects.requireNonNull(currentFile).getPath().replace("\\", "/");
-        return path.contains(rootFolder.getCodebaseName())
-                ? path.substring(path.indexOf(rootFolder.getCodebaseName()))
-                : path;
     }
 
     public List<FileInfo> getIgnoredFiles() {

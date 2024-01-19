@@ -101,11 +101,11 @@ public class FileSystemNode {
         if (o == null || getClass() != o.getClass()) return false;
         FileSystemNode that = (FileSystemNode) o;
         return isFile == that.isFile
-                && Objects.equals(name, that.name)
-                && Objects.equals(path, that.path)
-                && Objects.equals(parentPath, that.parentPath)
-                && Objects.equals(score, that.score)
-                && children.equals(that.children);
+               && Objects.equals(name, that.name)
+               && Objects.equals(path, that.path)
+               && Objects.equals(parentPath, that.parentPath)
+               && Objects.equals(score, that.score)
+               && children.equals(that.children);
     }
 
     @Override
@@ -116,12 +116,29 @@ public class FileSystemNode {
     @Override
     public String toString() {
         return "FileSystemNode{" +
-                "name='" + name + '\'' +
-                ", path='" + path + '\'' +
-                ", parentPath='" + parentPath + '\'' +
-                ", isFile=" + isFile +
-                ", score=" + score +
-                ", children=" + children +
-                '}';
+               "name='" + name + '\'' +
+               ", path='" + path + '\'' +
+               ", parentPath='" + parentPath + '\'' +
+               ", isFile=" + isFile +
+               ", score=" + score +
+               ", children=" + children +
+               '}';
+    }
+
+    public void updateFolderScore() {
+        this.updateFolderScore(this);
+    }
+
+    private long updateFolderScore(FileSystemNode node) {
+        if (node.isFile()) {
+            return node.getScore();
+        } else {
+            long totalScore = 0;
+            for (FileSystemNode child : node.getChildren().values()) {
+                totalScore += updateFolderScore(child);
+            }
+            node.updateScoreFrom(new RevisionScore(totalScore));
+            return totalScore;
+        }
     }
 }

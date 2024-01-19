@@ -27,8 +27,8 @@ public class GitOperations implements AutoCloseable {
     }
 
     public List<RevCommit> getCommits() throws GitAPIException, IOException {
-//        git.fetch().call();
-//        git.pull().call();
+        git.fetch().call();
+        git.pull().call();
         return StreamSupport.stream(git.log().all().call().spliterator(), false).toList();
     }
 

@@ -26,9 +26,11 @@ class FileSystemTreeTest {
     void should_load_file_system_tree_from_disk(String rootFolderName, String expectedRootTestCase) throws IOException {
         final RootFolder rootFolder = RootFolder.of(rootFolderName, "theglobalproject");
         var fsTree = new FileSystemTree(rootFolder);
-        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
+        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
+        var codebasesResource = new ClassPathResource("codebases");
 
-        fsTree.createFrom(new CodeBaseFile(codebasesResource.getFile(), rootFolder));
+        fsTree.createFrom(new CodeBaseFile(codebaseResource.getFile(), rootFolder,
+                codebasesResource.getFile().getPath()));
 
         final var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
         assertThat(fsTree)

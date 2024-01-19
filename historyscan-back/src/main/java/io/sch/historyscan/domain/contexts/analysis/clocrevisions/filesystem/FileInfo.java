@@ -1,41 +1,36 @@
 package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 
 public record FileInfo(String name, String path, boolean isFile, long currentNbLines) implements Comparable<FileInfo> {
     public List<String> pathParts(String rootFolder) {
-        if (rootFolder == null || rootFolder.isEmpty()) {
-            return Arrays.stream(path.trim().split("/"))
-                    .filter(part -> !part.isEmpty())
-                    .toList();
+        List<String> parts = new ArrayList<>();
+        int rootIndex = path.indexOf(rootFolder);
+        if (rootIndex != -1) {
+            String beforeRoot = path.substring(0, rootIndex + rootFolder.length());
+            if (!beforeRoot.isEmpty()) {
+                parts.add(beforeRoot);
+            }
+
+            String remainingPath = path.substring(rootIndex + rootFolder.length());
+            if (!remainingPath.isEmpty()) {
+                if (remainingPath.startsWith("/")) {
+                    remainingPath = remainingPath.substring(1);
+                }
+                parts.addAll(Arrays.asList(remainingPath.split("/")));
+            }
+        } else {
+            parts.addAll(Arrays.asList(path.split("/")));
         }
-        var pathParts = Arrays.stream(path.trim().split(rootFolder + "/", -1))
-                .toList();
-        return Stream.concat(
-                        pathPartsRootFolderWithPrefix(rootFolder, pathParts),
-                        pathPartsRootFolderSuffix(pathParts)
-                )
+
+        return parts.stream()
                 .filter(part -> !part.isEmpty())
-                .toList();
-    }
-
-    private static Stream<String> pathPartsRootFolderSuffix(List<String> splitPath) {
-        return Arrays.stream(splitPath.get(splitPath.size() - 1).split("/"))
-                .filter(subPart -> !subPart.isEmpty());
-    }
-
-    private static Stream<String> pathPartsRootFolderWithPrefix(String rootFolder, List<String> splitPath) {
-        return splitPath.stream()
-                .limit(splitPath.size() - 1L)
-                .flatMap(part -> Stream.concat(
-                        Arrays.stream(part.split("/"))
-                                .filter(subPart -> !subPart.isEmpty()),
-                        Stream.of(rootFolder)
-                ));
+                .collect(Collectors.toList());
     }
 
     public String pathFrom(String pathPart) {
