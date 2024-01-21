@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {AnalysisService} from "./analysis.service";
+import {AnalysisService} from "../analysis.service";
 import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocalstorageService} from "../../../shared/localstorage.service";
@@ -29,8 +28,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   canUpload = false;
   canDownload = false;
 
-  constructor(private readonly activatedRoute: ActivatedRoute,
-              private readonly analysisService: AnalysisService,
+  constructor(private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService,
               private readonly clocRevisionsService: ClocRevisionsService,
@@ -68,16 +66,14 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   private initData() {
-    this.activatedRoute.paramMap.subscribe(() => {
-      this.analysisService.clocAndRevisions().subscribe({
-        next: (codebaseClocRevisions) => {
-          this.initialCodebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
-          this.codebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
-          this.initRevisionsTreeMap();
-          this.initExtensionsFormArray();
-          this.initCanDownloadAndUpload();
-        }
-      });
+    this.analysisService.clocAndRevisions().subscribe({
+      next: (codebaseClocRevisions) => {
+        this.initialCodebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
+        this.codebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
+        this.initRevisionsTreeMap();
+        this.initExtensionsFormArray();
+        this.initCanDownloadAndUpload();
+      }
     });
   }
 

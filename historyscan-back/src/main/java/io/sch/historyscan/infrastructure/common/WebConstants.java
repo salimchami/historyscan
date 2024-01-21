@@ -1,4 +1,4 @@
-package io.sch.historyscan.infrastructure.common.filesystem;
+package io.sch.historyscan.infrastructure.common;
 
 public final class WebConstants {
 

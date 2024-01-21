@@ -13,6 +13,7 @@ export class LocalstorageService {
   private ANALYSIS_NAME = 'analysis-name';
   private ANALYSIS_TYPE = 'analysis-type';
   private FILES_TREE = 'files-tree';
+  private NETWORK_FILES_TREE = 'network-files-tree';
 
   private addItemsToLocalStorage(items: Array<{ key: string, value: string }>) {
     items.forEach(item => this.addItem(item.key, item.value));
@@ -107,5 +108,9 @@ export class LocalstorageService {
 
   clearFilesTree() {
     this.removeItem(this.FILES_TREE);
+  }
+
+  clearNetworkFilesTree() {
+    this.removeItem(this.NETWORK_FILES_TREE);
   }
 }

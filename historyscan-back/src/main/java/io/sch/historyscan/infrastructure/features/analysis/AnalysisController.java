@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static io.sch.historyscan.infrastructure.common.filesystem.WebConstants.ENDPOINT_ROOT;
+import static io.sch.historyscan.infrastructure.common.WebConstants.ENDPOINT_ROOT;
 
 @RestController
 @RequestMapping(path = ENDPOINT_ROOT)
