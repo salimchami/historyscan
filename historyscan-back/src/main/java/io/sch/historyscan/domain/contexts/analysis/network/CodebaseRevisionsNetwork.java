@@ -1,0 +1,19 @@
+package io.sch.historyscan.domain.contexts.analysis.network;
+
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDAggregate;
+
+import java.util.List;
+
+@DDDAggregate
+public record CodebaseRevisionsNetwork(
+        FileSystemTree actualFsTree,
+        List<FileInfo> ignoredRevisions,
+        List<String> extensions) {
+
+    public CodebaseRevisionsNetwork {
+        ignoredRevisions = List.copyOf(ignoredRevisions);
+        extensions = List.copyOf(extensions);
+    }
+}

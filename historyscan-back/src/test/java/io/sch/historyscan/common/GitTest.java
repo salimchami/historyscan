@@ -1,6 +1,5 @@
 package io.sch.historyscan.common;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.security.Security;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
