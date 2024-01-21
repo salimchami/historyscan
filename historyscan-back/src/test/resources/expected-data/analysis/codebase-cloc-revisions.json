@@ -5,7 +5,7 @@
     "parentPath": null,
     "isFile": false,
     "currentNbLines": 0,
-    "score": 29270,
+    "score": 44534,
     "children": [
       {
         "name": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject",
@@ -13,7 +13,7 @@
         "parentPath": "/",
         "isFile": false,
         "currentNbLines": 0,
-        "score": 29270,
+        "score": 44534,
         "children": [
           {
             "name": "src",
@@ -21,7 +21,7 @@
             "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject",
             "isFile": false,
             "currentNbLines": 0,
-            "score": 29248,
+            "score": 44512,
             "children": [
               {
                 "name": "main",
@@ -29,7 +29,7 @@
                 "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src",
                 "isFile": false,
                 "currentNbLines": 0,
-                "score": 29248,
+                "score": 44512,
                 "children": [
                   {
                     "name": "java",
@@ -37,7 +37,7 @@
                     "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main",
                     "isFile": false,
                     "currentNbLines": 0,
-                    "score": 29248,
+                    "score": 44512,
                     "children": [
                       {
                         "name": "io",
@@ -45,7 +45,7 @@
                         "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java",
                         "isFile": false,
                         "currentNbLines": 0,
-                        "score": 29248,
+                        "score": 44512,
                         "children": [
                           {
                             "name": "mycompany",
@@ -53,7 +53,7 @@
                             "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io",
                             "isFile": false,
                             "currentNbLines": 0,
-                            "score": 29248,
+                            "score": 44512,
                             "children": [
                               {
                                 "name": "theproject",
@@ -61,7 +61,7 @@
                                 "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany",
                                 "isFile": false,
                                 "currentNbLines": 0,
-                                "score": 29248,
+                                "score": 44512,
                                 "children": [
                                   {
                                     "name": "infrastructure",
@@ -69,7 +69,7 @@
                                     "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject",
                                     "isFile": false,
                                     "currentNbLines": 0,
-                                    "score": 8160,
+                                    "score": 16320,
                                     "children": [
                                       {
                                         "name": "boundedcontexts",
@@ -77,7 +77,7 @@
                                         "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
                                         "isFile": false,
                                         "currentNbLines": 0,
-                                        "score": 8160,
+                                        "score": 16320,
                                         "children": [
                                           {
                                             "name": "featureA",
@@ -85,7 +85,7 @@
                                             "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
                                             "isFile": false,
                                             "currentNbLines": 0,
-                                            "score": 8160,
+                                            "score": 16320,
                                             "children": [
                                               {
                                                 "name": "ExtensionsAdapter.java",
@@ -93,7 +93,7 @@
                                                 "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
                                                 "isFile": true,
                                                 "currentNbLines": 32,
-                                                "score": 8160,
+                                                "score": 16320,
                                                 "children": []
                                               }
                                             ]
@@ -108,7 +108,7 @@
                                     "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject",
                                     "isFile": false,
                                     "currentNbLines": 0,
-                                    "score": 21088,
+                                    "score": 28192,
                                     "children": [
                                       {
                                         "name": "boundedcontexts",
@@ -116,7 +116,7 @@
                                         "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
                                         "isFile": false,
                                         "currentNbLines": 0,
-                                        "score": 21088,
+                                        "score": 28192,
                                         "children": [
                                           {
                                             "name": "featureB",
@@ -143,7 +143,7 @@
                                             "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                                             "isFile": false,
                                             "currentNbLines": 0,
-                                            "score": 19264,
+                                            "score": 26368,
                                             "children": [
                                               {
                                                 "name": "Extensions.java",
@@ -160,7 +160,7 @@
                                                 "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                                 "isFile": false,
                                                 "currentNbLines": 0,
-                                                "score": 11424,
+                                                "score": 18528,
                                                 "children": [
                                                   {
                                                     "name": "Extensions.java",
@@ -168,7 +168,7 @@
                                                     "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                                                     "isFile": true,
                                                     "currentNbLines": 32,
-                                                    "score": 7104,
+                                                    "score": 14208,
                                                     "children": []
                                                   },
                                                   {

@@ -30,6 +30,8 @@ public class CodeBaseCommitFake {
                                 new CodeBaseHistoryCommitFile(featureARefactoredExtensions, 523, 90, 100, 32)
                         )),
                         new CodeBaseCommit(commitInfo, List.of(
+                                new CodeBaseHistoryCommitFile(featureARefactoredExtensions, 523, 90, 100, 32),
+                                new CodeBaseHistoryCommitFile(featureAExtensionsAdapter, 1_500, 150, 5, 100),
                                 new CodeBaseHistoryCommitFile(featureBFinallyLoading, 40, 12, 0, 10)
                         )),
                         new CodeBaseCommit(commitInfo, List.of(

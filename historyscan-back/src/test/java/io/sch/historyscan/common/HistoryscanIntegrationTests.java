@@ -71,6 +71,6 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
     public static class TestsFolders {
         public static final String APP_STARTUP_FOLDER = "app-startup";
-        public static final String CODEBASE_FOLDER = "codebases";
+        public static final String ANALYSIS = "analysis";
     }
 }

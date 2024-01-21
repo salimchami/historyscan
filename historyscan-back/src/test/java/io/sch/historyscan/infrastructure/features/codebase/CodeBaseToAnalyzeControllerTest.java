@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import static io.sch.historyscan.common.HistoryscanIntegrationTests.EndPoints.CODEBASES;
-import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.CODEBASE_FOLDER;
+import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.ANALYSIS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -39,8 +39,8 @@ class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
     void should_clone_the_codebase(String codeBaseToAddJson, String expectedAddedCodeBase) throws Exception {
         final File codeBase = Paths.get(codebasesFolder, "public-articles").toFile();
         FileSystemUtils.deleteRecursively(codeBase);
-        var expectedAddedCodebaseResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, expectedAddedCodeBase);
-        var codebaseToAdd = JsonReader.toRequestedJson(CODEBASE_FOLDER, codeBaseToAddJson);
+        var expectedAddedCodebaseResponse = JsonReader.toExpectedJson(ANALYSIS, expectedAddedCodeBase);
+        var codebaseToAdd = JsonReader.toRequestedJson(ANALYSIS, codeBaseToAddJson);
         endPointCaller.perform(post(CODEBASES).content(codebaseToAdd))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(expectedAddedCodebaseResponse, true));
@@ -49,7 +49,7 @@ class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
 
     @Test
     void should_list_current_codebases() throws Exception {
-        var expectedCodesBasesResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, "codebases-list");
+        var expectedCodesBasesResponse = JsonReader.toExpectedJson(ANALYSIS, "codebases-list");
         endPointCaller.perform(get(CODEBASES))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedCodesBasesResponse, true));
@@ -57,7 +57,7 @@ class CodeBaseToAnalyzeControllerTest extends HistoryscanIntegrationTests {
 
     @Test
     void should_find_current_codebase() throws Exception {
-        var expectedCodesBasesResponse = JsonReader.toExpectedJson(CODEBASE_FOLDER, "codebase-public-articles");
+        var expectedCodesBasesResponse = JsonReader.toExpectedJson(ANALYSIS, "codebase-public-articles");
         endPointCaller.perform(get(CODEBASES + "/public-articles"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedCodesBasesResponse, true));

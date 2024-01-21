@@ -2,84 +2,84 @@
   "name": "root",
   "path": "/",
   "currentNbLines": 0,
-  "score": 29270,
+  "score": 44534,
   "children": {
     "theglobalproject": {
       "name": "theglobalproject",
       "path": "theglobalproject",
       "parentPath": "/",
       "currentNbLines": 0,
-      "score": 29270,
+      "score": 44534,
       "children": {
         "src": {
           "name": "src",
           "path": "theglobalproject/src",
           "parentPath": "theglobalproject",
           "currentNbLines": 0,
-          "score": 29248,
+          "score": 44512,
           "children": {
             "main": {
               "name": "main",
               "path": "theglobalproject/src/main",
               "parentPath": "theglobalproject/src",
               "currentNbLines": 0,
-              "score": 29248,
+              "score": 44512,
               "children": {
                 "java": {
                   "name": "java",
                   "path": "theglobalproject/src/main/java",
                   "parentPath": "theglobalproject/src/main",
                   "currentNbLines": 0,
-                  "score": 29248,
+                  "score": 44512,
                   "children": {
                     "io": {
                       "name": "io",
                       "path": "theglobalproject/src/main/java/io",
                       "parentPath": "theglobalproject/src/main/java",
                       "currentNbLines": 0,
-                      "score": 29248,
+                      "score": 44512,
                       "children": {
                         "mycompany": {
                           "name": "mycompany",
                           "path": "theglobalproject/src/main/java/io/mycompany",
                           "parentPath": "theglobalproject/src/main/java/io",
                           "currentNbLines": 0,
-                          "score": 29248,
+                          "score": 44512,
                           "children": {
                             "theproject": {
                               "name": "theproject",
                               "path": "theglobalproject/src/main/java/io/mycompany/theproject",
                               "parentPath": "theglobalproject/src/main/java/io/mycompany",
                               "currentNbLines": 0,
-                              "score": 29248,
+                              "score": 44512,
                               "children": {
                                 "infrastructure": {
                                   "name": "infrastructure",
                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
                                   "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
                                   "currentNbLines": 0,
-                                  "score": 8160,
+                                  "score": 16320,
                                   "children": {
                                     "boundedcontexts": {
                                       "name": "boundedcontexts",
                                       "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
                                       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure",
                                       "currentNbLines": 0,
-                                      "score": 8160,
+                                      "score": 16320,
                                       "children": {
                                         "featureA": {
                                           "name": "featureA",
                                           "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
                                           "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts",
                                           "currentNbLines": 0,
-                                          "score": 8160,
+                                          "score": 16320,
                                           "children": {
                                             "ExtensionsAdapter.java": {
                                               "name": "ExtensionsAdapter.java",
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
                                               "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA",
                                               "currentNbLines": 32,
-                                              "score": 8160,
+                                              "score": 16320,
                                               "children": {},
                                               "file": true
                                             }
@@ -97,14 +97,14 @@
                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
                                   "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject",
                                   "currentNbLines": 0,
-                                  "score": 21088,
+                                  "score": 28192,
                                   "children": {
                                     "boundedcontexts": {
                                       "name": "boundedcontexts",
                                       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                                       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
                                       "currentNbLines": 0,
-                                      "score": 21088,
+                                      "score": 28192,
                                       "children": {
                                         "featureB": {
                                           "name": "featureB",
@@ -130,7 +130,7 @@
                                           "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                           "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                                           "currentNbLines": 0,
-                                          "score": 19264,
+                                          "score": 26368,
                                           "children": {
                                             "Extensions.java": {
                                               "name": "Extensions.java",
@@ -146,14 +146,14 @@
                                               "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                                               "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                               "currentNbLines": 0,
-                                              "score": 11424,
+                                              "score": 18528,
                                               "children": {
                                                 "Extensions.java": {
                                                   "name": "Extensions.java",
                                                   "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
                                                   "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                                                   "currentNbLines": 32,
-                                                  "score": 7104,
+                                                  "score": 14208,
                                                   "children": {},
                                                   "file": true
                                                 },

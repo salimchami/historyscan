@@ -3,12 +3,14 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
+import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@DDDEntity
 public class FileSystemTree {
     private final FileSystemNode root;
     private final RootFolder rootFolder;
@@ -114,5 +116,9 @@ public class FileSystemTree {
                "root=" + root +
                ", rootFolder=" + rootFolder +
                '}';
+    }
+
+    public List<FileSystemNode> files() {
+      return root.allFileNodes();
     }
 }
