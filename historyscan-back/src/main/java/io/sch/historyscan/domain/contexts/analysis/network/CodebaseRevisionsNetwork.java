@@ -40,9 +40,9 @@ public class CodebaseRevisionsNetwork {
     private List<NetworkLink> linksFrom(List<CodeBaseCommit> history, FileSystemNode fsNode) {
         Map<String, List<NetworkLink>> linksByFile = new HashMap<>();
         history.stream()
-                .filter(commit -> commit.files().stream().anyMatch(file -> file.path().equals(fsNode.getPath())))
+                .filter(commit -> commit.files().stream().anyMatch(file -> fsNode.getPath().contains(file.path())))
                 .flatMap(commit -> commit.files().stream())
-                .filter(commitFile -> !commitFile.path().equals(fsNode.getPath()))
+                .filter(commitFile -> !fsNode.getPath().contains(commitFile.path()))
                 .forEach(commitFile -> {
                     linksByFile.computeIfAbsent(commitFile.path(), k -> new ArrayList<>());
                     linksByFile.computeIfPresent(commitFile.path(), (path, fileLinks) -> fileLinksFromExistingList(commitFile, fileLinks));

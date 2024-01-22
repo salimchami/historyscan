@@ -9,19 +9,19 @@
         "score": 16320,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
             "weight": 2
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/build.gradle",
+            "path": "theglobalproject/build.gradle",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
             "weight": 1
           }
         ]
@@ -34,11 +34,11 @@
         "score": 1824,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
             "weight": 1
           }
         ]
@@ -51,11 +51,11 @@
         "score": 1760,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/build.gradle",
+            "path": "theglobalproject/build.gradle",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
             "weight": 1
           }
         ]
@@ -68,19 +68,19 @@
         "score": 14208,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
             "weight": 2
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/build.gradle",
+            "path": "theglobalproject/build.gradle",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
             "weight": 1
           }
         ]
@@ -93,15 +93,15 @@
         "score": 4320,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/build.gradle",
+            "path": "theglobalproject/build.gradle",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
             "weight": 1
           }
         ]
@@ -114,11 +114,11 @@
         "score": 6080,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/build.gradle",
+            "path": "theglobalproject/build.gradle",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
             "weight": 1
           }
         ]
@@ -131,23 +131,23 @@
         "score": 22,
         "links": [
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
             "weight": 1
           },
           {
-            "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
             "weight": 1
           }
         ]
