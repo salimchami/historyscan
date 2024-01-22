@@ -1,6 +1,5 @@
 package io.sch.historyscan.domain.contexts.analysis.network;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +22,7 @@ class CodebaseRevisionsNetworkTest {
 
         assertThat(actualNetwork)
                 .extracting(CodebaseRevisionsNetwork::getNetwork)
-                .isEqualTo(expectedNetwork());
+                .isEqualTo(serializeExpected("domain-codebase-network"));
     }
 
-    private static NetworkNodes expectedNetwork() throws JsonProcessingException {
-        return serializeExpected("domain-codebase-network");
-    }
 }

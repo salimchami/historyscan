@@ -6,12 +6,10 @@ import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.File
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
+import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @DDDEntity
 public class CodebaseRevisionsNetwork {
@@ -29,22 +27,39 @@ public class CodebaseRevisionsNetwork {
     }
 
     public CodebaseRevisionsNetwork calculateNetworkFromHistoryAndRevisions() {
-        network = new NetworkNodes(actualFsTree.files().stream().map(fsNode -> new NetworkNode(fsNode.getName(), fsNode.getPath(), fsNode.getParentPath(), fsNode.getCurrentNbLines(), fsNode.getScore(), linksFrom(history.commits(), fsNode))).toList());
+        network = new NetworkNodes(actualFsTree.files().stream()
+                .map(fsNode ->
+                        new NetworkNode(
+                                fsNode.getName(), fsNode.getPath(),
+                                fsNode.getParentPath(), fsNode.getCurrentNbLines(),
+                                fsNode.getScore(), linksFrom(history.commits(), fsNode)))
+                .toList());
         return this;
     }
 
     private List<NetworkLink> linksFrom(List<CodeBaseCommit> history, FileSystemNode fsNode) {
-        Map<String, List<NetworkLink>> links = new HashMap<>();
+        Map<String, List<NetworkLink>> linksByFile = new HashMap<>();
         history.stream()
                 .filter(commit -> commit.files().stream().anyMatch(file -> file.path().equals(fsNode.getPath())))
-                .forEach(commit -> commit.files().stream()
-                        .filter(file -> !file.path().equals(fsNode.getPath()))
-                        .forEach(file -> {
-                            List<NetworkLink> fileLinks = links.getOrDefault(file.path(), new ArrayList<>());
-                            fileLinks.add(new NetworkLink(file.path(), 1));
-                            links.put(file.path(), fileLinks);
-                        }));
-        return links.values().stream().flatMap(List::stream).toList();
+                .flatMap(commit -> commit.files().stream())
+                .filter(commitFile -> !commitFile.path().equals(fsNode.getPath()))
+                .forEach(commitFile -> {
+                    linksByFile.computeIfAbsent(commitFile.path(), k -> new ArrayList<>());
+                    linksByFile.computeIfPresent(commitFile.path(), (path, fileLinks) -> fileLinksFromExistingList(commitFile, fileLinks));
+                });
+        return linksByFile.values().stream().flatMap(List::stream).sorted().toList();
+    }
+
+    private static List<NetworkLink> fileLinksFromExistingList(CodeBaseHistoryCommitFile commitFile, List<NetworkLink> fileLinks) {
+        if (fileLinks.stream().anyMatch(link1 -> link1.path().equals(commitFile.path()))) {
+            return fileLinks.stream()
+                    .map(link -> link.path().equals(commitFile.path()) ? new NetworkLink(link.path(), link.weight() + 1) : link)
+                    .toList();
+        } else {
+            List<NetworkLink> updatedLinks = new ArrayList<>(fileLinks);
+            updatedLinks.add(new NetworkLink(commitFile.path(), 1));
+            return updatedLinks;
+        }
     }
 
     public NetworkNodes getNetwork() {

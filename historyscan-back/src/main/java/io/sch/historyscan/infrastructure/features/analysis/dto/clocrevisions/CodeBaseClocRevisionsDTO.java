@@ -1,6 +1,7 @@
-package io.sch.historyscan.infrastructure.features.analysis.dto;
+package io.sch.historyscan.infrastructure.features.analysis.dto.clocrevisions;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sch.historyscan.infrastructure.features.analysis.dto.FileInfoDTO;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;

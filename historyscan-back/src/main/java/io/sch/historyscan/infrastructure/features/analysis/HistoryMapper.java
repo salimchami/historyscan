@@ -4,10 +4,10 @@ import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitInfo;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryCommitFileDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryCommitInfoDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryDTO;
-import io.sch.historyscan.infrastructure.features.analysis.dto.CodeBaseHistoryFileDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.history.CodeBaseHistoryCommitFileDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.history.CodeBaseHistoryCommitInfoDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.history.CodeBaseHistoryDTO;
+import io.sch.historyscan.infrastructure.features.analysis.dto.history.CodeBaseHistoryFileDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

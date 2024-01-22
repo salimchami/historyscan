@@ -10,7 +10,7 @@ public final class NetworkNodesSerializerUtils {
     }
 
     public static NetworkNodes serializeExpected(String expectedRootTestCase) throws JsonProcessingException {
-        var expectedNetworkJson = JsonReader.toExpectedJson("network", expectedRootTestCase);
+        var expectedNetworkJson = JsonReader.toExpectedJson("analysis", expectedRootTestCase);
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addDeserializer(NetworkNodes.class, new NetworkNodesDeserializer());

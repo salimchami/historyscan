@@ -8,11 +8,11 @@
       "score": 16320,
       "links": [
         {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+          "weight": 2
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "path": "theglobalproject/build.gradle",
           "weight": 1
         },
         {
@@ -20,8 +20,8 @@
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
-          "weight": 2
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "weight": 1
         }
       ]
     },
@@ -67,11 +67,11 @@
       "score": 14208,
       "links": [
         {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "weight": 2
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "path": "theglobalproject/build.gradle",
           "weight": 1
         },
         {
@@ -79,8 +79,8 @@
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
-          "weight": 2
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "weight": 1
         }
       ]
     },
@@ -134,7 +134,7 @@
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
           "weight": 1
         },
         {
@@ -142,11 +142,11 @@
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
           "weight": 1
         }
       ]
