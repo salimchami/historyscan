@@ -5,7 +5,7 @@ import {
 } from "../../pages/analysis/cloc-revisions/codebase-cloc-revisions-file-tree.model";
 
 @Injectable({providedIn: 'root'})
-export class TreemapService {
+export class TreemapChartService {
   defaultChartOptions(): EChartsOption {
     return {
       title: {

@@ -40,7 +40,7 @@ export const PagesRoutes: Routes = [
           .then(m => m.ClocRevisionsAnalysisModule)
       },
       {
-        path: 'analysis/network-cloc-revisions',
+        path: 'analysis/network',
         component: NetworkClocRevisionsAnalysisComponent,
         loadChildren: () => import('../pages/analysis/network-cloc-revisions/network-cloc-revisions-analysis.module')
           .then(m => m.NetworkClocRevisionsAnalysisModule)

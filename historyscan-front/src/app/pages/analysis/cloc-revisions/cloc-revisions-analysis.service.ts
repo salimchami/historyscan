@@ -6,7 +6,7 @@ import {
 import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrevisions-file-tree.model";
 
 @Injectable({providedIn: 'root'})
-export class ClocRevisionsService {
+export class ClocRevisionsAnalysisService {
 
   constructor(private readonly dialog: MatDialog) {
   }
@@ -14,7 +14,7 @@ export class ClocRevisionsService {
   download(fileTreeToDownload: DownloadCodebaseClocrevisionsFileTree) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {fileTreeToDownload};
+    dialogConfig.data = {networkToDownload: fileTreeToDownload};
     this.dialog.open(ClocRevisionsTreeDownloadDialogComponent, dialogConfig);
   }
 }

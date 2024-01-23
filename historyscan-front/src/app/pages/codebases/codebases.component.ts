@@ -38,7 +38,7 @@ export class CodebasesComponent implements AfterContentInit {
   }
 
   hasNetworkClocAndRevisions(element: CurrentCodebase): boolean {
-    return !!element._links['analyze-network-cloc-revisions']?.href;
+    return !!element._links['analyze-network']?.href;
   }
 
   clocAndRevisions(element: CurrentCodebase): void {
@@ -56,9 +56,9 @@ export class CodebasesComponent implements AfterContentInit {
     const dialogRef = this.dialog.open(RootFolderDialog);
     dialogRef.afterClosed().subscribe(rootFolder => {
       if (rootFolder) {
-        this.addToLocalStorage(element, rootFolder, 'analyze-network-cloc-revisions');
+        this.addToLocalStorage(element, rootFolder, 'analyze-network');
         this.localStorageService.clearNetworkFilesTree()
-        this.router.navigateByUrl('/analysis/network-cloc-revisions').then();
+        this.router.navigateByUrl('/analysis/network').then();
       }
     });
   }

@@ -4,7 +4,7 @@ import {CodebaseClocRevisions} from "./codebase-cloc-revisions.model";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {LocalstorageService} from "../../../shared/localstorage.service";
 import {TreemapChartComponent} from "../../../components/treemap-chart/treemap-chart.component";
-import {ClocRevisionsService} from "./cloc-revisions.service";
+import {ClocRevisionsAnalysisService} from "./cloc-revisions-analysis.service";
 import {DownloadCodebaseClocrevisionsFileTree} from "./download-codebase-clocrevisions-file-tree.model";
 import {MatDialog} from "@angular/material/dialog";
 import {ClocRevisionsTreeUploadDialogComponent} from "./upload-dialog/cloc-revisions-tree-upload-dialog.component";
@@ -31,7 +31,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   constructor(private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService,
-              private readonly clocRevisionsService: ClocRevisionsService,
+              private readonly clocRevisionsService: ClocRevisionsAnalysisService,
               private readonly dialog: MatDialog,
               private readonly translate: TranslateService) {
     this.analysisForm = this.fb.group({

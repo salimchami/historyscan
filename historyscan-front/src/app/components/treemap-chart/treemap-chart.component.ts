@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from "@angular/core";
-import {TreemapService} from "./treemap.service";
+import {TreemapChartService} from "./treemap-chart.service";
 import {ECharts, EChartsOption} from "echarts";
 import {
   CodebaseClocRevisionsFileTree
@@ -17,7 +17,7 @@ export class TreemapChartComponent implements OnDestroy {
   chartOptions: EChartsOption;
   private echartsInstance!: ECharts;
 
-  constructor(private readonly treemapService: TreemapService,
+  constructor(private readonly treemapService: TreemapChartService,
               private readonly notificationService: NotificationService) {
     this.chartOptions = this.treemapService.defaultChartOptions();
   }
