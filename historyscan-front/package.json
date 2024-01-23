@@ -23,8 +23,6 @@
     "@angular/router": "^17.0.7",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
-    "@types/d3": "^7.4.3",
-    "d3": "^7.8.5",
     "echarts": "^5.4.3",
     "ng2-google-charts": "^7.0.0",
     "ngx-echarts": "^17.1.0",

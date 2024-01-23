@@ -18,7 +18,7 @@ export class CodebaseNetworkRevisions {
   }
 
   isEmpty() {
-    return !!this.network.nodes?.length;
+    return !this.network.nodes?.length;
   }
 
   copy(extensionsToKeep: Array<string>) {
