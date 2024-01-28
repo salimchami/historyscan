@@ -6,7 +6,7 @@ export class NetworkChartNode {
     public name: string,
     public symbolSize: number,
     public value: number,
-    public category: number,
+    public category: string,
     public label?: NetworkChartLabel,
   ) {
   }

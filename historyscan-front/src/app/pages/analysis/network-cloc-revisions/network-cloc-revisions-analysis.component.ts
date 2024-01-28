@@ -73,6 +73,7 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
     if (!this.codebaseNetworkRevisions.isEmpty()) {
       this.networkChart.updateChartSeries(
         this.codebaseNetworkRevisions.network,
+        this.codebaseNetworkRevisions.extensions,
         this.localStorageService.getCodebaseUrl()!,
         this.localStorageService.getCodebaseBranch()!,
       );

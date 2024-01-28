@@ -31,10 +31,10 @@ export class NetworkChartComponent implements OnDestroy {
     }
   }
 
-  updateChartSeries(network: NetworkNodes, title: string, description: string) {
+  updateChartSeries(network: NetworkNodes, extensions: Array<string>, title: string, description: string) {
     this.chartTitle = title;
     this.chartDescription = description;
-    this.chartOptions = this.networkService.toNetworkOptions(network, title, description);
+    this.chartOptions = this.networkService.toNetworkOptions(network, extensions, title, description);
 
   }
 

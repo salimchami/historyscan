@@ -29,10 +29,11 @@ export class NetworkChartService {
     return null;
   }
 
-  toNetworkOptions(network: NetworkNodes, title: string, description: string): EChartsOption {
+  toNetworkOptions(network: NetworkNodes, extensions: Array<string>,
+                   title: string, description: string): EChartsOption {
     const maxScore = this.findMaxScore(network.nodes);
     const minScore = this.findMinScore(network.nodes);
-    const graph = this.createDataStructure(network, minScore, maxScore);
+    const graph = this.createDataStructure(network, extensions, minScore, maxScore);
     graph.nodes.forEach(function (node) {
       node.label = {
         show: node.symbolSize > (maxScore * 70 / 100)
@@ -65,14 +66,20 @@ export class NetworkChartService {
           fontFamily: 'monospace',
         },
         formatter: (params: any) => {
-          const name = params.name;
-          const path = params.data.path;
-          const score = this.formatScore(params.value);
-          return `Name: ${name}<br>Path: ${path}<br>Score: ${score}`;
+          return `Name: ${(params.name)}
+                <br>Path: ${(params.data.id)}
+                <br>Score: ${(this.formatScore(params.value))}`;
         }
       },
       legend: [
         {
+          top: 20,
+          inactiveColor: "#969696",
+          backgroundColor: "#646464",
+          textStyle: {
+            color: "#fff",
+            fontWeight: "bold"
+          },
           data: graph.categories.map(function (a) {
             return a.name;
           })
@@ -109,7 +116,6 @@ export class NetworkChartService {
           label: {
             show: true,
             color: '#000',
-            formatter: (params: any) => params.data.isFile ? `${params.name}\n ${params.value}` : params.name,
           },
           height: '100%'
         },
@@ -133,19 +139,22 @@ export class NetworkChartService {
     return Math.min(...nodes.map(node => node.score))
   }
 
-  private createDataStructure(network: NetworkNodes, minScore: any, maxScore: number): NetworkChartNodes {
+  private createDataStructure(network: NetworkNodes, extensions: Array<string>,
+                              minScore: any, maxScore: number): NetworkChartNodes {
     const minSize = 6;
     const maxSize = 100;
     let chartNodes = [];
     let chartLinks = [];
-    let chartCategories = new Set<string>();
+
+
     for (let node of network.nodes) {
+      const extension = node.extension();
       chartNodes.push(new NetworkChartNode(
         node.path,
         node.name,
         minSize + (node.score - minScore) * (maxSize - minSize) / (maxScore - minScore),
         node.score,
-        0,
+        extension,
         new NetworkChartLabel(false),
       ));
       for (let link of node.links) {
@@ -154,11 +163,8 @@ export class NetworkChartService {
           link.path
         ));
       }
-      chartCategories.add(node.parentPath);
     }
-    let chartCategoriesArray =
-      Array.from(chartCategories).map(name => new NetworkChartCategory(name));
-
-    return new NetworkChartNodes(chartNodes, chartLinks, chartCategoriesArray);
+    return new NetworkChartNodes(chartNodes, chartLinks,
+      extensions.map(extension => new NetworkChartCategory(extension)));
   }
 }

@@ -5,37 +5,6 @@
     }
   </h3>
   <mat-divider></mat-divider>
-  @if (codebaseNetworkRevisions.extensions.length > 1) {
-    <div style="margin-top: 15px; margin-left: 15px">
-      @if (!disabledButtons()) {
-        <section>
-          <div class="buttons-row">
-            <button mat-raised-button (click)="unselectAll()"
-                    color="primary">{{ 'global.buttons.unselect-all'|translate }}
-            </button>
-            <button mat-raised-button (click)="selectAll()" color="primary">{{ 'global.buttons.select-all'|translate }}
-            </button>
-            <button mat-raised-button (click)="onRefresh()"
-                    color="warn">{{ 'global.buttons.refresh-graph'|translate }}
-            </button>
-          </div>
-        </section>
-      }
-      <div formArrayName="extensions">
-        <ng-container *ngFor="let extension of codebaseNetworkRevisions.extensions; let i = index">
-          <mat-checkbox [formControlName]="i">
-            {{ extension }}
-          </mat-checkbox>
-        </ng-container>
-      </div>
-    </div>
-  }
-  @if (containsOneExtension()) {
-    <p style="margin-left: 20px">{{ 'global.pages.analysis.network.one-extension'|translate }}:
-      '<strong>{{ codebaseNetworkRevisions.extensions[0] }}</strong>'</p>
-  }
-
-  <mat-divider></mat-divider>
   <div style="margin-top: 15px">
     <mat-form-field class="treemap-search-input user-action-input">
       <mat-label>{{ 'global.pages.analysis.network.search.placeholder'|translate }}</mat-label>
