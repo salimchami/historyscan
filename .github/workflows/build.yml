@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -29,14 +29,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Build with Gradle Wrapper
+        run: |
+          cd historyscan-back
+          ./gradlew build
+
       - name: Build with NodeJS
         run: |
           cd historyscan-front
           npm install
           npm run build
           npm test
-
-      - name: Build with Gradle Wrapper
-        run: |
-          cd historyscan-back
-          ./gradlew build
