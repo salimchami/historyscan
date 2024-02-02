@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Make Gradle Wrapper executable
+        run: chmod +x historyscan-back/gradlew
+
       - name: Build with Gradle Wrapper
         run: |
           cd historyscan-back
