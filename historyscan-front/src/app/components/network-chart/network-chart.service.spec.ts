@@ -12,7 +12,9 @@ describe('NetworkChartService', () => {
 
   it('should find the maximum score', () => {
     const nodes: Array<NetworkNode> = [
-      new NetworkNode('', '', '', 1, 15, []),
+      new NetworkNode('Extensions.java',
+        'src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java',
+        'src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA', 1, 15, []),
       new NetworkNode('', '', '', 1, 18, []),
       new NetworkNode('', '', '', 1, 150, []),
     ];
