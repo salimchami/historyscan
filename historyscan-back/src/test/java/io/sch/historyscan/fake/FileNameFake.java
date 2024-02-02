@@ -8,4 +8,5 @@ public class FileNameFake {
     public static final String featureBFinallyLoadingFileName = "FinallyLoading.java";
     public static final String featureAExtensionsAdapterFileName = "ExtensionsAdapter.java";
     public static final String buildGradleFileName = "build.gradle";
+    public static final String thelastfeatureHexagonalFeatureFileName = "HexagonalFeature.java";
 }

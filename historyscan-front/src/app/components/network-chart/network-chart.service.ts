@@ -33,7 +33,7 @@ export class NetworkChartService {
                    title: string, description: string): EChartsOption {
     const maxScore = this.findMaxScore(network.nodes);
     const minScore = this.findMinScore(network.nodes);
-    const graph = this.createDataStructure(network, extensions, minScore, maxScore);
+    const graph = this.createDataStructure(network, ['scss'], minScore, maxScore);
     graph.nodes.forEach(function (node) {
       node.label = {
         show: node.symbolSize > (maxScore * 70 / 100)
@@ -55,10 +55,12 @@ export class NetworkChartService {
       darkMode: true,
       tooltip: {
         trigger: 'item',
-        position: 'top',
+        position: [50,50],
         borderWidth: 2,
         borderColor: '#171d31',
         backgroundColor: '#d0d6ee',
+        appendToBody: true,
+// extraCssText: 'margin-top: 200px',
         textStyle: {
           color: '#000',
           fontSize: 10,
@@ -118,9 +120,8 @@ export class NetworkChartService {
             color: '#000',
           },
           height: '100%'
-        },
-
-      ] as SeriesOption[],
+        } as SeriesOption,
+      ] as Array<SeriesOption>,
     };
   }
 
@@ -128,7 +129,7 @@ export class NetworkChartService {
   }
 
   private formatScore(score: number): string {
-    return score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return score ? score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : '';
   }
 
   private findMaxScore(nodes: Array<NetworkNode>): number {
@@ -143,8 +144,8 @@ export class NetworkChartService {
                               minScore: any, maxScore: number): NetworkChartNodes {
     const minSize = 6;
     const maxSize = 100;
-    let chartNodes = [];
-    let chartLinks = [];
+    let chartNodes: Array<NetworkChartNode> = [];
+    let chartLinks: Array<NetworkChartLink> = [];
 
 
     for (let node of network.nodes) {
@@ -157,14 +158,18 @@ export class NetworkChartService {
         extension,
         new NetworkChartLabel(false),
       ));
-      for (let link of node.links) {
-        chartLinks.push(new NetworkChartLink(
-          node.path,
-          link.path
-        ));
-      }
+      this.addLinks(node, chartLinks);
     }
     return new NetworkChartNodes(chartNodes, chartLinks,
       extensions.map(extension => new NetworkChartCategory(extension)));
+  }
+
+  private addLinks(node: NetworkNode, chartLinks: NetworkChartLink[]) {
+    for (let link of node.links) {
+      chartLinks.push(new NetworkChartLink(
+        node.path,
+        link.path
+      ));
+    }
   }
 }

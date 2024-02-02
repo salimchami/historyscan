@@ -35,7 +35,8 @@ public class CodeBaseCommitFake {
                                 new CodeBaseHistoryCommitFile(featureBFinallyLoading, 40, 12, 0, 10)
                         )),
                         new CodeBaseCommit(commitInfo, List.of(
-                                new CodeBaseHistoryCommitFile(featureBFinallyLoading, 40, 35, 0, 0)
+                                new CodeBaseHistoryCommitFile(featureBFinallyLoading, 40, 35, 0, 0),
+                                new CodeBaseHistoryCommitFile(thelastfeatureHexagonalFeature, 40, 40, 0, 0)
                         ))
                 ));
     }

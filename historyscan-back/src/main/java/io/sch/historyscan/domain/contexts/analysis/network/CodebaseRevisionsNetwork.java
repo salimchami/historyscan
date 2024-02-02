@@ -5,11 +5,13 @@ import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.File
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNode;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
 import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseCommit;
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistory;
 import io.sch.historyscan.domain.contexts.analysis.history.CodeBaseHistoryCommitFile;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @DDDEntity
 public class CodebaseRevisionsNetwork {
@@ -26,40 +28,56 @@ public class CodebaseRevisionsNetwork {
         this.actualFsTree = clocRevisions.actualFsTree();
     }
 
-    public CodebaseRevisionsNetwork calculateNetworkFromHistoryAndRevisions() {
-        network = new NetworkNodes(actualFsTree.files().stream()
+    public CodebaseRevisionsNetwork calculateNetworkFromHistoryAndRevisions(CodeBaseToAnalyze codeBase) {
+        var actualCodebaseFiles = actualFsTree.files();
+        var historyCommits = filterHistoryFromActualFs(actualCodebaseFiles, codeBase.getName());
+        network = new NetworkNodes(actualCodebaseFiles.stream()
                 .map(fsNode ->
                         new NetworkNode(
                                 fsNode.getName(), fsNode.getPath(),
                                 fsNode.getParentPath(), fsNode.getCurrentNbLines(),
-                                fsNode.getScore(), linksFrom(history.commits(), fsNode)))
+                                fsNode.getScore(), linksFrom(historyCommits, fsNode)))
                 .toList());
         return this;
     }
 
-    private List<NetworkLink> linksFrom(List<CodeBaseCommit> history, FileSystemNode fsNode) {
-        Map<String, List<NetworkLink>> linksByFile = new HashMap<>();
-        history.stream()
-                .filter(commit -> commit.files().stream()
-                        .anyMatch(file -> fsNode.getPath().contains(file.path())))
-                .flatMap(commit -> commit.files().stream())
-                .filter(commitFile -> !fsNode.getPath().contains(commitFile.path()))
-                .forEach(commitFile -> {
-                    linksByFile.computeIfAbsent(commitFile.path(), k -> new ArrayList<>());
-                    linksByFile.computeIfPresent(commitFile.path(), (path, fileLinks) -> fileLinksFromExistingList(commitFile, fileLinks));
-                });
-        return linksByFile.values().stream().flatMap(List::stream).sorted().toList();
+    /**
+     * Removes from history, unexisting files in the file system
+     */
+    private List<CodeBaseCommit> filterHistoryFromActualFs(List<FileSystemNode> actualCodebaseFiles, String codebaseName) {
+        return history.commits().stream()
+                .map(commit -> new CodeBaseCommit(commit.info(), commit.files().stream()
+                        .filter(commitFile -> actualCodebaseFiles.stream()
+                                .anyMatch(actualFile -> actualFile.getPath().contains("%s/%s".formatted(codebaseName, commitFile.path()))))
+                        .map(commitFile -> new CodeBaseHistoryCommitFile(
+                                new io.sch.historyscan.domain.contexts.analysis.history.FileInfo(
+                                        commitFile.fileInfo().name(), String.format("%s/%s", codebaseName, commitFile.path()),
+                                        commitFile.fileInfo().isFile()
+                                ), commitFile.currentNbLines(), commitFile.nbAddedLines(), commitFile.nbDeletedLines(), commitFile.nbModifiedLines()))
+                        .toList()))
+                .filter(commit -> !commit.files().isEmpty())
+                .toList();
     }
 
-    private static List<NetworkLink> fileLinksFromExistingList(CodeBaseHistoryCommitFile commitFile, List<NetworkLink> fileLinks) {
-        if (fileLinks.stream().anyMatch(link1 -> link1.path().equals(commitFile.path()))) {
-            return fileLinks.stream()
-                    .map(link -> link.path().equals(commitFile.path()) ? new NetworkLink(link.path(), link.weight() + 1) : link)
-                    .toList();
+    private List<NetworkLink> linksFrom(List<CodeBaseCommit> history, FileSystemNode fsNode) {
+        List<NetworkLink> fsNodeLinks = new ArrayList<>();
+        history.stream()
+                .filter(commit -> commit.files().stream()
+                        .anyMatch(commitFile -> fsNode.getPath().contains(commitFile.path())))
+                .forEach(commit -> commit.files()
+                        .stream()
+                        .filter(commitFile -> !fsNode.getPath().contains(commitFile.path()))
+                        .forEach(commitFile -> addOrUpdateLink(commitFile, fsNodeLinks))
+                );
+        return fsNodeLinks.stream().sorted().toList();
+    }
+
+    private static void addOrUpdateLink(CodeBaseHistoryCommitFile commitFile, List<NetworkLink> fsNodeLinks) {
+        if (fsNodeLinks.stream().anyMatch(link -> link.path().equals(commitFile.path()))) {
+            fsNodeLinks.stream().filter(link -> link.path().equals(commitFile.path()))
+                    .findFirst().ifPresent(NetworkLink::incrementWeight);
         } else {
-            List<NetworkLink> updatedLinks = new ArrayList<>(fileLinks);
-            updatedLinks.add(new NetworkLink(commitFile.path(), 1));
-            return updatedLinks;
+            fsNodeLinks.add(new NetworkLink(commitFile.path(), 1L));
         }
     }
 

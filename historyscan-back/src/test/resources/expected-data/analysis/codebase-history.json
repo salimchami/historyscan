@@ -10,7 +10,7 @@
       "files": [
         {
           "fileName": "build.gradle",
-          "filePath": "theglobalproject/build.gradle",
+          "filePath": "build.gradle",
           "nbActualLines": 20,
           "nbAddedLines": 1,
           "nbDeletedLines": 2,
@@ -18,7 +18,7 @@
         },
         {
           "fileName": "Extensions.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
           "nbActualLines": 1500,
           "nbAddedLines": 15,
           "nbDeletedLines": 30,
@@ -26,7 +26,7 @@
         },
         {
           "fileName": "Loading.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
           "nbActualLines": 1250,
           "nbAddedLines": 150,
           "nbDeletedLines": 30,
@@ -44,7 +44,7 @@
       "files": [
         {
           "fileName": "build.gradle",
-          "filePath": "theglobalproject/build.gradle",
+          "filePath": "build.gradle",
           "nbActualLines": 20,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
@@ -52,7 +52,7 @@
         },
         {
           "fileName": "ExtensionsAdapter.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "filePath": "src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
           "nbActualLines": 1500,
           "nbAddedLines": 150,
           "nbDeletedLines": 5,
@@ -60,7 +60,7 @@
         },
         {
           "fileName": "Loading.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
           "nbActualLines": 150,
           "nbAddedLines": 10,
           "nbDeletedLines": 100,
@@ -68,7 +68,7 @@
         },
         {
           "fileName": "Extensions.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
           "nbActualLines": 523,
           "nbAddedLines": 90,
           "nbDeletedLines": 100,
@@ -86,7 +86,7 @@
       "files": [
         {
           "fileName": "Extensions.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
           "nbActualLines": 523,
           "nbAddedLines": 90,
           "nbDeletedLines": 100,
@@ -94,7 +94,7 @@
         },
         {
           "fileName": "ExtensionsAdapter.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "filePath": "src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
           "nbActualLines": 1500,
           "nbAddedLines": 150,
           "nbDeletedLines": 5,
@@ -102,7 +102,7 @@
         },
         {
           "fileName": "FinallyLoading.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
           "nbActualLines": 40,
           "nbAddedLines": 12,
           "nbDeletedLines": 0,
@@ -120,7 +120,7 @@
       "files": [
         {
           "fileName": "FinallyLoading.java",
-          "filePath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
           "nbActualLines": 40,
           "nbAddedLines": 35,
           "nbDeletedLines": 0,

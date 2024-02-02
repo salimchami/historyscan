@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.*;
+import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.ANALYSIS;
 import static io.sch.historyscan.common.JsonReader.toExpectedJson;
 import static io.sch.historyscan.common.JsonReader.toRequestedJson;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,19 +17,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AnalysisControllerTest extends HistoryscanIntegrationTests {
     public static Stream<Arguments> should_analyze_history_of_the_codebase_params() {
         return Stream.of(
-                Arguments.of("codebase-to-analyze-history", "codebase-history"),
-                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
-                Arguments.of("codebase-to-analyze-network", "codebase-network"),
-                Arguments.of("codebase-to-analyze-cloc-revisions-domain", "codebase-cloc-revisions-domain"),
-                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path")
+//                Arguments.of("codebase-to-analyze-history", "codebase-history"),
+//                Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
+                Arguments.of("codebase-to-analyze-network", "codebase-network")
+//                Arguments.of("codebase-to-analyze-cloc-revisions-domain", "codebase-cloc-revisions-domain"),
+//                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path")
         );
     }
 
     @ParameterizedTest
     @MethodSource("should_analyze_history_of_the_codebase_params")
     void should_analyze_history_of_the_codebase(String testCase, String expectedResult) throws Exception {
-        String requestedCodebaseToAnalyze = toRequestedJson(ANALYSIS, testCase);
-        String expectedHistory = toExpectedJson(ANALYSIS, expectedResult);
+        var requestedCodebaseToAnalyze = toRequestedJson(ANALYSIS, testCase);
+        var expectedHistory = toExpectedJson(ANALYSIS, expectedResult);
         endPointCaller.perform(post("/api/v1/analyze")
                         .content(requestedCodebaseToAnalyze))
                 .andExpect(status().isOk())

@@ -25,6 +25,6 @@ public class CodebaseNetworkAnalysis implements Analyze<CodebaseRevisionsNetwork
         var history = historyAnalysis.from(codeBase);
         var clocRevisions = clocRevisionsAnalysis.from(codeBase);
         return new CodebaseRevisionsNetwork(history, clocRevisions)
-                .calculateNetworkFromHistoryAndRevisions();
+                .calculateNetworkFromHistoryAndRevisions(codeBase);
     }
 }

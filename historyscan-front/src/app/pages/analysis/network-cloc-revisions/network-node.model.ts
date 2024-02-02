@@ -12,14 +12,14 @@ export class NetworkNode {
   ) {
   }
 
-  static of(node: NetworkNode) {
+  static of(node: any) {
     return new NetworkNode(
       node.name,
       node.path,
       node.parentPath,
       node.currentNbLines,
       node.score,
-      node.links.map(link => NetworkLink.of(link)),
+      node.links.map((link: any) => NetworkLink.of(link)),
     );
   }
 

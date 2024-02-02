@@ -44,7 +44,7 @@ public class AnalysisApplication {
     }
 
     @CacheEvict(allEntries = true, cacheNames = {"codebaseAnalysis"})
-    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.HOURS)
+    @Scheduled(fixedDelay = 15, timeUnit = TimeUnit.MINUTES)
     public void cacheEvict() {
         // Cache TTL
     }

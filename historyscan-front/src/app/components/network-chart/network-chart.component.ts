@@ -22,6 +22,7 @@ export class NetworkChartComponent implements OnDestroy {
 
   onChartInit(ec: ECharts) {
     this.echartsInstance = ec;
+    this.echartsInstance.resize({height: 700})
     this.copyPathOnNodeClick();
   }
 
