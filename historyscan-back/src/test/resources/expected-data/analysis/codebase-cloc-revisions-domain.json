@@ -5,7 +5,7 @@
     "parentPath": null,
     "isFile": false,
     "currentNbLines": 0,
-    "score": 28192,
+    "score": 28632,
     "children": [
       {
         "name": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
@@ -13,7 +13,7 @@
         "parentPath": "/",
         "isFile": false,
         "currentNbLines": 0,
-        "score": 28192,
+        "score": 28632,
         "children": [
           {
             "name": "boundedcontexts",
@@ -21,7 +21,7 @@
             "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
             "isFile": false,
             "currentNbLines": 0,
-            "score": 28192,
+            "score": 28632,
             "children": [
               {
                 "name": "featureB",
@@ -94,6 +94,25 @@
                     "isFile": true,
                     "currentNbLines": 32,
                     "score": 6080,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "thelastfeature",
+                "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "isFile": false,
+                "currentNbLines": 0,
+                "score": 440,
+                "children": [
+                  {
+                    "name": "HexagonalFeature.java",
+                    "path": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+                    "parentPath": "history-scan/historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                    "isFile": true,
+                    "currentNbLines": 11,
+                    "score": 440,
                     "children": []
                   }
                 ]

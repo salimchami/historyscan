@@ -125,6 +125,14 @@
           "nbAddedLines": 35,
           "nbDeletedLines": 0,
           "nbModifiedLines": 0
+        },
+        {
+          "fileName": "HexagonalFeature.java",
+          "filePath": "src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+          "nbActualLines": 40,
+          "nbAddedLines": 40,
+          "nbDeletedLines": 0,
+          "nbModifiedLines": 0
         }
       ]
     }

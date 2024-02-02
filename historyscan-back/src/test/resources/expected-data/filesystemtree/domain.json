@@ -92,6 +92,25 @@
                 }
               },
               "file": false
+            },
+            "thelastfeature": {
+              "name": "thelastfeature",
+              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+              "score": 0,
+              "currentNbLines": 0,
+              "children": {
+                "HexagonalFeature.java": {
+                  "name": "HexagonalFeature.java",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                  "score": 0,
+                  "currentNbLines": 1250,
+                  "children": {},
+                  "file": true
+                }
+              },
+              "file": false
             }
           },
           "file": false

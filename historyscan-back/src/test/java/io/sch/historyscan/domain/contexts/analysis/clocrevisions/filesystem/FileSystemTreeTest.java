@@ -24,7 +24,7 @@ class FileSystemTreeTest {
     @ParameterizedTest
     @MethodSource("should_load_file_system_tree_from_disk_params")
     void should_load_file_system_tree_from_disk(String rootFolderName, String expectedRootTestCase) throws IOException {
-        final RootFolder rootFolder = RootFolder.of(rootFolderName, "theglobalproject");
+        var rootFolder = RootFolder.of(rootFolderName, "theglobalproject");
         var fsTree = new FileSystemTree(rootFolder);
         var codebaseResource = new ClassPathResource("codebases/theglobalproject");
         var codebasesResource = new ClassPathResource("codebases");

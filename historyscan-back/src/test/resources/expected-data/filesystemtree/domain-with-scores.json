@@ -2,21 +2,21 @@
   "name": "root",
   "path": "/",
   "currentNbLines": 0,
-  "score": 28192,
+  "score": 28632,
   "children": {
     "theglobalproject/src/main/java/io/mycompany/theproject/domain": {
       "name": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
       "parentPath": "/",
       "currentNbLines": 0,
-      "score": 28192,
+      "score": 28632,
       "children": {
         "boundedcontexts": {
           "name": "boundedcontexts",
           "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
           "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
           "currentNbLines": 0,
-          "score": 28192,
+          "score": 28632,
           "children": {
             "featureB": {
               "name": "featureB",
@@ -87,6 +87,25 @@
                   "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                   "currentNbLines": 32,
                   "score": 6080,
+                  "children": {},
+                  "file": true
+                }
+              },
+              "file": false
+            },
+            "thelastfeature": {
+              "name": "thelastfeature",
+              "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+              "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+              "score": 440,
+              "currentNbLines": 0,
+              "children": {
+                "HexagonalFeature.java": {
+                  "name": "HexagonalFeature.java",
+                  "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+                  "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                  "score": 440,
+                  "currentNbLines": 1250,
                   "children": {},
                   "file": true
                 }

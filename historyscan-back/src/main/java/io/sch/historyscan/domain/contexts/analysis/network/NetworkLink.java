@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 import static java.util.Collections.reverseOrder;
+import static java.util.Objects.requireNonNull;
 
 public class NetworkLink implements Comparable<NetworkLink> {
     private final String path;
@@ -28,6 +29,7 @@ public class NetworkLink implements Comparable<NetworkLink> {
 
     @Override
     public int compareTo(NetworkLink o) {
+        requireNonNull(o, "NetworkLink cannot be compared to null");
         return Comparator
                 .comparing(NetworkLink::weight, reverseOrder())
                 .thenComparing(NetworkLink::path)
@@ -49,5 +51,13 @@ public class NetworkLink implements Comparable<NetworkLink> {
     @Override
     public int hashCode() {
         return Objects.hash(path, weight);
+    }
+
+    @Override
+    public String toString() {
+        return "NetworkLink{" +
+               "path='" + path + '\'' +
+               ", weight=" + weight +
+               '}';
     }
 }
