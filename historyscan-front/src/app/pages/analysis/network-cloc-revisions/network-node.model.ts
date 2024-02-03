@@ -1,6 +1,8 @@
 import {NetworkLink} from "./network-link.model";
 
 export class NetworkNode {
+  minSize = 6;
+  maxSize = 100;
 
   constructor(
     public name: string,
@@ -30,5 +32,14 @@ export class NetworkNode {
     }
     const slashIndex = this.path.lastIndexOf("/");
     return this.path.substring(slashIndex + 1);
+  }
+
+  symbolSize(minScore: number, maxScore: number) {
+    if (minScore === maxScore) {
+      return this.minSize;
+    }
+    return this.score !== undefined
+      ? this.minSize + (((this.score - minScore) * (this.maxSize - this.minSize)) / (maxScore - minScore))
+      : this.minSize
   }
 }

@@ -33,7 +33,7 @@ export class NetworkChartService {
                    title: string, description: string): EChartsOption {
     const maxScore = this.findMaxScore(network.nodes);
     const minScore = this.findMinScore(network.nodes);
-    const graph = this.createDataStructure(network, ['scss'], minScore, maxScore);
+    const graph = this.createDataStructure(network, extensions, minScore, maxScore);
     graph.nodes.forEach(function (node) {
       node.label = {
         show: node.symbolSize > (maxScore * 70 / 100)
@@ -55,12 +55,11 @@ export class NetworkChartService {
       darkMode: true,
       tooltip: {
         trigger: 'item',
-        position: [50,50],
+        position: [50, 50],
         borderWidth: 2,
         borderColor: '#171d31',
         backgroundColor: '#d0d6ee',
         appendToBody: true,
-// extraCssText: 'margin-top: 200px',
         textStyle: {
           color: '#000',
           fontSize: 10,
@@ -142,18 +141,15 @@ export class NetworkChartService {
 
   private createDataStructure(network: NetworkNodes, extensions: Array<string>,
                               minScore: any, maxScore: number): NetworkChartNodes {
-    const minSize = 6;
-    const maxSize = 100;
     let chartNodes: Array<NetworkChartNode> = [];
     let chartLinks: Array<NetworkChartLink> = [];
-
 
     for (let node of network.nodes) {
       const extension = node.extension();
       chartNodes.push(new NetworkChartNode(
         node.path,
         node.name,
-        minSize + (node.score - minScore) * (maxSize - minSize) / (maxScore - minScore),
+        node.symbolSize(minScore, maxScore),
         node.score,
         extension,
         new NetworkChartLabel(false),
@@ -166,10 +162,14 @@ export class NetworkChartService {
 
   private addLinks(node: NetworkNode, chartLinks: NetworkChartLink[]) {
     for (let link of node.links) {
-      chartLinks.push(new NetworkChartLink(
-        node.path,
-        link.path
-      ));
+      if (chartLinks.find((chartLink) => chartLink.source === node.path && chartLink.target === link.path) === undefined
+        && chartLinks.find((chartLink) => chartLink.source === link.path && chartLink.target === node.path) === undefined
+      ) {
+        chartLinks.push(new NetworkChartLink(
+          node.path,
+          link.path
+        ));
+      }
     }
   }
 }
