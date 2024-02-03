@@ -36,8 +36,8 @@ public class FileSystemTree {
 
     private void addFileParts(List<String> codeBaseParts, FileInfo file) {
         var current = root;
-        for (int i = 0; i < codeBaseParts.size(); i++) {
-            String part = codeBaseParts.get(i);
+        for (var i = 0; i < codeBaseParts.size(); i++) {
+            var part = codeBaseParts.get(i);
             if (!current.getChildren().containsKey(part)) {
                 var parentPath = parentPath(file, i, part);
                 var isFile = file.isFileFrom(part, rootFolder.getValue());
@@ -66,7 +66,7 @@ public class FileSystemTree {
                 .flatMap(commit -> commit.files().stream())
                 .collect(Collectors.groupingBy(CodeBaseHistoryCommitFile::fileInfo))
                 .forEach((key, value) -> {
-                    final Integer revisions = value.stream()
+                    var revisions = value.stream()
                             .map(CodeBaseHistoryCommitFile::cloc)
                             .reduce(0, Integer::sum);
                     root.findFileNode(key.path())
@@ -101,7 +101,7 @@ public class FileSystemTree {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FileSystemTree that = (FileSystemTree) o;
+        var that = (FileSystemTree) o;
         return Objects.equals(root, that.root);
     }
 
@@ -119,6 +119,6 @@ public class FileSystemTree {
     }
 
     public List<FileSystemNode> files() {
-      return root.allFileNodes();
+        return root.allFileNodes();
     }
 }

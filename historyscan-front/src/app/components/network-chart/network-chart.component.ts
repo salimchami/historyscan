@@ -36,7 +36,6 @@ export class NetworkChartComponent implements OnDestroy {
     this.chartTitle = title;
     this.chartDescription = description;
     this.chartOptions = this.networkService.toNetworkOptions(network, extensions, title, description);
-
   }
 
   tooltipOn(targetItem: string) {
@@ -55,12 +54,11 @@ export class NetworkChartComponent implements OnDestroy {
 
   copyPathOnNodeClick() {
     this.echartsInstance.on('click', (params: any) => {
-      if (params?.data?.path) {
-        navigator.clipboard.writeText(params.data.path).then(() => {
-          this.notificationService.showCopiedText(params.data.path);
+      if (params?.data?.id) {
+        navigator.clipboard.writeText(params.data.id).then(() => {
+          this.notificationService.showCopiedText(params.data.id);
         });
       }
     });
   }
-
 }

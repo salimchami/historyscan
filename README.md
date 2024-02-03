@@ -8,9 +8,13 @@ This project is a Java application built with Spring Boot and Gradle.
 It's inspired from the book [Your Code as a Crime Scene](https://pragprog.com/titles/atcrime2/your-code-as-a-crime-scene-second-edition)
 by Adam Tornhill.
 
-**the result is a tree of cloc revisions with score**.
+**Treemap chart of cloc revisions with scores**.
 
-![treemap screenshot](treemap-screenshot.png)
+![treemap chart screenshot](doc/treemap-chart-screenshot.png)
+
+**Network graph of network cloc revisions with scores**.
+
+![network graph screenshot](doc/network-chart-screenshot.png)
 
 ## Features
 
@@ -80,12 +84,11 @@ by Adam Tornhill.
     http://localhost:4200
 ```
 
-## Authors
-
-Salim CHAMI
-work@salimchami.net
-
 ## Version History
+
+* 1.3.0:
+    * multiple code fixes
+    * network graph of cloc revisions with scores
 
 * 1.2.0:
     * multiple code fixes
@@ -111,6 +114,13 @@ work@salimchami.net
     * add git repository analysis feature
     * add score calculation feature
 
+## Authors
+
+Salim CHAMI
+[work@salimchami.net](mailto:work@salimchami.net)
+
 ## License
 
-This project is licensed under the CC BY-NC License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the CC BY-NC License.
+
+See the [LICENSE.md](LICENSE.md) file for details.

@@ -22,9 +22,9 @@ export class NetworkChartService {
   }
 
   public searchItemInNetwork(seriesItem: SeriesOption, targetItem: string) {
-    if (seriesItem && 'type' in seriesItem && seriesItem.type === 'treemap' && 'data' in seriesItem) {
-      const data = seriesItem.data;
-      return this.findInSeries(data![0], targetItem);
+    if (seriesItem && 'type' in seriesItem && seriesItem.type === 'graph' && 'data' in seriesItem) {
+      const data = seriesItem.data as Array<NetworkChartNode>
+      return this.findInSeries(data, targetItem);
     }
     return null;
   }
@@ -86,7 +86,7 @@ export class NetworkChartService {
           })
         }
       ],
-      animationDuration: 1500,
+      animationDuration: 1000,
       animationEasingUpdate: 'quinticInOut',
       series: [
         {
@@ -96,8 +96,8 @@ export class NetworkChartService {
           links: graph.links,
           categories: graph.categories,
           force: {
-            repulsion: 200,
-            edgeLength: 60
+            repulsion: 1000,
+            edgeLength: 100
           },
           roam: true,
           lineStyle: {
@@ -124,7 +124,13 @@ export class NetworkChartService {
     };
   }
 
-  findInSeries(node: any, targetPath: string): any {
+  findInSeries(nodes: Array<NetworkChartNode>, targetPath: string): any {
+    const foundNode = nodes.find((node) =>
+      node.id.includes(targetPath));
+    if (foundNode) {
+      return foundNode;
+    }
+    return null;
   }
 
   private formatScore(score: number): string {
@@ -147,6 +153,7 @@ export class NetworkChartService {
     for (let node of network.nodes) {
       const extension = node.extension();
       chartNodes.push(new NetworkChartNode(
+        node.path,
         node.path,
         node.name,
         node.symbolSize(minScore, maxScore),
