@@ -42,11 +42,12 @@ export class NetworkChartComponent implements OnDestroy {
     if (this.chartOptions.series && Array.isArray(this.chartOptions.series)) {
       const seriesItem = this.chartOptions.series[0];
       const foundItem = this.networkService.searchItemInNetwork(seriesItem, targetItem);
-      if (foundItem?.dataIndex) {
+      debugger;
+      if (foundItem?.id) {
         this.echartsInstance.dispatchAction({
           type: 'showTip',
           seriesIndex: 0,
-          dataIndex: foundItem.dataIndex
+          id: foundItem.id
         });
       }
     }

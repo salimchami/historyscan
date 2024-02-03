@@ -154,7 +154,6 @@ export class NetworkChartService {
       const extension = node.extension();
       chartNodes.push(new NetworkChartNode(
         node.path,
-        node.path,
         node.name,
         node.symbolSize(minScore, maxScore),
         node.score,
