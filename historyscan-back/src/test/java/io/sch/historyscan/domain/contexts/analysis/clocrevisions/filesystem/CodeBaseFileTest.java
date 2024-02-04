@@ -40,8 +40,9 @@ class CodeBaseFileTest {
                         "boundedcontexts",
                         "featureA",
                         "ExtensionsAdapter.java",
-                        "build.gradle"
-
+                        "build.gradle",
+                        "thelastfeature",
+                        "HexagonalFeature.java"
                 )),
                 Arguments.of("domain", List.of(
                         "domain",
@@ -53,7 +54,9 @@ class CodeBaseFileTest {
                         "Extensions.java",
                         "Loading.java",
                         "featureB",
-                        "FinallyLoading.java"))
+                        "FinallyLoading.java",
+                        "thelastfeature",
+                        "HexagonalFeature.java"))
         );
     }
 
@@ -68,8 +71,8 @@ class CodeBaseFileTest {
     @ParameterizedTest
     @MethodSource("should_find_children_from_root_folder_and_without_ignored_files_params")
     void should_find_children_from_root_folder_and_without_ignored_files(String rootFolderValue, List<String> expectedFiles) {
-        final String codeBaseName = "theglobalproject";
-        RootFolder rootFolder = RootFolder.of(rootFolderValue, codeBaseName);
+        var codeBaseName = "theglobalproject";
+        var rootFolder = RootFolder.of(rootFolderValue, codeBaseName);
         var sut = new CodeBaseFile(codebaseFile, rootFolder, codebasesFile.getPath());
         var children = sut.filteredChildren();
         assertThat(children)

@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {TreemapChartComponent} from "./treemap-chart.component";
-import {TreemapService} from "./treemap.service";
+import {TreemapChartService} from "./treemap-chart.service";
 import {NgxEchartsModule} from "ngx-echarts";
 import {CommonModule} from "@angular/common";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
@@ -12,7 +12,7 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
   imports: [
     NgxEchartsModule, CommonModule, MatSnackBarModule
   ],
-  providers: [TreemapService, MatSnackBar],
+  providers: [TreemapChartService, MatSnackBar],
   exports: [
     TreemapChartComponent,
     MatSnackBarModule

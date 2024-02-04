@@ -1,4 +1,4 @@
-import {TreemapService} from "./treemap.service";
+import {TreemapChartService} from "./treemap-chart.service";
 
 describe('TreemapService', () => {
   const expectedItem = {
@@ -17,7 +17,7 @@ describe('TreemapService', () => {
     ['historyscan/domain/contexts/analysis/clocrevisions/filesystem/ActualFileSystemTree.'],
     ['historyscan/domain/contexts/analysis/clocrevisions/filesystem/ActualFileSystemTree'],
   ])('should find a file or folder from node', (targetPath: string) => {
-    const foundItem = new TreemapService().findInSeries({
+    const foundItem = new TreemapChartService().findInSeries({
       path: 'historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem',
       dataIndex: 195,
       children: [expectedItem]

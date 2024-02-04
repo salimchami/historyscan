@@ -5,7 +5,8 @@ import java.util.Optional;
 
 public enum EnumAnalysisType {
     COMMITS_SCAN("history"),
-    CLOC_REVISIONS("cloc-revisions");
+    CLOC_REVISIONS("cloc-revisions"),
+    NETWORK("network");
     private final String title;
 
     EnumAnalysisType(String title) {

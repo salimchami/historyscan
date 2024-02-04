@@ -21,7 +21,7 @@ export class CodebasesComponent implements AfterContentInit {
               private readonly codebasesService: CodebasesService,
               private readonly router: Router,
               private readonly localStorageService: LocalstorageService,
-              public dialog: MatDialog) {
+              public readonly dialog: MatDialog) {
   }
 
   ngAfterContentInit(): void {
@@ -38,7 +38,7 @@ export class CodebasesComponent implements AfterContentInit {
   }
 
   hasNetworkClocAndRevisions(element: CurrentCodebase): boolean {
-    return !!element._links['analyze-network-cloc-revisions']?.href;
+    return !!element._links['analyze-network']?.href;
   }
 
   clocAndRevisions(element: CurrentCodebase): void {
@@ -46,15 +46,21 @@ export class CodebasesComponent implements AfterContentInit {
     dialogRef.afterClosed().subscribe(rootFolder => {
       if (rootFolder) {
         this.addToLocalStorage(element, rootFolder, 'analyze-cloc-revisions');
-       this.localStorageService.clearFilesTree()
+        this.localStorageService.clearFilesTree();
         this.router.navigateByUrl('/analysis/cloc-revisions').then();
       }
     });
   }
 
   networkClocAndRevisions(element: CurrentCodebase): void {
-    this.addToLocalStorage(element, '', 'analyze-network-cloc-revisions');
-    this.router.navigateByUrl('/analysis/network-cloc-revisions').then();
+    const dialogRef = this.dialog.open(RootFolderDialog);
+    dialogRef.afterClosed().subscribe(rootFolder => {
+      if (rootFolder) {
+        this.addToLocalStorage(element, rootFolder, 'analyze-network');
+        this.localStorageService.clearNetworkFilesTree()
+        this.router.navigateByUrl('/analysis/network').then();
+      }
+    });
   }
 
   private addToLocalStorage(element: CurrentCodebase, rootFolder: string, analysisType: string) {

@@ -3,10 +3,7 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 import io.sch.historyscan.domain.hexagonalarchitecture.DDDEntity;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @DDDEntity
 public class FileSystemNode {
@@ -140,5 +137,17 @@ public class FileSystemNode {
             node.updateScoreFrom(new RevisionScore(totalScore));
             return totalScore;
         }
+    }
+
+    public List<FileSystemNode> allFileNodes() {
+        List<FileSystemNode> fileNodes = new ArrayList<>();
+        if (this.isFile) {
+            fileNodes.add(this);
+        } else {
+            for (FileSystemNode child : this.getChildren().values()) {
+                fileNodes.addAll(child.allFileNodes());
+            }
+        }
+        return fileNodes;
     }
 }

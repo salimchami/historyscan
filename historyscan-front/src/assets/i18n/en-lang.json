@@ -112,7 +112,7 @@
           "title-uploaded-file": "(uploaded file)",
           "root-folder": "Root folder",
           "download-tooltip": "Download codebase files tree (json)",
-          "upload-tooltip": "Uplaod codebase files tree (json)",
+          "upload-tooltip": "Upload a codebase files tree (json)",
           "one-extension": "The analysis contains only one extension",
           "ignored-files": {
             "title": "Ignored files",
@@ -133,6 +133,36 @@
             "upload": {
               "title": "Codebase files tree",
               "description": "Upload your custom codebase files tree",
+              "hint": "The json file must respect the following format"
+            }
+          }
+        },
+        "network": {
+          "title": "Network cloc revisions",
+          "title-uploaded-file": "(uploaded file)",
+          "root-folder": "Root folder",
+          "download-tooltip": "Download codebase network nodes (json)",
+          "upload-tooltip": "Upload codebase network nodes (json)",
+          "one-extension": "The analysis contains only one extension",
+          "ignored-files": {
+            "title": "Ignored files",
+            "no-data": "No data",
+            "name": "Name:"
+          },
+          "search": {
+            "placeholder": "Show tooltip on a node (file) by 'path': path/to/file/TheFile.ext",
+            "hint": "Increase the chances of finding your file by providing the most complete path possible."
+          },
+          "dialogs": {
+            "download": {
+              "title": "Codebase network analysis nodes",
+              "url": "Url:",
+              "branch": "Branch:",
+              "download": "Download"
+            },
+            "upload": {
+              "title": "Codebase network analysis nodes",
+              "description": "Upload your custom codebase network nodes",
               "hint": "The json file must respect the following format"
             }
           }

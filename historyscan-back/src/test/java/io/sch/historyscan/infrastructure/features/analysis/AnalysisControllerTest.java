@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.CODEBASE_FOLDER;
+import static io.sch.historyscan.common.HistoryscanIntegrationTests.TestsFolders.ANALYSIS;
 import static io.sch.historyscan.common.JsonReader.toExpectedJson;
 import static io.sch.historyscan.common.JsonReader.toRequestedJson;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,6 +19,7 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
         return Stream.of(
                 Arguments.of("codebase-to-analyze-history", "codebase-history"),
                 Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
+                Arguments.of("codebase-to-analyze-network", "codebase-network"),
                 Arguments.of("codebase-to-analyze-cloc-revisions-domain", "codebase-cloc-revisions-domain"),
                 Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path")
         );
@@ -27,8 +28,8 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
     @ParameterizedTest
     @MethodSource("should_analyze_history_of_the_codebase_params")
     void should_analyze_history_of_the_codebase(String testCase, String expectedResult) throws Exception {
-        String requestedCodebaseToAnalyze = toRequestedJson(CODEBASE_FOLDER, testCase);
-        String expectedHistory = toExpectedJson(CODEBASE_FOLDER, expectedResult);
+        var requestedCodebaseToAnalyze = toRequestedJson(ANALYSIS, testCase);
+        var expectedHistory = toExpectedJson(ANALYSIS, expectedResult);
         endPointCaller.perform(post("/api/v1/analyze")
                         .content(requestedCodebaseToAnalyze))
                 .andExpect(status().isOk())

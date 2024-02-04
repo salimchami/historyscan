@@ -1,0 +1,39 @@
+<h2 style="text-align: center">
+  <strong>{{ 'global.pages.analysis.cloc-revisions.dialogs.download.title'|translate }}</strong></h2>
+
+<h2 mat-dialog-title>
+  <span><strong>{{ 'global.pages.analysis.cloc-revisions.dialogs.download.url'|translate }}</strong></span> {{ codebaseUrl }}
+</h2>
+<h4 mat-dialog-title>
+  <span><strong>{{ 'global.pages.analysis.cloc-revisions.dialogs.download.branch'|translate }}</strong></span> {{ codebaseBranch }}
+</h4>
+<mat-divider></mat-divider>
+<mat-dialog-actions class="app-dialog-actions">
+  <div style="display: flex; justify-content: space-between; width: 100%;">
+    <div>
+      <a mat-raised-button [href]="sanitizedBlobUrl"
+         [download]="filename" color="primary" (click)="download()"> {{ 'global.buttons.download'|translate }}
+        <mat-icon matIconPrefix>download</mat-icon>
+      </a>
+      <button mat-raised-button (click)="viewInBrowser()"> {{ 'global.buttons.view-in-browser'|translate }}
+        <mat-icon matIconPrefix>code</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button color="warn" (click)="close()"> {{ 'global.buttons.close'|translate }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>
+@if (displayJson) {
+  <mat-card class="display-json-card">
+    <mat-card-content>
+      <div class="copy-icon">
+        <button mat-icon-button (click)="copyText()" [matTooltip]="'global.buttons.copy'|translate">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+      <pre class="scrollable-content">{{ jsonPayload }}</pre>
+    </mat-card-content>
+  </mat-card>
+}

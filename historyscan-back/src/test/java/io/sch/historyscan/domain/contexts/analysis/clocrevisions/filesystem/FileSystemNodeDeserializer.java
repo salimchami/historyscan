@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Optional;
 
 public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode> {
@@ -16,20 +14,20 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
     @Override
     public FileSystemNode deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        String name = node.get("name").asText();
-        String path = node.get("path").asText();
-        int currentNbLines = node.get("currentNbLines").asInt();
-        String parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
-        boolean isFile = node.get("file").asBoolean();
-        RevisionScore score = new RevisionScore(node.get("score").asInt());
+        var name = node.get("name").asText();
+        var path = node.get("path").asText();
+        var currentNbLines = node.get("currentNbLines").asInt();
+        var parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
+        var isFile = node.get("file").asBoolean();
+        var score = new RevisionScore(node.get("score").asInt());
 
-        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
+        var fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
 
-        JsonNode childrenNode = node.get("children");
-        Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();
+        var childrenNode = node.get("children");
+        var fields = childrenNode.fields();
         while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> field = fields.next();
-            FileSystemNode child = deserialize(field.getValue());
+            var field = fields.next();
+            var child = deserialize(field.getValue());
             fileSystemNode.addChild(field.getKey(), child);
         }
 
@@ -37,20 +35,20 @@ public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode>
     }
 
     private FileSystemNode deserialize(JsonNode node) {
-        String name = node.get("name").asText();
-        String path = node.get("path").asText();
-        int currentNbLines = node.get("currentNbLines").asInt();
-        String parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
-        boolean isFile = node.get("file").asBoolean();
-        RevisionScore score = new RevisionScore(node.get("score").asInt());
+        var name = node.get("name").asText();
+        var path = node.get("path").asText();
+        var currentNbLines = node.get("currentNbLines").asInt();
+        var parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
+        var isFile = node.get("file").asBoolean();
+        var score = new RevisionScore(node.get("score").asInt());
 
-        FileSystemNode fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
+        var fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
 
-        JsonNode childrenNode = node.get("children");
-        Iterator<Map.Entry<String, JsonNode>> fields = childrenNode.fields();
+        var childrenNode = node.get("children");
+        var fields = childrenNode.fields();
         while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> field = fields.next();
-            FileSystemNode child = deserialize(field.getValue());
+            var field = fields.next();
+            var child = deserialize(field.getValue());
             fileSystemNode.addChild(field.getKey(), child);
         }
 
