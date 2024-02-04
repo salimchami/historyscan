@@ -67,9 +67,13 @@ export class NetworkChartService {
           fontFamily: 'monospace',
         },
         formatter: (params: any) => {
-          return `Name: ${(params.name)}
+          if (params.data.source && params.data.target) {
+            return `Source: ${(params.data.source)}
+                    <br>Target: ${(params.data.target)}`;
+          }
+          return `Name: ${(params.data.name)}
                 <br>Path: ${(params.data.id)}
-                <br>Score: ${(this.formatScore(params.value))}`;
+                <br>Score: ${(this.formatScore(params.data.value))}`;
         }
       },
       legend: [
