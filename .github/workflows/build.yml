@@ -35,6 +35,7 @@ jobs:
       - name: Build with Gradle Wrapper
         run: |
           cd historyscan-back
+          ./gradlew clean
           ./gradlew build
 
       - name: Build with NodeJS
