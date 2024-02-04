@@ -3,7 +3,6 @@ package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 
@@ -30,7 +29,7 @@ public record FileInfo(String name, String path, boolean isFile, long currentNbL
 
         return parts.stream()
                 .filter(part -> !part.isEmpty())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public String pathFrom(String pathPart) {

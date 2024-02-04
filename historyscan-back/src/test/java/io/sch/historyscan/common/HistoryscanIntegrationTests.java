@@ -1,10 +1,11 @@
 package io.sch.historyscan.common;
 
 import io.sch.historyscan.HistoryscanApplication;
+import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer;
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import io.sch.historyscan.infrastructure.config.AppConfig;
 import io.sch.historyscan.infrastructure.config.HateoasConfig;
-import io.sch.historyscan.infrastructure.features.analysis.CodeBaseHistoryAnalyzer;
+import io.sch.historyscan.infrastructure.features.filesystem.FileSystemReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
@@ -36,17 +38,20 @@ import static org.mockito.Mockito.when;
 public abstract class HistoryscanIntegrationTests implements InitializingBean {
 
     @MockBean
-    private CodeBaseHistoryAnalyzer codeBaseHistoryAnalyzer;
+    private HistoryAnalyzer codeBaseHistoryAnalyzer;
     @MockBean
     private FileSystemManager fileSystemManager;
+    @Autowired
+    private FileSystemReader fileSystemReader;
 
     @BeforeEach
     void setUp() throws IOException {
-        var history = Optional.of(defaultHistory());
+        var codebasesResource = new ClassPathResource("codebases");
+        ReflectionTestUtils.setField(fileSystemReader, "codebasesFolder", codebasesResource.getFile().getPath());        var history = Optional.of(defaultHistory());
         when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(history);
-        var codebasesResource = new ClassPathResource("codebases/theglobalproject");
+        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
         when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
-                .thenReturn(Optional.of(codebasesResource.getFile()));
+                .thenReturn(Optional.of(codebaseResource.getFile()));
     }
 
     protected EndPointCaller endPointCaller;

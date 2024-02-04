@@ -8,8 +8,8 @@
     "score": 28632,
     "children": [
       {
-        "name": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
-        "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
+        "name": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
+        "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
         "parentPath": "/",
         "isFile": false,
         "currentNbLines": 0,
@@ -17,24 +17,24 @@
         "children": [
           {
             "name": "boundedcontexts",
-            "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
-            "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain",
+            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+            "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain",
             "isFile": false,
             "currentNbLines": 0,
             "score": 28632,
             "children": [
               {
                 "name": "featureB",
-                "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
-                "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+                "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                 "isFile": false,
                 "currentNbLines": 0,
                 "score": 1824,
                 "children": [
                   {
                     "name": "FinallyLoading.java",
-                    "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
-                    "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+                    "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+                    "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
                     "isFile": true,
                     "currentNbLines": 32,
                     "score": 1824,
@@ -44,16 +44,16 @@
               },
               {
                 "name": "thelastfeature",
-                "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
-                "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                 "isFile": false,
                 "currentNbLines": 0,
                 "score": 440,
                 "children": [
                   {
                     "name": "HexagonalFeature.java",
-                    "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
-                    "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                    "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+                    "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
                     "isFile": true,
                     "currentNbLines": 11,
                     "score": 440,
@@ -63,16 +63,16 @@
               },
               {
                 "name": "featureA",
-                "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-                "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
                 "isFile": false,
                 "currentNbLines": 0,
                 "score": 26368,
                 "children": [
                   {
                     "name": "Extensions.java",
-                    "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
-                    "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+                    "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                     "isFile": true,
                     "currentNbLines": 32,
                     "score": 1760,
@@ -80,16 +80,16 @@
                   },
                   {
                     "name": "refactored",
-                    "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
-                    "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                    "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                     "isFile": false,
                     "currentNbLines": 0,
                     "score": 18528,
                     "children": [
                       {
                         "name": "Extensions.java",
-                        "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
-                        "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                        "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+                        "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                         "isFile": true,
                         "currentNbLines": 32,
                         "score": 14208,
@@ -97,8 +97,8 @@
                       },
                       {
                         "name": "Loading.java",
-                        "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
-                        "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+                        "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+                        "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
                         "isFile": true,
                         "currentNbLines": 32,
                         "score": 4320,
@@ -108,8 +108,8 @@
                   },
                   {
                     "name": "Loading.java",
-                    "path": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
-                    "parentPath": "historyscan-back/build/resources/test/codebases/theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+                    "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+                    "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                     "isFile": true,
                     "currentNbLines": 32,
                     "score": 6080,

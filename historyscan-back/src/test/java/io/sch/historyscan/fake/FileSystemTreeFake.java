@@ -24,6 +24,5 @@ public final class FileSystemTreeFake {
                 .updateFilesScoreFrom(defaultHistory().commits())
                 .then()
                 .updateFoldersScore();
-
     }
 }
