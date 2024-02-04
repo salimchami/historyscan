@@ -26,6 +26,69 @@
       ]
     },
     {
+      "name": "Extensions.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+      "currentNbLines": 32,
+      "score": 14208,
+      "links": [
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "weight": 2
+        },
+        {
+          "path": "theglobalproject/build.gradle",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Loading.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+      "currentNbLines": 32,
+      "score": 6080,
+      "links": [
+        {
+          "path": "theglobalproject/build.gradle",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Loading.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
+      "currentNbLines": 32,
+      "score": 4320,
+      "links": [
+        {
+          "path": "theglobalproject/build.gradle",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
       "name": "FinallyLoading.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
@@ -59,69 +122,6 @@
         },
         {
           "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name": "Extensions.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
-      "currentNbLines": 32,
-      "score": 14208,
-      "links": [
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
-          "weight": 2
-        },
-        {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name": "Loading.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
-      "currentNbLines": 32,
-      "score": 4320,
-      "links": [
-        {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name": "Loading.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-      "currentNbLines": 32,
-      "score": 6080,
-      "links": [
-        {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
           "weight": 1
         }
       ]

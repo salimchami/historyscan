@@ -19,15 +19,15 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
         return Stream.of(
                 Arguments.of("codebase-to-analyze-history", "codebase-history"),
                 Arguments.of("codebase-to-analyze-cloc-revisions", "codebase-cloc-revisions"),
-                Arguments.of("codebase-to-analyze-network", "codebase-network"),
                 Arguments.of("codebase-to-analyze-cloc-revisions-domain", "codebase-cloc-revisions-domain"),
-                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path")
+                Arguments.of("codebase-to-analyze-cloc-revisions-domain-path", "codebase-cloc-revisions-domain-with-path"),
+                Arguments.of("codebase-to-analyze-network", "codebase-network")
         );
     }
 
     @ParameterizedTest
     @MethodSource("should_analyze_history_of_the_codebase_params")
-    void should_analyze_history_of_the_codebase(String testCase, String expectedResult) throws Exception {
+    void should_analyze_the_codebase(String testCase, String expectedResult) throws Exception {
         var requestedCodebaseToAnalyze = toRequestedJson(ANALYSIS, testCase);
         var expectedHistory = toExpectedJson(ANALYSIS, expectedResult);
         endPointCaller.perform(post("/api/v1/analyze")

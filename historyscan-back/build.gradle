@@ -28,4 +28,10 @@ dependencies {
 
 tasks.named('test', Test) {
 	useJUnitPlatform()
+    testLogging {
+        // Options are 'OFF', 'QUIET', 'MINIMAL', 'INFO', 'DEBUG', and 'WARN'
+        showStandardStreams = true
+        exceptionFormat = 'full' // Options: 'short', 'verbose', 'full'
+        events 'passed', 'skipped', 'failed'
+    }
 }

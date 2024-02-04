@@ -37,6 +37,7 @@ public class CodebaseRevisionsNetwork {
                                 fsNode.getName(), fsNode.getPath(),
                                 fsNode.getParentPath(), fsNode.getCurrentNbLines(),
                                 fsNode.getScore(), linksFrom(historyCommits, fsNode)))
+                .sorted()
                 .toList());
         return this;
     }
