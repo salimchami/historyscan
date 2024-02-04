@@ -138,25 +138,6 @@
                                             ]
                                           },
                                           {
-                                            "name": "thelastfeature",
-                                            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
-                                            "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
-                                            "isFile": false,
-                                            "currentNbLines": 0,
-                                            "score": 440,
-                                            "children": [
-                                              {
-                                                "name": "HexagonalFeature.java",
-                                                "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
-                                                "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
-                                                "isFile": true,
-                                                "currentNbLines": 11,
-                                                "score": 440,
-                                                "children": []
-                                              }
-                                            ]
-                                          },
-                                          {
                                             "name": "featureA",
                                             "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
                                             "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
@@ -208,6 +189,25 @@
                                                 "isFile": true,
                                                 "currentNbLines": 32,
                                                 "score": 6080,
+                                                "children": []
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "name": "thelastfeature",
+                                            "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                                            "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts",
+                                            "isFile": false,
+                                            "currentNbLines": 0,
+                                            "score": 440,
+                                            "children": [
+                                              {
+                                                "name": "HexagonalFeature.java",
+                                                "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+                                                "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+                                                "isFile": true,
+                                                "currentNbLines": 11,
+                                                "score": 440,
                                                 "children": []
                                               }
                                             ]

@@ -27,7 +27,7 @@ class AnalysisControllerTest extends HistoryscanIntegrationTests {
 
     @ParameterizedTest
     @MethodSource("should_analyze_history_of_the_codebase_params")
-    void should_analyze_history_of_the_codebase(String testCase, String expectedResult) throws Exception {
+    void should_analyze_the_codebase(String testCase, String expectedResult) throws Exception {
         var requestedCodebaseToAnalyze = toRequestedJson(ANALYSIS, testCase);
         var expectedHistory = toExpectedJson(ANALYSIS, expectedResult);
         endPointCaller.perform(post("/api/v1/analyze")
