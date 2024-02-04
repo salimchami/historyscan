@@ -26,57 +26,6 @@
       ]
     },
     {
-      "name": "FinallyLoading.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
-      "currentNbLines": 32,
-      "score": 1824,
-      "links": [
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name": "HexagonalFeature.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
-      "currentNbLines": 11,
-      "score": 440,
-      "links": [
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name": "Extensions.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
-      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
-      "currentNbLines": 32,
-      "score": 1760,
-      "links": [
-        {
-          "path": "theglobalproject/build.gradle",
-          "weight": 1
-        },
-        {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
-          "weight": 1
-        }
-      ]
-    },
-    {
       "name": "Extensions.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
@@ -103,6 +52,23 @@
     },
     {
       "name": "Loading.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
+      "currentNbLines": 32,
+      "score": 6080,
+      "links": [
+        {
+          "path": "theglobalproject/build.gradle",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Loading.java",
       "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Loading.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored",
       "currentNbLines": 32,
@@ -123,18 +89,52 @@
       ]
     },
     {
-      "name": "Loading.java",
-      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+      "name": "FinallyLoading.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB",
+      "currentNbLines": 32,
+      "score": 1824,
+      "links": [
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/refactored/Extensions.java",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+          "weight": 1
+        },
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/infrastructure/boundedcontexts/featureA/ExtensionsAdapter.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "Extensions.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
       "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA",
       "currentNbLines": 32,
-      "score": 6080,
+      "score": 1760,
       "links": [
         {
           "path": "theglobalproject/build.gradle",
           "weight": 1
         },
         {
-          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Extensions.java",
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureA/Loading.java",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name": "HexagonalFeature.java",
+      "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature/HexagonalFeature.java",
+      "parentPath": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/thelastfeature",
+      "currentNbLines": 11,
+      "score": 440,
+      "links": [
+        {
+          "path": "theglobalproject/src/main/java/io/mycompany/theproject/domain/boundedcontexts/featureB/FinallyLoading.java",
           "weight": 1
         }
       ]
