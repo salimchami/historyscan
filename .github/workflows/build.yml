@@ -42,4 +42,4 @@ jobs:
           cd historyscan-front
           npm install
           npm run build
-          npm test
+          npm run test
