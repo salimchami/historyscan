@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TranslateService} from "@ngx-translate/core";
 import {NetworkNodes} from "./network-nodes.model";
 import {NetworkUploadDialogComponent} from "./upload-dialog/network-upload-dialog.component";
+import {Duration} from "../../../shared/common/duration.model";
 
 @Component({
   selector: 'app-network-analysis',
@@ -25,6 +26,7 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
   canUpload = false;
   canDownload = false;
   showSearchHint: boolean = false;
+  duration: string = '';
   private initialCodebaseNetworkRevisions = CodebaseNetworkRevisions.empty();
   codebaseNetworkRevisions = CodebaseNetworkRevisions.empty();
 
@@ -58,6 +60,8 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
   }
 
   private initData() {
+    const duration = new Duration();
+    duration.start();
     this.analysisService.networkClocAndRevisions().subscribe({
       next: (codebaseNetworkRevisions) => {
         this.initialCodebaseNetworkRevisions = CodebaseNetworkRevisions.of(codebaseNetworkRevisions);
@@ -65,6 +69,8 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
         this.initRevisionsTreeMap();
         this.initExtensionsFormArray();
         this.initCanDownloadAndUpload();
+        duration.end();
+        this.duration = duration.format();
       }
     });
   }
@@ -106,28 +112,6 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
     this.initRevisionsTreeMap();
   }
 
-  unselectAll() {
-    this.select(false);
-  }
-
-  selectAll() {
-    this.select(true);
-  }
-
-  disabledButtons(): boolean {
-    return this.codebaseNetworkRevisions?.extensions?.length === 0;
-  }
-
-  containsOneExtension(): boolean {
-    return this.codebaseNetworkRevisions?.extensions?.length === 1;
-  }
-
-  private select(value: boolean) {
-    this.extensionsFormArray.controls.forEach((control) => {
-      control.setValue(value);
-    });
-  }
-
   private onSearchType() {
     this.analysisForm.get('search')?.valueChanges.subscribe((targetItem: string) => {
       if (targetItem && targetItem.length > 3) {
@@ -155,6 +139,8 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
   }
 
   private loadUploadedFile(result: NetworkNodes, updateFileStorage: boolean) {
+    const duration = new Duration();
+    duration.start();
     this.localStorageService.clearCodebaseUrl();
     this.localStorageService.clearCodebaseBranch();
     if (updateFileStorage) {
@@ -167,6 +153,8 @@ export class NetworkClocRevisionsAnalysisComponent implements OnInit, AfterViewI
     this.rootFolder = '';
     this.initCanDownloadAndUpload();
     this.initRevisionsTreeMap();
+    duration.end();
+    this.duration = duration.format();
   }
 
   private initCanDownloadAndUpload() {
