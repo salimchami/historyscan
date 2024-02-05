@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ClocRevisionsTreeUploadDialogComponent} from "./upload-dialog/cloc-revisions-tree-upload-dialog.component";
 import {TranslateService} from "@ngx-translate/core";
 import {CodebaseClocRevisionsFileTree} from "./codebase-cloc-revisions-file-tree.model";
+import {Duration} from "../../../shared/common/duration.model";
 
 @Component({
   selector: 'app-cloc-revisions-analysis',
@@ -27,7 +28,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   codebaseName: string = '';
   canUpload = false;
   canDownload = false;
-
+  duration: string = '';
   constructor(private readonly analysisService: AnalysisService,
               private readonly fb: FormBuilder,
               private readonly localStorageService: LocalstorageService,
@@ -66,6 +67,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   private initData() {
+    const duration = new Duration();
+    duration.start();
     this.analysisService.clocAndRevisions().subscribe({
       next: (codebaseClocRevisions) => {
         this.initialCodebaseClocRevisions = CodebaseClocRevisions.of(codebaseClocRevisions);
@@ -73,6 +76,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
         this.initRevisionsTreeMap();
         this.initExtensionsFormArray();
         this.initCanDownloadAndUpload();
+        duration.end();
+        this.duration = duration.format();
       }
     });
   }
@@ -161,6 +166,8 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   private loadUploadedFile(result: CodebaseClocRevisionsFileTree, updateFileStorage: boolean) {
+    const duration = new Duration();
+    duration.start();
     this.localStorageService.clearCodebaseUrl();
     this.localStorageService.clearCodebaseBranch();
     if (updateFileStorage) {
@@ -173,6 +180,7 @@ export class ClocRevisionsAnalysisComponent implements OnInit, AfterViewInit {
     this.rootFolder = '';
     this.initCanDownloadAndUpload();
     this.initRevisionsTreeMap();
-
+    duration.end();
+    this.duration = duration.format();
   }
 }

@@ -34,8 +34,12 @@
     <p style="margin-left: 20px">{{ 'global.pages.analysis.cloc-revisions.one-extension'|translate }}:
       '<strong>{{ codebaseClocRevisions.extensions[0] }}</strong>'</p>
   }
-
   <mat-divider></mat-divider>
+  @if (duration) {
+    <div style="margin-top: 15px; margin-left: 15px">
+      <p>{{ 'global.durations.graph-generated-in'|translate }}: <strong>{{ duration }}</strong></p>
+    </div>
+  }
   <div style="margin-top: 15px">
     <mat-form-field class="treemap-search-input user-action-input">
       <mat-label>{{ 'global.pages.analysis.cloc-revisions.search.placeholder'|translate }}</mat-label>

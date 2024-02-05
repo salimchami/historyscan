@@ -5,6 +5,11 @@
     }
   </h3>
   <mat-divider></mat-divider>
+  @if (duration) {
+    <div style="margin-top: 15px; margin-left: 15px">
+      <p>{{ 'global.durations.graph-generated-in'|translate }}: <strong>{{ duration }}</strong></p>
+    </div>
+  }
   <div style="margin-top: 15px">
     <mat-form-field class="treemap-search-input user-action-input">
       <mat-label>{{ 'global.pages.analysis.network.search.placeholder'|translate }}</mat-label>
