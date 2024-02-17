@@ -7,15 +7,17 @@ import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.Root
 import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import java.io.File
 
 @Component
-class FileSystemReader(@param:Value("\${io.sch.historyscan.codebases.folder}") private val codebasesFolder: String,
-                       private val fileSystemManager: FileSystemManager) : ActualFileSystemTree {
+class FileSystemReader(
+    @param:Value("\${io.sch.historyscan.codebases.folder}") private val codebasesFolder: String,
+    private val fileSystemManager: FileSystemManager
+) : ActualFileSystemTree {
     override fun from(rootFolder: RootFolder): FileSystemTree {
         val tree = FileSystemTree(rootFolder)
-        fileSystemManager.findFolder(codebasesFolder, rootFolder.codebaseName)
-                .ifPresent { file: File? -> tree.createFrom(CodeBaseFile(file, rootFolder, codebasesFolder)) }
+        fileSystemManager.findFolder(codebasesFolder, rootFolder.codebaseName)?.let { folder ->
+            tree.createFrom(CodeBaseFile(folder, rootFolder, codebasesFolder))
+        }
         return tree
     }
 }

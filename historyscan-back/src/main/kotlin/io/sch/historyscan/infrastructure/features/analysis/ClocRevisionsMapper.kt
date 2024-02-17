@@ -14,31 +14,39 @@ class ClocRevisionsMapper {
         val root = analyzedCodeBaseClocRevisions.actualFsTree.root
 
         return CodeBaseClocRevisionsDTO(
-                domainToWeb(root),
-                analyzedCodeBaseClocRevisions.ignoredRevisions.stream().map { fileInfo: FileInfo -> this.fileInfoDomainToWeb(fileInfo) }.toList(),
-                analyzedCodeBaseClocRevisions.extensions)
+            domainToWeb(root),
+            analyzedCodeBaseClocRevisions.ignoredRevisions.stream()
+                .map { fileInfo: FileInfo -> this.fileInfoDomainToWeb(fileInfo) }.toList(),
+            analyzedCodeBaseClocRevisions.extensions
+        )
     }
 
     private fun domainToWeb(node: FileSystemNode): ClocRevisionsFileNodeDTO {
-        return ClocRevisionsFileNodeDTO(node.name, node.path, node.parentPath!!, node.isFile,
-                node.currentNbLines, node.revisionScore?.score!!, domainToWebChildren(node.children))
+        return ClocRevisionsFileNodeDTO(
+            node.name, node.path, node.parentPath!!, node.isFile,
+            node.currentNbLines, node.revisionScore?.score!!, domainToWebChildren(node.children)
+        )
     }
 
     private fun domainToWebChildren(children: Map<String, FileSystemNode>): List<ClocRevisionsFileNodeDTO> {
-        return children.entries.stream().map { stringFileSystemNodeEntry: Map.Entry<String, FileSystemNode> -> this.domainToWebEntries(stringFileSystemNodeEntry) }.toList()
+        return children.entries.stream().map { stringFileSystemNodeEntry: Map.Entry<String, FileSystemNode> ->
+            this.domainToWebEntries(stringFileSystemNodeEntry)
+        }.toList()
     }
 
     private fun domainToWebEntries(stringFileSystemNodeEntry: Map.Entry<String, FileSystemNode>): ClocRevisionsFileNodeDTO {
-        return ClocRevisionsFileNodeDTO(stringFileSystemNodeEntry.value.name,
-                stringFileSystemNodeEntry.value.path,
-                stringFileSystemNodeEntry.value.parentPath,
-                stringFileSystemNodeEntry.value.isFile,
-                stringFileSystemNodeEntry.value.currentNbLines,
-                stringFileSystemNodeEntry.value.revisionScore?.score!!,
-                domainToWebChildren(stringFileSystemNodeEntry.value.children))
+        return ClocRevisionsFileNodeDTO(
+            stringFileSystemNodeEntry.value.name,
+            stringFileSystemNodeEntry.value.path,
+            stringFileSystemNodeEntry.value.parentPath ?: "",
+            stringFileSystemNodeEntry.value.isFile,
+            stringFileSystemNodeEntry.value.currentNbLines,
+            stringFileSystemNodeEntry.value.revisionScore?.score!!,
+            domainToWebChildren(stringFileSystemNodeEntry.value.children)
+        )
     }
 
-    private fun fileInfoDomainToWeb(fileInfo: FileInfo): FileInfoDTO? {
-        return FileInfoDTO(fileInfo?.name, fileInfo?.path)
+    private fun fileInfoDomainToWeb(fileInfo: FileInfo): FileInfoDTO {
+        return FileInfoDTO(fileInfo.name, fileInfo.path)
     }
 }
