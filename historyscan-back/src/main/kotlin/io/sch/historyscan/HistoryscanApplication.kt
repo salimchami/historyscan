@@ -7,8 +7,10 @@ import org.springframework.cache.annotation.EnableCaching
 @SpringBootApplication
 @EnableCaching
 class HistoryscanApplication {
-
-    fun main(args: Array<String>) {
-        runApplication<HistoryscanApplication>(*args)
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            runApplication<HistoryscanApplication>(*args)
+        }
     }
 }
