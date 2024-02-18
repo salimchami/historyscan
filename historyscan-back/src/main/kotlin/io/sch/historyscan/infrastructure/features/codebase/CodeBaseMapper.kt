@@ -15,16 +15,16 @@ class CodeBaseMapper {
     }
 
     fun domainToWeb(codebases: List<CurrentCodeBase>): CurrentCodebasesDTO {
-        return CurrentCodebasesDTO(codebases.stream()
-                .map { codebase: CurrentCodeBase -> this.domainToWeb(codebase) }
-                .toList())
+        return CurrentCodebasesDTO(codebases.map { this.domainToWeb(it) })
     }
 
     fun domainToWeb(codebase: CurrentCodeBase): CurrentCodebaseDTO {
-        return CurrentCodebaseDTO(codebase.name, codebase.url, codebase.currentBranch)
+        return CurrentCodebaseDTO(codebase.name,
+            codebase.url ?: "", codebase.currentBranch ?: "")
     }
 
     fun codebaseDomainToWeb(codeBase: CurrentCodeBase): CodebaseDTO {
-        return CodebaseDTO(codeBase.name, codeBase.url, codeBase.currentBranch)
+        return CodebaseDTO(codeBase.name,
+            codeBase.url?: "", codeBase.currentBranch?: "")
     }
 }

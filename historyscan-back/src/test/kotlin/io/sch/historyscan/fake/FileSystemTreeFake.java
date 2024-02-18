@@ -21,7 +21,7 @@ public final class FileSystemTreeFake {
         fsTree.createFrom(new CodeBaseFile(rootFile, rootFolder,
                 codebasesResource.getFile().getPath()));
         return fsTree
-                .updateFilesScoreFrom(defaultHistory().commits())
+                .updateFilesScoreFrom(defaultHistory().getCommits())
                 .then()
                 .updateFoldersScore();
     }

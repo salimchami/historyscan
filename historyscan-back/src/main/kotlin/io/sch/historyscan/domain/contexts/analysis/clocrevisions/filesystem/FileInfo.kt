@@ -28,9 +28,9 @@ class FileInfo(
             parts.addAll(listOf(*path.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         }
 
-        return parts.stream()
-            .filter { part: String -> part.isNotEmpty() }
-            .toList()
+        return parts
+            .filter { it.isNotEmpty() }
+
     }
 
     fun pathFrom(pathPart: String): String {

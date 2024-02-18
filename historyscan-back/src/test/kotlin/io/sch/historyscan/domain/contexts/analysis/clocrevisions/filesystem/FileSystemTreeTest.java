@@ -34,7 +34,7 @@ class FileSystemTreeTest {
 
         final var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
         assertThat(fsTree)
-                .extracting(FileSystemTree::getRoot)
+                .extracting(FileSystemTree::getRootFolder)
                 .isEqualTo(expectedRoot);
     }
 }

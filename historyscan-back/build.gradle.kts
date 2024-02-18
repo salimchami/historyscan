@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,6 +8,9 @@ plugins {
     kotlin("plugin.spring") version "1.9.22"
 }
 
+springBoot {
+    mainClass.set("io.sch.historyscan.HistoryscanApplication")
+}
 group = "io.sch"
 version = "1.3.0"
 
@@ -33,15 +37,15 @@ sourceSets {
 }
 
 dependencies {
+
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.eclipse.jgit:org.eclipse.jgit:6.7.0.202309050840-r")
-    implementation("org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.7.0.202309050840-r")
-    implementation("org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.7.0.202309050840-r")
-
+    implementation(libs.jgitcore)
+    implementation(libs.jgitsshapache)
+    implementation(libs.jgitgpgbc)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.tngtech.archunit:archunit:1.2.0")
+    testImplementation(libs.archunit)
 }
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -53,8 +57,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
-//        showStandardStreams = true
-//        exceptionFormat = "full"
-//        events "passed", "skipped", "failed"
+        showStandardStreams = true
+        exceptionFormat = TestExceptionFormat.FULL
+        events("passed", "skipped", "failed")
     }
 }

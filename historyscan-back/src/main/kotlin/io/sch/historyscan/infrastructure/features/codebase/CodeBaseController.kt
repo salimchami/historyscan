@@ -22,10 +22,10 @@ class CodeBaseController(private val codebaseApplication: CodeBaseApplication) {
     }
 
     @GetMapping(path = ["/{codebaseName}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun findCodeBase(@PathVariable("codebaseName") codebaseName: String?): ResponseEntity<CodebaseDTO> {
-        return codebaseApplication.findCodeBase(codebaseName)
-                .map { body: CodebaseDTO? -> ResponseEntity.ok(body) }
-                .orElse(ResponseEntity.notFound().build())
+    fun findCodeBase(@PathVariable("codebaseName") codebaseName: String): ResponseEntity<CodebaseDTO> {
+        val codebase = codebaseApplication.findCodeBase(codebaseName)
+        return codebase?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.notFound().build()
     }
 
     @GetMapping

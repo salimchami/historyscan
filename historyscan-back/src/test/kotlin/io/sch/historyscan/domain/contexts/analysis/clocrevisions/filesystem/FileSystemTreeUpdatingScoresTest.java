@@ -33,13 +33,13 @@ class FileSystemTreeUpdatingScoresTest {
         fsTree.createFrom(new CodeBaseFile(codebaseResource.getFile(), rootFolder,
                 codebasesResource.getFile().getPath()));
         fsTree = fsTree
-                .updateFilesScoreFrom(defaultHistory().commits())
+                .updateFilesScoreFrom(defaultHistory().getCommits())
                 .then()
                 .updateFoldersScore();
 
         var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
         assertThat(fsTree)
-                .extracting(FileSystemTree::getRoot)
+                .extracting(FileSystemTree::getRootFolder)
                 .isEqualTo(expectedRoot);
     }
 }

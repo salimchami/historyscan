@@ -39,7 +39,7 @@ class CloneCodeBaseManagement(private val logger: AppLogger,
                     .setURI(codeBaseToClone.url)
                     .setDirectory(codebase)
                     .setBranch(codeBaseToClone.branch)
-                    .setBranchesToClone(setOf("refs/heads/%s".formatted(codeBaseToClone.branch)))
+                    .setBranchesToClone(setOf("refs/heads/%s".format(codeBaseToClone.branch)))
                     .setGitDir(File(codebase, ".git"))
                     .setBare(false)
                     .call().use { git ->

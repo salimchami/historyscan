@@ -6,7 +6,7 @@ import java.io.File
 @HexagonalArchitectureSPI
 interface CodeBaseRepository {
     @Throws(CodeBaseAlreadyExistsException::class)
-    fun clone(codeBaseToClone: CodeBaseToClone?): ClonedCodeBase?
+    fun clone(codeBaseToClone: CodeBaseToClone): ClonedCodeBase
 
-    fun pull(codebase: File?, codeBaseToClone: CodeBaseToClone?): ClonedCodeBase?
+    fun pull(codebase: File, codeBaseToClone: CodeBaseToClone): ClonedCodeBase
 }

@@ -20,7 +20,7 @@ class FilePathTest {
                            "\\src\\main\\java\\io\\sch\\historyscan\\domain\\contexts\\analysis" +
                            "\\clocrevisions\\filesystem";
         var expectedFolderPath = "historyscan/historyscan-back/src/main/java/io/sch/historyscan/domain/contexts/analysis/clocrevisions/filesystem";
-        final String codebaseName = "historyscan";
+        var codebaseName = "historyscan";
         return Stream.of(
                 Arguments.of("/", codebaseName, fullFilePath, expectedFilePath),
                 Arguments.of(codebaseName, codebaseName, fullFilePath, expectedFilePath),
@@ -35,7 +35,7 @@ class FilePathTest {
     void should_create_path(String rootFolder, String codebaseName, String fullPath, String expectedPath) {
         var filePath = new FilePath(new File(fullPath), rootFolder, codebaseName,
                 "C:/Users/slim/historyscan/codebases");
-        var path = filePath.pathFromCodebaseName(filePath.currentFile());
+        var path = filePath.pathFromCodebaseName(filePath.getCurrentFile());
         assertThat(path).isEqualTo(expectedPath);
     }
 }

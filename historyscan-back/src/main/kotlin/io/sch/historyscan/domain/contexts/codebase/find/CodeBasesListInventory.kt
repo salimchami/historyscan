@@ -4,5 +4,5 @@ import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureSPI
 
 @HexagonalArchitectureSPI
 fun interface CodeBasesListInventory {
-    fun listAll(): List<CurrentCodeBase?>?
+    fun listAll(): List<CurrentCodeBase>
 }

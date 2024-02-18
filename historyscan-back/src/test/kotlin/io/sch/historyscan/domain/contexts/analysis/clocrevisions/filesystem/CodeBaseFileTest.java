@@ -76,7 +76,7 @@ class CodeBaseFileTest {
         var sut = new CodeBaseFile(codebaseFile, rootFolder, codebasesFile.getPath());
         var children = sut.filteredChildren();
         assertThat(children)
-                .extracting(FileInfo::name)
+                .extracting(FileInfo::getName)
                 .containsExactlyInAnyOrderElementsOf(expectedFiles);
     }
 }

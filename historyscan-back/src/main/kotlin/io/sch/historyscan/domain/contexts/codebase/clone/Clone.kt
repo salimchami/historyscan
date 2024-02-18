@@ -5,5 +5,5 @@ import io.sch.historyscan.domain.hexagonalarchitecture.HexagonalArchitectureAPI
 @HexagonalArchitectureAPI
 fun interface Clone {
     @Throws(CodeBaseAlreadyExistsException::class)
-    fun from(codeBaseToClone: CodeBaseToClone?): ClonedCodeBase?
+    fun from(codeBaseToClone: CodeBaseToClone): ClonedCodeBase
 }

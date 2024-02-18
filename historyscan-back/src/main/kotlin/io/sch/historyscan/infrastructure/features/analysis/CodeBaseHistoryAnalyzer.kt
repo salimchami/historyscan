@@ -22,23 +22,23 @@ class CodeBaseHistoryAnalyzer(
     @param:Value("\${io.sch.historyscan.codebases.folder}") private val codebasesFolder: String,
     private val fileSystemManager: FileSystemManager, private val logger: Logger
 ) : HistoryAnalyzer {
-    override fun of(codeBaseName: String): CodeBaseHistory {
-        return fileSystemManager.findFolder(codebasesFolder, codeBaseName)
-            .map { codebase: File -> this.codeBaseHistory(codebase) }
+    override fun of(codeBaseName: String): CodeBaseHistory? {
+        val folder = fileSystemManager.findFolder(codebasesFolder, codeBaseName)
+        return folder?.let { codeBaseHistory(it) }
     }
 
-    private fun codeBaseHistory(codebase: File?): CodeBaseHistory {
+    private fun codeBaseHistory(codebase: File): CodeBaseHistory {
         try {
             val codebaseCurrentFilesPaths = fileSystemManager.allFilesFrom(codebase, ".git")
             return GitWrapper(codebase, codebaseCurrentFilesPaths).history()
         } catch (e: IOException) {
-            logger.error("Unable to open codebase %s".format(codebase!!.name), e)
+            logger.error("Unable to open codebase %s".format(codebase.name), e)
             throw CodeBaseNotOpenedException("Unable to open codebase %s".format(codebase.name), e)
         } catch (e: NoHeadException) {
-            logger.error("Unable to find HEAD for codebase %s".format(codebase!!.name), e)
+            logger.error("Unable to find HEAD for codebase %s".format(codebase.name), e)
             throw CodeBaseHeadNotFoundException("Unable to find HEAD for codebase %s".format(codebase.name), e)
         } catch (e: GitAPIException) {
-            logger.error("Unable to find log for codebase %s".format(codebase!!.name), e)
+            logger.error("Unable to find log for codebase %s".format(codebase.name), e)
             throw CodeBaseLogNotFoundException("Unable to find log for codebase %s".format(codebase.name), e)
         }
     }

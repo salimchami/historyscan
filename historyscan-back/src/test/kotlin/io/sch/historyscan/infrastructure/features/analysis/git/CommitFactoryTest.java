@@ -8,7 +8,6 @@ import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,7 @@ class CommitFactoryTest extends GitTest {
 
     @BeforeEach
     void setUp() {
-        FileSystemManager fileSystemManager = mock(FileSystemManager.class);
+        var fileSystemManager = mock(FileSystemManager.class);
         when(fileSystemManager.allFilesFrom(codebase, ".git")).thenCallRealMethod();
         sut = new CommitFactory();
         paths = fileSystemManager.allFilesFrom(codebase, ".git");
@@ -33,13 +32,12 @@ class CommitFactoryTest extends GitTest {
     }
 
     @Test
-    void createCommit() throws IOException {
-        try (GitOperations gitOperations = new GitOperations(codebase)) {
+    void createCommit() {
+        try (var gitOperations = new GitOperations(codebase)) {
             var commit = sut.createCommit(gitCommit, paths, gitOperations);
             assertThat(commit)
-                    .isPresent()
-                    .map(CodeBaseCommit::files)
-                    .contains(expectedCommitFiles);
+                    .extracting(CodeBaseCommit::getFiles)
+                    .isEqualTo(expectedCommitFiles);
         }
     }
 }

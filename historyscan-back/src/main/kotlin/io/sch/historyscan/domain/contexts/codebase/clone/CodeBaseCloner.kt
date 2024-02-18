@@ -5,7 +5,7 @@ import io.sch.historyscan.domain.hexagonalarchitecture.DDDService
 @DDDService
 class CodeBaseCloner(private val codeBaseRepository: CodeBaseRepository) : Clone {
     @Throws(CodeBaseAlreadyExistsException::class)
-    override fun from(codeBaseToClone: CodeBaseToClone?): ClonedCodeBase? {
+    override fun from(codeBaseToClone: CodeBaseToClone): ClonedCodeBase {
         return codeBaseRepository.clone(codeBaseToClone)
     }
 }

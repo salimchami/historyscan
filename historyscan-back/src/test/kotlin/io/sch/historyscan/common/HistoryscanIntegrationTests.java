@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -47,11 +46,11 @@ public abstract class HistoryscanIntegrationTests implements InitializingBean {
     @BeforeEach
     void setUp() throws IOException {
         var codebasesResource = new ClassPathResource("codebases");
-        ReflectionTestUtils.setField(fileSystemReader, "codebasesFolder", codebasesResource.getFile().getPath());        var history = Optional.of(defaultHistory());
-        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(history);
+        ReflectionTestUtils.setField(fileSystemReader, "codebasesFolder", codebasesResource.getFile().getPath());
+        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(defaultHistory());
         var codebaseResource = new ClassPathResource("codebases/theglobalproject");
         when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
-                .thenReturn(Optional.of(codebaseResource.getFile()));
+                .thenReturn(codebaseResource.getFile());
     }
 
     protected EndPointCaller endPointCaller;

@@ -5,10 +5,7 @@ class FileSystemNodeExtension(val root: FileSystemNode) {
         get() {
             val extensions: MutableList<String> = ArrayList()
             collectExtensions(root, extensions)
-            return extensions.stream()
-                    .distinct()
-                    .sorted()
-                    .toList()
+            return extensions.distinct().sorted()
         }
 
     private fun collectExtensions(node: FileSystemNode, extensions: MutableList<String>) {
