@@ -23,4 +23,13 @@ export class NotificationService {
       this.showNotification(`${message}: ${path}`);
     });
   }
+
+  showError(message: string) {
+    this.translateService.get('global.buttons.close').subscribe((close: string) => {
+      this.snackBar.open(message, close, {
+        duration: 10000,
+        panelClass: ['error-snackbar']
+      });
+    });
+  }
 }
