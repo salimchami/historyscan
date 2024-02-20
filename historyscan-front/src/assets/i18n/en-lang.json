@@ -1,6 +1,10 @@
 {
   "global": {
     "app-name": "Git History Scan",
+    "error": {
+      "basic": "Error",
+      "server": "A server error has occurred"
+    },
     "buttons": {
       "cancel": "Cancel",
       "close": "Close",

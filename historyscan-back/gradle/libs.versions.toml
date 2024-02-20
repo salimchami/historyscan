@@ -1,0 +1,10 @@
+[versions]
+arch-unit = "1.2.0"
+jgit = "6.7.0.202309050840-r"
+konsist= "0.13.0"
+
+[libraries]
+konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
+jgitcore = { module = "org.eclipse.jgit:org.eclipse.jgit", version.ref = "jgit" }
+jgitsshapache = { module = "org.eclipse.jgit:org.eclipse.jgit.ssh.apache", version.ref = "jgit" }
+jgitgpgbc = { module = "org.eclipse.jgit:org.eclipse.jgit.gpg.bc", version.ref = "jgit" }

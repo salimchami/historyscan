@@ -6,6 +6,7 @@ import {LoadingService} from '../navigation';
 import {HttpErrors} from './http-errors-constant';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from "@angular/router";
+import {NotificationService} from "../notification.service";
 
 @Injectable()
 export class HttpLoadingInterceptor implements HttpInterceptor {
@@ -36,10 +37,14 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
 
   showError(err: any) {
     const translateService = this.injector.get(TranslateService);
+    const notificationService = this.injector.get(NotificationService);
     translateService.get('global.errors.basic').subscribe({
       next: () => {
         switch (err.status) {
           case HttpErrors.INTERNAL_SERVER_ERROR:
+          case HttpErrors.BAD_REQUEST:
+            notificationService.showError(translateService.instant('global.error.server'));
+            console.log(err.message);
             break;
           case HttpErrors.UNAUTHORIZED:
             this.router.navigate(['welcome']).then();
