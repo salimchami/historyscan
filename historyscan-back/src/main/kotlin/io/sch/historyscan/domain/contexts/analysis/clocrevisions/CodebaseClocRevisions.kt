@@ -7,4 +7,4 @@ import io.sch.historyscan.domain.hexagonalarchitecture.DDDAggregate
 @DDDAggregate
 class CodebaseClocRevisions(
     val actualFsTree: FileSystemTree, val ignoredRevisions: List<FileInfo>, val extensions: List<String>
-) {}
+)

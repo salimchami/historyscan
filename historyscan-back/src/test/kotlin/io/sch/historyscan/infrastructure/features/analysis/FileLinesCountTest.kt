@@ -1,33 +1,27 @@
-package io.sch.historyscan.infrastructure.features.analysis;
+package io.sch.historyscan.infrastructure.features.analysis
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
+import io.sch.historyscan.infrastructure.features.analysis.FileLinesCount.Companion.from
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.springframework.core.io.ClassPathResource
+import java.nio.file.Files
 
-import java.io.IOException;
-import java.nio.file.Files;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class FileLinesCountTest {
-
-    private byte[] fileContent;
-
-    @BeforeEach
-    void setUp() throws IOException {
-         var file =  new ClassPathResource("codebases/theglobalproject/src/main/java/io/mycompany/" +
-                                                   "theproject/domain/boundedcontexts/featureA/Loading.java").getFile();
-        fileContent = Files.readAllBytes(file.toPath());
-    }
+internal class FileLinesCountTest {
 
     @Test
-    void should_count_added_modified_deleted_and_actual_lines() {
-          var fileLinesCount = FileLinesCount.from(
-                  new String[]{"+line1", "-line2", "+++line3", "---line4"},
-                  fileContent, "Loading.java");
-          assertEquals(32, fileLinesCount.nbLines);
-          assertEquals(1, fileLinesCount.addedLines);
-          assertEquals(1, fileLinesCount.deletedLines);
-          assertEquals(2, fileLinesCount.modifiedLines);
+    fun should_count_added_modified_deleted_and_actual_lines() {
+        val file = ClassPathResource(
+            "codebases/theglobalproject/src/main/java/io/mycompany/" +
+                    "theproject/domain/boundedcontexts/featureA/Loading.java"
+        ).file
+        val fileContent = Files.readAllBytes(file.toPath())
+        val fileLinesCount = from(
+            arrayOf("+line1", "-line2", "+++line3", "---line4"),
+            fileContent, "Loading.java"
+        )
+        Assertions.assertEquals(32, fileLinesCount.nbLines)
+        Assertions.assertEquals(1, fileLinesCount.addedLines)
+        Assertions.assertEquals(1, fileLinesCount.deletedLines)
+        Assertions.assertEquals(2, fileLinesCount.modifiedLines)
     }
 }

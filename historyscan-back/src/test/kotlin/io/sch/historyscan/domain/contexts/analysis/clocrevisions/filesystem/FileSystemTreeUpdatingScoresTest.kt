@@ -1,45 +1,53 @@
-package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
+package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.core.io.ClassPathResource;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.RootFolder.Companion.of
+import io.sch.historyscan.fake.CodeBaseCommitFake
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import org.springframework.core.io.ClassPathResource
+import java.io.IOException
+import java.util.stream.Stream
 
-import java.io.IOException;
-import java.util.stream.Stream;
+internal class FileSystemTreeUpdatingScoresTest {
+    @ParameterizedTest
+    @MethodSource("should_load_file_system_tree_from_disk_params")
+    @Throws(IOException::class)
+    fun should_load_file_system_tree_from_disk(rootFolderName: String, expectedRootTestCase: String) {
+        val codebaseName = "theglobalproject"
+        val rootFolder = of(rootFolderName, codebaseName)
+        var fsTree = FileSystemTree(
+            rootFolder
+        )
+        val codebaseResource = ClassPathResource("codebases/theglobalproject")
+        val codebasesResource = ClassPathResource("codebases")
 
-import static io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemNodeSerializerUtils.serializeExpectedRoot;
-import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
-import static org.assertj.core.api.Assertions.assertThat;
+        fsTree.createFrom(
+            CodeBaseFile(
+                codebaseResource.file, rootFolder,
+                codebasesResource.file.path
+            )
+        )
+        fsTree = fsTree
+            .updateFilesScoreFrom(CodeBaseCommitFake.defaultHistory()!!.commits)
+            .then()
+            .updateFoldersScore()
 
-class FileSystemTreeUpdatingScoresTest {
-    public static Stream<Arguments> should_load_file_system_tree_from_disk_params() {
-        return Stream.of(
+        val expectedRootFolder = FileSystemNodeSerializerUtils.serializeExpectedRoot(expectedRootTestCase)
+        Assertions.assertThat(fsTree)
+            .extracting("rootFolder")
+            .isEqualTo(expectedRootFolder)
+    }
+
+    companion object {
+        @JvmStatic
+        fun should_load_file_system_tree_from_disk_params(): Stream<Arguments> {
+            return Stream.of(
                 Arguments.of("domain", "domain-with-scores"),
                 Arguments.of("/", "theglobalproject-with-scores"),
                 Arguments.of("", "theglobalproject-with-scores")
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("should_load_file_system_tree_from_disk_params")
-    void should_load_file_system_tree_from_disk(String rootFolderName, String expectedRootTestCase) throws IOException {
-        var codebaseName = "theglobalproject";
-        var rootFolder = RootFolder.of(rootFolderName, codebaseName);
-        var fsTree = new FileSystemTree(rootFolder);
-        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
-        var codebasesResource = new ClassPathResource("codebases");
-
-        fsTree.createFrom(new CodeBaseFile(codebaseResource.getFile(), rootFolder,
-                codebasesResource.getFile().getPath()));
-        fsTree = fsTree
-                .updateFilesScoreFrom(defaultHistory().getCommits())
-                .then()
-                .updateFoldersScore();
-
-        var expectedRoot = serializeExpectedRoot(expectedRootTestCase);
-        assertThat(fsTree)
-                .extracting(FileSystemTree::getRootFolder)
-                .isEqualTo(expectedRoot);
+            )
+        }
     }
 }

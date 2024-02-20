@@ -1,57 +1,68 @@
-package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem;
+package io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore;
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.JsonNode
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore
+import java.io.IOException
+import java.util.*
 
-import java.io.IOException;
-import java.util.Optional;
+class FileSystemNodeDeserializer : JsonDeserializer<FileSystemNode?>() {
+    @Throws(IOException::class)
+    override fun deserialize(
+        jsonParser: JsonParser?,
+        deserializationContext: DeserializationContext?
+    ): FileSystemNode? {
+        val node = jsonParser!!.codec.readTree<JsonNode?>(jsonParser)
+        val name = node!!["name"].asText()
+        val path = node["path"].asText()
+        val currentNbLines = node["currentNbLines"].asInt()
+        val parentPath = Optional.ofNullable(node["parentPath"]).map { obj: JsonNode? -> obj!!.asText() }
+            .orElse(null)
+        val isFile = node["file"].asBoolean()
+        val score = RevisionScore(node["score"].asInt().toLong())
 
-public class FileSystemNodeDeserializer extends JsonDeserializer<FileSystemNode> {
+        val fileSystemNode = FileSystemNode(
+            name!!, path!!, parentPath, isFile, currentNbLines.toLong(), score
+        )
 
-    @Override
-    public FileSystemNode deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        var name = node.get("name").asText();
-        var path = node.get("path").asText();
-        var currentNbLines = node.get("currentNbLines").asInt();
-        var parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
-        var isFile = node.get("file").asBoolean();
-        var score = new RevisionScore(node.get("score").asInt());
-
-        var fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
-
-        var childrenNode = node.get("children");
-        var fields = childrenNode.fields();
-        while (fields.hasNext()) {
-            var field = fields.next();
-            var child = deserialize(field.getValue());
-            fileSystemNode.addChild(field.getKey(), child);
+        val childrenNode = node["children"]
+        val fields = childrenNode!!.fields()
+        while (fields!!.hasNext()) {
+            val field = fields.next()
+            val child = deserialize(
+                field!!.value
+            )
+            fileSystemNode.addChild(field.key!!, child!!)
         }
 
-        return fileSystemNode;
+        return fileSystemNode
     }
 
-    private FileSystemNode deserialize(JsonNode node) {
-        var name = node.get("name").asText();
-        var path = node.get("path").asText();
-        var currentNbLines = node.get("currentNbLines").asInt();
-        var parentPath = Optional.ofNullable(node.get("parentPath")).map(JsonNode::asText).orElse(null);
-        var isFile = node.get("file").asBoolean();
-        var score = new RevisionScore(node.get("score").asInt());
+    private fun deserialize(node: JsonNode?): FileSystemNode? {
+        val name = node!!["name"].asText()
+        val path = node["path"].asText()
+        val currentNbLines = node["currentNbLines"].asInt()
+        val parentPath = Optional.ofNullable(node["parentPath"]).map { obj: JsonNode? -> obj!!.asText() }
+            .orElse(null)
+        val isFile = node["file"].asBoolean()
+        val score = RevisionScore(node["score"].asInt().toLong())
 
-        var fileSystemNode = new FileSystemNode(name, path, parentPath, isFile, currentNbLines, score);
+        val fileSystemNode = FileSystemNode(
+            name!!, path!!, parentPath, isFile, currentNbLines.toLong(), score
+        )
 
-        var childrenNode = node.get("children");
-        var fields = childrenNode.fields();
-        while (fields.hasNext()) {
-            var field = fields.next();
-            var child = deserialize(field.getValue());
-            fileSystemNode.addChild(field.getKey(), child);
+        val childrenNode = node["children"]
+        val fields = childrenNode!!.fields()
+        while (fields!!.hasNext()) {
+            val field = fields.next()
+            val child = deserialize(
+                field!!.value
+            )
+            fileSystemNode.addChild(field.key!!, child!!)
         }
 
-        return fileSystemNode;
+        return fileSystemNode
     }
 }

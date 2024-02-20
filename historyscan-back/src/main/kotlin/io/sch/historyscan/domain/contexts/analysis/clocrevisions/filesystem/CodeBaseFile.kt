@@ -15,21 +15,24 @@ class CodeBaseFile(private val rootFile: File, private val rootFolder: RootFolde
         return rootFile.name == rootFolder.codebaseName
     }
 
-    fun filteredChildren(): List<FileInfo> {
+       fun filteredChildren(): List<FileInfo> {
         try {
             Files.walk(rootFile.toPath()).use { codeBaseFiles ->
-                return codeBaseFiles.map { obj: Path -> obj.toFile() }
-                        .filter { file: File ->
-                            FilePath(file, rootFolder.value, rootFolder.codebaseName, codebasesPath)
-                                    .isValid
-                        }
-                        .map { codeBaseFile: File -> this.child(codeBaseFile) }
-                        .map { it!! }
+
+                return  codeBaseFiles.map { path: Path -> getValidChildren(path) }
                         .toList()
+                        .filterNotNull()
+
             }
         } catch (e: IOException) {
             throw CodebasePathCanNotBeRead("Error while reading codebase files tree", e)
         }
+    }
+
+    private fun getValidChildren(path: Path): FileInfo? {
+        val file = path.toFile()
+        val filePath = FilePath(file, rootFolder.value, rootFolder.codebaseName, codebasesPath)
+        return if (filePath.isValid) child(file) else null
     }
 
     private fun child(codeBaseFile: File): FileInfo? {

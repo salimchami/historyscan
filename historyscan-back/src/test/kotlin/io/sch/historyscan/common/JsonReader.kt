@@ -1,41 +1,36 @@
-package io.sch.historyscan.common;
+package io.sch.historyscan.common
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.util.stream.Collectors
 
-public final class JsonReader {
-
-    private JsonReader() {
-        // private constructor due to utils class.
-    }
-
-    private static String toJson(String baseFolder, String folder, String testCase) {
-        var jsonFile = String.format("/%s/%s/%s.json", baseFolder, folder, testCase);
-        var jsonURL = JsonReader.class.getResource(jsonFile);
-        if(jsonURL == null) {
-            throw new IllegalArgumentException("No JSON file found : " + jsonFile);
-        }
-        try (var lines = Files.lines(Paths.get(jsonURL.toURI()))) {
-            return lines.collect(Collectors.joining(""));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("No JSON file found : " + jsonFile, e);
+object JsonReader {
+    private fun toJson(baseFolder: String, folder: String, testCase: String): String {
+        val jsonFile = String.format("/%s/%s/%s.json", baseFolder, folder, testCase)
+        val jsonURL = JsonReader::class.java.getResource(jsonFile)
+            ?: throw IllegalArgumentException("No JSON file found : $jsonFile")
+        try {
+            Files.lines(Paths.get(jsonURL.toURI())).use { lines ->
+                return lines.collect(Collectors.joining(""))
+            }
+        } catch (e: Exception) {
+            throw IllegalArgumentException("No JSON file found : $jsonFile", e)
         }
     }
 
-    public static String toExpectedJson(String folder, String testCase) {
-        return toJson("expected-data", folder, testCase);
+    fun toExpectedJson(folder: String, testCase: String): String {
+        return toJson("expected-data", folder, testCase)
     }
 
-    public static String toRequestedJson(String folder, String testCase) {
-        return toJson("requested-data", folder, testCase);
+    fun toRequestedJson(folder: String, testCase: String): String {
+        return toJson("requested-data", folder, testCase)
     }
 
-    public static String toExpectedJson(String prefix, String folder, String testCase) {
-        return toJson(prefix.concat("/").concat("expected-data"), folder, testCase);
+    fun toExpectedJson(prefix: String, folder: String, testCase: String): String {
+        return toJson("$prefix/expected-data", folder, testCase)
     }
 
-    public static String toRequestedJson(String prefix, String folder, String testCase) {
-        return toJson(prefix.concat("/").concat("requested-data"), folder, testCase);
+    fun toRequestedJson(prefix: String, folder: String, testCase: String): String {
+        return toJson("$prefix/requested-data", folder, testCase)
     }
 }

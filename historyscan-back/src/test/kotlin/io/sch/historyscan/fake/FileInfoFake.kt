@@ -1,18 +1,32 @@
-package io.sch.historyscan.fake;
+package io.sch.historyscan.fake
 
-import io.sch.historyscan.domain.contexts.analysis.history.FileInfo;
+import io.sch.historyscan.domain.contexts.analysis.history.FileInfo
 
-import static io.sch.historyscan.fake.FileNameFake.thelastfeatureHexagonalFeatureFileName;
-import static io.sch.historyscan.fake.FileNameFake.*;
-import static io.sch.historyscan.fake.FilePathFake.*;
-
-public class FileInfoFake {
-    public static final FileInfo buildGradle = new FileInfo(buildGradleFileName, buildGradleFilePath, true);
-    public static final FileInfo featureARefactoredExtensions = new FileInfo(featureARefactoredExtensionsFileName, featureARefactoredExtensionsFilePath, true);
-    public static final FileInfo featureARefactoredLoading = new FileInfo(featureARefactoredLoadingFileName, featureARefactoredLoadingFilePath, true);
-    public static final FileInfo featureAExtensions = new FileInfo(featureAExtensionsFileName, featureAExtensionsFilePath, true);
-    public static final FileInfo featureALoading = new FileInfo(featureALoadingFileName, featureALoadingFilePath, true);
-    public static final FileInfo featureBFinallyLoading = new FileInfo(featureBFinallyLoadingFileName, featureBFinallyLoadingFilePath, true);
-    public static final FileInfo featureAExtensionsAdapter = new FileInfo(featureAExtensionsAdapterFileName, featureAExtensionsAdapterFilePath, true);
-    public static final FileInfo thelastfeatureHexagonalFeature = new FileInfo(thelastfeatureHexagonalFeatureFileName, thelastfeatureHexagonalFeatureFilePath, true);
+object FileInfoFake {
+    val buildGradle: FileInfo? = FileInfo(
+        FileNameFake.buildGradleFileName!!, FilePathFake.buildGradleFilePath!!, true
+    )
+    val featureARefactoredExtensions: FileInfo? = FileInfo(
+        FileNameFake.featureARefactoredExtensionsFileName!!, FilePathFake.featureARefactoredExtensionsFilePath!!, true
+    )
+    val featureARefactoredLoading: FileInfo? = FileInfo(
+        FileNameFake.featureARefactoredLoadingFileName!!, FilePathFake.featureARefactoredLoadingFilePath!!, true
+    )
+    val featureAExtensions: FileInfo? = FileInfo(
+        FileNameFake.featureAExtensionsFileName!!, FilePathFake.featureAExtensionsFilePath!!, true
+    )
+    val featureALoading: FileInfo? = FileInfo(
+        FileNameFake.featureALoadingFileName!!, FilePathFake.featureALoadingFilePath!!, true
+    )
+    val featureBFinallyLoading: FileInfo? = FileInfo(
+        FileNameFake.featureBFinallyLoadingFileName!!, FilePathFake.featureBFinallyLoadingFilePath!!, true
+    )
+    val featureAExtensionsAdapter: FileInfo? = FileInfo(
+        FileNameFake.featureAExtensionsAdapterFileName!!, FilePathFake.featureAExtensionsAdapterFilePath!!, true
+    )
+    val thelastfeatureHexagonalFeature: FileInfo? = FileInfo(
+        FileNameFake.thelastfeatureHexagonalFeatureFileName!!,
+        FilePathFake.thelastfeatureHexagonalFeatureFilePath!!,
+        true
+    )
 }

@@ -5,8 +5,7 @@ class FileInfo(
     val path: String,
     val isFile: Boolean,
     val currentNbLines: Long
-) :
-    Comparable<FileInfo> {
+) : Comparable<FileInfo> {
     fun pathParts(rootFolder: String): List<String> {
         val parts: MutableList<String> = ArrayList()
         val rootIndex = this.path.indexOf(rootFolder)

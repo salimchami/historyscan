@@ -1,28 +1,30 @@
-package io.sch.historyscan.fake;
+package io.sch.historyscan.fake
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.CodeBaseFile;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.FileSystemTree;
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.RootFolder;
-import org.springframework.core.io.ClassPathResource;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.*
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.RootFolder.Companion.of
+import org.springframework.core.io.ClassPathResource
+import java.io.IOException
 
-import java.io.IOException;
-
-import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
-
-public final class FileSystemTreeFake {
-
-    public static FileSystemTree create(String rootFolderName) throws IOException {
-        var codebaseName = "theglobalproject";
-        var rootFolder = RootFolder.of(rootFolderName, codebaseName);
-        var fsTree = new FileSystemTree(rootFolder);
-        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
-        var codebasesResource = new ClassPathResource("codebases");
-        var rootFile = codebaseResource.getFile();
-        fsTree.createFrom(new CodeBaseFile(rootFile, rootFolder,
-                codebasesResource.getFile().getPath()));
+object FileSystemTreeFake {
+    @Throws(IOException::class)
+    fun create(rootFolderName: String?): FileSystemTree? {
+        val codebaseName = "theglobalproject"
+        val rootFolder = of(rootFolderName!!, codebaseName)
+        val fsTree = FileSystemTree(
+            rootFolder
+        )
+        val codebaseResource = ClassPathResource("codebases/theglobalproject")
+        val codebasesResource = ClassPathResource("codebases")
+        val rootFile = codebaseResource.file
+        fsTree.createFrom(
+            CodeBaseFile(
+                rootFile, rootFolder,
+                codebasesResource.file.path
+            )
+        )
         return fsTree
-                .updateFilesScoreFrom(defaultHistory().getCommits())
-                .then()
-                .updateFoldersScore();
+            .updateFilesScoreFrom(CodeBaseCommitFake.defaultHistory()!!.commits)
+            .then()
+            .updateFoldersScore()
     }
 }

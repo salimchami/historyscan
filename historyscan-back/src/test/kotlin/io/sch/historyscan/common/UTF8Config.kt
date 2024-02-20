@@ -1,23 +1,18 @@
-package io.sch.historyscan.common;
+package io.sch.historyscan.common
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+import org.springframework.context.annotation.Configuration
+import org.springframework.http.converter.HttpMessageConverter
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import java.nio.charset.StandardCharsets
 
 @Configuration
-public class UTF8Config
-        implements WebMvcConfigurer {
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.stream()
-                .filter(converter -> converter instanceof MappingJackson2HttpMessageConverter)
-                .findFirst()
-                .ifPresent(converter -> ((MappingJackson2HttpMessageConverter) converter)
-                        .setDefaultCharset(StandardCharsets.UTF_8));
+class UTF8Config : WebMvcConfigurer {
+    override fun configureMessageConverters(converters: List<HttpMessageConverter<*>>) {
+        converters.forEach { converter ->
+            if (converter is MappingJackson2HttpMessageConverter) {
+                converter.defaultCharset = StandardCharsets.UTF_8
+            }
+        }
     }
 }

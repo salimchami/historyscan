@@ -1,29 +1,29 @@
-package io.sch.historyscan.domain.contexts.analysis.clocrevisions;
+package io.sch.historyscan.domain.contexts.analysis.clocrevisions
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.RevisionScore.Companion.calculateRevisionsScore
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
-import java.util.stream.Stream;
+internal class RevisionScoreTest {
+    @ParameterizedTest
+    @MethodSource("should_calculate_revisions_score_params")
+    fun should_calculate_revisions_score(numberOfRevisions: Int, nbLines: Int, expectedScore: Int) {
+        val score = calculateRevisionsScore(numberOfRevisions, nbLines)
+        Assertions.assertThat(score).isEqualTo(expectedScore.toLong())
+    }
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-class RevisionScoreTest {
-
-    public static Stream<Arguments> should_calculate_revisions_score_params() {
-        return Stream.of(
+    companion object {
+        fun should_calculate_revisions_score_params(): Stream<Arguments?>? {
+            return Stream.of(
                 Arguments.of(22, 20, 440),
                 Arguments.of(135, 150, 20250),
                 Arguments.of(222, 523, 116106),
                 Arguments.of(310, 1500, 465000),
                 Arguments.of(190, 1250, 237500)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("should_calculate_revisions_score_params")
-    void should_calculate_revisions_score(int numberOfRevisions, int nbLines, int expectedScore) {
-        var score = RevisionScore.calculateRevisionsScore(numberOfRevisions, nbLines);
-        assertThat(score).isEqualTo(expectedScore);
+            )
+        }
     }
 }

@@ -1,30 +1,28 @@
-package io.sch.historyscan.domain.contexts.analysis.network;
+package io.sch.historyscan.domain.contexts.analysis.network
 
-import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions;
-import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze;
-import org.junit.jupiter.api.Test;
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.CodebaseClocRevisions
+import io.sch.historyscan.domain.contexts.analysis.clocrevisions.filesystem.*
+import io.sch.historyscan.domain.contexts.analysis.common.CodeBaseToAnalyze.Companion.of
+import io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType
+import io.sch.historyscan.domain.contexts.analysis.network.CodebaseRevisionsNetwork
+import io.sch.historyscan.fake.CodeBaseCommitFake
+import io.sch.historyscan.fake.FileSystemTreeFake
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import java.io.IOException
 
-import java.io.IOException;
-import java.util.List;
-
-import static io.sch.historyscan.domain.contexts.analysis.common.EnumAnalysisType.NETWORK;
-import static io.sch.historyscan.domain.contexts.analysis.network.NetworkNodesSerializerUtils.serializeExpected;
-import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
-import static io.sch.historyscan.fake.FileSystemTreeFake.create;
-import static org.assertj.core.api.Assertions.assertThat;
-
-class CodebaseRevisionsNetworkTest {
+internal class CodebaseRevisionsNetworkTest {
     @Test
-    void should_create_network_from_history_and_revisions() throws IOException {
-        var fsTree = create("/");
-        var clocRevisions = new CodebaseClocRevisions(fsTree, List.of(), List.of("java"));
-        var sut = new CodebaseRevisionsNetwork(defaultHistory(), clocRevisions);
-        var codeBaseToAnalyze = CodeBaseToAnalyze.of("theglobalproject", NETWORK.title, "/");
-        var actualNetwork = sut.calculateNetworkFromHistoryAndRevisions(codeBaseToAnalyze);
+    @Throws(IOException::class)
+    fun should_create_network_from_history_and_revisions() {
+        val fsTree = FileSystemTreeFake.create("/")
+        val clocRevisions = CodebaseClocRevisions(fsTree!!, listOf(), listOf("java"))
+        val sut = CodebaseRevisionsNetwork(CodeBaseCommitFake.defaultHistory()!!, clocRevisions)
+        val codeBaseToAnalyze = of("theglobalproject", EnumAnalysisType.NETWORK.title, "/")
+        val actualNetwork = sut.calculateNetworkFromHistoryAndRevisions(codeBaseToAnalyze)
 
-        assertThat(actualNetwork)
-                .extracting(CodebaseRevisionsNetwork::getNetwork)
-                .isEqualTo(serializeExpected("domain-codebase-network"));
+        Assertions.assertThat(actualNetwork)
+            .extracting(CodebaseRevisionsNetwork::network)
+            .isEqualTo(NetworkNodesSerializerUtils.serializeExpected("domain-codebase-network"))
     }
-
 }

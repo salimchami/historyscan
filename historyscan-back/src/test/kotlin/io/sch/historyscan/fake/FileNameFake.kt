@@ -1,12 +1,12 @@
-package io.sch.historyscan.fake;
+package io.sch.historyscan.fake
 
-public class FileNameFake {
-    public static final String featureARefactoredExtensionsFileName = "Extensions.java";
-    public static final String featureARefactoredLoadingFileName = "Loading.java";
-    public static final String featureAExtensionsFileName = "Extensions.java";
-    public static final String featureALoadingFileName = "Loading.java";
-    public static final String featureBFinallyLoadingFileName = "FinallyLoading.java";
-    public static final String featureAExtensionsAdapterFileName = "ExtensionsAdapter.java";
-    public static final String buildGradleFileName = "build.gradle";
-    public static final String thelastfeatureHexagonalFeatureFileName = "HexagonalFeature.java";
+object FileNameFake {
+    val featureARefactoredExtensionsFileName: String? = "Extensions.java"
+    val featureARefactoredLoadingFileName: String? = "Loading.java"
+    val featureAExtensionsFileName: String? = "Extensions.java"
+    val featureALoadingFileName: String? = "Loading.java"
+    val featureBFinallyLoadingFileName: String? = "FinallyLoading.java"
+    val featureAExtensionsAdapterFileName: String? = "ExtensionsAdapter.java"
+    val buildGradleFileName: String? = "build.gradle"
+    val thelastfeatureHexagonalFeatureFileName: String? = "HexagonalFeature.java"
 }

@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.jgitsshapache)
     implementation(libs.jgitgpgbc)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation(libs.archunit)
+    testImplementation(libs.konsist)
 }
 tasks.withType<KotlinCompile> {
     kotlinOptions {

@@ -1,80 +1,85 @@
-package io.sch.historyscan.common;
+package io.sch.historyscan.common
 
-import io.sch.historyscan.HistoryscanApplication;
-import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer;
-import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager;
-import io.sch.historyscan.infrastructure.config.AppConfig;
-import io.sch.historyscan.infrastructure.config.HateoasConfig;
-import io.sch.historyscan.infrastructure.features.filesystem.FileSystemReader;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.test.web.servlet.MockMvc;
+import io.sch.historyscan.HistoryscanApplication
+import io.sch.historyscan.domain.contexts.analysis.history.HistoryAnalyzer
+import io.sch.historyscan.fake.CodeBaseCommitFake
+import io.sch.historyscan.infrastructure.common.filesystem.FileSystemManager
+import io.sch.historyscan.infrastructure.config.AppConfig
+import io.sch.historyscan.infrastructure.config.HateoasConfig
+import io.sch.historyscan.infrastructure.features.filesystem.FileSystemReader
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.fail
+import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.eq
+import org.mockito.Mockito
+import org.springframework.beans.factory.InitializingBean
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.core.io.ClassPathResource
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.util.ReflectionTestUtils
+import org.springframework.test.web.servlet.MockMvc
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static io.sch.historyscan.fake.CodeBaseCommitFake.defaultHistory;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
-
-@SpringBootTest(classes = HistoryscanApplication.class)
-@ContextConfiguration(classes = {
-        AppConfig.class,
-        HateoasConfig.class,
-        UTF8Config.class
-})
+@SpringBootTest(classes = [HistoryscanApplication::class])
+@ContextConfiguration(
+    classes = [AppConfig::class, HateoasConfig::class, UTF8Config::class
+    ]
+)
 @AutoConfigureMockMvc
-public abstract class HistoryscanIntegrationTests implements InitializingBean {
+abstract class HistoryscanIntegrationTests : InitializingBean {
+    @MockBean
+    lateinit var codeBaseHistoryAnalyzer: HistoryAnalyzer
 
     @MockBean
-    private HistoryAnalyzer codeBaseHistoryAnalyzer;
-    @MockBean
-    private FileSystemManager fileSystemManager;
+    lateinit var fileSystemManager: FileSystemManager
+
     @Autowired
-    private FileSystemReader fileSystemReader;
+    lateinit var fileSystemReader: FileSystemReader
 
     @BeforeEach
-    void setUp() throws IOException {
-        var codebasesResource = new ClassPathResource("codebases");
-        ReflectionTestUtils.setField(fileSystemReader, "codebasesFolder", codebasesResource.getFile().getPath());
-        when(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(defaultHistory());
-        var codebaseResource = new ClassPathResource("codebases/theglobalproject");
-        when(fileSystemManager.findFolder(anyString(), eq("theglobalproject")))
-                .thenReturn(codebaseResource.getFile());
+    @Throws(IOException::class)
+    fun setUp() {
+        val codebasesResource = ClassPathResource("codebases")
+        ReflectionTestUtils.setField(fileSystemReader, "codebasesFolder", codebasesResource.file.path)
+        Mockito.`when`(codeBaseHistoryAnalyzer.of("theglobalproject")).thenReturn(CodeBaseCommitFake.defaultHistory())
+        val codebaseResource = ClassPathResource("codebases/theglobalproject")
+        Mockito.`when`(
+            fileSystemManager.findFolder(
+                anyString(),
+                eq("theglobalproject")
+            )
+        )
+            .thenReturn(codebaseResource.file)
     }
 
-    protected EndPointCaller endPointCaller;
+    lateinit var endPointCaller: EndPointCaller
+
     @Autowired
-    private MockMvc mockMvc;
+    lateinit var mockMvc: MockMvc
 
-    @Override
-    public void afterPropertiesSet() {
-        endPointCaller = new EndPointCaller(mockMvc);
+    override fun afterPropertiesSet() {
+        endPointCaller = EndPointCaller(mockMvc)
     }
 
-    protected void codebaseExists(String folderName) {
+    protected fun codebaseExists(folderName: String) {
         if (!Files.exists(Paths.get(folderName))) {
-            fail("The codebase folder " + folderName + " does not exist");
+            fail("The codebase folder $folderName does not exist")
         }
     }
 
-    public static class EndPoints {
-        public static final String BASE_URL = "/api/v1";
-        public static final String CODEBASES = BASE_URL + "/codebases";
+    object EndPoints {
+        const val BASE_URL: String = "/api/v1"
+        const val CODEBASES: String = "$BASE_URL/codebases"
     }
 
-    public static class TestsFolders {
-        public static final String APP_STARTUP_FOLDER = "app-startup";
-        public static final String ANALYSIS = "analysis";
+    object TestsFolders {
+        const val APP_STARTUP_FOLDER: String = "app-startup"
+        const val ANALYSIS: String = "analysis"
     }
 }

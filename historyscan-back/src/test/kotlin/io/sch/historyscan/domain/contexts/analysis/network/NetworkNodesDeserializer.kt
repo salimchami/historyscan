@@ -1,39 +1,35 @@
-package io.sch.historyscan.domain.contexts.analysis.network;
+package io.sch.historyscan.domain.contexts.analysis.network
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.JsonNode
+import java.io.IOException
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+class NetworkNodesDeserializer : JsonDeserializer<NetworkNodes>() {
+    @Throws(IOException::class)
+    override fun deserialize(jsonParser: JsonParser, deserializationContext: DeserializationContext): NetworkNodes {
+        val rootNode = jsonParser.codec.readTree<JsonNode>(jsonParser)
+        val nodesArray = rootNode["nodes"]
 
-public class NetworkNodesDeserializer extends JsonDeserializer<NetworkNodes> {
+        val networkNodes: MutableList<NetworkNode> = ArrayList()
+        for (node in nodesArray) {
+            val name = node["name"].asText()
+            val path = node["path"].asText()
+            val parentPath = node["parentPath"].asText()
+            val currentNbLines = node["currentNbLines"].asInt()
+            val score = node["score"].asInt()
 
-    @Override
-    public NetworkNodes deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        JsonNode rootNode = jsonParser.getCodec().readTree(jsonParser);
-        JsonNode nodesArray = rootNode.get("nodes");
-
-        List<NetworkNode> networkNodes = new ArrayList<>();
-        for (JsonNode node : nodesArray) {
-            String name = node.get("name").asText();
-            String path = node.get("path").asText();
-            String parentPath = node.get("parentPath").asText();
-            int currentNbLines = node.get("currentNbLines").asInt();
-            int score = node.get("score").asInt();
-
-            List<NetworkLink> links = new ArrayList<>();
-            for (JsonNode linkNode : node.get("links")) {
-                String linkPath = linkNode.get("path").asText();
-                int weight = linkNode.get("weight").asInt();
-                links.add(new NetworkLink(linkPath, weight));
+            val links: MutableList<NetworkLink> = ArrayList()
+            for (linkNode in node["links"]) {
+                val linkPath = linkNode["path"].asText()
+                val weight = linkNode["weight"].asInt()
+                links.add(NetworkLink(linkPath, weight.toLong()))
             }
 
-            networkNodes.add(new NetworkNode(name, path, parentPath, currentNbLines, score, links));
+            networkNodes.add(NetworkNode(name, path, parentPath, currentNbLines.toLong(), score.toLong(), links))
         }
 
-        return new NetworkNodes(networkNodes);
+        return NetworkNodes(networkNodes)
     }
 }
