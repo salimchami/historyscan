@@ -32,7 +32,6 @@ public class CodeBaseInfoManagement implements CodeBaseInfoInventory {
                 .map(this::codeBaseFromFolder);
     }
 
-
     public CurrentCodeBase codeBaseFromFolder(File folder) {
         var gitFolder = new GitFolder(folder).toDotGitFolder();
         try (var git = Git.open(gitFolder)) {

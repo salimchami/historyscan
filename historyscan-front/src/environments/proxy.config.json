@@ -1,6 +1,6 @@
 {
   "/authenticate": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:9095",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -11,7 +11,7 @@
     }
   },
   "/api": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:9095",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -22,7 +22,7 @@
     }
   },
   "/actuator": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:9095",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
