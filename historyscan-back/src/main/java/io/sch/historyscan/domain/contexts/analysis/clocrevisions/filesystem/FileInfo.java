@@ -56,12 +56,19 @@ public record FileInfo(String name, String path, boolean isFile, long currentNbL
     }
 
     public String parentPathFrom(String pathPart) {
+        if(pathPart.contains("/")) {
+            pathPart = "/" + pathPart;
+        }
         int index = pathPart.equals(name)
                 ? path.lastIndexOf(pathPart)
                 : path.lastIndexOf(pathPart + "/");
         if (index == 0) {
             return null;
         }
-        return path.substring(0, index - 1);
+        try {
+            return path.substring(0, index - 1);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }
