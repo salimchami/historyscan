@@ -3,6 +3,7 @@ import {EChartsOption, SeriesOption} from "echarts";
 import {
   CodebaseClocRevisionsFileTree
 } from "../../pages/analysis/cloc-revisions/codebase-cloc-revisions-file-tree.model";
+import {TreemapNodeTree} from "./entities/treemap-node-tree";
 
 @Injectable({providedIn: 'root'})
 export class TreemapChartService {
@@ -147,48 +148,7 @@ export class TreemapChartService {
   }
 
   private createTreeStructure(revisions: CodebaseClocRevisionsFileTree): any[] {
-    const nodesMap: any = {};
-    this.createNodes(revisions, nodesMap, 1);
-    const root = {name: 'root', children: []};
-    this.assignChildren(revisions, nodesMap, root);
-    return root.children;
-  }
-
-  private createNodes(revisions: CodebaseClocRevisionsFileTree, nodesMap: any, index: number) {
-    if ((revisions.isFile || !!revisions.children.length)) {
-      nodesMap[revisions.path] = {
-        name: revisions.name,
-        value: revisions.score,
-        path: revisions.path,
-        isFile: revisions.isFile,
-        dataIndex: index,
-        children: []
-      };
-      index++;
-    }
-    revisions.children.forEach(child => {
-      if (child.isFile || !!child.children.length) {
-        index = this.createNodes(child, nodesMap, index);
-      }
-    });
-    return index;
-  }
-
-  private assignChildren(revisions: CodebaseClocRevisionsFileTree, nodesMap: any, root: any) {
-    if (revisions.parentPath !== undefined && nodesMap[revisions.parentPath]) {
-      let parentNode = nodesMap[revisions.parentPath];
-      let node = nodesMap[revisions.path];
-
-      if ((node.children.length === 1 && !node.children[0].isFile) || node.path === 'pathToSkip') {
-        node = node.children[0];
-      }
-
-      parentNode.children.push(node);
-    } else if (revisions.path === '/') {
-      const node = nodesMap[revisions.path];
-      root.children.push(node);
-    }
-    revisions.children.forEach(child => this.assignChildren(child, nodesMap, root));
+    return TreemapNodeTree.from(revisions).children;
   }
 
   findInSeries(node: any, targetPath: string): any {

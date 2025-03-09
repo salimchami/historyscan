@@ -28,7 +28,7 @@ import {CodebaseClocRevisionsFileTree} from "../codebase-cloc-revisions-file-tre
 })
 export class ClocRevisionsTreeUploadDialogComponent {
   fileError: string = '';
-  exampleOfFilesTree: CodebaseClocRevisionsFileTree;
+  exampleOfFilesTree: CodebaseClocRevisionsFileTree | undefined;
 
   constructor(
     public dialogRef: MatDialogRef<ClocRevisionsTreeUploadDialogComponent>,
