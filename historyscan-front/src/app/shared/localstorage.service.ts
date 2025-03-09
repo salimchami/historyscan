@@ -5,15 +5,15 @@ import {CodebaseClocRevisionsFileTree} from "../pages/analysis/cloc-revisions/co
   providedIn: 'root'
 })
 export class LocalstorageService {
-  private CODEBASES_URL = 'codebases-url';
-  private CODEBASE_BRANCH = 'codebase-branch';
-  private CODEBASE_URL = 'codebase-url';
-  private ANALYSIS_ROOT_FOLDER = 'analysis-root-folder';
-  private ANALYSIS_HREF = 'analysis-href';
-  private ANALYSIS_NAME = 'analysis-name';
-  private ANALYSIS_TYPE = 'analysis-type';
-  private FILES_TREE = 'files-tree';
-  private NETWORK_FILES_TREE = 'network-files-tree';
+  private readonly CODEBASES_URL = 'codebases-url';
+  private readonly CODEBASE_BRANCH = 'codebase-branch';
+  private readonly CODEBASE_URL = 'codebase-url';
+  private readonly ANALYSIS_ROOT_FOLDER = 'analysis-root-folder';
+  private readonly ANALYSIS_HREF = 'analysis-href';
+  private readonly ANALYSIS_NAME = 'analysis-name';
+  private readonly ANALYSIS_TYPE = 'analysis-type';
+  private readonly FILES_TREE = 'files-tree';
+  private readonly NETWORK_FILES_TREE = 'network-files-tree';
 
   private addItemsToLocalStorage(items: Array<{ key: string, value: string }>) {
     items.forEach(item => this.addItem(item.key, item.value));

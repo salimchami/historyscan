@@ -1,0 +1,1087 @@
+{
+  "name": "root",
+  "value": 1558965,
+  "path": "/",
+  "isFile": false,
+  "dataIndex": 1,
+  "children": [
+    {
+      "name": "42next-app-api/src/iam",
+      "value": 1558965,
+      "path": "42next-app-api/src/iam",
+      "isFile": false,
+      "dataIndex": 2,
+      "children": [
+        {
+          "name": "test",
+          "value": 334238,
+          "path": "42next-app-api/src/iam/test",
+          "isFile": false,
+          "dataIndex": 3,
+          "children": [
+            {
+              "name": "subsystem",
+              "value": 322520,
+              "path": "42next-app-api/src/iam/test/subsystem",
+              "isFile": false,
+              "dataIndex": 4,
+              "children": [
+                {
+                  "name": "authentication.subsystem-spec.ts",
+                  "value": 322520,
+                  "path": "42next-app-api/src/iam/test/subsystem/authentication.subsystem-spec.ts",
+                  "isFile": true,
+                  "dataIndex": 5,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "utils.ts",
+              "value": 11718,
+              "path": "42next-app-api/src/iam/test/utils.ts",
+              "isFile": true,
+              "dataIndex": 6,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "configuration",
+          "value": 7948,
+          "path": "42next-app-api/src/iam/configuration",
+          "isFile": false,
+          "dataIndex": 7,
+          "children": [
+            {
+              "name": "authentication-config.module.ts",
+              "value": 598,
+              "path": "42next-app-api/src/iam/configuration/authentication-config.module.ts",
+              "isFile": true,
+              "dataIndex": 8,
+              "children": []
+            },
+            {
+              "name": "authentication-config.ts",
+              "value": 7350,
+              "path": "42next-app-api/src/iam/configuration/authentication-config.ts",
+              "isFile": true,
+              "dataIndex": 9,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "infrastructure",
+          "value": 1034645,
+          "path": "42next-app-api/src/iam/infrastructure",
+          "isFile": false,
+          "dataIndex": 10,
+          "children": [
+            {
+              "name": "controller",
+              "value": 169433,
+              "path": "42next-app-api/src/iam/infrastructure/controller",
+              "isFile": false,
+              "dataIndex": 11,
+              "children": [
+                {
+                  "name": "view",
+                  "value": 12558,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/view",
+                  "isFile": false,
+                  "dataIndex": 12,
+                  "children": [
+                    {
+                      "name": "logout.ts",
+                      "value": 216,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/logout.ts",
+                      "isFile": true,
+                      "dataIndex": 13,
+                      "children": []
+                    },
+                    {
+                      "name": "reset-password.ts",
+                      "value": 630,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/reset-password.ts",
+                      "isFile": true,
+                      "dataIndex": 14,
+                      "children": []
+                    },
+                    {
+                      "name": "refresh.ts",
+                      "value": 216,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/refresh.ts",
+                      "isFile": true,
+                      "dataIndex": 15,
+                      "children": []
+                    },
+                    {
+                      "name": "login.ts",
+                      "value": 8550,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/login.ts",
+                      "isFile": true,
+                      "dataIndex": 16,
+                      "children": []
+                    },
+                    {
+                      "name": "forgot-password-request.ts",
+                      "value": 1896,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/forgot-password-request.ts",
+                      "isFile": true,
+                      "dataIndex": 17,
+                      "children": []
+                    },
+                    {
+                      "name": "role.ts",
+                      "value": 1050,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/view/role.ts",
+                      "isFile": true,
+                      "dataIndex": 18,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "roles.controller.spec.ts",
+                  "value": 9936,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/roles.controller.spec.ts",
+                  "isFile": true,
+                  "dataIndex": 19,
+                  "children": []
+                },
+                {
+                  "name": "decorators",
+                  "value": 3338,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/decorators",
+                  "isFile": false,
+                  "dataIndex": 20,
+                  "children": [
+                    {
+                      "name": "permissions.decorator.ts",
+                      "value": 816,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/decorators/permissions.decorator.ts",
+                      "isFile": true,
+                      "dataIndex": 21,
+                      "children": []
+                    },
+                    {
+                      "name": "technical-account.decorator.ts",
+                      "value": 784,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/decorators/technical-account.decorator.ts",
+                      "isFile": true,
+                      "dataIndex": 22,
+                      "children": []
+                    },
+                    {
+                      "name": "with-permissions.decorator.ts",
+                      "value": 1738,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/decorators/with-permissions.decorator.ts",
+                      "isFile": true,
+                      "dataIndex": 23,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "iam.public.controller.ts",
+                  "value": 40936,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/iam.public.controller.ts",
+                  "isFile": true,
+                  "dataIndex": 24,
+                  "children": []
+                },
+                {
+                  "name": "iam.public.controller.spec.ts",
+                  "value": 87912,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/iam.public.controller.spec.ts",
+                  "isFile": true,
+                  "dataIndex": 25,
+                  "children": []
+                },
+                {
+                  "name": "roles.controller.ts",
+                  "value": 1560,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/roles.controller.ts",
+                  "isFile": true,
+                  "dataIndex": 26,
+                  "children": []
+                },
+                {
+                  "name": "guards",
+                  "value": 13193,
+                  "path": "42next-app-api/src/iam/infrastructure/controller/guards",
+                  "isFile": false,
+                  "dataIndex": 27,
+                  "children": [
+                    {
+                      "name": "permissions.guard.ts",
+                      "value": 10065,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/guards/permissions.guard.ts",
+                      "isFile": true,
+                      "dataIndex": 28,
+                      "children": []
+                    },
+                    {
+                      "name": "technical-account.guard.ts",
+                      "value": 2210,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/guards/technical-account.guard.ts",
+                      "isFile": true,
+                      "dataIndex": 29,
+                      "children": []
+                    },
+                    {
+                      "name": "auth.guard.mock.ts",
+                      "value": 918,
+                      "path": "42next-app-api/src/iam/infrastructure/controller/guards/auth.guard.mock.ts",
+                      "isFile": true,
+                      "dataIndex": 30,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "adapters",
+              "value": 863510,
+              "path": "42next-app-api/src/iam/infrastructure/adapters",
+              "isFile": false,
+              "dataIndex": 31,
+              "children": [
+                {
+                  "name": "keycloak",
+                  "value": 939,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak",
+                  "isFile": false,
+                  "dataIndex": 32,
+                  "children": [
+                    {
+                      "name": "keycloak-realm.ts",
+                      "value": 168,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/keycloak-realm.ts",
+                      "isFile": true,
+                      "dataIndex": 33,
+                      "children": []
+                    },
+                    {
+                      "name": "keycloak-user.ts",
+                      "value": 315,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/keycloak-user.ts",
+                      "isFile": true,
+                      "dataIndex": 34,
+                      "children": []
+                    },
+                    {
+                      "name": "api-call-error.ts",
+                      "value": 168,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/api-call-error.ts",
+                      "isFile": true,
+                      "dataIndex": 35,
+                      "children": []
+                    },
+                    {
+                      "name": "get-keycloak-realm-failed.ts",
+                      "value": 36,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/get-keycloak-realm-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 36,
+                      "children": []
+                    },
+                    {
+                      "name": "get-keycloak-user-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/get-keycloak-user-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 37,
+                      "children": []
+                    },
+                    {
+                      "name": "api-call-response.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak/api-call-response.ts",
+                      "isFile": true,
+                      "dataIndex": 38,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "google",
+                  "value": 107686,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/google",
+                  "isFile": false,
+                  "dataIndex": 39,
+                  "children": [
+                    {
+                      "name": "google-idp-spec.ts",
+                      "value": 101218,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/google/google-idp-spec.ts",
+                      "isFile": true,
+                      "dataIndex": 40,
+                      "children": []
+                    },
+                    {
+                      "name": "google-idp.ts",
+                      "value": 6468,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/google/google-idp.ts",
+                      "isFile": true,
+                      "dataIndex": 41,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "email-provider",
+                  "value": 5365,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/email-provider",
+                  "isFile": false,
+                  "dataIndex": 42,
+                  "children": [
+                    {
+                      "name": "email-provider.service.ts",
+                      "value": 5365,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/email-provider/email-provider.service.ts",
+                      "isFile": true,
+                      "dataIndex": 43,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "redis",
+                  "value": 126,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/redis",
+                  "isFile": false,
+                  "dataIndex": 44,
+                  "children": [
+                    {
+                      "name": "redis-client.error.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/infrastructure/adapters/redis/redis-client.error.ts",
+                      "isFile": true,
+                      "dataIndex": 45,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "keycloak-authentication.spec.ts",
+                  "value": 86510,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak-authentication.spec.ts",
+                  "isFile": true,
+                  "dataIndex": 46,
+                  "children": []
+                },
+                {
+                  "name": "redis-action-tokens.ts",
+                  "value": 32452,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/redis-action-tokens.ts",
+                  "isFile": true,
+                  "dataIndex": 47,
+                  "children": []
+                },
+                {
+                  "name": "keycloak-authentication.ts",
+                  "value": 630432,
+                  "path": "42next-app-api/src/iam/infrastructure/adapters/keycloak-authentication.ts",
+                  "isFile": true,
+                  "dataIndex": 48,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "permissions",
+              "value": 1702,
+              "path": "42next-app-api/src/iam/infrastructure/permissions",
+              "isFile": false,
+              "dataIndex": 49,
+              "children": [
+                {
+                  "name": "permissions.ts",
+                  "value": 105,
+                  "path": "42next-app-api/src/iam/infrastructure/permissions/permissions.ts",
+                  "isFile": true,
+                  "dataIndex": 50,
+                  "children": []
+                },
+                {
+                  "name": "permissions.spec.ts",
+                  "value": 1380,
+                  "path": "42next-app-api/src/iam/infrastructure/permissions/permissions.spec.ts",
+                  "isFile": true,
+                  "dataIndex": 51,
+                  "children": []
+                },
+                {
+                  "name": "central-cam.permissions.ts",
+                  "value": 105,
+                  "path": "42next-app-api/src/iam/infrastructure/permissions/central-cam.permissions.ts",
+                  "isFile": true,
+                  "dataIndex": 52,
+                  "children": []
+                },
+                {
+                  "name": "index.ts",
+                  "value": 112,
+                  "path": "42next-app-api/src/iam/infrastructure/permissions/index.ts",
+                  "isFile": true,
+                  "dataIndex": 53,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "domain",
+          "value": 96244,
+          "path": "42next-app-api/src/iam/domain",
+          "isFile": false,
+          "dataIndex": 54,
+          "children": [
+            {
+              "name": "core",
+              "value": 87394,
+              "path": "42next-app-api/src/iam/domain/core",
+              "isFile": false,
+              "dataIndex": 55,
+              "children": [
+                {
+                  "name": "identity-provider",
+                  "value": 392,
+                  "path": "42next-app-api/src/iam/domain/core/identity-provider",
+                  "isFile": false,
+                  "dataIndex": 56,
+                  "children": [
+                    {
+                      "name": "get-idp-information-success.ts",
+                      "value": 168,
+                      "path": "42next-app-api/src/iam/domain/core/identity-provider/get-idp-information-success.ts",
+                      "isFile": true,
+                      "dataIndex": 57,
+                      "children": []
+                    },
+                    {
+                      "name": "get-idp-information-failed.ts",
+                      "value": 224,
+                      "path": "42next-app-api/src/iam/domain/core/identity-provider/get-idp-information-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 58,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "passwords",
+                  "value": 64562,
+                  "path": "42next-app-api/src/iam/domain/core/passwords",
+                  "isFile": false,
+                  "dataIndex": 59,
+                  "children": [
+                    {
+                      "name": "reset-password-failed.ts",
+                      "value": 168,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/reset-password-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 60,
+                      "children": []
+                    },
+                    {
+                      "name": "reset-password.ts",
+                      "value": 3596,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/reset-password.ts",
+                      "isFile": true,
+                      "dataIndex": 61,
+                      "children": []
+                    },
+                    {
+                      "name": "forgot-password.spec.ts",
+                      "value": 56392,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/forgot-password.spec.ts",
+                      "isFile": true,
+                      "dataIndex": 62,
+                      "children": []
+                    },
+                    {
+                      "name": "forgot-password.ts",
+                      "value": 2522,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/forgot-password.ts",
+                      "isFile": true,
+                      "dataIndex": 63,
+                      "children": []
+                    },
+                    {
+                      "name": "invalid-password-error.ts",
+                      "value": 1518,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/invalid-password-error.ts",
+                      "isFile": true,
+                      "dataIndex": 64,
+                      "children": []
+                    },
+                    {
+                      "name": "forgot-password-failed.ts",
+                      "value": 36,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/forgot-password-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 65,
+                      "children": []
+                    },
+                    {
+                      "name": "user-id.ts",
+                      "value": 168,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/user-id.ts",
+                      "isFile": true,
+                      "dataIndex": 66,
+                      "children": []
+                    },
+                    {
+                      "name": "find-user-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/find-user-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 67,
+                      "children": []
+                    },
+                    {
+                      "name": "get-action-token-lifespan-failed.ts",
+                      "value": 36,
+                      "path": "42next-app-api/src/iam/domain/core/passwords/get-action-token-lifespan-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 68,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "roles",
+                  "value": 612,
+                  "path": "42next-app-api/src/iam/domain/core/roles",
+                  "isFile": false,
+                  "dataIndex": 69,
+                  "children": [
+                    {
+                      "name": "get-roles.ts",
+                      "value": 612,
+                      "path": "42next-app-api/src/iam/domain/core/roles/get-roles.ts",
+                      "isFile": true,
+                      "dataIndex": 70,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "action-token",
+                  "value": 378,
+                  "path": "42next-app-api/src/iam/domain/core/action-token",
+                  "isFile": false,
+                  "dataIndex": 71,
+                  "children": [
+                    {
+                      "name": "delete-action-token-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/action-token/delete-action-token-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 72,
+                      "children": []
+                    },
+                    {
+                      "name": "generate-action-token-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/action-token/generate-action-token-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 73,
+                      "children": []
+                    },
+                    {
+                      "name": "check-action-token-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/action-token/check-action-token-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 74,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "jwt-tokens",
+                  "value": 21450,
+                  "path": "42next-app-api/src/iam/domain/core/jwt-tokens",
+                  "isFile": false,
+                  "dataIndex": 75,
+                  "children": [
+                    {
+                      "name": "logout.ts",
+                      "value": 840,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/logout.ts",
+                      "isFile": true,
+                      "dataIndex": 76,
+                      "children": []
+                    },
+                    {
+                      "name": "login-with-credentials.spec.ts",
+                      "value": 16422,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/login-with-credentials.spec.ts",
+                      "isFile": true,
+                      "dataIndex": 77,
+                      "children": []
+                    },
+                    {
+                      "name": "jwt-tokens.ts",
+                      "value": 216,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/jwt-tokens.ts",
+                      "isFile": true,
+                      "dataIndex": 78,
+                      "children": []
+                    },
+                    {
+                      "name": "get-jwt-tokens-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/get-jwt-tokens-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 79,
+                      "children": []
+                    },
+                    {
+                      "name": "login-with-credentials.ts",
+                      "value": 870,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/login-with-credentials.ts",
+                      "isFile": true,
+                      "dataIndex": 80,
+                      "children": []
+                    },
+                    {
+                      "name": "login-with-google.ts",
+                      "value": 1980,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/login-with-google.ts",
+                      "isFile": true,
+                      "dataIndex": 81,
+                      "children": []
+                    },
+                    {
+                      "name": "logout-failed.ts",
+                      "value": 126,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/logout-failed.ts",
+                      "isFile": true,
+                      "dataIndex": 82,
+                      "children": []
+                    },
+                    {
+                      "name": "refresh-session.ts",
+                      "value": 870,
+                      "path": "42next-app-api/src/iam/domain/core/jwt-tokens/refresh-session.ts",
+                      "isFile": true,
+                      "dataIndex": 83,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "api",
+              "value": 1936,
+              "path": "42next-app-api/src/iam/domain/api",
+              "isFile": false,
+              "dataIndex": 84,
+              "children": [
+                {
+                  "name": "reset-password.use-case.ts",
+                  "value": 870,
+                  "path": "42next-app-api/src/iam/domain/api/reset-password.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 85,
+                  "children": []
+                },
+                {
+                  "name": "login-with-credentials.use-case.ts",
+                  "value": 252,
+                  "path": "42next-app-api/src/iam/domain/api/login-with-credentials.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 86,
+                  "children": []
+                },
+                {
+                  "name": "login-with-google.use-case.ts",
+                  "value": 320,
+                  "path": "42next-app-api/src/iam/domain/api/login-with-google.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 87,
+                  "children": []
+                },
+                {
+                  "name": "refresh-session.use-case.ts",
+                  "value": 210,
+                  "path": "42next-app-api/src/iam/domain/api/refresh-session.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 88,
+                  "children": []
+                },
+                {
+                  "name": "forgot-password.use-case.ts",
+                  "value": 36,
+                  "path": "42next-app-api/src/iam/domain/api/forgot-password.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 89,
+                  "children": []
+                },
+                {
+                  "name": "logout.use-case.ts",
+                  "value": 224,
+                  "path": "42next-app-api/src/iam/domain/api/logout.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 90,
+                  "children": []
+                },
+                {
+                  "name": "get-roles.use-case.ts",
+                  "value": 24,
+                  "path": "42next-app-api/src/iam/domain/api/get-roles.use-case.ts",
+                  "isFile": true,
+                  "dataIndex": 91,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "spi",
+              "value": 6914,
+              "path": "42next-app-api/src/iam/domain/spi",
+              "isFile": false,
+              "dataIndex": 92,
+              "children": [
+                {
+                  "name": "action-tokens.ts",
+                  "value": 1826,
+                  "path": "42next-app-api/src/iam/domain/spi/action-tokens.ts",
+                  "isFile": true,
+                  "dataIndex": 93,
+                  "children": []
+                },
+                {
+                  "name": "identity-provider.ts",
+                  "value": 396,
+                  "path": "42next-app-api/src/iam/domain/spi/identity-provider.ts",
+                  "isFile": true,
+                  "dataIndex": 94,
+                  "children": []
+                },
+                {
+                  "name": "authentication.ts",
+                  "value": 4452,
+                  "path": "42next-app-api/src/iam/domain/spi/authentication.ts",
+                  "isFile": true,
+                  "dataIndex": 95,
+                  "children": []
+                },
+                {
+                  "name": "roles.ts",
+                  "value": 24,
+                  "path": "42next-app-api/src/iam/domain/spi/roles.ts",
+                  "isFile": true,
+                  "dataIndex": 96,
+                  "children": []
+                },
+                {
+                  "name": "action-email-sender.ts",
+                  "value": 216,
+                  "path": "42next-app-api/src/iam/domain/spi/action-email-sender.ts",
+                  "isFile": true,
+                  "dataIndex": 97,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "authentication",
+              "value": 0,
+              "path": "42next-app-api/src/iam/domain/authentication",
+              "isFile": false,
+              "dataIndex": 98,
+              "children": [
+                {
+                  "name": "core",
+                  "value": 0,
+                  "path": "42next-app-api/src/iam/domain/authentication/core",
+                  "isFile": false,
+                  "dataIndex": 99,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "keycloak-config.service.ts",
+          "value": 3570,
+          "path": "42next-app-api/src/iam/keycloak-config.service.ts",
+          "isFile": true,
+          "dataIndex": 100,
+          "children": []
+        },
+        {
+          "name": "groups-management",
+          "value": 42544,
+          "path": "42next-app-api/src/iam/groups-management",
+          "isFile": false,
+          "dataIndex": 101,
+          "children": [
+            {
+              "name": "groups-management.module.ts",
+              "value": 864,
+              "path": "42next-app-api/src/iam/groups-management/groups-management.module.ts",
+              "isFile": true,
+              "dataIndex": 102,
+              "children": []
+            },
+            {
+              "name": "shared",
+              "value": 870,
+              "path": "42next-app-api/src/iam/groups-management/shared",
+              "isFile": false,
+              "dataIndex": 103,
+              "children": [
+                {
+                  "name": "configuration",
+                  "value": 870,
+                  "path": "42next-app-api/src/iam/groups-management/shared/configuration",
+                  "isFile": false,
+                  "dataIndex": 104,
+                  "children": [
+                    {
+                      "name": "identity-provider-configuration.ts",
+                      "value": 870,
+                      "path": "42next-app-api/src/iam/groups-management/shared/configuration/identity-provider-configuration.ts",
+                      "isFile": true,
+                      "dataIndex": 105,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "groups-management-configuration.module.ts",
+              "value": 182,
+              "path": "42next-app-api/src/iam/groups-management/groups-management-configuration.module.ts",
+              "isFile": true,
+              "dataIndex": 106,
+              "children": []
+            },
+            {
+              "name": "infrastructure",
+              "value": 35802,
+              "path": "42next-app-api/src/iam/groups-management/infrastructure",
+              "isFile": false,
+              "dataIndex": 107,
+              "children": [
+                {
+                  "name": "driven",
+                  "value": 35802,
+                  "path": "42next-app-api/src/iam/groups-management/infrastructure/driven",
+                  "isFile": false,
+                  "dataIndex": 108,
+                  "children": [
+                    {
+                      "name": "keycloak-provider.ts",
+                      "value": 4664,
+                      "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/keycloak-provider.ts",
+                      "isFile": true,
+                      "dataIndex": 109,
+                      "children": []
+                    },
+                    {
+                      "name": "keycloak-provider.spec.ts",
+                      "value": 26200,
+                      "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/keycloak-provider.spec.ts",
+                      "isFile": true,
+                      "dataIndex": 110,
+                      "children": []
+                    },
+                    {
+                      "name": "dtos",
+                      "value": 24,
+                      "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/dtos",
+                      "isFile": false,
+                      "dataIndex": 111,
+                      "children": [
+                        {
+                          "name": "grant-type.ts",
+                          "value": 12,
+                          "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/dtos/grant-type.ts",
+                          "isFile": true,
+                          "dataIndex": 112,
+                          "children": []
+                        },
+                        {
+                          "name": "open-id-configuration.ts",
+                          "value": 12,
+                          "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/dtos/open-id-configuration.ts",
+                          "isFile": true,
+                          "dataIndex": 113,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "axios-client.ts",
+                      "value": 4914,
+                      "path": "42next-app-api/src/iam/groups-management/infrastructure/driven/axios-client.ts",
+                      "isFile": true,
+                      "dataIndex": 114,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "domain",
+              "value": 4826,
+              "path": "42next-app-api/src/iam/groups-management/domain",
+              "isFile": false,
+              "dataIndex": 115,
+              "children": [
+                {
+                  "name": "core",
+                  "value": 4604,
+                  "path": "42next-app-api/src/iam/groups-management/domain/core",
+                  "isFile": false,
+                  "dataIndex": 116,
+                  "children": [
+                    {
+                      "name": "use-cases",
+                      "value": 4236,
+                      "path": "42next-app-api/src/iam/groups-management/domain/core/use-cases",
+                      "isFile": false,
+                      "dataIndex": 117,
+                      "children": [
+                        {
+                          "name": "list-all-groups.service.ts",
+                          "value": 210,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/use-cases/list-all-groups.service.ts",
+                          "isFile": true,
+                          "dataIndex": 118,
+                          "children": []
+                        },
+                        {
+                          "name": "add-group.service.spec.ts",
+                          "value": 2120,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/use-cases/add-group.service.spec.ts",
+                          "isFile": true,
+                          "dataIndex": 119,
+                          "children": []
+                        },
+                        {
+                          "name": "list-all-groups.service.spec.ts",
+                          "value": 1634,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/use-cases/list-all-groups.service.spec.ts",
+                          "isFile": true,
+                          "dataIndex": 120,
+                          "children": []
+                        },
+                        {
+                          "name": "add-group.service.ts",
+                          "value": 272,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/use-cases/add-group.service.ts",
+                          "isFile": true,
+                          "dataIndex": 121,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "entities",
+                      "value": 338,
+                      "path": "42next-app-api/src/iam/groups-management/domain/core/entities",
+                      "isFile": false,
+                      "dataIndex": 122,
+                      "children": [
+                        {
+                          "name": "group.ts",
+                          "value": 338,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/entities/group.ts",
+                          "isFile": true,
+                          "dataIndex": 123,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "errors",
+                      "value": 30,
+                      "path": "42next-app-api/src/iam/groups-management/domain/core/errors",
+                      "isFile": false,
+                      "dataIndex": 124,
+                      "children": [
+                        {
+                          "name": "group-creation-failed.ts",
+                          "value": 30,
+                          "path": "42next-app-api/src/iam/groups-management/domain/core/errors/group-creation-failed.ts",
+                          "isFile": true,
+                          "dataIndex": 125,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "api",
+                  "value": 114,
+                  "path": "42next-app-api/src/iam/groups-management/domain/api",
+                  "isFile": false,
+                  "dataIndex": 126,
+                  "children": [
+                    {
+                      "name": "add-group.ts",
+                      "value": 72,
+                      "path": "42next-app-api/src/iam/groups-management/domain/api/add-group.ts",
+                      "isFile": true,
+                      "dataIndex": 127,
+                      "children": []
+                    },
+                    {
+                      "name": "list-all-groups.ts",
+                      "value": 42,
+                      "path": "42next-app-api/src/iam/groups-management/domain/api/list-all-groups.ts",
+                      "isFile": true,
+                      "dataIndex": 128,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "spi",
+                  "value": 108,
+                  "path": "42next-app-api/src/iam/groups-management/domain/spi",
+                  "isFile": false,
+                  "dataIndex": 129,
+                  "children": [
+                    {
+                      "name": "identity-provider.ts",
+                      "value": 108,
+                      "path": "42next-app-api/src/iam/groups-management/domain/spi/identity-provider.ts",
+                      "isFile": true,
+                      "dataIndex": 130,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "iam-module.ts",
+          "value": 39776,
+          "path": "42next-app-api/src/iam/iam-module.ts",
+          "isFile": true,
+          "dataIndex": 131,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

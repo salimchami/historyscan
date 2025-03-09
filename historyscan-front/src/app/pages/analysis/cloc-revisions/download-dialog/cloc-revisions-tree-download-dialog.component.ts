@@ -42,9 +42,9 @@ export class ClocRevisionsTreeDownloadDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sanitizer: DomSanitizer
   ) {
-    this.payload = data.fileTreeToDownload.payload;
-    this.codebaseUrl = data.fileTreeToDownload.codebaseUrl;
-    this.codebaseBranch = data.fileTreeToDownload.codebaseBranch;
+    this.payload = data.chartToDownload.payload;
+    this.codebaseUrl = data.chartToDownload.codebaseUrl;
+    this.codebaseBranch = data.chartToDownload.codebaseBranch;
     this.jsonPayload = JSON.stringify(this.payload, null, 2);
   }
 
